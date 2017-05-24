@@ -112,12 +112,12 @@ namespace DiskSpace
             }
         }
 
-        private void lblTitle_MouseDown(object sender, MouseEventArgs e)
+        private void Title_MouseDown(object sender, MouseEventArgs e)
         {
             Offset = new Point(e.X, e.Y);
         }
 
-        private void lblTitle_MouseMove(object sender, MouseEventArgs e)
+        private void Title_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -126,54 +126,54 @@ namespace DiskSpace
             }
         }
 
-        private void minimizePanel_MouseEnter(object sender, EventArgs e)
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
         {
             minimizePanel.BackColor = Color.LightGray;
         }
 
-        private void minimizePanel_MouseLeave(object sender, EventArgs e)
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
         {
             minimizePanel.BackColor = Color.White;
         }
 
-        private void settingsIcon_MouseLeave(object sender, EventArgs e)
+        private void SettingsIcon_MouseLeave(object sender, EventArgs e)
         {
             settingsIcon.Image = Properties.Resources.simple_gears;
         }
 
-        private void settingsIcon_MouseEnter(object sender, EventArgs e)
+        private void SettingsIcon_MouseEnter(object sender, EventArgs e)
         {
             settingsIcon.Image = Properties.Resources.simple_gears_grey;
         }
 
-        private void minimizeContainerPanel_MouseEnter(object sender, EventArgs e)
+        private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e)
         {
-            minimizePanel_MouseEnter(sender, e);
+            MinimizePanel_MouseEnter(sender, e);
         }
 
-        private void minimizeContainerPanel_MouseLeave(object sender, EventArgs e)
+        private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e)
         {
-            minimizePanel_MouseLeave(sender, e);
+            MinimizePanel_MouseLeave(sender, e);
         }
 
-        private void minimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
+        private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            minimizePanel_MouseClick(sender, e);
+            MinimizePanel_MouseClick(sender, e);
         }
 
-        private void minimizePanel_MouseClick(object sender, MouseEventArgs e)
+        private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
         {
             WindowState = FormWindowState.Minimized;
         }
 
-        private void titleIcon_MouseDown(object sender, MouseEventArgs e)
+        private void TitleIcon_MouseDown(object sender, MouseEventArgs e)
         {
-            lblTitle_MouseDown(sender, e);
+            Title_MouseDown(sender, e);
         }
 
-        private void titleIcon_MouseMove(object sender, MouseEventArgs e)
+        private void TitleIcon_MouseMove(object sender, MouseEventArgs e)
         {
-            lblTitle_MouseMove(sender, e);
+            Title_MouseMove(sender, e);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -181,7 +181,7 @@ namespace DiskSpace
             diskSpaceNotifyIcon.Dispose();
         }
 
-        private void diskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
+        private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
                 diskSpaceNotifyIcon.ContextMenuStrip.Hide();
@@ -189,7 +189,7 @@ namespace DiskSpace
                 diskSpaceNotifyIcon.ContextMenuStrip.Show(Cursor.Position);
         }
 
-        private void checkTimer_Tick(object sender, EventArgs e)
+        private void CheckTimer_Tick(object sender, EventArgs e)
         {
             UpdateFreespace();
         }
@@ -229,12 +229,12 @@ namespace DiskSpace
             }
         }
 
-        private void diskSpaceNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void DiskSpaceNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ToogleFormVisibility();
         }
 
-        private void diskSpaceNotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        private void DiskSpaceNotifyIcon_BalloonTipClicked(object sender, EventArgs e)
         {
             ToogleFormVisibility();
         }
@@ -245,25 +245,25 @@ namespace DiskSpace
                 Properties.Resources.Hide : Properties.Resources.Show;
         }
 
-        private void showToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToogleFormVisibility();
         }
 
         
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             settingsForm.ShowDialog(this);
         }
 
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void settingsIcon_Click(object sender, EventArgs e)
+        private void SettingsIcon_Click(object sender, EventArgs e)
         {
-            settingsToolStripMenuItem_Click(sender, e);
+            SettingsToolStripMenuItem_Click(sender, e);
         }
     }
 }

@@ -69,9 +69,9 @@
             this.minimizePanel.Name = "minimizePanel";
             this.minimizePanel.Size = new System.Drawing.Size(28, 10);
             this.minimizePanel.TabIndex = 2;
-            this.minimizePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.minimizePanel_MouseClick);
-            this.minimizePanel.MouseEnter += new System.EventHandler(this.minimizePanel_MouseEnter);
-            this.minimizePanel.MouseLeave += new System.EventHandler(this.minimizePanel_MouseLeave);
+            this.minimizePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MinimizePanel_MouseClick);
+            this.minimizePanel.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
+            this.minimizePanel.MouseLeave += new System.EventHandler(this.MinimizePanel_MouseLeave);
             // 
             // lblTitle
             // 
@@ -85,8 +85,8 @@
             this.lblTitle.Size = new System.Drawing.Size(374, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitle_MouseDown);
-            this.lblTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblTitle_MouseMove);
+            this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Title_MouseDown);
+            this.lblTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Title_MouseMove);
             // 
             // minimizeContainerPanel
             // 
@@ -96,9 +96,9 @@
             this.minimizeContainerPanel.Name = "minimizeContainerPanel";
             this.minimizeContainerPanel.Size = new System.Drawing.Size(32, 32);
             this.minimizeContainerPanel.TabIndex = 3;
-            this.minimizeContainerPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.minimizeContainerPanel_MouseClick);
-            this.minimizeContainerPanel.MouseEnter += new System.EventHandler(this.minimizeContainerPanel_MouseEnter);
-            this.minimizeContainerPanel.MouseLeave += new System.EventHandler(this.minimizeContainerPanel_MouseLeave);
+            this.minimizeContainerPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MinimizeContainerPanel_MouseClick);
+            this.minimizeContainerPanel.MouseEnter += new System.EventHandler(this.MinimizeContainerPanel_MouseEnter);
+            this.minimizeContainerPanel.MouseLeave += new System.EventHandler(this.MinimizeContainerPanel_MouseLeave);
             // 
             // diskSpaceNotifyIcon
             // 
@@ -106,9 +106,9 @@
             this.diskSpaceNotifyIcon.ContextMenuStrip = this.contextMenuStrip;
             this.diskSpaceNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("diskSpaceNotifyIcon.Icon")));
             this.diskSpaceNotifyIcon.Visible = true;
-            this.diskSpaceNotifyIcon.BalloonTipClicked += new System.EventHandler(this.diskSpaceNotifyIcon_BalloonTipClicked);
-            this.diskSpaceNotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.diskSpaceNotifyIcon_MouseClick);
-            this.diskSpaceNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.diskSpaceNotifyIcon_MouseDoubleClick);
+            this.diskSpaceNotifyIcon.BalloonTipClicked += new System.EventHandler(this.DiskSpaceNotifyIcon_BalloonTipClicked);
+            this.diskSpaceNotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DiskSpaceNotifyIcon_MouseClick);
+            this.diskSpaceNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DiskSpaceNotifyIcon_MouseDoubleClick);
             // 
             // contextMenuStrip
             // 
@@ -134,7 +134,7 @@
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
             this.showToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
-            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -143,7 +143,7 @@
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -159,12 +159,12 @@
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
-            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
             // checkTimer
             // 
             this.checkTimer.Interval = 1000;
-            this.checkTimer.Tick += new System.EventHandler(this.checkTimer_Tick);
+            this.checkTimer.Tick += new System.EventHandler(this.CheckTimer_Tick);
             // 
             // titleIcon
             // 
@@ -176,8 +176,8 @@
             this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.titleIcon.TabIndex = 1;
             this.titleIcon.TabStop = false;
-            this.titleIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.titleIcon_MouseDown);
-            this.titleIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.titleIcon_MouseMove);
+            this.titleIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseDown);
+            this.titleIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseMove);
             // 
             // settingsIcon
             // 
@@ -190,9 +190,9 @@
             this.settingsIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.settingsIcon.TabIndex = 2;
             this.settingsIcon.TabStop = false;
-            this.settingsIcon.Click += new System.EventHandler(this.settingsIcon_Click);
-            this.settingsIcon.MouseEnter += new System.EventHandler(this.settingsIcon_MouseEnter);
-            this.settingsIcon.MouseLeave += new System.EventHandler(this.settingsIcon_MouseLeave);
+            this.settingsIcon.Click += new System.EventHandler(this.SettingsIcon_Click);
+            this.settingsIcon.MouseEnter += new System.EventHandler(this.SettingsIcon_MouseEnter);
+            this.settingsIcon.MouseLeave += new System.EventHandler(this.SettingsIcon_MouseLeave);
             // 
             // MainForm
             // 
