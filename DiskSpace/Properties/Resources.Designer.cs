@@ -61,6 +61,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form always on top.
+        /// </summary>
+        internal static string AlwaysOnTop {
+            get {
+                return ResourceManager.GetString("AlwaysOnTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Space.
         /// </summary>
         internal static string DiskSpace {
@@ -75,6 +84,15 @@ namespace DiskSpace.Properties {
         internal static string DriveSeparator {
             get {
                 return ResourceManager.GetString("DriveSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive to monitor.
+        /// </summary>
+        internal static string DriveToMonitor {
+            get {
+                return ResourceManager.GetString("DriveToMonitor", resourceCulture);
             }
         }
         
@@ -106,6 +124,24 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification limit.
+        /// </summary>
+        internal static string NotificationLimit {
+            get {
+                return ResourceManager.GetString("NotificationLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max free space for notifications.
+        /// </summary>
+        internal static string NotificationLimitText {
+            get {
+                return ResourceManager.GetString("NotificationLimitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit.
         /// </summary>
         internal static string Quit {
@@ -125,6 +161,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string SaveButtonTitle {
+            get {
+                return ResourceManager.GetString("SaveButtonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string Settings {
@@ -139,6 +184,15 @@ namespace DiskSpace.Properties {
         internal static string Show {
             get {
                 return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free space notifications.
+        /// </summary>
+        internal static string ShowNotifications {
+            get {
+                return ResourceManager.GetString("ShowNotifications", resourceCulture);
             }
         }
         
@@ -169,6 +223,24 @@ namespace DiskSpace.Properties {
             get {
                 object obj = ResourceManager.GetObject("ssd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start minimized.
+        /// </summary>
+        internal static string StartMinimized {
+            get {
+                return ResourceManager.GetString("StartMinimized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto start.
+        /// </summary>
+        internal static string StartWithWindowsText {
+            get {
+                return ResourceManager.GetString("StartWithWindowsText", resourceCulture);
             }
         }
     }

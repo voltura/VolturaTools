@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 
 namespace DiskSpace
@@ -12,9 +12,9 @@ namespace DiskSpace
         /// Local drives
         /// </summary>
         /// <returns></returns>
-        public static System.Collections.ObjectModel.Collection<Drive> Drives()
+        public static Collection<Drive> Drives()
         {
-            System.Collections.ObjectModel.Collection<Drive> drives = new System.Collections.ObjectModel.Collection<Drive>();
+            Collection<Drive> drives = new Collection<Drive>();
             string SPACE = string.Empty.PadLeft(1);
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo d in allDrives)

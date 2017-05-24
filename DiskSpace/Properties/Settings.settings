@@ -17,26 +17,14 @@
     <Setting Name="notifyWhenSpaceChange" Description="Display Balloon notification when free disk space changes" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="StartWithWindowsText" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Autorun</Value>
+    <Setting Name="NotificationLimitGB" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">700</Value>
     </Setting>
-    <Setting Name="StartMinimizedText" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Start minimized</Value>
+    <Setting Name="NotificationLimitActive" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ShowNotificationsText" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Free space notifications</Value>
-    </Setting>
-    <Setting Name="AlwaysOnTopText" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Form always on top</Value>
-    </Setting>
-    <Setting Name="DriveToMonitorText" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Drive to monitor</Value>
-    </Setting>
-    <Setting Name="SaveButtonTitle" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Close</Value>
-    </Setting>
-    <Setting Name="SettingsFormTitle" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Settings</Value>
+    <Setting Name="NotificatonAmountLimit" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">700</Value>
     </Setting>
   </Settings>
 </SettingsFile>

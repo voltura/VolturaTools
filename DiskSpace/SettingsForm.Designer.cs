@@ -1,4 +1,7 @@
-﻿namespace DiskSpace
+﻿using System;
+using System.Globalization;
+
+namespace DiskSpace
 {
     partial class SettingsForm
     {
@@ -28,12 +31,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.cmbDrives = new System.Windows.Forms.ComboBox();
-            this.localDrivesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.localDrivesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.settingsPanel = new System.Windows.Forms.Panel();
+            this.txtNotificationLimitGB = new System.Windows.Forms.TextBox();
+            this.chkNotificationLimit = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.chkStartWithWindows = new System.Windows.Forms.CheckBox();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBox();
@@ -41,8 +43,7 @@
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.lblDrive = new System.Windows.Forms.Label();
             this.lblSettingsTitle = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.localDrivesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.localDrivesBindingSource1)).BeginInit();
+            this.lblGB = new System.Windows.Forms.Label();
             this.settingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,16 +56,19 @@
             this.cmbDrives.ForeColor = System.Drawing.Color.White;
             this.cmbDrives.FormattingEnabled = true;
             this.cmbDrives.ItemHeight = 28;
-            this.cmbDrives.Location = new System.Drawing.Point(219, 151);
+            this.cmbDrives.Location = new System.Drawing.Point(219, 259);
             this.cmbDrives.Name = "cmbDrives";
-            this.cmbDrives.Size = new System.Drawing.Size(263, 36);
-            this.cmbDrives.TabIndex = 4;
+            this.cmbDrives.Size = new System.Drawing.Size(158, 36);
+            this.cmbDrives.TabIndex = 6;
             // 
             // settingsPanel
             // 
             this.settingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsPanel.BackColor = System.Drawing.Color.Black;
+            this.settingsPanel.Controls.Add(this.lblGB);
+            this.settingsPanel.Controls.Add(this.txtNotificationLimitGB);
+            this.settingsPanel.Controls.Add(this.chkNotificationLimit);
             this.settingsPanel.Controls.Add(this.btnSave);
             this.settingsPanel.Controls.Add(this.chkStartWithWindows);
             this.settingsPanel.Controls.Add(this.chkAlwaysOnTop);
@@ -80,6 +84,32 @@
             this.settingsPanel.Size = new System.Drawing.Size(614, 311);
             this.settingsPanel.TabIndex = 2;
             // 
+            // txtNotificationLimitGB
+            // 
+            this.txtNotificationLimitGB.BackColor = System.Drawing.Color.Black;
+            this.txtNotificationLimitGB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNotificationLimitGB.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DiskSpace.Properties.Settings.Default, "NotificatonAmountLimit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.txtNotificationLimitGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.txtNotificationLimitGB.ForeColor = System.Drawing.Color.White;
+            this.txtNotificationLimitGB.Location = new System.Drawing.Point(219, 160);
+            this.txtNotificationLimitGB.Margin = new System.Windows.Forms.Padding(0);
+            this.txtNotificationLimitGB.Name = "txtNotificationLimitGB";
+            this.txtNotificationLimitGB.Size = new System.Drawing.Size(91, 34);
+            this.txtNotificationLimitGB.TabIndex = 5;
+            // 
+            // chkNotificationLimit
+            // 
+            this.chkNotificationLimit.AutoSize = true;
+            this.chkNotificationLimit.Checked = global::DiskSpace.Properties.Settings.Default.NotificationLimitActive;
+            this.chkNotificationLimit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "NotificationLimitActive", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkNotificationLimit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.chkNotificationLimit.Location = new System.Drawing.Point(13, 161);
+            this.chkNotificationLimit.Name = "chkNotificationLimit";
+            this.chkNotificationLimit.Size = new System.Drawing.Size(203, 32);
+            this.chkNotificationLimit.TabIndex = 4;
+            this.chkNotificationLimit.Text = global::DiskSpace.Properties.Resources.NotificationLimit;
+            this.chkNotificationLimit.UseVisualStyleBackColor = true;
+            // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.DeepSkyBlue;
@@ -88,10 +118,10 @@
             this.btnSave.Location = new System.Drawing.Point(407, 255);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(196, 43);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.Text = global::DiskSpace.Properties.Settings.Default.SaveButtonTitle;
+            this.btnSave.TabIndex = 7;
+            this.btnSave.Text = global::DiskSpace.Properties.Resources.SaveButtonTitle;
             this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.Save_Click);
             // 
             // chkStartWithWindows
             // 
@@ -102,9 +132,9 @@
             this.chkStartWithWindows.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStartWithWindows.Location = new System.Drawing.Point(13, 24);
             this.chkStartWithWindows.Name = "chkStartWithWindows";
-            this.chkStartWithWindows.Size = new System.Drawing.Size(116, 32);
+            this.chkStartWithWindows.Size = new System.Drawing.Size(135, 32);
             this.chkStartWithWindows.TabIndex = 0;
-            this.chkStartWithWindows.Text = global::DiskSpace.Properties.Settings.Default.StartWithWindowsText;
+            this.chkStartWithWindows.Text = global::DiskSpace.Properties.Resources.StartWithWindowsText;
             this.chkStartWithWindows.UseVisualStyleBackColor = true;
             // 
             // chkAlwaysOnTop
@@ -118,7 +148,7 @@
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
             this.chkAlwaysOnTop.Size = new System.Drawing.Size(224, 32);
             this.chkAlwaysOnTop.TabIndex = 3;
-            this.chkAlwaysOnTop.Text = global::DiskSpace.Properties.Settings.Default.AlwaysOnTopText;
+            this.chkAlwaysOnTop.Text = global::DiskSpace.Properties.Resources.AlwaysOnTop;
             this.chkAlwaysOnTop.UseVisualStyleBackColor = true;
             // 
             // chkDisplayNotifications
@@ -132,7 +162,7 @@
             this.chkDisplayNotifications.Name = "chkDisplayNotifications";
             this.chkDisplayNotifications.Size = new System.Drawing.Size(263, 32);
             this.chkDisplayNotifications.TabIndex = 1;
-            this.chkDisplayNotifications.Text = global::DiskSpace.Properties.Settings.Default.ShowNotificationsText;
+            this.chkDisplayNotifications.Text = global::DiskSpace.Properties.Resources.ShowNotifications;
             this.chkDisplayNotifications.UseVisualStyleBackColor = true;
             // 
             // chkStartMinimized
@@ -146,18 +176,17 @@
             this.chkStartMinimized.Name = "chkStartMinimized";
             this.chkStartMinimized.Size = new System.Drawing.Size(190, 32);
             this.chkStartMinimized.TabIndex = 2;
-            this.chkStartMinimized.Text = global::DiskSpace.Properties.Settings.Default.StartMinimizedText;
+            this.chkStartMinimized.Text = global::DiskSpace.Properties.Resources.StartMinimized;
             this.chkStartMinimized.UseVisualStyleBackColor = true;
             // 
             // lblDrive
             // 
             this.lblDrive.AutoSize = true;
             this.lblDrive.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDrive.Location = new System.Drawing.Point(32, 154);
+            this.lblDrive.Location = new System.Drawing.Point(32, 262);
             this.lblDrive.Name = "lblDrive";
             this.lblDrive.Size = new System.Drawing.Size(171, 28);
             this.lblDrive.TabIndex = 5;
-            this.lblDrive.Text = global::DiskSpace.Properties.Settings.Default.DriveToMonitorText;
             // 
             // lblSettingsTitle
             // 
@@ -167,10 +196,20 @@
             this.lblSettingsTitle.Name = "lblSettingsTitle";
             this.lblSettingsTitle.Size = new System.Drawing.Size(616, 32);
             this.lblSettingsTitle.TabIndex = 1;
-            this.lblSettingsTitle.Text = global::DiskSpace.Properties.Settings.Default.SettingsFormTitle;
+            this.lblSettingsTitle.Text = global::DiskSpace.Properties.Resources.Settings;
             this.lblSettingsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSettingsTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblSettingsTitle_MouseDown);
-            this.lblSettingsTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblSettingsTitle_MouseMove);
+            this.lblSettingsTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseDown);
+            this.lblSettingsTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseMove);
+            // 
+            // lblGB
+            // 
+            this.lblGB.AutoSize = true;
+            this.lblGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGB.Location = new System.Drawing.Point(313, 162);
+            this.lblGB.Name = "lblGB";
+            this.lblGB.Size = new System.Drawing.Size(39, 28);
+            this.lblGB.TabIndex = 8;
+            this.lblGB.Text = global::DiskSpace.Properties.Resources.GB;
             // 
             // SettingsForm
             // 
@@ -190,8 +229,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.localDrivesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.localDrivesBindingSource1)).EndInit();
             this.settingsPanel.ResumeLayout(false);
             this.settingsPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -204,11 +241,12 @@
         private System.Windows.Forms.CheckBox chkDisplayNotifications;
         private System.Windows.Forms.CheckBox chkAlwaysOnTop;
         private System.Windows.Forms.ComboBox cmbDrives;
-        private System.Windows.Forms.BindingSource localDrivesBindingSource;
-        private System.Windows.Forms.BindingSource localDrivesBindingSource1;
         private System.Windows.Forms.Label lblDrive;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblSettingsTitle;
         private System.Windows.Forms.Panel settingsPanel;
+        private System.Windows.Forms.CheckBox chkNotificationLimit;
+        private System.Windows.Forms.TextBox txtNotificationLimitGB;
+        private System.Windows.Forms.Label lblGB;
     }
 }

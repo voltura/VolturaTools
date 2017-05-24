@@ -103,66 +103,39 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Autorun")]
-        public string StartWithWindowsText {
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public uint NotificationLimitGB {
             get {
-                return ((string)(this["StartWithWindowsText"]));
+                return ((uint)(this["NotificationLimitGB"]));
+            }
+            set {
+                this["NotificationLimitGB"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Start minimized")]
-        public string StartMinimizedText {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NotificationLimitActive {
             get {
-                return ((string)(this["StartMinimizedText"]));
+                return ((bool)(this["NotificationLimitActive"]));
+            }
+            set {
+                this["NotificationLimitActive"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Free space notifications")]
-        public string ShowNotificationsText {
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        public uint NotificatonAmountLimit {
             get {
-                return ((string)(this["ShowNotificationsText"]));
+                return ((uint)(this["NotificatonAmountLimit"]));
             }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Form always on top")]
-        public string AlwaysOnTopText {
-            get {
-                return ((string)(this["AlwaysOnTopText"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Drive to monitor")]
-        public string DriveToMonitorText {
-            get {
-                return ((string)(this["DriveToMonitorText"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Close")]
-        public string SaveButtonTitle {
-            get {
-                return ((string)(this["SaveButtonTitle"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Settings")]
-        public string SettingsFormTitle {
-            get {
-                return ((string)(this["SettingsFormTitle"]));
+            set {
+                this["NotificatonAmountLimit"] = value;
             }
         }
     }
