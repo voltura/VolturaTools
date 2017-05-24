@@ -183,6 +183,7 @@ namespace DiskSpace
 
         private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
+            showToolStripMenuItem.Text = (WindowState == FormWindowState.Minimized) ? Properties.Resources.Show : Properties.Resources.Hide;
             if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
                 diskSpaceNotifyIcon.ContextMenuStrip.Hide();
             else
@@ -217,14 +218,14 @@ namespace DiskSpace
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                WindowState = FormWindowState.Normal;
                 Show();
+                WindowState = FormWindowState.Normal;
                 showToolStripMenuItem.Text = Properties.Resources.Hide;
             }
             else
             {
-                WindowState = FormWindowState.Minimized;
                 Hide();
+                WindowState = FormWindowState.Minimized;
                 showToolStripMenuItem.Text = Properties.Resources.Show;
             }
         }
@@ -249,7 +250,6 @@ namespace DiskSpace
         {
             ToogleFormVisibility();
         }
-
         
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
