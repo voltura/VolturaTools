@@ -52,6 +52,7 @@ namespace DiskSpace
             lblDrive.Text = Properties.Resources.DriveToMonitor;
             lblSettingsTitle.Text = Properties.Resources.Settings;
             lblGB.Text = Properties.Resources.GB;
+            Text = lblSettingsTitle.Text;
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,6 +63,10 @@ namespace DiskSpace
 
         private void Save_Click(object sender, EventArgs e)
         {
+            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
+            {
+                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
+            }
             Close();
         }
 
@@ -77,6 +82,12 @@ namespace DiskSpace
                 Top = Cursor.Position.Y - Offset.Y;
                 Left = Cursor.Position.X - Offset.X;
             }
+        }
+
+        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
+        {
+            if (!uint.TryParse(txtNotificationLimitGB.Text, out uint parsedValue))
+                txtNotificationLimitGB.Text = string.Empty;
         }
     }
 }

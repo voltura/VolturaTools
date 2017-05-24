@@ -72,6 +72,8 @@ namespace DiskSpace
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
             lblTitle.Text = Properties.Resources.DiskSpace;
+            Text = Properties.Resources.DiskSpace;
+            contextMenuStrip.Text = Properties.Resources.DiskSpace;
         }
 
         private static void CheckSettings()
@@ -198,6 +200,7 @@ namespace DiskSpace
         private void UpdateFreespace()
         {
             decimal space = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
+            uint uSpace = Convert.ToUInt32(space);
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
             string freeSpace = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") + Properties.Resources.GB;
             if (lblFreeSpace.Text != freeSpace)
@@ -208,8 +211,13 @@ namespace DiskSpace
                 diskSpaceNotifyIcon.Text = diskSpaceNotifyIcon.BalloonTipText;
                 if (Properties.Settings.Default.notifyWhenSpaceChange)
                 {
-                    diskSpaceNotifyIcon.Visible = true;
-                    diskSpaceNotifyIcon.ShowBalloonTip(500);
+                    if ((!Properties.Settings.Default.NotificationLimitActive) || 
+                        (Properties.Settings.Default.NotificationLimitActive == true &&
+                        Properties.Settings.Default.NotificationLimitGB >= uSpace))
+                    {
+                        diskSpaceNotifyIcon.Visible = true;
+                        diskSpaceNotifyIcon.ShowBalloonTip(500);
+                    }
                 }
             }
         }
@@ -264,6 +272,11 @@ namespace DiskSpace
         private void SettingsIcon_Click(object sender, EventArgs e)
         {
             SettingsToolStripMenuItem_Click(sender, e);
+        }
+
+        private void ContextMenuStrip_MouseLeave(object sender, EventArgs e)
+        {
+                contextMenuStrip.Hide();
         }
     }
 }

@@ -29,11 +29,13 @@ namespace DiskSpace
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Windows.Forms.Control.set_Text(System.String)")]
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.cmbDrives = new System.Windows.Forms.ComboBox();
             this.settingsPanel = new System.Windows.Forms.Panel();
+            this.lblGB = new System.Windows.Forms.Label();
             this.txtNotificationLimitGB = new System.Windows.Forms.TextBox();
             this.chkNotificationLimit = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -43,7 +45,6 @@ namespace DiskSpace
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.lblDrive = new System.Windows.Forms.Label();
             this.lblSettingsTitle = new System.Windows.Forms.Label();
-            this.lblGB = new System.Windows.Forms.Label();
             this.settingsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,9 +57,9 @@ namespace DiskSpace
             this.cmbDrives.ForeColor = System.Drawing.Color.White;
             this.cmbDrives.FormattingEnabled = true;
             this.cmbDrives.ItemHeight = 28;
-            this.cmbDrives.Location = new System.Drawing.Point(219, 259);
+            this.cmbDrives.Location = new System.Drawing.Point(229, 259);
             this.cmbDrives.Name = "cmbDrives";
-            this.cmbDrives.Size = new System.Drawing.Size(158, 36);
+            this.cmbDrives.Size = new System.Drawing.Size(148, 36);
             this.cmbDrives.TabIndex = 6;
             // 
             // settingsPanel
@@ -84,6 +85,16 @@ namespace DiskSpace
             this.settingsPanel.Size = new System.Drawing.Size(614, 311);
             this.settingsPanel.TabIndex = 2;
             // 
+            // lblGB
+            // 
+            this.lblGB.AutoSize = true;
+            this.lblGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGB.Location = new System.Drawing.Point(323, 162);
+            this.lblGB.Name = "lblGB";
+            this.lblGB.Size = new System.Drawing.Size(39, 28);
+            this.lblGB.TabIndex = 8;
+            this.lblGB.Text = "GB";
+            // 
             // txtNotificationLimitGB
             // 
             this.txtNotificationLimitGB.BackColor = System.Drawing.Color.Black;
@@ -91,11 +102,13 @@ namespace DiskSpace
             this.txtNotificationLimitGB.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DiskSpace.Properties.Settings.Default, "NotificatonAmountLimit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtNotificationLimitGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.txtNotificationLimitGB.ForeColor = System.Drawing.Color.White;
-            this.txtNotificationLimitGB.Location = new System.Drawing.Point(219, 160);
+            this.txtNotificationLimitGB.Location = new System.Drawing.Point(229, 160);
             this.txtNotificationLimitGB.Margin = new System.Windows.Forms.Padding(0);
             this.txtNotificationLimitGB.Name = "txtNotificationLimitGB";
             this.txtNotificationLimitGB.Size = new System.Drawing.Size(91, 34);
             this.txtNotificationLimitGB.TabIndex = 5;
+            this.txtNotificationLimitGB.Text = "700";
+            this.txtNotificationLimitGB.TextChanged += new System.EventHandler(this.NotificationLimitGB_TextChanged);
             // 
             // chkNotificationLimit
             // 
@@ -144,7 +157,7 @@ namespace DiskSpace
             this.chkAlwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAlwaysOnTop.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "alwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkAlwaysOnTop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(219, 89);
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(229, 89);
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
             this.chkAlwaysOnTop.Size = new System.Drawing.Size(224, 32);
             this.chkAlwaysOnTop.TabIndex = 3;
@@ -158,7 +171,7 @@ namespace DiskSpace
             this.chkDisplayNotifications.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDisplayNotifications.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "notifyWhenSpaceChange", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.chkDisplayNotifications.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayNotifications.Location = new System.Drawing.Point(219, 24);
+            this.chkDisplayNotifications.Location = new System.Drawing.Point(229, 24);
             this.chkDisplayNotifications.Name = "chkDisplayNotifications";
             this.chkDisplayNotifications.Size = new System.Drawing.Size(263, 32);
             this.chkDisplayNotifications.TabIndex = 1;
@@ -181,12 +194,12 @@ namespace DiskSpace
             // 
             // lblDrive
             // 
-            this.lblDrive.AutoSize = true;
             this.lblDrive.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDrive.Location = new System.Drawing.Point(32, 262);
             this.lblDrive.Name = "lblDrive";
-            this.lblDrive.Size = new System.Drawing.Size(171, 28);
+            this.lblDrive.Size = new System.Drawing.Size(181, 28);
             this.lblDrive.TabIndex = 5;
+            this.lblDrive.Text = "Drive to monitor";
             // 
             // lblSettingsTitle
             // 
@@ -196,20 +209,10 @@ namespace DiskSpace
             this.lblSettingsTitle.Name = "lblSettingsTitle";
             this.lblSettingsTitle.Size = new System.Drawing.Size(616, 32);
             this.lblSettingsTitle.TabIndex = 1;
-            this.lblSettingsTitle.Text = global::DiskSpace.Properties.Resources.Settings;
+            this.lblSettingsTitle.Text = "Settings";
             this.lblSettingsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblSettingsTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseDown);
             this.lblSettingsTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseMove);
-            // 
-            // lblGB
-            // 
-            this.lblGB.AutoSize = true;
-            this.lblGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGB.Location = new System.Drawing.Point(313, 162);
-            this.lblGB.Name = "lblGB";
-            this.lblGB.Size = new System.Drawing.Size(39, 28);
-            this.lblGB.TabIndex = 8;
-            this.lblGB.Text = global::DiskSpace.Properties.Resources.GB;
             // 
             // SettingsForm
             // 
