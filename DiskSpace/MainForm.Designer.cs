@@ -112,7 +112,6 @@
             // 
             // contextMenuStrip
             // 
-            this.contextMenuStrip.AutoSize = false;
             this.contextMenuStrip.BackColor = System.Drawing.Color.Black;
             this.contextMenuStrip.DropShadowEnabled = false;
             this.contextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,23 +124,21 @@
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(174, 139);
+            this.contextMenuStrip.Size = new System.Drawing.Size(137, 106);
             // 
             // showToolStripMenuItem
             // 
-            this.showToolStripMenuItem.AutoSize = false;
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.AutoSize = false;
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -151,7 +148,7 @@
             this.toolStripSeparator1.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.toolStripSeparator1.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(170, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // quitToolStripMenuItem
             // 
