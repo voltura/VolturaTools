@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DiskSpace.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="driveLetter" Description="Drive to report free space on" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C</Value>
+    </Setting>
+    <Setting Name="alwaysOnTop" Description="Show application form topmost" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="startMinimized" Description="Start application without displaying form" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="startWithWindows" Description="Start application automatically with Windows" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="notifyWhenSpaceChange" Description="Display Balloon notification when free disk space changes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="StartWithWindowsText" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Autorun</Value>
+    </Setting>
+    <Setting Name="StartMinimizedText" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Start minimized</Value>
+    </Setting>
+    <Setting Name="ShowNotificationsText" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Free space notifications</Value>
+    </Setting>
+    <Setting Name="AlwaysOnTopText" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Form always on top</Value>
+    </Setting>
+    <Setting Name="DriveToMonitorText" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Drive to monitor</Value>
+    </Setting>
+    <Setting Name="SaveButtonTitle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Close</Value>
+    </Setting>
+    <Setting Name="SettingsFormTitle" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Settings</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NoBigger
+[assembly: CLSCompliant(true)]
+namespace DiskSpace
 {
     static class Program
     {
@@ -16,7 +17,7 @@ namespace NoBigger
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }
