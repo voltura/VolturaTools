@@ -2,9 +2,9 @@
 Small tools and utilities for Windows environment
 
 # DiskSpace
-  Small Toolbar enabled app that displays current amount of free space on a selected drive
-  Supports Balloon tip notifications, also visible via hover over Taskbar icon or application form itself
-  Can be configured to only show notifications if specified GB amount limit of free disk space is passed
+  Small Toolbar enabled app that displays current amount of free space on a selected drive.
+  Supports Balloon tip notifications, also visible via hover over Taskbar icon or application form itself.
+  Can be configured to only show notifications if specified GB amount limit of free disk space is passed.
 
 Configuration possibilites to;
   - Start application with Windows
