@@ -12,9 +12,9 @@ namespace DiskSpace
     /// </summary>
     public partial class MainForm : Form
     {
-        DriveInfo di;
+        DriveInfo di = null;
         Point offset;
-        SettingsForm settingsForm;
+        SettingsForm settingsForm = null;
 
         /// <summary>
         /// Mouse location offset used form form movement
@@ -27,12 +27,48 @@ namespace DiskSpace
         public DriveInfo DI { get => di; set => di = value; }
 
         /// <summary>
+        /// Settings form
+        /// </summary>
+        public SettingsForm ApplicationSettingsForm
+        {
+            get
+            {
+                if (settingsForm == null)
+                {
+                    settingsForm = new SettingsForm();
+                }
+                settingsForm.Icon = Properties.Resources.samsung_m2_ssd;
+                return settingsForm;
+            }
+            set => settingsForm = value;
+        }
+
+        /// <summary>
         /// Main form constructor
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
-            InitApplication();
+            try
+            {
+                InitApplication();
+            }
+            catch (Exception ex)
+            {
+                if (ApplicationSettingsForm != null)
+                {
+                    ApplicationSettingsForm.Dispose();
+                }
+                MessageBox.Show(this, 
+                    ex.ToString(), 
+                    ProductName + ProductVersion, 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error, 
+                    MessageBoxDefaultButton.Button1, 
+                    MessageBoxOptions.DefaultDesktopOnly);
+                throw;
+            }
+            
         }
 
         private void InitApplication()
@@ -67,10 +103,6 @@ namespace DiskSpace
                     false);
             }
             UpdateFreespace();
-            settingsForm = new SettingsForm()
-            {
-                Icon = Properties.Resources.samsung_m2_ssd
-            };
             TopMost = Properties.Settings.Default.alwaysOnTop;
             checkTimer.Enabled = true;
             showToolStripMenuItem.Text = Properties.Settings.Default.startMinimized 
@@ -183,7 +215,20 @@ namespace DiskSpace
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            diskSpaceNotifyIcon.Dispose();
+            Properties.Settings.Default.mainFormLocation = Location;
+            Properties.Settings.Default.Save();
+            if (ApplicationSettingsForm != null)
+            {
+                ApplicationSettingsForm.Dispose();
+            }
+            if (diskSpaceNotifyIcon != null)
+            {
+                diskSpaceNotifyIcon.Dispose();
+            }
+            if (contextMenuStrip != null)
+            {
+                contextMenuStrip.Dispose();
+            }
         }
 
         private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
@@ -235,6 +280,7 @@ namespace DiskSpace
             }
             else
             {
+                Properties.Settings.Default.Save();
                 Hide();
                 WindowState = FormWindowState.Minimized;
                 showToolStripMenuItem.Text = Properties.Resources.Show;
@@ -264,7 +310,7 @@ namespace DiskSpace
         
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm.ShowDialog(this);
+            ApplicationSettingsForm.ShowDialog(this);
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,6 +331,14 @@ namespace DiskSpace
         private void TitleIcon_Click(object sender, EventArgs e)
         {
             titleIcon.ContextMenuStrip.Show(this, new Point(10, 10));
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.mainFormLocation != null)
+            {
+                this.Location = Properties.Settings.Default.mainFormLocation;
+            }
         }
     }
 }

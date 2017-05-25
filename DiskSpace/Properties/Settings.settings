@@ -26,5 +26,8 @@
     <Setting Name="NotificatonAmountLimit" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">700</Value>
     </Setting>
+    <Setting Name="mainFormLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">40, 40</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

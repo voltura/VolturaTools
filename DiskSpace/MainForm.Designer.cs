@@ -207,12 +207,15 @@
             this.Controls.Add(this.lblFreeSpace);
             this.Controls.Add(this.minimizeContainerPanel);
             this.Controls.Add(this.lblTitle);
+            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DiskSpace.Properties.Settings.Default, "mainFormLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = global::DiskSpace.Properties.Settings.Default.mainFormLocation;
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.VisibleChanged += new System.EventHandler(this.MainForm_VisibleChanged);
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
