@@ -167,6 +167,7 @@
             // titleIcon
             // 
             this.titleIcon.BackColor = System.Drawing.Color.Transparent;
+            this.titleIcon.ContextMenuStrip = this.contextMenuStrip;
             this.titleIcon.Image = global::DiskSpace.Properties.Resources.ssd;
             this.titleIcon.Location = new System.Drawing.Point(5, 1);
             this.titleIcon.Name = "titleIcon";
@@ -174,6 +175,7 @@
             this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.titleIcon.TabIndex = 1;
             this.titleIcon.TabStop = false;
+            this.titleIcon.Click += new System.EventHandler(this.TitleIcon_Click);
             this.titleIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseDown);
             this.titleIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseMove);
             // 

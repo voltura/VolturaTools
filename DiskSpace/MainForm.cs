@@ -38,9 +38,12 @@ namespace DiskSpace
         private void InitApplication()
         {
             CheckSettings();
+            Icon = Properties.Resources.samsung_m2_ssd;
+            diskSpaceNotifyIcon.Icon = Properties.Resources.samsung_m2_ssd;
             di = new DriveInfo(Properties.Settings.Default.driveLetter);
-            this.lblTitle.Text = Properties.Resources.DiskSpace;
-            this.Text = Properties.Resources.DiskSpace;
+            lblTitle.Text = Properties.Resources.DiskSpace;
+            Text = Properties.Resources.DiskSpace;
+            contextMenuStrip.Text = Properties.Resources.DiskSpace;
             if (Properties.Settings.Default.startMinimized)
             {
                 WindowState = FormWindowState.Minimized;
@@ -64,16 +67,16 @@ namespace DiskSpace
                     false);
             }
             UpdateFreespace();
-            settingsForm = new SettingsForm();
+            settingsForm = new SettingsForm()
+            {
+                Icon = Properties.Resources.samsung_m2_ssd
+            };
             TopMost = Properties.Settings.Default.alwaysOnTop;
             checkTimer.Enabled = true;
             showToolStripMenuItem.Text = Properties.Settings.Default.startMinimized 
                 ? Properties.Resources.Show : Properties.Resources.Hide;
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
-            lblTitle.Text = Properties.Resources.DiskSpace;
-            Text = Properties.Resources.DiskSpace;
-            contextMenuStrip.Text = Properties.Resources.DiskSpace;
         }
 
         private static void CheckSettings()
@@ -277,6 +280,11 @@ namespace DiskSpace
         private void ContextMenuStrip_MouseLeave(object sender, EventArgs e)
         {
                 contextMenuStrip.Hide();
+        }
+
+        private void TitleIcon_Click(object sender, EventArgs e)
+        {
+            titleIcon.ContextMenuStrip.Show(this, new Point(10, 10));
         }
     }
 }
