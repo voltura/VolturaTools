@@ -105,7 +105,7 @@
             this.diskSpaceNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.diskSpaceNotifyIcon.ContextMenuStrip = this.contextMenuStrip;
             this.diskSpaceNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("diskSpaceNotifyIcon.Icon")));
-            this.diskSpaceNotifyIcon.Text = " ";
+            this.diskSpaceNotifyIcon.Text = string.Empty;
             this.diskSpaceNotifyIcon.Visible = true;
             this.diskSpaceNotifyIcon.BalloonTipClicked += new System.EventHandler(this.DiskSpaceNotifyIcon_BalloonTipClicked);
             this.diskSpaceNotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DiskSpaceNotifyIcon_MouseClick);

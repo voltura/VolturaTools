@@ -70,6 +70,25 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap banner {
+            get {
+                object obj = ResourceManager.GetObject("banner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \nUsage:\n{0} autorun=[1] notifications=[1] minimized=[1] start=[1]\n\nautorun=1\t\tStart with Windows\nnotifications=1\tShow notifications when disk space changes\nminimized=1\t\tStart in Taskbar only, do not show form when launching\nstart=1\t\t\tStart application after configuration\n\nExamples:\nConfigure not to start with Windows, display notifications, not minimized at startup and launch after configuration:\n{0} autorun= notifications=1 minimized= start=1\n\nConfigure to start with Windows, minimized [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CommandLineTip {
+            get {
+                return ResourceManager.GetString("CommandLineTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Space.
         /// </summary>
         internal static string DiskSpace {

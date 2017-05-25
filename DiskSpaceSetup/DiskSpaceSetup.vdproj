@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3CA93C6C99624064BAE4F87D1CFE91B3"
+        "MsmKey" = "8:_A2425A65601A4DBD93FB5A8280719FD2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -82,7 +82,7 @@
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -110,6 +110,20 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_1EEC544E74D246E3965C72CE0B2E47D4"
+            {
+            "Name" = "8:DiskSpace"
+            "Condition" = "8:"
+            "Object" = "8:_B8A86A946FFC4EDBB69259B0FA058D77"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:autorun=[CHECKBOXA1] notifications=[CHECKBOXA2] minimized=[CHECKBOXA3] start=[CHECKBOXA4]"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_7380EBE3_045D_4D8E_B20B_DAFB9738CF75"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -164,10 +178,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3CA93C6C99624064BAE4F87D1CFE91B3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2425A65601A4DBD93FB5A8280719FD2"
             {
-            "SourcePath" = "8:..\\..\\DiskSpace\\Icon\\alpha_banner.bmp"
-            "TargetName" = "8:alpha_banner.bmp"
+            "SourcePath" = "8:..\\DiskSpace\\Resources\\banner.bmp"
+            "TargetName" = "8:banner.bmp"
             "Tag" = "8:"
             "Folder" = "8:_A52D817334224D0CA8A2DF8403AF3169"
             "Condition" = "8:"
@@ -252,7 +266,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DiskSpace"
         "ProductCode" = "8:{34A89ADA-B5A0-42BF-828D-D327BFFAAA90}"
-        "PackageCode" = "8:{272987A1-DCCD-447A-B7BE-3CF5640F41CF}"
+        "PackageCode" = "8:{FC9A85C0-639E-44E4-A5FA-7F16E6666E22}"
         "UpgradeCode" = "8:{A6FA47D0-36C0-47D3-990B-F1078F6A425A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -414,7 +428,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_3CA93C6C99624064BAE4F87D1CFE91B3"
+                            "Value" = "8:_A2425A65601A4DBD93FB5A8280719FD2"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -555,7 +569,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:Install options"
+                            "Value" = "8:Installation options"
                             "DefaultValue" = "8:#1214"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -632,8 +646,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1235"
+                            "Setting" = "3:2"
+                            "Value" = "8:Show notifications when amount of free disk space changes (+/- 1 GB)"
                             "DefaultValue" = "8:#1235"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -659,7 +673,7 @@
                             "ContextData" = "8:Unchecked=;Checked=1"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:"
+                            "Value" = "8:1"
                             "DefaultValue" = "8:"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -672,7 +686,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:0"
+                            "Value" = "3:1"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -684,8 +698,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1236"
+                            "Setting" = "3:2"
+                            "Value" = "8:Start [ProductName] minimized (accessable via Windows Taskbar)"
                             "DefaultValue" = "8:#1236"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -711,7 +725,7 @@
                             "ContextData" = "8:Unchecked=;Checked=1"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:"
+                            "Value" = "8:1"
                             "DefaultValue" = "8:"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -724,7 +738,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:0"
+                            "Value" = "3:1"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -736,8 +750,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1237"
+                            "Setting" = "3:2"
+                            "Value" = "8:Start [ProductName] after setup is completed"
                             "DefaultValue" = "8:#1237"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -763,7 +777,7 @@
                             "ContextData" = "8:Unchecked=;Checked=1"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:"
+                            "Value" = "8:1"
                             "DefaultValue" = "8:"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -776,7 +790,7 @@
                             "ContextData" = "8:1;True=1;False=0"
                             "Attributes" = "3:0"
                             "Setting" = "3:0"
-                            "Value" = "3:0"
+                            "Value" = "3:1"
                             "DefaultValue" = "3:1"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -835,7 +849,7 @@
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
                             "Setting" = "3:2"
-                            "Value" = "8:_3CA93C6C99624064BAE4F87D1CFE91B3"
+                            "Value" = "8:_A2425A65601A4DBD93FB5A8280719FD2"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"

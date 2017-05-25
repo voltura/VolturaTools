@@ -22,6 +22,11 @@ namespace DiskSpace
         public SettingsForm()
         {
             InitializeComponent();
+            InitializeFormFromSettings();
+        }
+
+        private void InitializeFormFromSettings()
+        {
             cmbDrives.DataSource = LocalDrives.Drives();
             cmbDrives.DisplayMember = "Description";
             cmbDrives.ValueMember = "DriveName";
@@ -53,6 +58,35 @@ namespace DiskSpace
             lblSettingsTitle.Text = Properties.Resources.Settings;
             lblGB.Text = Properties.Resources.GB;
             Text = lblSettingsTitle.Text;
+        }
+
+        ///// <summary>
+        ///// Constructor used by installer
+        ///// </summary>
+        ///// <param name="startWithWindows">Run when Windows starts</param>
+        ///// <param name="notifications">Show notifications</param>
+        ///// <param name="minimized">Start minimized</param>
+        //public SettingsForm(bool startWithWindows, bool notifications, bool minimized)
+        //{
+        //    Visible = false;
+        //    Enabled = false;
+        //    ShowInTaskbar = false;
+        //    UpdateSettings(startWithWindows, notifications, minimized);
+        //    Close();
+        //}
+
+        /// <summary>
+        /// Update settings
+        /// </summary>
+        /// <param name="startWithWindows">Start application when Windows starts</param>
+        /// <param name="notifications">Display balloon tip notifications</param>
+        /// <param name="minimized">Start application minimized</param>
+        public static void UpdateSettings(bool startWithWindows, bool notifications, bool minimized)
+        {
+            Properties.Settings.Default.startMinimized = minimized;
+            Properties.Settings.Default.startWithWindows = startWithWindows;
+            Properties.Settings.Default.notifyWhenSpaceChange = notifications;
+            Properties.Settings.Default.Save();
         }
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
