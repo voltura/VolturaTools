@@ -102,11 +102,10 @@ namespace DiskSpace
                 Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace", 
                     false);
             }
-            UpdateFreespace();
+            UpdateFreespaceAndShowBalloonTip();
             TopMost = Properties.Settings.Default.alwaysOnTop;
             checkTimer.Enabled = true;
-            showToolStripMenuItem.Text = Properties.Settings.Default.startMinimized 
-                ? Properties.Resources.Show : Properties.Resources.Hide;
+            Visible = !Properties.Settings.Default.startMinimized;
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
         }
@@ -151,6 +150,11 @@ namespace DiskSpace
 
         private void Title_MouseDown(object sender, MouseEventArgs e)
         {
+            SaveOffsetAndLocation(e);
+        }
+
+        private void SaveOffsetAndLocation(MouseEventArgs e)
+        {
             if (WindowState == FormWindowState.Normal)
             {
                 Properties.Settings.Default.mainFormLocation = Location;
@@ -160,69 +164,105 @@ namespace DiskSpace
 
         private void Title_MouseMove(object sender, MouseEventArgs e)
         {
+            MoveMainFormAndSaveLocation(e);
+        }
+
+        private void MoveMainFormAndSaveLocation(MouseEventArgs e)
+        {
             if (e.Button == MouseButtons.Left)
             {
+                Top = Cursor.Position.Y - Offset.Y;
+                Left = Cursor.Position.X - Offset.X;
                 if (WindowState == FormWindowState.Normal)
                 {
                     Properties.Settings.Default.mainFormLocation = Location;
                 }
-                Top = Cursor.Position.Y - Offset.Y;
-                Left = Cursor.Position.X - Offset.X;
             }
         }
 
         private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
+
+        private void FocusMinimizeIcon()
         {
             minimizePanel.BackColor = Color.LightGray;
         }
 
         private void MinimizePanel_MouseLeave(object sender, EventArgs e)
         {
+            UnfocusMinimizeIcon();
+        }
+
+        private void UnfocusMinimizeIcon()
+        {
             minimizePanel.BackColor = Color.White;
         }
 
         private void SettingsIcon_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusSettingsIcon();
+        }
+
+        private void UnfocusSettingsIcon()
         {
             settingsIcon.Image = Properties.Resources.simple_gears;
         }
 
         private void SettingsIcon_MouseEnter(object sender, EventArgs e)
         {
+            FocusSettingsIcon();
+        }
+
+        private void FocusSettingsIcon()
+        {
             settingsIcon.Image = Properties.Resources.simple_gears_grey;
         }
 
         private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e)
         {
-            MinimizePanel_MouseEnter(sender, e);
+            FocusMinimizeIcon();
         }
 
         private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e)
         {
-            MinimizePanel_MouseLeave(sender, e);
+            UnfocusMinimizeIcon();
         }
 
         private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            MinimizePanel_MouseClick(sender, e);
+            MinimizeAndHideMainForm();
         }
 
         private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
         {
+            MinimizeAndHideMainForm();
+        }
+
+        private void MinimizeAndHideMainForm()
+        {
             Properties.Settings.Default.mainFormLocation = Location;
+            Visible = false;
             WindowState = FormWindowState.Minimized;
         }
 
         private void TitleIcon_MouseDown(object sender, MouseEventArgs e)
         {
-            Title_MouseDown(sender, e);
+            SaveOffsetAndLocation(e);
         }
 
         private void TitleIcon_MouseMove(object sender, MouseEventArgs e)
         {
-            Title_MouseMove(sender, e);
+            MoveMainFormAndSaveLocation(e);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CleanupAndSaveMainFormLocation();
+        }
+
+        private void CleanupAndSaveMainFormLocation()
         {
             if (WindowState == FormWindowState.Normal)
             {
@@ -249,8 +289,11 @@ namespace DiskSpace
 
         private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            showToolStripMenuItem.Text = (WindowState == FormWindowState.Minimized) ? 
-                Properties.Resources.Show : Properties.Resources.Hide;
+            ToogleDiskSpaceNotifyIconContextMenuVisibility();
+        }
+
+        private void ToogleDiskSpaceNotifyIconContextMenuVisibility()
+        {
             if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
             {
                 diskSpaceNotifyIcon.ContextMenuStrip.Hide();
@@ -263,10 +306,10 @@ namespace DiskSpace
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            UpdateFreespace();
+            UpdateFreespaceAndShowBalloonTip();
         }
 
-        private void UpdateFreespace()
+        private void UpdateFreespaceAndShowBalloonTip()
         {
             decimal space = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
             uint uSpace = Convert.ToUInt32(space);
@@ -287,8 +330,8 @@ namespace DiskSpace
                         limitReached)
                     {
                         diskSpaceNotifyIcon.BalloonTipIcon = limitReached ? ToolTipIcon.Warning : ToolTipIcon.Info;
-                        diskSpaceNotifyIcon.Visible = true;
                         diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000:500);
+                        diskSpaceNotifyIcon.Visible = true;
                     }
                 }
             }
@@ -298,14 +341,14 @@ namespace DiskSpace
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                Show();
+                Visible = true;
                 WindowState = FormWindowState.Normal;
                 showToolStripMenuItem.Text = Properties.Resources.Hide;
             }
             else
             {
                 Properties.Settings.Default.Save();
-                Hide();
+                Visible = false;
                 WindowState = FormWindowState.Minimized;
                 showToolStripMenuItem.Text = Properties.Resources.Show;
             }
@@ -323,28 +366,65 @@ namespace DiskSpace
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
         {
-            showToolStripMenuItem.Text = (WindowState == FormWindowState.Normal) ? 
+            UpdateContextMenuItemText();
+        }
+
+        private void UpdateContextMenuItemText()
+        {
+            showToolStripMenuItem.Text = Visible ?
                 Properties.Resources.Hide : Properties.Resources.Show;
         }
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Normal)
+            SaveMainFormLocation();
+            if (Visible)
+            {
+                CloseSettingsForm();
+            }
+            ToogleFormVisibility();
+        }
+
+        private void CloseSettingsForm()
+        {
+            if (ApplicationSettingsForm.WindowState == FormWindowState.Normal &&
+                ApplicationSettingsForm.Visible)
+            {
+                ApplicationSettingsForm.Visible = false;
+                ApplicationSettingsForm.Close();
+            }
+        }
+
+        private void SaveMainFormLocation()
+        {
+            if (WindowState == FormWindowState.Normal && Visible)
             {
                 Properties.Settings.Default.mainFormLocation = Location;
                 Properties.Settings.Default.Save();
             }
-            ToogleFormVisibility();
         }
-        
+
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ApplicationSettingsForm.ShowDialog(this);
+            ShowSettingsForm();
+        }
+
+        private void ShowSettingsForm()
+        {
+            if (ApplicationSettingsForm.Visible)
+            {
+                ApplicationSettingsForm.BringToFront();
+                ApplicationSettingsForm.Focus();
+            }
+            else
+            {
+                ApplicationSettingsForm.ShowDialog(this);
+            }
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Normal)
+            if (WindowState == FormWindowState.Normal && Visible)
             {
                 Properties.Settings.Default.mainFormLocation = Location;
                 Properties.Settings.Default.Save();
@@ -364,16 +444,26 @@ namespace DiskSpace
 
         private void TitleIcon_Click(object sender, EventArgs e)
         {
+            ShowContextMenuAtTitleIcon();
+        }
+
+        private void ShowContextMenuAtTitleIcon()
+        {
             titleIcon.ContextMenuStrip.Show(this, new Point(10, 10));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            SetMainFormLocationFromSettings();
+        }
+
+        private void SetMainFormLocationFromSettings()
+        {
             if (Properties.Settings.Default.mainFormLocation != null)
             {
                 if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
                 {
-                    Properties.Settings.Default.mainFormLocation =  new Point(1,1);
+                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
                 }
                 Location = Properties.Settings.Default.mainFormLocation;
             }
