@@ -224,7 +224,9 @@ namespace DiskSpace
             this.minimizePanelFrame.Name = "minimizePanelFrame";
             this.minimizePanelFrame.Size = new System.Drawing.Size(65, 32);
             this.minimizePanelFrame.TabIndex = 3;
-            this.minimizePanelFrame.Click += new System.EventHandler(this.minimizePanelFrame_Click);
+            this.minimizePanelFrame.Click += new System.EventHandler(this.MinimizePanelFrame_Click);
+            this.minimizePanelFrame.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
+            this.minimizePanelFrame.MouseLeave += new System.EventHandler(this.MinimizePanel_MouseLeave);
             // 
             // minimizePanel
             // 
@@ -235,7 +237,7 @@ namespace DiskSpace
             this.minimizePanel.Name = "minimizePanel";
             this.minimizePanel.Size = new System.Drawing.Size(28, 10);
             this.minimizePanel.TabIndex = 3;
-            this.minimizePanel.Click += new System.EventHandler(this.minimizePanel_Click);
+            this.minimizePanel.Click += new System.EventHandler(this.MinimizePanel_Click);
             // 
             // SettingsForm
             // 

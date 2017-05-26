@@ -62,6 +62,7 @@ namespace DiskSpace
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            minimizePanel.BackColor = Color.White;
             if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
             {
                 Properties.Settings.Default.NotificationLimitGB = notificationLimit;
@@ -101,12 +102,22 @@ namespace DiskSpace
             }
         }
 
-        private void minimizePanel_Click(object sender, EventArgs e)
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            minimizePanel.BackColor = Color.LightGray;
+        }
+
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            minimizePanel.BackColor = Color.White;
+        }
+
+        private void MinimizePanel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void minimizePanelFrame_Click(object sender, EventArgs e)
+        private void MinimizePanelFrame_Click(object sender, EventArgs e)
         {
             Close();
         }
