@@ -130,7 +130,7 @@ namespace DiskSpace
                     {
                         foundDrive = d.Name;
                     }
-                    if (Properties.Settings.Default.driveLetter.Equals(d.Name))
+                    if (d.Name.Contains(Properties.Settings.Default.driveLetter))
                     {
                         configuredDriveExists = true;
                         break;
@@ -151,6 +151,10 @@ namespace DiskSpace
 
         private void Title_MouseDown(object sender, MouseEventArgs e)
         {
+            if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.mainFormLocation = Location;
+            }
             Offset = new Point(e.X, e.Y);
         }
 
@@ -158,6 +162,10 @@ namespace DiskSpace
         {
             if (e.Button == MouseButtons.Left)
             {
+                if (WindowState == FormWindowState.Normal)
+                {
+                    Properties.Settings.Default.mainFormLocation = Location;
+                }
                 Top = Cursor.Position.Y - Offset.Y;
                 Left = Cursor.Position.X - Offset.X;
             }
@@ -200,6 +208,7 @@ namespace DiskSpace
 
         private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
         {
+            Properties.Settings.Default.mainFormLocation = Location;
             WindowState = FormWindowState.Minimized;
         }
 
@@ -215,8 +224,15 @@ namespace DiskSpace
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.mainFormLocation = Location;
-            Properties.Settings.Default.Save();
+            if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.mainFormLocation = Location;
+                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
+                {
+                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
+                }
+                Properties.Settings.Default.Save();
+            }
             if (ApplicationSettingsForm != null)
             {
                 ApplicationSettingsForm.Dispose();
@@ -233,11 +249,16 @@ namespace DiskSpace
 
         private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            showToolStripMenuItem.Text = (WindowState == FormWindowState.Minimized) ? Properties.Resources.Show : Properties.Resources.Hide;
+            showToolStripMenuItem.Text = (WindowState == FormWindowState.Minimized) ? 
+                Properties.Resources.Show : Properties.Resources.Hide;
             if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
+            {
                 diskSpaceNotifyIcon.ContextMenuStrip.Hide();
+            }
             else
+            {
                 diskSpaceNotifyIcon.ContextMenuStrip.Show(Cursor.Position);
+            }
         }
 
         private void CheckTimer_Tick(object sender, EventArgs e)
@@ -250,7 +271,8 @@ namespace DiskSpace
             decimal space = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
             uint uSpace = Convert.ToUInt32(space);
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            string freeSpace = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") + Properties.Resources.GB;
+            string freeSpace = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") + 
+                Properties.Resources.GB;
             if (lblFreeSpace.Text != freeSpace)
             {
                 lblFreeSpace.Text = freeSpace;
@@ -259,12 +281,14 @@ namespace DiskSpace
                 diskSpaceNotifyIcon.Text = diskSpaceNotifyIcon.BalloonTipText;
                 if (Properties.Settings.Default.notifyWhenSpaceChange)
                 {
-                    if ((!Properties.Settings.Default.NotificationLimitActive) || 
-                        (Properties.Settings.Default.NotificationLimitActive == true &&
-                        Properties.Settings.Default.NotificationLimitGB >= uSpace))
+                    bool limitReached = (Properties.Settings.Default.NotificationLimitActive == true &&
+                        Properties.Settings.Default.NotificationLimitGB >= uSpace);
+                    if ((!Properties.Settings.Default.NotificationLimitActive) ||
+                        limitReached)
                     {
+                        diskSpaceNotifyIcon.BalloonTipIcon = limitReached ? ToolTipIcon.Warning : ToolTipIcon.Info;
                         diskSpaceNotifyIcon.Visible = true;
-                        diskSpaceNotifyIcon.ShowBalloonTip(500);
+                        diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000:500);
                     }
                 }
             }
@@ -305,6 +329,11 @@ namespace DiskSpace
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.mainFormLocation = Location;
+                Properties.Settings.Default.Save();
+            }
             ToogleFormVisibility();
         }
         
@@ -315,6 +344,11 @@ namespace DiskSpace
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.mainFormLocation = Location;
+                Properties.Settings.Default.Save();
+            }
             Close();
         }
 
@@ -337,7 +371,11 @@ namespace DiskSpace
         {
             if (Properties.Settings.Default.mainFormLocation != null)
             {
-                this.Location = Properties.Settings.Default.mainFormLocation;
+                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
+                {
+                    Properties.Settings.Default.mainFormLocation =  new Point(1,1);
+                }
+                Location = Properties.Settings.Default.mainFormLocation;
             }
         }
     }

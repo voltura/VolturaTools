@@ -14,7 +14,6 @@ namespace DiskSpace
         [STAThread]
         static void Main(string[] args)
         {
-            bool calledFromInstaller = false;
             if (args.Length > 0)
             {
                 string allParams = string.Join("|", args);
@@ -22,39 +21,56 @@ namespace DiskSpace
                 bool notifications = allParams.Contains("notifications=1");
                 bool minimized = allParams.Contains("minimized=1");
                 bool start = allParams.Contains("start=1");
-                calledFromInstaller = allParams.Contains("autorun=") == true &&
-                                        allParams.Contains("notifications=") == true &&
-                                        allParams.Contains("minimized=") == true &&
-                                        allParams.Contains("start=") == true;
+                bool calledFromInstaller = allParams.Contains("autorun=") == true &&
+                                            allParams.Contains("notifications=") == true &&
+                                            allParams.Contains("minimized=") == true &&
+                                            allParams.Contains("start=") == true;
                 if (calledFromInstaller)
                 {
-                    SettingsForm.UpdateSettings(startWithWindows, notifications, minimized);
+                    UpdateSettings(startWithWindows, notifications, minimized);
                     if (start)
                     {
-                        using (Process p = new Process())
-                        {
-                            ProcessStartInfo startInfo = new ProcessStartInfo(Application.ExecutablePath)
-                            {
-                                UseShellExecute = false
-                            };
-                            p.StartInfo = startInfo;
-                            p.Start();
-                        }
+                        StartApplicationAsSeparateProcess();
                     }
-                    return;
                 }
                 else
                 {
                     string executable = Application.ExecutablePath.Substring(Application.ExecutablePath.LastIndexOf(@"\", 
                         StringComparison.Ordinal) + 1);
-                    IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-                    Console.WriteLine(string.Format(formatProvider, Properties.Resources.CommandLineTip, executable));
-                    return;
+                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, 
+                        Properties.Resources.CommandLineTip, executable));
                 }
+                return;
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+        }
+
+        private static void StartApplicationAsSeparateProcess()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo(Application.ExecutablePath)
+                {
+                    UseShellExecute = false
+                };
+                p.Start();
+            }
+        }
+
+        /// <summary>
+        /// Update settings
+        /// </summary>
+        /// <param name="startWithWindows">Start application when Windows starts</param>
+        /// <param name="notifications">Display balloon tip notifications</param>
+        /// <param name="minimized">Start application minimized</param>
+        private static void UpdateSettings(bool startWithWindows, bool notifications, bool minimized)
+        {
+            Properties.Settings.Default.startMinimized = minimized;
+            Properties.Settings.Default.startWithWindows = startWithWindows;
+            Properties.Settings.Default.notifyWhenSpaceChange = notifications;
+            Properties.Settings.Default.Save();
         }
     }
 }

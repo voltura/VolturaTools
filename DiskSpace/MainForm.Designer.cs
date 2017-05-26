@@ -38,7 +38,6 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTimer = new System.Windows.Forms.Timer(this.components);
             this.titleIcon = new System.Windows.Forms.PictureBox();
@@ -117,21 +116,20 @@
             this.contextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.quitToolStripMenuItem});
+            this.quitToolStripMenuItem,
+            this.showToolStripMenuItem});
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(137, 106);
+            this.contextMenuStrip.Size = new System.Drawing.Size(174, 133);
             this.contextMenuStrip.MouseLeave += new System.EventHandler(this.ContextMenuStrip_MouseLeave);
             // 
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
@@ -139,23 +137,15 @@
             // 
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.AutoSize = false;
-            this.toolStripSeparator1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(136, 32);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -207,10 +197,10 @@
             this.Controls.Add(this.lblFreeSpace);
             this.Controls.Add(this.minimizeContainerPanel);
             this.Controls.Add(this.lblTitle);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DiskSpace.Properties.Settings.Default, "mainFormLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = global::DiskSpace.Properties.Settings.Default.mainFormLocation;
+            this.Location = new System.Drawing.Point(40, 40);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.TopMost = true;
@@ -237,7 +227,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
         private System.Windows.Forms.Timer checkTimer;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
