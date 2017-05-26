@@ -14,37 +14,55 @@ namespace DiskSpace
         [STAThread]
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            if (StartedWithCommandLineArguments(args))
             {
-                string allParams = string.Join("|", args);
-                bool startWithWindows = allParams.Contains("autorun=1");
-                bool notifications = allParams.Contains("notifications=1");
-                bool minimized = allParams.Contains("minimized=1");
-                bool start = allParams.Contains("start=1");
-                bool calledFromInstaller = allParams.Contains("autorun=") == true &&
-                                            allParams.Contains("notifications=") == true &&
-                                            allParams.Contains("minimized=") == true &&
-                                            allParams.Contains("start=") == true;
-                if (calledFromInstaller)
-                {
-                    UpdateSettings(startWithWindows, notifications, minimized);
-                    if (start)
-                    {
-                        StartApplicationAsSeparateProcess();
-                    }
-                }
-                else
-                {
-                    string executable = Application.ExecutablePath.Substring(Application.ExecutablePath.LastIndexOf(@"\", 
-                        StringComparison.Ordinal) + 1);
-                    Console.WriteLine(string.Format(CultureInfo.InvariantCulture, 
-                        Properties.Resources.CommandLineTip, executable));
-                }
+                HandleCommandLineExecution(args);
                 return;
             }
+            RunApplication();
+        }
+
+        private static void RunApplication()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+        }
+
+        private static bool StartedWithCommandLineArguments(string[] args)
+        {
+            return args.Length != 0;
+        }
+
+        private static void HandleCommandLineExecution(string[] args)
+        {
+            string allParams = string.Join("|", args);
+            bool startWithWindows = allParams.Contains("autorun=1");
+            bool notifications = allParams.Contains("notifications=1");
+            bool minimized = allParams.Contains("minimized=1");
+            bool start = allParams.Contains("start=1");
+            bool calledFromInstaller = allParams.Contains("autorun=") == true &&
+                                        allParams.Contains("notifications=") == true &&
+                                        allParams.Contains("minimized=") == true &&
+                                        allParams.Contains("start=") == true;
+            if (calledFromInstaller)
+            {
+                UpdateSettings(startWithWindows, notifications, minimized);
+                if (start)
+                {
+                    StartApplicationAsSeparateProcess();
+                }
+                return;
+            }
+            ShowCommandLineUsage();
+        }
+
+        private static void ShowCommandLineUsage()
+        {
+            string executable = Application.ExecutablePath.Substring(Application.ExecutablePath.LastIndexOf(@"\",
+                StringComparison.Ordinal) + 1);
+            Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
+                Properties.Resources.CommandLineTip, executable));
         }
 
         private static void StartApplicationAsSeparateProcess()
