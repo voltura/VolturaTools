@@ -45,7 +45,10 @@ namespace DiskSpace
             this.chkStartMinimized = new System.Windows.Forms.CheckBox();
             this.lblDrive = new System.Windows.Forms.Label();
             this.lblSettingsTitle = new System.Windows.Forms.Label();
+            this.minimizePanelFrame = new System.Windows.Forms.Panel();
+            this.minimizePanel = new System.Windows.Forms.Panel();
             this.settingsPanel.SuspendLayout();
+            this.minimizePanelFrame.SuspendLayout();
             this.SuspendLayout();
             // 
             // cmbDrives
@@ -214,12 +217,33 @@ namespace DiskSpace
             this.lblSettingsTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseDown);
             this.lblSettingsTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SettingsTitle_MouseMove);
             // 
+            // minimizePanelFrame
+            // 
+            this.minimizePanelFrame.Controls.Add(this.minimizePanel);
+            this.minimizePanelFrame.Location = new System.Drawing.Point(549, 0);
+            this.minimizePanelFrame.Name = "minimizePanelFrame";
+            this.minimizePanelFrame.Size = new System.Drawing.Size(65, 32);
+            this.minimizePanelFrame.TabIndex = 3;
+            this.minimizePanelFrame.Click += new System.EventHandler(this.minimizePanelFrame_Click);
+            // 
+            // minimizePanel
+            // 
+            this.minimizePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.minimizePanel.BackColor = System.Drawing.Color.White;
+            this.minimizePanel.Location = new System.Drawing.Point(34, 9);
+            this.minimizePanel.Margin = new System.Windows.Forms.Padding(0);
+            this.minimizePanel.Name = "minimizePanel";
+            this.minimizePanel.Size = new System.Drawing.Size(28, 10);
+            this.minimizePanel.TabIndex = 3;
+            this.minimizePanel.Click += new System.EventHandler(this.minimizePanel_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(616, 348);
+            this.Controls.Add(this.minimizePanelFrame);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.lblSettingsTitle);
             this.DoubleBuffered = true;
@@ -234,6 +258,7 @@ namespace DiskSpace
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.settingsPanel.ResumeLayout(false);
             this.settingsPanel.PerformLayout();
+            this.minimizePanelFrame.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -251,5 +276,7 @@ namespace DiskSpace
         private System.Windows.Forms.CheckBox chkNotificationLimit;
         private System.Windows.Forms.TextBox txtNotificationLimitGB;
         private System.Windows.Forms.Label lblGB;
+        private System.Windows.Forms.Panel minimizePanelFrame;
+        private System.Windows.Forms.Panel minimizePanel;
     }
 }

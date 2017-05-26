@@ -62,16 +62,20 @@ namespace DiskSpace
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
+            {
+                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
+            }
+            else
+            {
+                Properties.Settings.Default.NotificationLimitGB = 10;
+            }
             Properties.Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
             Properties.Settings.Default.Save();
         }
 
         private void Save_Click(object sender, EventArgs e)
         {
-            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
-            {
-                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
-            }
             Close();
         }
 
@@ -95,6 +99,16 @@ namespace DiskSpace
             {
                 txtNotificationLimitGB.Text = string.Empty;
             }
+        }
+
+        private void minimizePanel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void minimizePanelFrame_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
