@@ -116,6 +116,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomColorsRenderer.cs" />
     <Compile Include="Drive.cs" />
     <Compile Include="LocalDrives.cs" />
     <Compile Include="MainForm.cs">

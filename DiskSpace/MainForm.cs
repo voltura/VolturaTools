@@ -1,10 +1,13 @@
-﻿using System;
+﻿#region Using statements
+
+using System;
 using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
 using Microsoft.Win32;
 
+#endregion
 namespace DiskSpace
 {
     /// <summary>
@@ -52,6 +55,7 @@ namespace DiskSpace
             try
             {
                 InitApplication();
+                contextMenuStrip.Renderer = new CustomColorsRenderer();
             }
             catch (Exception ex)
             {
@@ -68,7 +72,6 @@ namespace DiskSpace
                     MessageBoxOptions.DefaultDesktopOnly);
                 throw;
             }
-            
         }
 
         private void InitApplication()
@@ -104,10 +107,11 @@ namespace DiskSpace
             }
             UpdateFreespaceAndShowBalloonTip();
             TopMost = Properties.Settings.Default.alwaysOnTop;
-            checkTimer.Enabled = true;
             Visible = !Properties.Settings.Default.startMinimized;
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
+            UpdateContextMenuItemText();
+            checkTimer.Enabled = true;
         }
 
         private static void CheckSettings()

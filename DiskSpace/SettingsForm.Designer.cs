@@ -53,23 +53,24 @@ namespace DiskSpace
             // 
             // cmbDrives
             // 
-            this.cmbDrives.BackColor = System.Drawing.Color.Black;
+            this.cmbDrives.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.cmbDrives.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDrives.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbDrives.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbDrives.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbDrives.ForeColor = System.Drawing.Color.White;
             this.cmbDrives.FormattingEnabled = true;
-            this.cmbDrives.ItemHeight = 28;
-            this.cmbDrives.Location = new System.Drawing.Point(229, 259);
+            this.cmbDrives.ItemHeight = 23;
+            this.cmbDrives.Location = new System.Drawing.Point(395, 125);
+            this.cmbDrives.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbDrives.Name = "cmbDrives";
-            this.cmbDrives.Size = new System.Drawing.Size(148, 36);
+            this.cmbDrives.Size = new System.Drawing.Size(132, 31);
             this.cmbDrives.TabIndex = 6;
             // 
             // settingsPanel
             // 
             this.settingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsPanel.BackColor = System.Drawing.Color.Black;
+            this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.settingsPanel.Controls.Add(this.lblGB);
             this.settingsPanel.Controls.Add(this.txtNotificationLimitGB);
             this.settingsPanel.Controls.Add(this.chkNotificationLimit);
@@ -80,35 +81,33 @@ namespace DiskSpace
             this.settingsPanel.Controls.Add(this.chkStartMinimized);
             this.settingsPanel.Controls.Add(this.lblDrive);
             this.settingsPanel.Controls.Add(this.cmbDrives);
-            this.settingsPanel.Location = new System.Drawing.Point(1, 35);
+            this.settingsPanel.Location = new System.Drawing.Point(0, 32);
             this.settingsPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.settingsPanel.MaximumSize = new System.Drawing.Size(614, 311);
-            this.settingsPanel.MinimumSize = new System.Drawing.Size(614, 311);
             this.settingsPanel.Name = "settingsPanel";
-            this.settingsPanel.Size = new System.Drawing.Size(614, 311);
+            this.settingsPanel.Size = new System.Drawing.Size(548, 237);
             this.settingsPanel.TabIndex = 2;
             // 
             // lblGB
             // 
             this.lblGB.AutoSize = true;
-            this.lblGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGB.Location = new System.Drawing.Point(323, 162);
+            this.lblGB.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGB.Location = new System.Drawing.Point(445, 73);
             this.lblGB.Name = "lblGB";
-            this.lblGB.Size = new System.Drawing.Size(39, 28);
+            this.lblGB.Size = new System.Drawing.Size(32, 23);
             this.lblGB.TabIndex = 8;
             this.lblGB.Text = "GB";
             // 
             // txtNotificationLimitGB
             // 
-            this.txtNotificationLimitGB.BackColor = System.Drawing.Color.Black;
+            this.txtNotificationLimitGB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.txtNotificationLimitGB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNotificationLimitGB.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DiskSpace.Properties.Settings.Default, "NotificatonAmountLimit", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.txtNotificationLimitGB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.txtNotificationLimitGB.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNotificationLimitGB.ForeColor = System.Drawing.Color.White;
-            this.txtNotificationLimitGB.Location = new System.Drawing.Point(229, 160);
+            this.txtNotificationLimitGB.Location = new System.Drawing.Point(395, 71);
             this.txtNotificationLimitGB.Margin = new System.Windows.Forms.Padding(0);
             this.txtNotificationLimitGB.Name = "txtNotificationLimitGB";
-            this.txtNotificationLimitGB.Size = new System.Drawing.Size(91, 34);
+            this.txtNotificationLimitGB.Size = new System.Drawing.Size(47, 30);
             this.txtNotificationLimitGB.TabIndex = 5;
             this.txtNotificationLimitGB.Text = "700";
             this.txtNotificationLimitGB.TextChanged += new System.EventHandler(this.NotificationLimitGB_TextChanged);
@@ -116,24 +115,36 @@ namespace DiskSpace
             // chkNotificationLimit
             // 
             this.chkNotificationLimit.AutoSize = true;
+            this.chkNotificationLimit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.chkNotificationLimit.Checked = global::DiskSpace.Properties.Settings.Default.NotificationLimitActive;
             this.chkNotificationLimit.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "NotificationLimitActive", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkNotificationLimit.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.chkNotificationLimit.Location = new System.Drawing.Point(13, 161);
+            this.chkNotificationLimit.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkNotificationLimit.FlatAppearance.BorderSize = 2;
+            this.chkNotificationLimit.FlatAppearance.CheckedBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkNotificationLimit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkNotificationLimit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.chkNotificationLimit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkNotificationLimit.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNotificationLimit.Location = new System.Drawing.Point(204, 71);
+            this.chkNotificationLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkNotificationLimit.Name = "chkNotificationLimit";
-            this.chkNotificationLimit.Size = new System.Drawing.Size(203, 32);
+            this.chkNotificationLimit.Size = new System.Drawing.Size(156, 27);
             this.chkNotificationLimit.TabIndex = 4;
             this.chkNotificationLimit.Text = global::DiskSpace.Properties.Resources.NotificationLimit;
-            this.chkNotificationLimit.UseVisualStyleBackColor = true;
+            this.chkNotificationLimit.UseVisualStyleBackColor = false;
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnSave.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(407, 255);
+            this.btnSave.Location = new System.Drawing.Point(395, 184);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(196, 43);
+            this.btnSave.Size = new System.Drawing.Size(132, 32);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = global::DiskSpace.Properties.Resources.SaveButtonTitle;
             this.btnSave.UseVisualStyleBackColor = false;
@@ -142,75 +153,110 @@ namespace DiskSpace
             // chkStartWithWindows
             // 
             this.chkStartWithWindows.AutoSize = true;
+            this.chkStartWithWindows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.chkStartWithWindows.Checked = global::DiskSpace.Properties.Settings.Default.startWithWindows;
             this.chkStartWithWindows.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkStartWithWindows.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "startWithWindows", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkStartWithWindows.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStartWithWindows.Location = new System.Drawing.Point(13, 24);
+            this.chkStartWithWindows.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartWithWindows.FlatAppearance.BorderSize = 2;
+            this.chkStartWithWindows.FlatAppearance.CheckedBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartWithWindows.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartWithWindows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.chkStartWithWindows.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkStartWithWindows.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStartWithWindows.Location = new System.Drawing.Point(13, 19);
+            this.chkStartWithWindows.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkStartWithWindows.Name = "chkStartWithWindows";
-            this.chkStartWithWindows.Size = new System.Drawing.Size(135, 32);
+            this.chkStartWithWindows.Size = new System.Drawing.Size(104, 27);
             this.chkStartWithWindows.TabIndex = 0;
             this.chkStartWithWindows.Text = global::DiskSpace.Properties.Resources.StartWithWindowsText;
-            this.chkStartWithWindows.UseVisualStyleBackColor = true;
+            this.chkStartWithWindows.UseVisualStyleBackColor = false;
             // 
             // chkAlwaysOnTop
             // 
             this.chkAlwaysOnTop.AutoSize = true;
+            this.chkAlwaysOnTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.chkAlwaysOnTop.Checked = global::DiskSpace.Properties.Settings.Default.alwaysOnTop;
             this.chkAlwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAlwaysOnTop.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "alwaysOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkAlwaysOnTop.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(229, 89);
+            this.chkAlwaysOnTop.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkAlwaysOnTop.FlatAppearance.BorderSize = 2;
+            this.chkAlwaysOnTop.FlatAppearance.CheckedBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkAlwaysOnTop.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkAlwaysOnTop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.chkAlwaysOnTop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkAlwaysOnTop.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(13, 123);
+            this.chkAlwaysOnTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
-            this.chkAlwaysOnTop.Size = new System.Drawing.Size(224, 32);
+            this.chkAlwaysOnTop.Size = new System.Drawing.Size(180, 27);
             this.chkAlwaysOnTop.TabIndex = 3;
             this.chkAlwaysOnTop.Text = global::DiskSpace.Properties.Resources.AlwaysOnTop;
-            this.chkAlwaysOnTop.UseVisualStyleBackColor = true;
+            this.chkAlwaysOnTop.UseVisualStyleBackColor = false;
             // 
             // chkDisplayNotifications
             // 
             this.chkDisplayNotifications.AutoSize = true;
+            this.chkDisplayNotifications.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.chkDisplayNotifications.Checked = global::DiskSpace.Properties.Settings.Default.notifyWhenSpaceChange;
             this.chkDisplayNotifications.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDisplayNotifications.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "notifyWhenSpaceChange", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkDisplayNotifications.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisplayNotifications.Location = new System.Drawing.Point(229, 24);
+            this.chkDisplayNotifications.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkDisplayNotifications.FlatAppearance.BorderSize = 2;
+            this.chkDisplayNotifications.FlatAppearance.CheckedBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkDisplayNotifications.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkDisplayNotifications.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.chkDisplayNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkDisplayNotifications.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisplayNotifications.Location = new System.Drawing.Point(204, 19);
+            this.chkDisplayNotifications.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkDisplayNotifications.Name = "chkDisplayNotifications";
-            this.chkDisplayNotifications.Size = new System.Drawing.Size(263, 32);
+            this.chkDisplayNotifications.Size = new System.Drawing.Size(208, 27);
             this.chkDisplayNotifications.TabIndex = 1;
             this.chkDisplayNotifications.Text = global::DiskSpace.Properties.Resources.ShowNotifications;
-            this.chkDisplayNotifications.UseVisualStyleBackColor = true;
+            this.chkDisplayNotifications.UseVisualStyleBackColor = false;
             // 
             // chkStartMinimized
             // 
             this.chkStartMinimized.AutoSize = true;
+            this.chkStartMinimized.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.chkStartMinimized.Checked = global::DiskSpace.Properties.Settings.Default.startMinimized;
             this.chkStartMinimized.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkStartMinimized.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "startMinimized", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkStartMinimized.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStartMinimized.Location = new System.Drawing.Point(13, 89);
+            this.chkStartMinimized.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartMinimized.FlatAppearance.BorderSize = 2;
+            this.chkStartMinimized.FlatAppearance.CheckedBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartMinimized.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chkStartMinimized.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
+            this.chkStartMinimized.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.chkStartMinimized.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkStartMinimized.Location = new System.Drawing.Point(13, 71);
+            this.chkStartMinimized.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkStartMinimized.Name = "chkStartMinimized";
-            this.chkStartMinimized.Size = new System.Drawing.Size(190, 32);
+            this.chkStartMinimized.Size = new System.Drawing.Size(148, 27);
             this.chkStartMinimized.TabIndex = 2;
             this.chkStartMinimized.Text = global::DiskSpace.Properties.Resources.StartMinimized;
-            this.chkStartMinimized.UseVisualStyleBackColor = true;
+            this.chkStartMinimized.UseVisualStyleBackColor = false;
             // 
             // lblDrive
             // 
-            this.lblDrive.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDrive.Location = new System.Drawing.Point(32, 262);
+            this.lblDrive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.lblDrive.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDrive.Location = new System.Drawing.Point(220, 125);
             this.lblDrive.Name = "lblDrive";
-            this.lblDrive.Size = new System.Drawing.Size(181, 28);
+            this.lblDrive.Size = new System.Drawing.Size(169, 22);
             this.lblDrive.TabIndex = 5;
             this.lblDrive.Text = "Drive to monitor";
             // 
             // lblSettingsTitle
             // 
             this.lblSettingsTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblSettingsTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblSettingsTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSettingsTitle.Location = new System.Drawing.Point(0, 0);
             this.lblSettingsTitle.Name = "lblSettingsTitle";
-            this.lblSettingsTitle.Size = new System.Drawing.Size(616, 32);
+            this.lblSettingsTitle.Padding = new System.Windows.Forms.Padding(32, 0, 0, 0);
+            this.lblSettingsTitle.Size = new System.Drawing.Size(548, 32);
             this.lblSettingsTitle.TabIndex = 1;
             this.lblSettingsTitle.Text = "Settings";
             this.lblSettingsTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,9 +266,10 @@ namespace DiskSpace
             // minimizePanelFrame
             // 
             this.minimizePanelFrame.Controls.Add(this.minimizePanel);
-            this.minimizePanelFrame.Location = new System.Drawing.Point(549, 0);
+            this.minimizePanelFrame.Location = new System.Drawing.Point(510, 0);
+            this.minimizePanelFrame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.minimizePanelFrame.Name = "minimizePanelFrame";
-            this.minimizePanelFrame.Size = new System.Drawing.Size(65, 32);
+            this.minimizePanelFrame.Size = new System.Drawing.Size(36, 32);
             this.minimizePanelFrame.TabIndex = 3;
             this.minimizePanelFrame.Click += new System.EventHandler(this.MinimizePanelFrame_Click);
             this.minimizePanelFrame.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
@@ -232,20 +279,20 @@ namespace DiskSpace
             // 
             this.minimizePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minimizePanel.BackColor = System.Drawing.Color.White;
-            this.minimizePanel.Location = new System.Drawing.Point(34, 9);
+            this.minimizePanel.Location = new System.Drawing.Point(7, 7);
             this.minimizePanel.Margin = new System.Windows.Forms.Padding(0);
             this.minimizePanel.Name = "minimizePanel";
-            this.minimizePanel.Size = new System.Drawing.Size(28, 10);
+            this.minimizePanel.Size = new System.Drawing.Size(25, 8);
             this.minimizePanel.TabIndex = 3;
             this.minimizePanel.Click += new System.EventHandler(this.MinimizePanel_Click);
             this.minimizePanel.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.ClientSize = new System.Drawing.Size(616, 348);
+            this.ClientSize = new System.Drawing.Size(548, 269);
             this.Controls.Add(this.minimizePanelFrame);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.lblSettingsTitle);
@@ -253,6 +300,7 @@ namespace DiskSpace
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
