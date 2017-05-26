@@ -238,6 +238,7 @@ namespace DiskSpace
             this.minimizePanel.Size = new System.Drawing.Size(28, 10);
             this.minimizePanel.TabIndex = 3;
             this.minimizePanel.Click += new System.EventHandler(this.MinimizePanel_Click);
+            this.minimizePanel.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
             // 
             // SettingsForm
             // 
