@@ -1,7 +1,10 @@
-﻿using System;
+﻿#region Using statements
+
+using System;
 using System.Windows.Forms;
 using System.Drawing;
 
+#endregion
 namespace DiskSpace
 {
     /// <summary>
@@ -9,12 +12,22 @@ namespace DiskSpace
     /// </summary>
     public partial class SettingsForm : Form
     {
+        #region Private member variables
+
         Point offset;
+
+        #endregion
+
+        #region Protected class properties
 
         /// <summary>
         /// Mouse location offset used form form movement
         /// </summary>
-        public Point Offset { get => offset; set => offset = value; }
+        protected Point Offset { get => offset; set => offset = value; }
+
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Settings form constructor
@@ -24,6 +37,64 @@ namespace DiskSpace
             InitializeComponent();
             InitializeFormFromSettings();
         }
+
+        #endregion
+
+        #region Events handling
+
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void UpdateDriveLetterSetting()
+        {
+            Properties.Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            UpdateOffset(e);
+        }
+
+        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveForm(e);
+        }
+
+        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
+        {
+            AcceptOnlyNumericNotificationGBInput();
+        }
+
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
+
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
+
+        private void MinimizePanel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MinimizePanelFrame_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        #endregion
+
+        #region Private methods
 
         private void InitializeFormFromSettings()
         {
@@ -60,32 +131,28 @@ namespace DiskSpace
             Text = lblSettingsTitle.Text;
         }
 
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void SaveSettings()
         {
-            minimizePanel.BackColor = Color.White;
-            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
-            {
-                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
-            }
-            else
-            {
-                Properties.Settings.Default.NotificationLimitGB = 10;
-            }
-            Properties.Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+            UnfocusMinimizeIcon();
+            UpdateNotificationLimitSetting();
+            UpdateDriveLetterSetting();
             Properties.Settings.Default.Save();
         }
 
-        private void Save_Click(object sender, EventArgs e)
+        private void FocusMinimizeIcon()
         {
-            Close();
+            minimizePanel.BackColor = Color.LightGray;
         }
 
-        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
+        private void AcceptOnlyNumericNotificationGBInput()
         {
-            Offset = new Point(e.X, e.Y);
+            if (!uint.TryParse(txtNotificationLimitGB.Text, out uint parsedValue))
+            {
+                txtNotificationLimitGB.Text = string.Empty;
+            }
         }
 
-        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
+        private void MoveForm(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -94,32 +161,28 @@ namespace DiskSpace
             }
         }
 
-        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
+        private void UpdateOffset(MouseEventArgs e)
         {
-            if (!uint.TryParse(txtNotificationLimitGB.Text, out uint parsedValue))
+            Offset = new Point(e.X, e.Y);
+        }
+
+        private void UpdateNotificationLimitSetting()
+        {
+            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
             {
-                txtNotificationLimitGB.Text = string.Empty;
+                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
+            }
+            else
+            {
+                Properties.Settings.Default.NotificationLimitGB = 10;
             }
         }
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
-        {
-            minimizePanel.BackColor = Color.LightGray;
-        }
-
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        private void UnfocusMinimizeIcon()
         {
             minimizePanel.BackColor = Color.White;
         }
 
-        private void MinimizePanel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void MinimizePanelFrame_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        #endregion
     }
 }
