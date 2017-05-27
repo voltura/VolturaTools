@@ -50,6 +50,7 @@
             // lblFreeSpace
             // 
             this.lblFreeSpace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.lblFreeSpace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblFreeSpace.Font = new System.Drawing.Font("Segoe UI Black", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFreeSpace.ForeColor = System.Drawing.Color.White;
             this.lblFreeSpace.Location = new System.Drawing.Point(0, 32);
@@ -130,7 +131,7 @@
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(150, 28);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 28);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -138,7 +139,7 @@
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(150, 28);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(121, 28);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -146,7 +147,7 @@
             // 
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(150, 28);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(121, 28);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
