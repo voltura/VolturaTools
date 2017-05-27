@@ -103,50 +103,70 @@ namespace DiskSpace
 
         private void InitializeFormFromSettings()
         {
-            cmbDrives.DataSource = LocalDrives.Drives();
-            cmbDrives.DisplayMember = "Description";
-            cmbDrives.ValueMember = "DriveName";
+            PopulateDrivesInDropdown();
+            SetControlTextsFromResources();
+            SetValuesFromSettings();
+            AddFieldDataBindings();
+        }
+
+        private void SetValuesFromSettings()
+        {
             cmbDrives.SelectedValue = Properties.Settings.Default.driveLetter;
-            if (txtNotificationLimitGB.DataBindings.Count == 0)
-            {
-                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "NotificatonAmountLimit", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
             chkNotificationLimit.Checked = Properties.Settings.Default.NotificationLimitActive;
-            if (chkNotificationLimit.DataBindings.Count == 0)
-            {
-                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
-            chkNotificationLimit.Text = Properties.Resources.NotificationLimit;
-            btnSave.Text = Properties.Resources.SaveButtonTitle;
             chkStartWithWindows.Checked = Properties.Settings.Default.startWithWindows;
-            if (chkStartWithWindows.DataBindings.Count == 0)
-            {
-                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startWithWindows", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
-            chkStartWithWindows.Text = Properties.Resources.StartWithWindowsText;
             chkAlwaysOnTop.Checked = Properties.Settings.Default.alwaysOnTop;
-            if (chkAlwaysOnTop.DataBindings.Count == 0)
-            {
-                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "alwaysOnTop", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
-            chkAlwaysOnTop.Text = Properties.Resources.AlwaysOnTop;
             chkDisplayNotifications.Checked = Properties.Settings.Default.notifyWhenSpaceChange;
-            if (chkDisplayNotifications.DataBindings.Count == 0)
-            {
-                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
-            chkDisplayNotifications.Text = Properties.Resources.ShowNotifications;
             chkStartMinimized.Checked = Properties.Settings.Default.startMinimized;
             chkStartMinimized.CheckState = CheckState.Checked;
-            if (chkStartMinimized.DataBindings.Count == 0)
-            {
-                chkStartMinimized.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startMinimized", true, DataSourceUpdateMode.OnPropertyChanged));
-            }
+        }
+
+        private void SetControlTextsFromResources()
+        {
+            chkNotificationLimit.Text = Properties.Resources.NotificationLimit;
+            btnSave.Text = Properties.Resources.SaveButtonTitle;
+            chkStartWithWindows.Text = Properties.Resources.StartWithWindowsText;
+            chkAlwaysOnTop.Text = Properties.Resources.AlwaysOnTop;
+            chkDisplayNotifications.Text = Properties.Resources.ShowNotifications;
             chkStartMinimized.Text = Properties.Resources.StartMinimized;
             lblDrive.Text = Properties.Resources.DriveToMonitor;
             lblSettingsTitle.Text = Properties.Resources.Settings;
             lblGB.Text = Properties.Resources.GB;
-            Text = lblSettingsTitle.Text;
+            Text = Properties.Resources.Settings;
+        }
+
+        private void PopulateDrivesInDropdown()
+        {
+            cmbDrives.DataSource = LocalDrives.Drives();
+            cmbDrives.DisplayMember = "Description";
+            cmbDrives.ValueMember = "DriveName";
+        }
+
+        private void AddFieldDataBindings()
+        {
+            if (chkNotificationLimit.DataBindings.Count == 0)
+            {
+                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (txtNotificationLimitGB.DataBindings.Count == 0)
+            {
+                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "NotificatonAmountLimit", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (chkStartWithWindows.DataBindings.Count == 0)
+            {
+                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startWithWindows", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (chkAlwaysOnTop.DataBindings.Count == 0)
+            {
+                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "alwaysOnTop", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (chkDisplayNotifications.DataBindings.Count == 0)
+            {
+                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+            if (chkStartMinimized.DataBindings.Count == 0)
+            {
+                chkStartMinimized.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startMinimized", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
         }
 
         private void SaveSettings()
