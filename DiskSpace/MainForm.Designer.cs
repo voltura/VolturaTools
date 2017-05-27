@@ -59,6 +59,7 @@
             this.lblFreeSpace.Size = new System.Drawing.Size(336, 83);
             this.lblFreeSpace.TabIndex = 1;
             this.lblFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblFreeSpace.Click += new System.EventHandler(this.FreeSpace_Click);
             // 
             // minimizePanel
             // 

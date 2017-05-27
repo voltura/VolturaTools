@@ -47,8 +47,10 @@ namespace DiskSpace
             this.lblSettingsTitle = new System.Windows.Forms.Label();
             this.minimizePanelFrame = new System.Windows.Forms.Panel();
             this.minimizePanel = new System.Windows.Forms.Panel();
+            this.titleIcon = new System.Windows.Forms.PictureBox();
             this.settingsPanel.SuspendLayout();
             this.minimizePanelFrame.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbDrives
@@ -287,12 +289,26 @@ namespace DiskSpace
             this.minimizePanel.Click += new System.EventHandler(this.MinimizePanel_Click);
             this.minimizePanel.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
             // 
+            // titleIcon
+            // 
+            this.titleIcon.BackColor = System.Drawing.Color.Transparent;
+            this.titleIcon.Image = global::DiskSpace.Properties.Resources.simple_gears;
+            this.titleIcon.InitialImage = global::DiskSpace.Properties.Resources.simple_gears;
+            this.titleIcon.Location = new System.Drawing.Point(4, 0);
+            this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.titleIcon.Name = "titleIcon";
+            this.titleIcon.Size = new System.Drawing.Size(32, 32);
+            this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.titleIcon.TabIndex = 4;
+            this.titleIcon.TabStop = false;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(548, 269);
+            this.Controls.Add(this.titleIcon);
             this.Controls.Add(this.minimizePanelFrame);
             this.Controls.Add(this.settingsPanel);
             this.Controls.Add(this.lblSettingsTitle);
@@ -307,9 +323,11 @@ namespace DiskSpace
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.settingsPanel.ResumeLayout(false);
             this.settingsPanel.PerformLayout();
             this.minimizePanelFrame.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -329,5 +347,6 @@ namespace DiskSpace
         private System.Windows.Forms.Label lblGB;
         private System.Windows.Forms.Panel minimizePanelFrame;
         private System.Windows.Forms.Panel minimizePanel;
+        private System.Windows.Forms.PictureBox titleIcon;
     }
 }

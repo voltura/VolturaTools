@@ -14,7 +14,10 @@ namespace DiskSpace.Properties {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
-        
+
+        public event System.EventHandler DriveChanged;
+        private static readonly object Locker = new object();
+
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
         public static Settings Default {
@@ -35,7 +38,14 @@ namespace DiskSpace.Properties {
                 return ((string)(this["driveLetter"]));
             }
             set {
-                this["driveLetter"] = value;
+                lock (Locker)
+                {
+                    if (this["driveLetter"].ToString() != value)
+                    {
+                        this["driveLetter"] = value;
+                        if (DriveChanged != null) DriveChanged(this, System.EventArgs.Empty);
+                    }
+                }
             }
         }
         

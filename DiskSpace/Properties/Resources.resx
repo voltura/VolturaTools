@@ -201,4 +201,8 @@
     <value>\nUsage:\n{0} autorun=[1] notifications=[1] minimized=[1] start=[1]\n\nautorun=1\t\tStart with Windows\nnotifications=1\tShow notifications when disk space changes\nminimized=1\t\tStart in Taskbar only, do not show form when launching\nstart=1\t\t\tStart application after configuration\n\nExamples:\nConfigure not to start with Windows, display notifications, not minimized at startup and launch after configuration:\n{0} autorun= notifications=1 minimized= start=1\n\nConfigure to start with Windows, minimized, show notifications, do not run after config:\n{0} autorun=1 notifications=1 minimized=1 start=</value>
     <comment>Command line tip if user entered wrong command line options</comment>
   </data>
+  <data name="MinusSign" xml:space="preserve">
+    <value> - </value>
+    <comment>Form title</comment>
+  </data>
 </root>

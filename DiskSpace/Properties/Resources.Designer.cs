@@ -143,6 +143,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  - .
+        /// </summary>
+        internal static string MinusSign {
+            get {
+                return ResourceManager.GetString("MinusSign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification limit.
         /// </summary>
         internal static string NotificationLimit {

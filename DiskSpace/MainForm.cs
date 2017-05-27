@@ -18,6 +18,16 @@ namespace DiskSpace
         DriveInfo di = null;
         Point offset;
         SettingsForm settingsForm = null;
+        private decimal lastFreeSpace = 0M;
+        /// <summary>
+        /// Current free space
+        /// </summary>
+        private decimal CurrentFreeSpace { get => DI.AvailableFreeSpace / 1024 / 1024 / 1024; }
+
+        /// <summary>
+        /// Last recorded free space
+        /// </summary>
+        public decimal LastRecordedFreeSpace { get => lastFreeSpace; set => lastFreeSpace = value; }
 
         /// <summary>
         /// Mouse location offset used form form movement
@@ -27,7 +37,18 @@ namespace DiskSpace
         /// <summary>
         /// DriveInfo object used to check free disk space
         /// </summary>
-        public DriveInfo DI { get => di; set => di = value; }
+        public DriveInfo DI
+        {
+            get
+            {
+                if (di == null)
+                {
+                    di = new DriveInfo(Properties.Settings.Default.driveLetter);
+                }
+                return di;
+            }
+            set => di = value;
+        }
 
         /// <summary>
         /// Settings form
@@ -51,20 +72,16 @@ namespace DiskSpace
         /// </summary>
         public MainForm()
         {
-            InitializeComponent();
             try
             {
+                InitializeComponent();
                 InitApplication();
-                contextMenuStrip.Renderer = new CustomColorsRenderer();
             }
             catch (Exception ex)
             {
-                if (ApplicationSettingsForm != null)
-                {
-                    ApplicationSettingsForm.Dispose();
-                }
-                MessageBox.Show(this, 
-                    ex.ToString(), 
+                Cleanup();
+                MessageBox.Show(this,
+                    ex.Message, 
                     ProductName + ProductVersion, 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error, 
@@ -76,11 +93,11 @@ namespace DiskSpace
 
         private void InitApplication()
         {
+            contextMenuStrip.Renderer = new CustomColorsRenderer();
             CheckSettings();
             Icon = Properties.Resources.samsung_m2_ssd;
             diskSpaceNotifyIcon.Icon = Properties.Resources.samsung_m2_ssd;
-            di = new DriveInfo(Properties.Settings.Default.driveLetter);
-            lblTitle.Text = Properties.Resources.DiskSpace;
+            UpdateTitleText();
             Text = Properties.Resources.DiskSpace;
             contextMenuStrip.Text = Properties.Resources.DiskSpace;
             if (Properties.Settings.Default.startMinimized)
@@ -96,22 +113,39 @@ namespace DiskSpace
             if (Properties.Settings.Default.startWithWindows)
             {
                 string regKeyPath = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-                string appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"", 
+                string appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
                     Application.ExecutablePath);
                 Registry.SetValue(regKeyPath, "DiskSpace", appPath);
             }
             else
             {
-                Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace", 
+                Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace",
                     false);
             }
-            UpdateFreespaceAndShowBalloonTip();
+            UpdateFreespaceTexts();
+            ShowBalloonTipNotification();
             TopMost = Properties.Settings.Default.alwaysOnTop;
             Visible = !Properties.Settings.Default.startMinimized;
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
             UpdateContextMenuItemText();
+            Properties.Settings.Default.DriveChanged += Default_DriveChanged;
             checkTimer.Enabled = true;
+        }
+
+        private void Default_DriveChanged(object sender, EventArgs e)
+        {
+            DI = new DriveInfo(Properties.Settings.Default.driveLetter);
+            UpdateFreespaceTexts();
+        }
+
+        private void UpdateTitleText()
+        {
+            string titleText = Properties.Resources.DiskSpace + Properties.Resources.MinusSign + DI.Name;
+            if (lblTitle.Text != titleText)
+            {
+                lblTitle.Text = titleText;
+            }
         }
 
         private static void CheckSettings()
@@ -263,20 +297,12 @@ namespace DiskSpace
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CleanupAndSaveMainFormLocation();
+            SaveMainFormLocation();
+            Cleanup();
         }
 
-        private void CleanupAndSaveMainFormLocation()
+        private void Cleanup()
         {
-            if (WindowState == FormWindowState.Normal)
-            {
-                Properties.Settings.Default.mainFormLocation = Location;
-                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
-                {
-                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
-                }
-                Properties.Settings.Default.Save();
-            }
             if (ApplicationSettingsForm != null)
             {
                 ApplicationSettingsForm.Dispose();
@@ -288,6 +314,19 @@ namespace DiskSpace
             if (contextMenuStrip != null)
             {
                 contextMenuStrip.Dispose();
+            }
+        }
+
+        private void SaveMainFormLocation()
+        {
+            if (WindowState == FormWindowState.Normal && Visible == true)
+            {
+                Properties.Settings.Default.mainFormLocation = Location;
+                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
+                {
+                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
+                }
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -310,31 +349,57 @@ namespace DiskSpace
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            UpdateFreespaceAndShowBalloonTip();
+            UpdateFreespaceTexts();
+            ShowBalloonTipNotification();
         }
 
-        private void UpdateFreespaceAndShowBalloonTip()
+        private void UpdateFreespaceTexts()
         {
-            decimal space = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
-            uint uSpace = Convert.ToUInt32(space);
+            decimal space = CurrentFreeSpace;
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            string freeSpace = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") + 
+            string freeSpaceFormText = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") +
                 Properties.Resources.GB;
-            if (lblFreeSpace.Text != freeSpace)
+            UpdateFormFreeSpaceText(freeSpaceFormText);
+            UpdateTitleText();
+            UpdateNotificationFreeSpaceText(freeSpaceFormText);
+        }
+
+        private void UpdateNotificationFreeSpaceText(string freeSpaceFormText)
+        {
+            string freeSpaceInfoText = Properties.Settings.Default.driveLetter +
+                Properties.Resources.DriveSeparator + freeSpaceFormText + Properties.Resources.FreeSpace;
+            if (diskSpaceNotifyIcon.BalloonTipText != freeSpaceInfoText)
             {
-                lblFreeSpace.Text = freeSpace;
-                diskSpaceNotifyIcon.BalloonTipText = Properties.Settings.Default.driveLetter +
-                    Properties.Resources.DriveSeparator + freeSpace + Properties.Resources.FreeSpace;
-                diskSpaceNotifyIcon.Text = diskSpaceNotifyIcon.BalloonTipText;
-                if (Properties.Settings.Default.notifyWhenSpaceChange)
+                diskSpaceNotifyIcon.BalloonTipText = freeSpaceInfoText;
+                diskSpaceNotifyIcon.Text = freeSpaceInfoText;
+            }
+        }
+
+        private void UpdateFormFreeSpaceText(string freeSpaceFormText)
+        {
+            if (lblFreeSpace.Text != freeSpaceFormText)
+            {
+                lblFreeSpace.Text = freeSpaceFormText;
+            }
+        }
+
+        private void ShowBalloonTipNotification()
+        {
+            uint uSpace = Convert.ToUInt32(CurrentFreeSpace);
+
+            if (Properties.Settings.Default.notifyWhenSpaceChange)
+            {
+                bool limitReached = (Properties.Settings.Default.NotificationLimitActive == true &&
+                    Properties.Settings.Default.NotificationLimitGB >= uSpace);
+                if ((!Properties.Settings.Default.NotificationLimitActive) ||
+                    limitReached)
                 {
-                    bool limitReached = (Properties.Settings.Default.NotificationLimitActive == true &&
-                        Properties.Settings.Default.NotificationLimitGB >= uSpace);
-                    if ((!Properties.Settings.Default.NotificationLimitActive) ||
-                        limitReached)
+                    if (LastRecordedFreeSpace != CurrentFreeSpace)
                     {
-                        diskSpaceNotifyIcon.BalloonTipIcon = limitReached ? ToolTipIcon.Warning : ToolTipIcon.Info;
-                        diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000:500);
+                        LastRecordedFreeSpace = CurrentFreeSpace;
+                        diskSpaceNotifyIcon.BalloonTipIcon = limitReached ?
+                            ToolTipIcon.Warning : ToolTipIcon.Info;
+                        diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
                         diskSpaceNotifyIcon.Visible = true;
                     }
                 }
@@ -370,6 +435,7 @@ namespace DiskSpace
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
         {
+            UpdateFreespaceTexts();
             UpdateContextMenuItemText();
         }
 
@@ -386,6 +452,7 @@ namespace DiskSpace
             {
                 CloseSettingsForm();
             }
+            UpdateFreespaceTexts();
             ToogleFormVisibility();
         }
 
@@ -396,15 +463,6 @@ namespace DiskSpace
             {
                 ApplicationSettingsForm.Visible = false;
                 ApplicationSettingsForm.Close();
-            }
-        }
-
-        private void SaveMainFormLocation()
-        {
-            if (WindowState == FormWindowState.Normal && Visible)
-            {
-                Properties.Settings.Default.mainFormLocation = Location;
-                Properties.Settings.Default.Save();
             }
         }
 
@@ -423,6 +481,7 @@ namespace DiskSpace
             else
             {
                 ApplicationSettingsForm.ShowDialog(this);
+                UpdateFreespaceTexts();
             }
         }
 
@@ -471,6 +530,28 @@ namespace DiskSpace
                 }
                 Location = Properties.Settings.Default.mainFormLocation;
             }
+        }
+
+        private void FreeSpace_Click(object sender, EventArgs e)
+        {
+            ChangeMonitoredDrive();
+        }
+
+        private void ChangeMonitoredDrive()
+        {
+            string currentDriveLetter = Properties.Settings.Default.driveLetter;
+            string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
+            if (nextDriveLetter != currentDriveLetter)
+            {
+                DI = new DriveInfo(nextDriveLetter);
+                Properties.Settings.Default.driveLetter = nextDriveLetter;
+                Properties.Settings.Default.Save();
+                UpdateFreespaceTexts();
+            }
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
         }
     }
 }
