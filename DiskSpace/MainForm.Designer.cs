@@ -202,7 +202,7 @@
             this.diskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
             this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
-            this.diskCleanupToolStripMenuItem.Text = "Disk clean-up";
+            this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
             this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
             // 
             // MainForm

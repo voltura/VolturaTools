@@ -205,4 +205,8 @@
     <value> - </value>
     <comment>Form title</comment>
   </data>
+  <data name="Diskcleanup" xml:space="preserve">
+    <value>Disk clean-up</value>
+    <comment>Context menu item that launches CleanMgr.exe</comment>
+  </data>
 </root>

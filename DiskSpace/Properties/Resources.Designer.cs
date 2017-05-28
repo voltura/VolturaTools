@@ -89,6 +89,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk clean-up.
+        /// </summary>
+        internal static string Diskcleanup {
+            get {
+                return ResourceManager.GetString("Diskcleanup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Space.
         /// </summary>
         internal static string DiskSpace {

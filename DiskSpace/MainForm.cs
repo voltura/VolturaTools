@@ -89,6 +89,16 @@ namespace DiskSpace
             set => settingsForm = value;
         }
 
+        private static string CleanMgrFullPath
+        {
+            get
+            {
+                var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                string cleanMgrFullPath = Path.Combine(systemPath, "cleanmgr.exe");
+                return cleanMgrFullPath;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -158,6 +168,11 @@ namespace DiskSpace
             Visible = !Properties.Settings.Default.startMinimized;
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
+            diskCleanupToolStripMenuItem.Text = Properties.Resources.Diskcleanup;
+            if (!File.Exists(CleanMgrFullPath))
+            {
+                diskCleanupToolStripMenuItem.Enabled = false;
+            }
             UpdateContextMenuItemText();
             Properties.Settings.Default.DriveChanged += DriveLetterSettingChanged;
             checkTimer.Enabled = true;
@@ -409,19 +424,19 @@ namespace DiskSpace
             }
         }
 
-        private void LaunchCleanManager()
-        {            
-            using (Process p = new Process())
+        private static void LaunchCleanManager()
+        {
+            if (File.Exists(CleanMgrFullPath))
             {
-                var windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
-                string cleanMgrFullPath = Path.Combine(windowsPath, @"system32\cleanmgr.exe");
-                p.StartInfo = new ProcessStartInfo(cleanMgrFullPath)
+                using (Process p = new Process())
                 {
-                    UseShellExecute = false
-                };
-                p.Start();
+                    p.StartInfo = new ProcessStartInfo(CleanMgrFullPath)
+                    {
+                        UseShellExecute = false
+                    };
+                    p.Start();
+                }
             }
-
         }
 
         #endregion
