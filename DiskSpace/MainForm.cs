@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 #endregion
 
@@ -408,6 +409,21 @@ namespace DiskSpace
             }
         }
 
+        private void LaunchCleanManager()
+        {            
+            using (Process p = new Process())
+            {
+                var windowsPath = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                string cleanMgrFullPath = Path.Combine(windowsPath, @"system32\cleanmgr.exe");
+                p.StartInfo = new ProcessStartInfo(cleanMgrFullPath)
+                {
+                    UseShellExecute = false
+                };
+                p.Start();
+            }
+
+        }
+
         #endregion
 
         #region Event handling
@@ -575,6 +591,11 @@ namespace DiskSpace
         private void FreeSpace_Click(object sender, EventArgs e)
         {
             ChangeMonitoredDrive();
+        }
+
+        private void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LaunchCleanManager();
         }
 
         #endregion
