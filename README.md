@@ -17,6 +17,14 @@ Context menu options available via Taskbar icon click or right-click on main for
   - Show: Shows the main form of the application that displays the amount of free space on montitored disk
   - Hide: If applicatiopn form is visible then this menu option exist to hide it
   - Quit: Quits the application
+  - Disk clean-up: Launches Windows Disk Clean-up tool (DiskMgr.exe)
+  
+Main form features;
+  - Displays available free space of selected drive
+  - Icon to show settings form
+  - Context menu to; hide (minimize to taskbar), settings - show settings form, quit - quits application, disk clean-up - launches disk cleanup
+  - Click on free disk space will show next available disks free space (C -> D and so on), setting automatically updated to monitor selected disk
+  - Title bar showns drive that is being monitored and the disk size
   
  # DiskSpaceSetup
    .MSI package for DiskSpace, supports install, uninstall via ControlPanel or though .MSI. Also Repair function.
