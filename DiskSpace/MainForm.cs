@@ -19,15 +19,29 @@ namespace DiskSpace
         Point offset;
         SettingsForm settingsForm = null;
         private decimal lastFreeSpace = 0M;
+        private decimal currentFreeSpace = 0M;
+
         /// <summary>
         /// Current free space
         /// </summary>
-        private decimal CurrentFreeSpace { get => DI.AvailableFreeSpace / 1024 / 1024 / 1024; }
+        private decimal CurrentFreeSpace
+        {
+            get => currentFreeSpace;
+            set
+            {
+                if (currentFreeSpace != value)
+                {
+                    currentFreeSpace = value;
+                    UpdateFreespaceTexts();
+                    ShowBalloonTipNotification();
+                }
+            }
+        }
 
         /// <summary>
         /// Last recorded free space
         /// </summary>
-        public decimal LastRecordedFreeSpace { get => lastFreeSpace; set => lastFreeSpace = value; }
+        public decimal LastNotifiedFreeSpace { get => lastFreeSpace; set => lastFreeSpace = value; }
 
         /// <summary>
         /// Mouse location offset used form form movement
@@ -129,11 +143,11 @@ namespace DiskSpace
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
             UpdateContextMenuItemText();
-            Properties.Settings.Default.DriveChanged += Default_DriveChanged;
+            Properties.Settings.Default.DriveChanged += DriveLetterSettingChanged;
             checkTimer.Enabled = true;
         }
 
-        private void Default_DriveChanged(object sender, EventArgs e)
+        private void DriveLetterSettingChanged(object sender, EventArgs e)
         {
             DI = new DriveInfo(Properties.Settings.Default.driveLetter);
             UpdateFreespaceTexts();
@@ -349,15 +363,13 @@ namespace DiskSpace
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            UpdateFreespaceTexts();
-            ShowBalloonTipNotification();
+            CurrentFreeSpace = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
         }
 
         private void UpdateFreespaceTexts()
         {
-            decimal space = CurrentFreeSpace;
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            string freeSpaceFormText = string.Format(formatProvider, "{0:0.00}", space).Replace(".00", "") +
+            string freeSpaceFormText = string.Format(formatProvider, "{0:0.00}", CurrentFreeSpace).Replace(".00", "") +
                 Properties.Resources.GB;
             UpdateFormFreeSpaceText(freeSpaceFormText);
             UpdateTitleText();
@@ -394,9 +406,9 @@ namespace DiskSpace
                 if ((!Properties.Settings.Default.NotificationLimitActive) ||
                     limitReached)
                 {
-                    if (LastRecordedFreeSpace != CurrentFreeSpace)
+                    if (LastNotifiedFreeSpace != CurrentFreeSpace)
                     {
-                        LastRecordedFreeSpace = CurrentFreeSpace;
+                        LastNotifiedFreeSpace = CurrentFreeSpace;
                         diskSpaceNotifyIcon.BalloonTipIcon = limitReached ?
                             ToolTipIcon.Warning : ToolTipIcon.Info;
                         diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
@@ -435,7 +447,6 @@ namespace DiskSpace
 
         private void MainForm_VisibleChanged(object sender, EventArgs e)
         {
-            UpdateFreespaceTexts();
             UpdateContextMenuItemText();
         }
 
@@ -452,7 +463,6 @@ namespace DiskSpace
             {
                 CloseSettingsForm();
             }
-            UpdateFreespaceTexts();
             ToogleFormVisibility();
         }
 
@@ -481,7 +491,6 @@ namespace DiskSpace
             else
             {
                 ApplicationSettingsForm.ShowDialog(this);
-                UpdateFreespaceTexts();
             }
         }
 
@@ -546,7 +555,6 @@ namespace DiskSpace
                 DI = new DriveInfo(nextDriveLetter);
                 Properties.Settings.Default.driveLetter = nextDriveLetter;
                 Properties.Settings.Default.Save();
-                UpdateFreespaceTexts();
             }
         }
 

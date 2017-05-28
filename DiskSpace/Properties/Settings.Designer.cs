@@ -43,7 +43,7 @@ namespace DiskSpace.Properties {
                     if (this["driveLetter"].ToString() != value)
                     {
                         this["driveLetter"] = value;
-                        if (DriveChanged != null) DriveChanged(this, System.EventArgs.Empty);
+                        DriveChanged?.Invoke(this, System.EventArgs.Empty);
                     }
                 }
             }
