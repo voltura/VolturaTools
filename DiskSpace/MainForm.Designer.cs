@@ -39,11 +39,12 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.diskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTimer = new System.Windows.Forms.Timer(this.components);
             this.titleIcon = new System.Windows.Forms.PictureBox();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.diskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
@@ -124,11 +125,12 @@
             this.quitToolStripMenuItem,
             this.showToolStripMenuItem,
             this.toolStripSeparator1,
-            this.diskCleanupToolStripMenuItem});
+            this.diskCleanupToolStripMenuItem,
+            this.diskManagementToolStripMenuItem});
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(165, 150);
+            this.contextMenuStrip.Size = new System.Drawing.Size(202, 178);
             this.contextMenuStrip.MouseLeave += new System.EventHandler(this.ContextMenuStrip_MouseLeave);
             // 
             // settingsToolStripMenuItem
@@ -136,7 +138,7 @@
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -144,7 +146,7 @@
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -152,9 +154,22 @@
             // 
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            // 
+            // diskCleanupToolStripMenuItem
+            // 
+            this.diskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
+            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
+            this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
+            this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
             // 
             // checkTimer
             // 
@@ -192,18 +207,13 @@
             this.settingsIcon.MouseEnter += new System.EventHandler(this.SettingsIcon_MouseEnter);
             this.settingsIcon.MouseLeave += new System.EventHandler(this.SettingsIcon_MouseLeave);
             // 
-            // toolStripSeparator1
+            // diskManagementToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
-            // 
-            // diskCleanupToolStripMenuItem
-            // 
-            this.diskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
-            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
-            this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
-            this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
+            this.diskManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
+            this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
+            this.diskManagementToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.DiskManagement;
+            this.diskManagementToolStripMenuItem.Click += new System.EventHandler(this.DiskManagementToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -252,6 +262,7 @@
         private System.Windows.Forms.Timer checkTimer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem diskCleanupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem diskManagementToolStripMenuItem;
     }
 }
 

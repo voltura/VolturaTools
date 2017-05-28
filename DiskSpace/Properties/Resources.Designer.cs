@@ -98,6 +98,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk Management.
+        /// </summary>
+        internal static string DiskManagement {
+            get {
+                return ResourceManager.GetString("DiskManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk Space.
         /// </summary>
         internal static string DiskSpace {
@@ -254,6 +263,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  .
+        /// </summary>
+        internal static string Space {
+            get {
+                return ResourceManager.GetString("Space", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ssd {
@@ -278,6 +296,15 @@ namespace DiskSpace.Properties {
         internal static string StartWithWindowsText {
             get {
                 return ResourceManager.GetString("StartWithWindowsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TB.
+        /// </summary>
+        internal static string TB {
+            get {
+                return ResourceManager.GetString("TB", resourceCulture);
             }
         }
     }

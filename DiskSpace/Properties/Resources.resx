@@ -209,4 +209,16 @@
     <value>Disk clean-up</value>
     <comment>Context menu item that launches CleanMgr.exe</comment>
   </data>
+  <data name="DiskManagement" xml:space="preserve">
+    <value>Disk Management</value>
+    <comment>Context menu item to start Disk Management Management Snapin</comment>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value> </value>
+    <comment>Just a space character</comment>
+  </data>
+  <data name="TB" xml:space="preserve">
+    <value>TB</value>
+    <comment>Terrabyte</comment>
+  </data>
 </root>

@@ -99,6 +99,22 @@ namespace DiskSpace
             }
         }
 
+        private string DiskSize
+        {
+            get
+            {
+                decimal diskCapacityInGB = Math.Round((decimal)DI.TotalSize / 1024 / 1024 / 1024);
+                if (diskCapacityInGB / 1024 >= 1M)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                                        "{0:0.0}", diskCapacityInGB / 1024).Replace(".0","") +
+                                        Properties.Resources.TB;
+                }
+                return string.Format(CultureInfo.InvariantCulture,
+                                    "{0:0}", diskCapacityInGB) + 
+                                    Properties.Resources.GB;
+            }
+        }        
         #endregion
 
         #region Constructor
@@ -169,6 +185,7 @@ namespace DiskSpace
             quitToolStripMenuItem.Text = Properties.Resources.Quit;
             settingsToolStripMenuItem.Text = Properties.Resources.Settings;
             diskCleanupToolStripMenuItem.Text = Properties.Resources.Diskcleanup;
+            diskManagementToolStripMenuItem.Text = Properties.Resources.DiskManagement;
             if (!File.Exists(CleanMgrFullPath))
             {
                 diskCleanupToolStripMenuItem.Enabled = false;
@@ -180,7 +197,8 @@ namespace DiskSpace
 
         private void UpdateTitleText()
         {
-            string titleText = Properties.Resources.DiskSpace + Properties.Resources.MinusSign + DI.Name;
+            string titleText = Properties.Resources.DiskSpace + Properties.Resources.Space + DI.Name.Substring(0,2)
+                + Properties.Resources.Space + DiskSize;
             if (lblTitle.Text != titleText)
             {
                 lblTitle.Text = titleText;
@@ -432,11 +450,30 @@ namespace DiskSpace
                 {
                     p.StartInfo = new ProcessStartInfo(CleanMgrFullPath)
                     {
+                        Arguments = Properties.Settings.Default.driveLetter,
                         UseShellExecute = false
                     };
                     p.Start();
                 }
             }
+        }
+
+        private static void LaunchDiskManagement()
+        {
+            using (Process p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo("diskmgmt.msc")
+                {
+                    UseShellExecute = true,
+                };
+                p.Start();
+            }
+        }
+
+        private void UpdateContextMenuItemText()
+        {
+            showToolStripMenuItem.Text = Visible ?
+                Properties.Resources.Hide : Properties.Resources.Show;
         }
 
         #endregion
@@ -446,6 +483,7 @@ namespace DiskSpace
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
             CurrentFreeSpace = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
+            UpdateContextMenuItemText();
         }
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)
@@ -552,10 +590,9 @@ namespace DiskSpace
             UpdateContextMenuItemText();
         }
 
-        private void UpdateContextMenuItemText()
+        private void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showToolStripMenuItem.Text = Visible ?
-                Properties.Resources.Hide : Properties.Resources.Show;
+            LaunchDiskManagement();
         }
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
