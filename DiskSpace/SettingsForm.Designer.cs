@@ -113,6 +113,10 @@ namespace DiskSpace
             this.txtNotificationLimitGB.TabIndex = 5;
             this.txtNotificationLimitGB.Text = "700";
             this.txtNotificationLimitGB.TextChanged += new System.EventHandler(this.NotificationLimitGB_TextChanged);
+            this.txtNotificationLimitGB.Enter += new System.EventHandler(this.NotificationLimitGB_Enter);
+            this.txtNotificationLimitGB.Leave += new System.EventHandler(this.NotificationLimitGB_Leave);
+            this.txtNotificationLimitGB.MouseEnter += new System.EventHandler(this.NotificationLimitGB_MouseEnter);
+            this.txtNotificationLimitGB.MouseLeave += new System.EventHandler(this.NotificationLimitGB_MouseLeave);
             // 
             // chkNotificationLimit
             // 

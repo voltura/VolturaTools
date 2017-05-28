@@ -97,6 +97,29 @@ namespace DiskSpace
             InitializeFormFromSettings();
         }
 
+        private void NotificationLimitGB_MouseEnter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGB();
+        }
+
+        private void NotificationLimitGB_MouseLeave(object sender, EventArgs e)
+        {
+            if (!txtNotificationLimitGB.Focused)
+            {
+                ResetBackColorOnNotificationLimitGB();
+            }
+        }
+
+        private void NotificationLimitGB_Enter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGB();
+        }
+
+        private void NotificationLimitGB_Leave(object sender, EventArgs e)
+        {
+            ResetBackColorOnNotificationLimitGB();
+        }
+
         #endregion
 
         #region Private methods
@@ -221,6 +244,17 @@ namespace DiskSpace
             minimizePanel.BackColor = Color.White;
         }
 
+        private void SetActiveBackColorOnNotifictationLimitGB()
+        {
+            txtNotificationLimitGB.BackColor = Color.DeepSkyBlue;
+        }
+
+        private void ResetBackColorOnNotificationLimitGB()
+        {
+            txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
+        }
+
         #endregion
+
     }
 }
