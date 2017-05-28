@@ -1,4 +1,10 @@
-﻿#region Using statements
+﻿#region ToDo
+// Display disk properties using below techniques
+// https://msdn.microsoft.com/en-us/library/aa394173(v=vs.85).aspx
+// https://docs.microsoft.com/en-us/windows-hardware/drivers/install/invoking-a-device-properties-dialog-box-from-a-command-line-prompt
+#endregion
+
+#region Using statements
 
 using System;
 using System.Windows.Forms;

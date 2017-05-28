@@ -627,7 +627,7 @@ namespace DiskSpace
 
         private void ContextMenuStrip_MouseLeave(object sender, EventArgs e)
         {
-                contextMenuStrip.Hide();
+            contextMenuStrip.Hide();
         }
 
         private void TitleIcon_Click(object sender, EventArgs e)
