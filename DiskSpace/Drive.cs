@@ -5,6 +5,8 @@
     /// </summary>
     public class Drive
     {
+        #region Public properties
+
         /// <summary>
         /// Drive name
         /// </summary>
@@ -14,6 +16,10 @@
         /// Description
         /// </summary>
         public string Description { get; set; }
+
+        #endregion
+
+        #region Public constructor
 
         /// <summary>
         /// Drive constructor
@@ -25,5 +31,7 @@
             DriveName = driveName;
             Description = description;
         }
+
+        #endregion
     }
 }

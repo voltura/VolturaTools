@@ -33,7 +33,7 @@ namespace DiskSpace
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.cmbDrives = new System.Windows.Forms.ComboBox();
+            this.cmbDrives = new CustomComboBox();
             this.settingsPanel = new System.Windows.Forms.Panel();
             this.lblGB = new System.Windows.Forms.Label();
             this.txtNotificationLimitGB = new System.Windows.Forms.TextBox();
@@ -333,7 +333,6 @@ namespace DiskSpace
             this.minimizePanelFrame.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -341,7 +340,7 @@ namespace DiskSpace
         private System.Windows.Forms.CheckBox chkStartMinimized;
         private System.Windows.Forms.CheckBox chkDisplayNotifications;
         private System.Windows.Forms.CheckBox chkAlwaysOnTop;
-        private System.Windows.Forms.ComboBox cmbDrives;
+        private CustomComboBox cmbDrives;
         private System.Windows.Forms.Label lblDrive;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblSettingsTitle;

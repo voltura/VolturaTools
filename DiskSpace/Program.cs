@@ -1,13 +1,19 @@
-﻿using System;
+﻿#region Using statements
+
+using System;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Globalization;
+
+#endregion
 
 [assembly: CLSCompliant(true)]
 namespace DiskSpace
 {
     static class Program
     {
+        #region Application entrypoint
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -21,6 +27,10 @@ namespace DiskSpace
             }
             RunApplication();
         }
+
+        #endregion
+
+        #region Private static methods and functions
 
         private static void RunApplication()
         {
@@ -90,5 +100,7 @@ namespace DiskSpace
             Properties.Settings.Default.notifyWhenSpaceChange = notifications;
             Properties.Settings.Default.Save();
         }
+
+        #endregion
     }
 }

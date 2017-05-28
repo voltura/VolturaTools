@@ -117,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomColorsRenderer.cs" />
+    <Compile Include="CustomComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Drive.cs" />
     <Compile Include="LocalDrives.cs" />
     <Compile Include="MainForm.cs">

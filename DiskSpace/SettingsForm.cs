@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Drawing;
 
 #endregion
+
 namespace DiskSpace
 {
     /// <summary>
@@ -255,6 +256,5 @@ namespace DiskSpace
         }
 
         #endregion
-
     }
 }

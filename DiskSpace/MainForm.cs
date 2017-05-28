@@ -8,6 +8,7 @@ using System.Globalization;
 using Microsoft.Win32;
 
 #endregion
+
 namespace DiskSpace
 {
     /// <summary>
@@ -15,11 +16,17 @@ namespace DiskSpace
     /// </summary>
     public partial class MainForm : Form
     {
+        #region Member variables
+
         DriveInfo di = null;
         Point offset;
         SettingsForm settingsForm = null;
         private decimal lastFreeSpace = 0M;
         private decimal currentFreeSpace = 0M;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Current free space
@@ -81,6 +88,10 @@ namespace DiskSpace
             set => settingsForm = value;
         }
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Main form constructor
         /// </summary>
@@ -104,6 +115,10 @@ namespace DiskSpace
                 throw;
             }
         }
+
+        #endregion
+
+        #region Private functions
 
         private void InitApplication()
         {
@@ -147,12 +162,6 @@ namespace DiskSpace
             checkTimer.Enabled = true;
         }
 
-        private void DriveLetterSettingChanged(object sender, EventArgs e)
-        {
-            DI = new DriveInfo(Properties.Settings.Default.driveLetter);
-            UpdateFreespaceTexts();
-        }
-
         private void UpdateTitleText()
         {
             string titleText = Properties.Resources.DiskSpace + Properties.Resources.MinusSign + DI.Name;
@@ -190,7 +199,7 @@ namespace DiskSpace
                 if (!configuredDriveExists)
                 {
                     Properties.Settings.Default.driveLetter =
-                        (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1) 
+                        (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1)
                         ? "C" : foundDrive.Substring(0, 1);
                 }
             }
@@ -200,11 +209,6 @@ namespace DiskSpace
             }
         }
 
-        private void Title_MouseDown(object sender, MouseEventArgs e)
-        {
-            SaveOffsetAndLocation(e);
-        }
-
         private void SaveOffsetAndLocation(MouseEventArgs e)
         {
             if (WindowState == FormWindowState.Normal)
@@ -212,11 +216,6 @@ namespace DiskSpace
                 Properties.Settings.Default.mainFormLocation = Location;
             }
             Offset = new Point(e.X, e.Y);
-        }
-
-        private void Title_MouseMove(object sender, MouseEventArgs e)
-        {
-            MoveMainFormAndSaveLocation(e);
         }
 
         private void MoveMainFormAndSaveLocation(MouseEventArgs e)
@@ -232,19 +231,9 @@ namespace DiskSpace
             }
         }
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
-        {
-            FocusMinimizeIcon();
-        }
-
         private void FocusMinimizeIcon()
         {
             minimizePanel.BackColor = Color.LightGray;
-        }
-
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
-        {
-            UnfocusMinimizeIcon();
         }
 
         private void UnfocusMinimizeIcon()
@@ -252,19 +241,9 @@ namespace DiskSpace
             minimizePanel.BackColor = Color.White;
         }
 
-        private void SettingsIcon_MouseLeave(object sender, EventArgs e)
-        {
-            UnfocusSettingsIcon();
-        }
-
         private void UnfocusSettingsIcon()
         {
             settingsIcon.Image = Properties.Resources.simple_gears;
-        }
-
-        private void SettingsIcon_MouseEnter(object sender, EventArgs e)
-        {
-            FocusSettingsIcon();
         }
 
         private void FocusSettingsIcon()
@@ -272,47 +251,11 @@ namespace DiskSpace
             settingsIcon.Image = Properties.Resources.simple_gears_grey;
         }
 
-        private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e)
-        {
-            FocusMinimizeIcon();
-        }
-
-        private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e)
-        {
-            UnfocusMinimizeIcon();
-        }
-
-        private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
-        {
-            MinimizeAndHideMainForm();
-        }
-
-        private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
-        {
-            MinimizeAndHideMainForm();
-        }
-
         private void MinimizeAndHideMainForm()
         {
             Properties.Settings.Default.mainFormLocation = Location;
             Visible = false;
             WindowState = FormWindowState.Minimized;
-        }
-
-        private void TitleIcon_MouseDown(object sender, MouseEventArgs e)
-        {
-            SaveOffsetAndLocation(e);
-        }
-
-        private void TitleIcon_MouseMove(object sender, MouseEventArgs e)
-        {
-            MoveMainFormAndSaveLocation(e);
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveMainFormLocation();
-            Cleanup();
         }
 
         private void Cleanup()
@@ -342,28 +285,6 @@ namespace DiskSpace
                 }
                 Properties.Settings.Default.Save();
             }
-        }
-
-        private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
-        {
-            ToogleDiskSpaceNotifyIconContextMenuVisibility();
-        }
-
-        private void ToogleDiskSpaceNotifyIconContextMenuVisibility()
-        {
-            if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
-            {
-                diskSpaceNotifyIcon.ContextMenuStrip.Hide();
-            }
-            else
-            {
-                diskSpaceNotifyIcon.ContextMenuStrip.Show(Cursor.Position);
-            }
-        }
-
-        private void CheckTimer_Tick(object sender, EventArgs e)
-        {
-            CurrentFreeSpace = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
         }
 
         private void UpdateFreespaceTexts()
@@ -435,6 +356,156 @@ namespace DiskSpace
             }
         }
 
+        private void CloseSettingsForm()
+        {
+            if (ApplicationSettingsForm.WindowState == FormWindowState.Normal &&
+                ApplicationSettingsForm.Visible)
+            {
+                ApplicationSettingsForm.Visible = false;
+                ApplicationSettingsForm.Close();
+            }
+        }
+
+        private void ShowSettingsForm()
+        {
+            if (ApplicationSettingsForm.Visible)
+            {
+                ApplicationSettingsForm.BringToFront();
+                ApplicationSettingsForm.Focus();
+            }
+            else
+            {
+                ApplicationSettingsForm.ShowDialog(this);
+            }
+        }
+
+        private void ShowContextMenuAtTitleIcon()
+        {
+            titleIcon.ContextMenuStrip.Show(this, new Point(10, 10));
+        }
+
+        private void SetMainFormLocationFromSettings()
+        {
+            if (Properties.Settings.Default.mainFormLocation != null)
+            {
+                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
+                {
+                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
+                }
+                Location = Properties.Settings.Default.mainFormLocation;
+            }
+        }
+
+        private void ChangeMonitoredDrive()
+        {
+            string currentDriveLetter = Properties.Settings.Default.driveLetter;
+            string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
+            if (nextDriveLetter != currentDriveLetter)
+            {
+                DI = new DriveInfo(nextDriveLetter);
+                Properties.Settings.Default.driveLetter = nextDriveLetter;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        #endregion
+
+        #region Event handling
+
+        private void CheckTimer_Tick(object sender, EventArgs e)
+        {
+            CurrentFreeSpace = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
+        }
+
+        private void DriveLetterSettingChanged(object sender, EventArgs e)
+        {
+            DI = new DriveInfo(Properties.Settings.Default.driveLetter);
+            UpdateFreespaceTexts();
+        }
+
+        private void Title_MouseDown(object sender, MouseEventArgs e)
+        {
+            SaveOffsetAndLocation(e);
+        }
+
+        private void Title_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveMainFormAndSaveLocation(e);
+        }
+
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
+
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
+
+        private void SettingsIcon_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusSettingsIcon();
+        }
+
+        private void SettingsIcon_MouseEnter(object sender, EventArgs e)
+        {
+            FocusSettingsIcon();
+        }
+
+        private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
+
+        private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
+
+        private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            MinimizeAndHideMainForm();
+        }
+
+        private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            MinimizeAndHideMainForm();
+        }
+
+        private void TitleIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            SaveOffsetAndLocation(e);
+        }
+
+        private void TitleIcon_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveMainFormAndSaveLocation(e);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveMainFormLocation();
+            Cleanup();
+        }
+
+        private void DiskSpaceNotifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            ToogleDiskSpaceNotifyIconContextMenuVisibility();
+        }
+
+        private void ToogleDiskSpaceNotifyIconContextMenuVisibility()
+        {
+            if (diskSpaceNotifyIcon.ContextMenuStrip.Visible)
+            {
+                diskSpaceNotifyIcon.ContextMenuStrip.Hide();
+            }
+            else
+            {
+                diskSpaceNotifyIcon.ContextMenuStrip.Show(Cursor.Position);
+            }
+        }
+
         private void DiskSpaceNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ToogleFormVisibility();
@@ -466,32 +537,9 @@ namespace DiskSpace
             ToogleFormVisibility();
         }
 
-        private void CloseSettingsForm()
-        {
-            if (ApplicationSettingsForm.WindowState == FormWindowState.Normal &&
-                ApplicationSettingsForm.Visible)
-            {
-                ApplicationSettingsForm.Visible = false;
-                ApplicationSettingsForm.Close();
-            }
-        }
-
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowSettingsForm();
-        }
-
-        private void ShowSettingsForm()
-        {
-            if (ApplicationSettingsForm.Visible)
-            {
-                ApplicationSettingsForm.BringToFront();
-                ApplicationSettingsForm.Focus();
-            }
-            else
-            {
-                ApplicationSettingsForm.ShowDialog(this);
-            }
         }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -519,26 +567,9 @@ namespace DiskSpace
             ShowContextMenuAtTitleIcon();
         }
 
-        private void ShowContextMenuAtTitleIcon()
-        {
-            titleIcon.ContextMenuStrip.Show(this, new Point(10, 10));
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             SetMainFormLocationFromSettings();
-        }
-
-        private void SetMainFormLocationFromSettings()
-        {
-            if (Properties.Settings.Default.mainFormLocation != null)
-            {
-                if (Properties.Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
-                {
-                    Properties.Settings.Default.mainFormLocation = new Point(1, 1);
-                }
-                Location = Properties.Settings.Default.mainFormLocation;
-            }
         }
 
         private void FreeSpace_Click(object sender, EventArgs e)
@@ -546,20 +577,6 @@ namespace DiskSpace
             ChangeMonitoredDrive();
         }
 
-        private void ChangeMonitoredDrive()
-        {
-            string currentDriveLetter = Properties.Settings.Default.driveLetter;
-            string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
-            if (nextDriveLetter != currentDriveLetter)
-            {
-                DI = new DriveInfo(nextDriveLetter);
-                Properties.Settings.Default.driveLetter = nextDriveLetter;
-                Properties.Settings.Default.Save();
-            }
-        }
-
-        private void MainForm_Activated(object sender, EventArgs e)
-        {
-        }
+        #endregion
     }
 }
