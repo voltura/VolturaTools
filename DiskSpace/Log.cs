@@ -57,7 +57,7 @@ namespace DiskSpace
         {
             Trace.Close();
             string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            FileInfo fi = new FileInfo(logFile);
+            FileInfo fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
             if (fi.Exists)
             {
                 int trimSize = Properties.Settings.Default.logFileSizeMB * 1024 * 1024;
