@@ -2,7 +2,8 @@
 Small tools and utilities for Windows environment
 
 # DiskSpace 
-<a href="https://github.com/voltura/VolturaTools/edit/master/DiskSpaceSetup.msi" class="btn">Download installer</a></br>
+<a href="https://github.com/voltura/VolturaTools/raw/master/DiskSpaceSetup.msi">Download installer</a>
+
   Small Toolbar enabled app that displays current amount of free space on a selected drive.
   Supports Balloon tip notifications, also visible via hover over Taskbar icon or application form itself.
   Can be configured to only show notifications if specified GB amount limit of free disk space is passed.
