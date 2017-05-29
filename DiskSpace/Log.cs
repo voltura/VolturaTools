@@ -16,6 +16,7 @@ namespace DiskSpace
     /// </summary>
     internal static class Log
     {
+        #region Internal methods
 
         /// <summary>
         /// Init log
@@ -81,6 +82,8 @@ namespace DiskSpace
             }
             Init();
         }
+
+        #endregion
 
         #region Public static log properties
 
