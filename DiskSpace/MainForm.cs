@@ -490,6 +490,7 @@ namespace DiskSpace
         {
             CurrentFreeSpace = DI.AvailableFreeSpace / 1024 / 1024 / 1024;
             UpdateContextMenuItemText();
+            Log.Truncate();
         }
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)

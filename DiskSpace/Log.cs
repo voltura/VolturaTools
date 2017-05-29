@@ -33,7 +33,6 @@ namespace DiskSpace
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
                 Trace.UseGlobalLock = true;
-                Log.Info = "Log initiated";
             }
             catch
             {
@@ -46,6 +45,15 @@ namespace DiskSpace
         }
 
         internal static void Close()
+        {
+            Truncate();
+            Trace.Close();
+        }
+
+        /// <summary>
+        /// Truncate log
+        /// </summary>
+        internal static void Truncate()
         {
             Trace.Close();
             string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
@@ -71,7 +79,9 @@ namespace DiskSpace
                     }
                 }
             }
+            Init();
         }
+
         #region Public static log properties
 
         /// <summary>
