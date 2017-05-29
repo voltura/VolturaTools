@@ -50,7 +50,7 @@ namespace DiskSpace
 
         private void UpdateDriveLetterSetting()
         {
-            Properties.Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+            Properties.Settings.Default.DriveLetter = cmbDrives.SelectedValue.ToString();
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -135,7 +135,7 @@ namespace DiskSpace
 
         private void SetValuesFromSettings()
         {
-            cmbDrives.SelectedValue = Properties.Settings.Default.driveLetter;
+            cmbDrives.SelectedValue = Properties.Settings.Default.DriveLetter;
             chkNotificationLimit.Checked = Properties.Settings.Default.NotificationLimitActive;
             chkStartWithWindows.Checked = Properties.Settings.Default.startWithWindows;
             chkAlwaysOnTop.Checked = Properties.Settings.Default.alwaysOnTop;

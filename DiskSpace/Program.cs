@@ -1,7 +1,9 @@
-﻿#region ToDo
+﻿#region To-do
+
 // Display disk properties using below techniques
 // https://msdn.microsoft.com/en-us/library/aa394173(v=vs.85).aspx
 // https://docs.microsoft.com/en-us/windows-hardware/drivers/install/invoking-a-device-properties-dialog-box-from-a-command-line-prompt
+
 #endregion
 
 #region Using statements
@@ -26,6 +28,7 @@ namespace DiskSpace
         [STAThread]
         static void Main(string[] args)
         {
+            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             if (StartedWithCommandLineArguments(args))
             {
                 HandleCommandLineExecution(args);
@@ -38,11 +41,23 @@ namespace DiskSpace
 
         #region Private static methods and functions
 
+        static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        {
+            Log.Error = (Exception) e.ExceptionObject;
+            Log.Info = "=== Application ended ===";
+            Log.Close();
+            Environment.Exit(1);
+        }
+
         private static void RunApplication()
         {
+            Log.Init();
+            Log.Info = "=== Application started ===";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+            Log.Info = "=== Application ended ===";
+            Log.Close();
         }
 
         private static bool StartedWithCommandLineArguments(string[] args)
@@ -75,8 +90,9 @@ namespace DiskSpace
 
         private static void ShowCommandLineUsage()
         {
-            string executable = Application.ExecutablePath.Substring(Application.ExecutablePath.LastIndexOf(@"\",
-                StringComparison.Ordinal) + 1);
+            string executable = System.IO.Path.GetFileName(Application.ExecutablePath);
+            Log.Info = string.Format(CultureInfo.InvariantCulture,
+                Properties.Resources.CommandLineTip, executable);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
                 Properties.Resources.CommandLineTip, executable));
         }

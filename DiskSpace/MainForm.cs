@@ -42,6 +42,11 @@ namespace DiskSpace
                     currentFreeSpace = value;
                     UpdateFreespaceTexts();
                     ShowBalloonTipNotification();
+                    Log.Info = string.Format(CultureInfo.InvariantCulture, "{0} {1:0}{2}{3}",
+                        Properties.Settings.Default.DriveLetter,
+                        value,
+                        Properties.Resources.GB,
+                        Properties.Resources.FreeSpace);
                 }
             }
         }
@@ -65,7 +70,7 @@ namespace DiskSpace
             {
                 if (di == null)
                 {
-                    di = new DriveInfo(Properties.Settings.Default.driveLetter);
+                    di = new DriveInfo(Properties.Settings.Default.DriveLetter);
                 }
                 return di;
             }
@@ -149,6 +154,7 @@ namespace DiskSpace
 
         private void InitApplication()
         {
+            Log.Info = "Init Application";
             contextMenuStrip.Renderer = new CustomColorsRenderer();
             CheckSettings();
             Icon = Properties.Resources.samsung_m2_ssd;
@@ -210,10 +216,10 @@ namespace DiskSpace
             try
             {
                 // check driveLetter setting
-                if (string.IsNullOrEmpty(Properties.Settings.Default.driveLetter) ||
-                    (Properties.Settings.Default.driveLetter.Length != 1))
+                if (string.IsNullOrEmpty(Properties.Settings.Default.DriveLetter) ||
+                    (Properties.Settings.Default.DriveLetter.Length != 1))
                 {
-                    Properties.Settings.Default.driveLetter = "C";
+                    Properties.Settings.Default.DriveLetter = "C";
                 }
                 DriveInfo[] allDrives = DriveInfo.GetDrives();
                 bool configuredDriveExists = false;
@@ -224,7 +230,7 @@ namespace DiskSpace
                     {
                         foundDrive = d.Name;
                     }
-                    if (d.Name.Contains(Properties.Settings.Default.driveLetter))
+                    if (d.Name.Contains(Properties.Settings.Default.DriveLetter))
                     {
                         configuredDriveExists = true;
                         break;
@@ -232,7 +238,7 @@ namespace DiskSpace
                 }
                 if (!configuredDriveExists)
                 {
-                    Properties.Settings.Default.driveLetter =
+                    Properties.Settings.Default.DriveLetter =
                         (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1)
                         ? "C" : foundDrive.Substring(0, 1);
                 }
@@ -333,7 +339,7 @@ namespace DiskSpace
 
         private void UpdateNotificationFreeSpaceText(string freeSpaceFormText)
         {
-            string freeSpaceInfoText = Properties.Settings.Default.driveLetter +
+            string freeSpaceInfoText = Properties.Settings.Default.DriveLetter +
                 Properties.Resources.DriveSeparator + freeSpaceFormText + Properties.Resources.FreeSpace;
             if (diskSpaceNotifyIcon.BalloonTipText != freeSpaceInfoText)
             {
@@ -432,12 +438,12 @@ namespace DiskSpace
 
         private void ChangeMonitoredDrive()
         {
-            string currentDriveLetter = Properties.Settings.Default.driveLetter;
+            string currentDriveLetter = Properties.Settings.Default.DriveLetter;
             string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
             if (nextDriveLetter != currentDriveLetter)
             {
                 DI = new DriveInfo(nextDriveLetter);
-                Properties.Settings.Default.driveLetter = nextDriveLetter;
+                Properties.Settings.Default.DriveLetter = nextDriveLetter;
                 Properties.Settings.Default.Save();
             }
         }
@@ -450,7 +456,7 @@ namespace DiskSpace
                 {
                     p.StartInfo = new ProcessStartInfo(CleanMgrFullPath)
                     {
-                        Arguments = Properties.Settings.Default.driveLetter,
+                        Arguments = Properties.Settings.Default.DriveLetter,
                         UseShellExecute = false
                     };
                     p.Start();
@@ -488,7 +494,7 @@ namespace DiskSpace
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)
         {
-            DI = new DriveInfo(Properties.Settings.Default.driveLetter);
+            DI = new DriveInfo(Properties.Settings.Default.DriveLetter);
             UpdateFreespaceTexts();
         }
 
