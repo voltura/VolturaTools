@@ -1,8 +1,9 @@
 ﻿#region Using statements
 
 using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
+using DiskSpace.Properties;
 
 #endregion
 
@@ -15,8 +16,6 @@ namespace DiskSpace
     {
         #region Private member variables
 
-        Point offset;
-
         #endregion
 
         #region Protected class properties
@@ -24,7 +23,7 @@ namespace DiskSpace
         /// <summary>
         /// Mouse location offset used form form movement
         /// </summary>
-        protected Point Offset { get => offset; set => offset = value; }
+        protected Point Offset { get; set; }
 
         #endregion
 
@@ -50,7 +49,7 @@ namespace DiskSpace
 
         private void UpdateDriveLetterSetting()
         {
-            Properties.Settings.Default.DriveLetter = cmbDrives.SelectedValue.ToString();
+            Settings.Default.DriveLetter = cmbDrives.SelectedValue.ToString();
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace DiskSpace
 
         private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
         {
-            AcceptOnlyNumericNotificationGBInput();
+            AcceptOnlyNumericNotificationGbInput();
         }
 
         private void MinimizePanel_MouseEnter(object sender, EventArgs e)
@@ -100,25 +99,25 @@ namespace DiskSpace
 
         private void NotificationLimitGB_MouseEnter(object sender, EventArgs e)
         {
-            SetActiveBackColorOnNotifictationLimitGB();
+            SetActiveBackColorOnNotifictationLimitGb();
         }
 
         private void NotificationLimitGB_MouseLeave(object sender, EventArgs e)
         {
             if (!txtNotificationLimitGB.Focused)
             {
-                ResetBackColorOnNotificationLimitGB();
+                ResetBackColorOnNotificationLimitGb();
             }
         }
 
         private void NotificationLimitGB_Enter(object sender, EventArgs e)
         {
-            SetActiveBackColorOnNotifictationLimitGB();
+            SetActiveBackColorOnNotifictationLimitGb();
         }
 
         private void NotificationLimitGB_Leave(object sender, EventArgs e)
         {
-            ResetBackColorOnNotificationLimitGB();
+            ResetBackColorOnNotificationLimitGb();
         }
 
         #endregion
@@ -135,27 +134,27 @@ namespace DiskSpace
 
         private void SetValuesFromSettings()
         {
-            cmbDrives.SelectedValue = Properties.Settings.Default.DriveLetter;
-            chkNotificationLimit.Checked = Properties.Settings.Default.NotificationLimitActive;
-            chkStartWithWindows.Checked = Properties.Settings.Default.startWithWindows;
-            chkAlwaysOnTop.Checked = Properties.Settings.Default.alwaysOnTop;
-            chkDisplayNotifications.Checked = Properties.Settings.Default.notifyWhenSpaceChange;
-            chkStartMinimized.Checked = Properties.Settings.Default.startMinimized;
+            cmbDrives.SelectedValue = Settings.Default.DriveLetter;
+            chkNotificationLimit.Checked = Settings.Default.NotificationLimitActive;
+            chkStartWithWindows.Checked = Settings.Default.startWithWindows;
+            chkAlwaysOnTop.Checked = Settings.Default.alwaysOnTop;
+            chkDisplayNotifications.Checked = Settings.Default.notifyWhenSpaceChange;
+            chkStartMinimized.Checked = Settings.Default.startMinimized;
             chkStartMinimized.CheckState = CheckState.Checked;
         }
 
         private void SetControlTextsFromResources()
         {
-            chkNotificationLimit.Text = Properties.Resources.NotificationLimit;
-            btnSave.Text = Properties.Resources.SaveButtonTitle;
-            chkStartWithWindows.Text = Properties.Resources.StartWithWindowsText;
-            chkAlwaysOnTop.Text = Properties.Resources.AlwaysOnTop;
-            chkDisplayNotifications.Text = Properties.Resources.ShowNotifications;
-            chkStartMinimized.Text = Properties.Resources.StartMinimized;
-            lblDrive.Text = Properties.Resources.DriveToMonitor;
-            lblSettingsTitle.Text = Properties.Resources.Settings;
-            lblGB.Text = Properties.Resources.GB;
-            Text = Properties.Resources.Settings;
+            chkNotificationLimit.Text = Resources.NotificationLimit;
+            btnSave.Text = Resources.SaveButtonTitle;
+            chkStartWithWindows.Text = Resources.StartWithWindowsText;
+            chkAlwaysOnTop.Text = Resources.AlwaysOnTop;
+            chkDisplayNotifications.Text = Resources.ShowNotifications;
+            chkStartMinimized.Text = Resources.StartMinimized;
+            lblDrive.Text = Resources.DriveToMonitor;
+            lblSettingsTitle.Text = Resources.Settings;
+            lblGB.Text = Resources.GB;
+            Text = Resources.Settings;
         }
 
         private void PopulateDrivesInDropdown()
@@ -169,27 +168,27 @@ namespace DiskSpace
         {
             if (chkNotificationLimit.DataBindings.Count == 0)
             {
-                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Settings.Default, "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (txtNotificationLimitGB.DataBindings.Count == 0)
             {
-                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Properties.Settings.Default, "NotificatonAmountLimit", true, DataSourceUpdateMode.OnPropertyChanged));
+                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Settings.Default, "NotificatonAmountLimit", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkStartWithWindows.DataBindings.Count == 0)
             {
-                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startWithWindows", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Settings.Default, "startWithWindows", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkAlwaysOnTop.DataBindings.Count == 0)
             {
-                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "alwaysOnTop", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Settings.Default, "alwaysOnTop", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkDisplayNotifications.DataBindings.Count == 0)
             {
-                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Settings.Default, "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkStartMinimized.DataBindings.Count == 0)
             {
-                chkStartMinimized.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, "startMinimized", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkStartMinimized.DataBindings.Add(new Binding("Checked", Settings.Default, "startMinimized", true, DataSourceUpdateMode.OnPropertyChanged));
             }
         }
 
@@ -198,7 +197,7 @@ namespace DiskSpace
             UnfocusMinimizeIcon();
             UpdateNotificationLimitSetting();
             UpdateDriveLetterSetting();
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void FocusMinimizeIcon()
@@ -206,9 +205,9 @@ namespace DiskSpace
             minimizePanel.BackColor = Color.LightGray;
         }
 
-        private void AcceptOnlyNumericNotificationGBInput()
+        private void AcceptOnlyNumericNotificationGbInput()
         {
-            if (!uint.TryParse(txtNotificationLimitGB.Text, out uint parsedValue))
+            if (!uint.TryParse(txtNotificationLimitGB.Text, out uint _))
             {
                 txtNotificationLimitGB.Text = string.Empty;
             }
@@ -230,14 +229,7 @@ namespace DiskSpace
 
         private void UpdateNotificationLimitSetting()
         {
-            if (uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit))
-            {
-                Properties.Settings.Default.NotificationLimitGB = notificationLimit;
-            }
-            else
-            {
-                Properties.Settings.Default.NotificationLimitGB = 10;
-            }
+            Settings.Default.NotificationLimitGB = uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notificationLimit : 10;
         }
 
         private void UnfocusMinimizeIcon()
@@ -245,12 +237,12 @@ namespace DiskSpace
             minimizePanel.BackColor = Color.White;
         }
 
-        private void SetActiveBackColorOnNotifictationLimitGB()
+        private void SetActiveBackColorOnNotifictationLimitGb()
         {
             txtNotificationLimitGB.BackColor = Color.DeepSkyBlue;
         }
 
-        private void ResetBackColorOnNotificationLimitGB()
+        private void ResetBackColorOnNotificationLimitGb()
         {
             txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
         }

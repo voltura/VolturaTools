@@ -9,9 +9,11 @@
 #region Using statements
 
 using System;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Windows.Forms;
+using DiskSpace.Properties;
 
 #endregion
 
@@ -28,7 +30,7 @@ namespace DiskSpace
         [STAThread]
         static void Main(string[] args)
         {
-            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             if (StartedWithCommandLineArguments(args))
             {
                 HandleCommandLineExecution(args);
@@ -72,10 +74,10 @@ namespace DiskSpace
             bool notifications = allParams.Contains("notifications=1");
             bool minimized = allParams.Contains("minimized=1");
             bool start = allParams.Contains("start=1");
-            bool calledFromInstaller = allParams.Contains("autorun=") == true &&
-                                        allParams.Contains("notifications=") == true &&
-                                        allParams.Contains("minimized=") == true &&
-                                        allParams.Contains("start=") == true;
+            bool calledFromInstaller = allParams.Contains("autorun=") &&
+                                        allParams.Contains("notifications=") &&
+                                        allParams.Contains("minimized=") &&
+                                        allParams.Contains("start=");
             if (calledFromInstaller)
             {
                 UpdateSettings(startWithWindows, notifications, minimized);
@@ -90,11 +92,11 @@ namespace DiskSpace
 
         private static void ShowCommandLineUsage()
         {
-            string executable = System.IO.Path.GetFileName(Application.ExecutablePath);
+            string executable = Path.GetFileName(Application.ExecutablePath);
             Log.Info = string.Format(CultureInfo.InvariantCulture,
-                Properties.Resources.CommandLineTip, executable);
+                Resources.CommandLineTip, executable);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
-                Properties.Resources.CommandLineTip, executable));
+                Resources.CommandLineTip, executable));
         }
 
         private static void StartApplicationAsSeparateProcess()
@@ -117,10 +119,10 @@ namespace DiskSpace
         /// <param name="minimized">Start application minimized</param>
         private static void UpdateSettings(bool startWithWindows, bool notifications, bool minimized)
         {
-            Properties.Settings.Default.startMinimized = minimized;
-            Properties.Settings.Default.startWithWindows = startWithWindows;
-            Properties.Settings.Default.notifyWhenSpaceChange = notifications;
-            Properties.Settings.Default.Save();
+            Settings.Default.startMinimized = minimized;
+            Settings.Default.startWithWindows = startWithWindows;
+            Settings.Default.notifyWhenSpaceChange = notifications;
+            Settings.Default.Save();
         }
 
         #endregion

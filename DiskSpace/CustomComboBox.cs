@@ -18,7 +18,7 @@ namespace DiskSpace
         /// <summary>
         /// DrawMode
         /// </summary>
-        new public DrawMode DrawMode { get; set; }
+        public new DrawMode DrawMode { get; set; }
 
         /// <summary>
         /// Highlight color
@@ -34,9 +34,9 @@ namespace DiskSpace
         /// </summary>
         public CustomComboBox()
         {
-            base.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            base.DrawMode = DrawMode.OwnerDrawFixed;
             HighlightColor = Color.DeepSkyBlue;
-            DrawItem += new DrawItemEventHandler(CustomComboBox_DrawItem);
+            DrawItem += CustomComboBox_DrawItem;
         }
 
         #endregion
@@ -59,18 +59,20 @@ namespace DiskSpace
             }
             else
             {
-                using (SolidBrush brush = new SolidBrush(combo.BackColor))
+                if (combo != null)
+                    using (SolidBrush brush = new SolidBrush(combo.BackColor))
+                    {
+                        e.Graphics.FillRectangle(brush, e.Bounds);
+                    }
+            }
+            if (combo != null)
+                using (SolidBrush brush = new SolidBrush(combo.ForeColor))
                 {
-                    e.Graphics.FillRectangle(brush, e.Bounds);
+                    Collection<Drive> drives = (Collection<Drive>) combo.DataSource;
+                    e.Graphics.DrawString(drives[e.Index].Description, e.Font,
+                        brush,
+                        new Point(e.Bounds.X, e.Bounds.Y));
                 }
-            }
-            using (SolidBrush brush = new SolidBrush(combo.ForeColor))
-            {
-                Collection<Drive> drives = (Collection<Drive>)combo.DataSource;
-                e.Graphics.DrawString(drives[e.Index].Description, e.Font,
-                                    brush,
-                                    new Point(e.Bounds.X, e.Bounds.Y));
-            }
             e.DrawFocusRectangle();
         }
 

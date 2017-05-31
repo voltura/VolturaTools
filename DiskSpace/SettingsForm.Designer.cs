@@ -1,5 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace DiskSpace
 {
@@ -8,7 +8,7 @@ namespace DiskSpace
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -336,20 +336,20 @@ namespace DiskSpace
         }
 
         #endregion
-        private System.Windows.Forms.CheckBox chkStartWithWindows;
-        private System.Windows.Forms.CheckBox chkStartMinimized;
-        private System.Windows.Forms.CheckBox chkDisplayNotifications;
-        private System.Windows.Forms.CheckBox chkAlwaysOnTop;
+        private CheckBox chkStartWithWindows;
+        private CheckBox chkStartMinimized;
+        private CheckBox chkDisplayNotifications;
+        private CheckBox chkAlwaysOnTop;
         private CustomComboBox cmbDrives;
-        private System.Windows.Forms.Label lblDrive;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label lblSettingsTitle;
-        private System.Windows.Forms.Panel settingsPanel;
-        private System.Windows.Forms.CheckBox chkNotificationLimit;
-        private System.Windows.Forms.TextBox txtNotificationLimitGB;
-        private System.Windows.Forms.Label lblGB;
-        private System.Windows.Forms.Panel minimizePanelFrame;
-        private System.Windows.Forms.Panel minimizePanel;
-        private System.Windows.Forms.PictureBox titleIcon;
+        private Label lblDrive;
+        private Button btnSave;
+        private Label lblSettingsTitle;
+        private Panel settingsPanel;
+        private CheckBox chkNotificationLimit;
+        private TextBox txtNotificationLimitGB;
+        private Label lblGB;
+        private Panel minimizePanelFrame;
+        private Panel minimizePanel;
+        private PictureBox titleIcon;
     }
 }

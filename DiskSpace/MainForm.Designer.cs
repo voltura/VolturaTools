@@ -1,11 +1,14 @@
-﻿namespace DiskSpace
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace DiskSpace
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -248,21 +251,21 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblFreeSpace;
-        private System.Windows.Forms.PictureBox settingsIcon;
-        private System.Windows.Forms.PictureBox titleIcon;
-        private System.Windows.Forms.Panel minimizePanel;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel minimizeContainerPanel;
-        private System.Windows.Forms.NotifyIcon diskSpaceNotifyIcon;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.Timer checkTimer;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem diskCleanupToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem diskManagementToolStripMenuItem;
+        private Label lblFreeSpace;
+        private PictureBox settingsIcon;
+        private PictureBox titleIcon;
+        private Panel minimizePanel;
+        private Label lblTitle;
+        private Panel minimizeContainerPanel;
+        private NotifyIcon diskSpaceNotifyIcon;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem showToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem quitToolStripMenuItem;
+        private Timer checkTimer;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem diskCleanupToolStripMenuItem;
+        private ToolStripMenuItem diskManagementToolStripMenuItem;
     }
 }
 

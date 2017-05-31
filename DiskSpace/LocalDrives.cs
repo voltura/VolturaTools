@@ -21,7 +21,7 @@ namespace DiskSpace
         public static Collection<Drive> Drives()
         {
             Collection<Drive> drives = new Collection<Drive>();
-            string SPACE = string.Empty.PadLeft(1);
+            string space = string.Empty.PadLeft(1);
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo d in allDrives)
             {
@@ -29,7 +29,7 @@ namespace DiskSpace
                     d.DriveType == DriveType.Removable)
                 {
                     drives.Add(new Drive(d.Name.Substring(0, 1),
-                        d.Name + SPACE + d.VolumeLabel));
+                        d.Name + space + d.VolumeLabel));
                 }
             }
             return drives;

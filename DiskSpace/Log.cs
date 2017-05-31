@@ -1,11 +1,12 @@
 ﻿#region Using statements
 
 using System;
-using System.IO;
 using System.Diagnostics;
-using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
+using DiskSpace.Properties;
 
 #endregion
 
@@ -24,23 +25,19 @@ namespace DiskSpace
         internal static void Init()
         {
             FileStream fs = null;
-            TextWriterTraceListener traceListener = null;
             try
             {
                 string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
                 fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append);
                 Trace.Listeners.Clear();
-                traceListener = new TextWriterTraceListener(fs);
+                var traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
                 Trace.UseGlobalLock = true;
             }
             catch
             {
-                if (fs != null)
-                {
-                    fs.Dispose();
-                }
+                fs?.Dispose();
                 throw;
             }
         }
@@ -61,7 +58,7 @@ namespace DiskSpace
             FileInfo fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
             if (fi.Exists)
             {
-                int trimSize = Properties.Settings.Default.logFileSizeMB * 1024 * 1024;
+                int trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
                 if (fi.Length > trimSize)
                 {
                     using (MemoryStream ms = new MemoryStream(trimSize))
@@ -113,13 +110,13 @@ namespace DiskSpace
         {
             private get
             {
-                return new ArgumentNullException(Properties.Resources.DiskSpace);
+                return new ArgumentNullException(Resources.DiskSpace);
             }
             set
             {
                 Trace.TraceError("{0} {1}", 
                     DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture), 
-                    value.ToString());
+                    value);
             }
         }
                 

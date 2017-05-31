@@ -8,14 +8,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.CodeDom.Compiler;
+using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+
 namespace DiskSpace.Properties {
     
     
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [CompilerGenerated()]
+    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
+    internal sealed partial class Settings : ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
 
         //public event System.EventHandler DriveChanged;
         //private static readonly object Locker = new object();
@@ -52,10 +58,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Show application form topmost
         /// </summary>
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("Show application form topmost")]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [SettingsDescription("Show application form topmost")]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool alwaysOnTop {
             get {
                 return ((bool)(this["alwaysOnTop"]));
@@ -68,10 +74,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Start application without displaying form
         /// </summary>
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("Start application without displaying form")]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [SettingsDescription("Start application without displaying form")]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool startMinimized {
             get {
                 return ((bool)(this["startMinimized"]));
@@ -84,10 +90,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Start application automatically with Windows
         /// </summary>
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("Start application automatically with Windows")]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [SettingsDescription("Start application automatically with Windows")]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool startWithWindows {
             get {
                 return ((bool)(this["startWithWindows"]));
@@ -100,10 +106,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Display Balloon notification when free disk space changes
         /// </summary>
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsDescriptionAttribute("Display Balloon notification when free disk space changes")]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [UserScopedSetting()]
+        [SettingsDescription("Display Balloon notification when free disk space changes")]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("True")]
         public bool notifyWhenSpaceChange {
             get {
                 return ((bool)(this["notifyWhenSpaceChange"]));
@@ -113,9 +119,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("700")]
         public uint NotificationLimitGB {
             get {
                 return ((uint)(this["NotificationLimitGB"]));
@@ -125,9 +131,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("False")]
         public bool NotificationLimitActive {
             get {
                 return ((bool)(this["NotificationLimitActive"]));
@@ -137,9 +143,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("700")]
         public uint NotificatonAmountLimit {
             get {
                 return ((uint)(this["NotificatonAmountLimit"]));
@@ -149,21 +155,21 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("40, 40")]
-        public global::System.Drawing.Point mainFormLocation {
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("40, 40")]
+        public Point mainFormLocation {
             get {
-                return ((global::System.Drawing.Point)(this["mainFormLocation"]));
+                return ((Point)(this["mainFormLocation"]));
             }
             set {
                 this["mainFormLocation"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [UserScopedSetting()]
+        [DebuggerNonUserCode()]
+        [DefaultSettingValue("10")]
         public int logFileSizeMB {
             get {
                 return ((int)(this["logFileSizeMB"]));
