@@ -468,7 +468,8 @@ namespace DiskSpace
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            CurrentFreeSpace = Di.AvailableFreeSpace / 1024 / 1024 / 1024;
+            CurrentFreeSpace = Math.Round((decimal) Di.AvailableFreeSpace / 1024 / 1024 / 1024, 
+                MidpointRounding.ToEven);
             UpdateContextMenuItemText();
             Log.Truncate();
         }

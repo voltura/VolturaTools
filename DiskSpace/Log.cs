@@ -88,6 +88,7 @@ namespace DiskSpace
         /// Log info
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         internal static string Info
         {
             private get
@@ -108,6 +109,7 @@ namespace DiskSpace
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static Exception Error
         {
+            // ReSharper disable once UnusedMember.Local
             private get
             {
                 return new ArgumentNullException(Resources.DiskSpace);
