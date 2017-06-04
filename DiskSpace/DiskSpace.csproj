@@ -121,6 +121,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drive.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LocalDrives.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Mail.cs" />
