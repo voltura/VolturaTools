@@ -89,6 +89,16 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon computer_hardware_ssd_icon_jpT_icon {
+            get {
+                object obj = ResourceManager.GetObject("computer_hardware_ssd_icon_jpT_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disk clean-up.
         /// </summary>
         internal static string Diskcleanup {
@@ -170,11 +180,31 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show/Hide.
+        ///   Looks up a localized string similar to Log.
         /// </summary>
-        internal static string Hide {
+        internal static string Log {
             get {
-                return ResourceManager.GetString("Hide", resourceCulture);
+                return ResourceManager.GetString("Log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap log_blue {
+            get {
+                object obj = ResourceManager.GetObject("log_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap log_white {
+            get {
+                object obj = ResourceManager.GetObject("log_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -233,16 +263,6 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon samsung_m2_ssd {
-            get {
-                object obj = ResourceManager.GetObject("samsung_m2_ssd", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string SaveButtonTitle {
@@ -272,9 +292,9 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Show/Hide.
         /// </summary>
-        internal static string Show {
+        internal static string ShowHide {
             get {
-                return ResourceManager.GetString("Show", resourceCulture);
+                return ResourceManager.GetString("ShowHide", resourceCulture);
             }
         }
         

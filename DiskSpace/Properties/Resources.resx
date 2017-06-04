@@ -118,127 +118,133 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ssd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ssd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="computer_hardware_ssd_icon_jpT_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\computer_hardware_ssd_icon_jpT_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="simple_gears" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\simple_gears.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Email settings - SMTP</value>
+    <comment>Email settings form title</comment>
   </data>
-  <data name="simple_gears_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\simple_gears_grey.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+    <comment>Notification</comment>
+  </data>
+  <data name="banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\banner.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DiskSpace" xml:space="preserve">
     <value>Disk Space</value>
     <comment>Form title</comment>
   </data>
-  <data name="FreeSpace" xml:space="preserve">
-    <value> free space</value>
-    <comment>Used in balloon notification</comment>
+  <data name="ProductURL" xml:space="preserve">
+    <value>https://voltura.github.io/VolturaTools/</value>
+    <comment>product url</comment>
   </data>
-  <data name="GB" xml:space="preserve">
-    <value>GB</value>
-    <comment>Used in main form and balloon notification</comment>
+  <data name="NotificationLimitText" xml:space="preserve">
+    <value>Max free space for notifications</value>
+    <comment>Settings form</comment>
   </data>
-  <data name="Hide" xml:space="preserve">
-    <value>Show/Hide</value>
-    <comment>Context menu item to hide form</comment>
+  <data name="Diskcleanup" xml:space="preserve">
+    <value>Disk clean-up</value>
+    <comment>Context menu item that launches CleanMgr.exe</comment>
   </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Quit</value>
-    <comment>Context menu item to quit application</comment>
-  </data>
-  <data name="samsung_m2_ssd" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\samsung_m2_ssd.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MinusSign" xml:space="preserve">
+    <value> - </value>
+    <comment>Form title</comment>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
     <comment>Context menu item to display settings form and title in settings form</comment>
   </data>
-  <data name="Show" xml:space="preserve">
-    <value>Show/Hide</value>
-    <comment>Context menu item to show form</comment>
-  </data>
-  <data name="DriveSeparator" xml:space="preserve">
-    <value>: </value>
-    <comment>Used in balloon notification</comment>
-  </data>
-  <data name="AlwaysOnTop" xml:space="preserve">
-    <value>Always on top</value>
-    <comment>Settings form</comment>
-  </data>
-  <data name="DriveToMonitor" xml:space="preserve">
-    <value>Drive to monitor</value>
-    <comment>Settings form</comment>
-  </data>
   <data name="NotificationLimit" xml:space="preserve">
     <value>Notification limit</value>
     <comment>Settings form</comment>
   </data>
-  <data name="NotificationLimitText" xml:space="preserve">
-    <value>Max free space for notifications</value>
+  <data name="FreeSpace" xml:space="preserve">
+    <value> free space</value>
+    <comment>Used in balloon notification</comment>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+    <comment>Settings form</comment>
+  </data>
+  <data name="AlwaysOnTop" xml:space="preserve">
+    <value>Always on top</value>
     <comment>Settings form</comment>
   </data>
   <data name="SaveButtonTitle" xml:space="preserve">
     <value>Close</value>
     <comment>Settings form</comment>
   </data>
-  <data name="ShowNotifications" xml:space="preserve">
-    <value>Show notifications</value>
-    <comment>Settings form</comment>
+  <data name="simple_gears_grey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\simple_gears_grey.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StartMinimized" xml:space="preserve">
-    <value>Start minimized</value>
-    <comment>Settings form</comment>
+  <data name="Quit" xml:space="preserve">
+    <value>Quit</value>
+    <comment>Context menu item to quit application</comment>
   </data>
   <data name="StartWithWindowsText" xml:space="preserve">
     <value>Auto start</value>
     <comment>Settings form</comment>
   </data>
-  <data name="banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\banner.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ShowNotifications" xml:space="preserve">
+    <value>Show notifications</value>
+    <comment>Settings form</comment>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+    <comment>Context menu item Log</comment>
   </data>
   <data name="CommandLineTip" xml:space="preserve">
     <value>\nUsage:\n{0} autorun=[1] notifications=[1] minimized=[1] start=[1]\n\nautorun=1\t\tStart with Windows\nnotifications=1\tShow notifications when disk space changes\nminimized=1\t\tStart in Taskbar only, do not show form when launching\nstart=1\t\t\tStart application after configuration\n\nExamples:\nConfigure not to start with Windows, display notifications, not minimized at startup and launch after configuration:\n{0} autorun= notifications=1 minimized= start=1\n\nConfigure to start with Windows, minimized, show notifications, do not run after config:\n{0} autorun=1 notifications=1 minimized=1 start=</value>
     <comment>Command line tip if user entered wrong command line options</comment>
   </data>
-  <data name="MinusSign" xml:space="preserve">
-    <value> - </value>
-    <comment>Form title</comment>
-  </data>
-  <data name="Diskcleanup" xml:space="preserve">
-    <value>Disk clean-up</value>
-    <comment>Context menu item that launches CleanMgr.exe</comment>
-  </data>
-  <data name="DiskManagement" xml:space="preserve">
-    <value>Disk Management</value>
-    <comment>Context menu item to start Disk Management Management Snapin</comment>
+  <data name="DriveToMonitor" xml:space="preserve">
+    <value>Drive to monitor</value>
+    <comment>Settings form</comment>
   </data>
   <data name="Space" xml:space="preserve">
     <value> </value>
     <comment>Just a space character</comment>
   </data>
-  <data name="TB" xml:space="preserve">
-    <value>TB</value>
-    <comment>Terrabyte</comment>
-  </data>
-  <data name="EmailSettings" xml:space="preserve">
-    <value>Email settings - SMTP</value>
-    <comment>Email settings form title</comment>
-  </data>
   <data name="SendTestEmail" xml:space="preserve">
     <value>Send test email</value>
     <comment>Email settings form - send test email button title</comment>
+  </data>
+  <data name="DriveSeparator" xml:space="preserve">
+    <value>: </value>
+    <comment>Used in balloon notification</comment>
   </data>
   <data name="FailedToSendEmail" xml:space="preserve">
     <value>Failed to send email, check settings.</value>
     <comment>Send mail error</comment>
   </data>
-  <data name="Notification" xml:space="preserve">
-    <value>Notification</value>
-    <comment>Notification</comment>
+  <data name="ShowHide" xml:space="preserve">
+    <value>Show/Hide</value>
+    <comment>Context menu item to show/hide form</comment>
   </data>
-  <data name="ProductURL" xml:space="preserve">
-    <value>https://voltura.github.io/VolturaTools/</value>
-    <comment>product url</comment>
+  <data name="simple_gears" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\simple_gears.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TB" xml:space="preserve">
+    <value>TB</value>
+    <comment>Terrabyte</comment>
+  </data>
+  <data name="DiskManagement" xml:space="preserve">
+    <value>Disk Management</value>
+    <comment>Context menu item to start Disk Management Management Snapin</comment>
+  </data>
+  <data name="GB" xml:space="preserve">
+    <value>GB</value>
+    <comment>Used in main form and balloon notification</comment>
+  </data>
+  <data name="ssd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Computer-Hardware-Ssd-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="log_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\log_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="log_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\log_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -80,6 +80,34 @@ namespace DiskSpace
             Init();
         }
 
+        internal static void Show()
+        {
+            string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+            logFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile);
+            FileInfo fi = new FileInfo(logFile);
+            if (!fi.Exists)
+            {
+                return;
+            }
+            Process process = null;
+            try
+            {
+#pragma warning disable IDE0017 // Simplify object initialization
+                process = new Process();
+#pragma warning restore IDE0017 // Simplify object initialization
+                process.StartInfo = new ProcessStartInfo(logFile) { UseShellExecute = true };
+                process.Start();
+            }
+            catch (InvalidOperationException ex)
+            {
+                Error = ex;
+            }
+            finally
+            {
+                process?.Dispose();
+            }
+        }
+
         #endregion
 
         #region Public static log properties

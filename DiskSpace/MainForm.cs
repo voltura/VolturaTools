@@ -80,7 +80,7 @@ namespace DiskSpace
                 {
                     _settingsForm = new SettingsForm();
                 }
-                _settingsForm.Icon = Resources.samsung_m2_ssd;
+                _settingsForm.Icon = Resources.computer_hardware_ssd_icon_jpT_icon;
                 return _settingsForm;
             }
             set => _settingsForm = value;
@@ -149,8 +149,8 @@ namespace DiskSpace
             Log.Info = "Init Application";
             contextMenuStrip.Renderer = new CustomColorsRenderer();
             CheckSettings();
-            Icon = Resources.samsung_m2_ssd;
-            diskSpaceNotifyIcon.Icon = Resources.samsung_m2_ssd;
+            Icon = Resources.computer_hardware_ssd_icon_jpT_icon;
+            diskSpaceNotifyIcon.Icon = Resources.computer_hardware_ssd_icon_jpT_icon;
             UpdateTitleText();
             Text = Resources.DiskSpace;
             contextMenuStrip.Text = Resources.DiskSpace;
@@ -188,7 +188,7 @@ namespace DiskSpace
             {
                 diskCleanupToolStripMenuItem.Enabled = false;
             }
-            UpdateContextMenuItemText();
+            showToolStripMenuItem.Text = Resources.ShowHide;
             Settings.Default.DriveChanged += DriveLetterSettingChanged;
             checkTimer.Enabled = true;
         }
@@ -380,14 +380,12 @@ namespace DiskSpace
             {
                 Visible = true;
                 WindowState = FormWindowState.Normal;
-                showToolStripMenuItem.Text = Resources.Hide;
             }
             else
             {
                 Settings.Default.Save();
                 Visible = false;
                 WindowState = FormWindowState.Minimized;
-                showToolStripMenuItem.Text = Resources.Show;
             }
         }
 
@@ -468,12 +466,6 @@ namespace DiskSpace
             }
         }
 
-        private void UpdateContextMenuItemText()
-        {
-            showToolStripMenuItem.Text = Visible ?
-                Resources.Hide : Resources.Show;
-        }
-
         #endregion
 
         #region Event handling
@@ -482,7 +474,6 @@ namespace DiskSpace
         {
             CurrentFreeSpace = Math.Round((decimal) DI.AvailableFreeSpace / 1024 / 1024 / 1024, 
                 MidpointRounding.ToEven);
-            UpdateContextMenuItemText();
             Log.Truncate();
         }
 
@@ -585,11 +576,6 @@ namespace DiskSpace
             ToogleFormVisibility();
         }
 
-        private void MainForm_VisibleChanged(object sender, EventArgs e)
-        {
-            UpdateContextMenuItemText();
-        }
-
         private void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LaunchDiskManagement();
@@ -648,6 +634,26 @@ namespace DiskSpace
         private void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LaunchCleanManager();
+        }
+
+        private void LogFileIcon_Click(object sender, EventArgs e)
+        {
+            Log.Show();
+        }
+
+        private void LogFileIcon_MouseEnter(object sender, EventArgs e)
+        {
+            logFileIcon.Image = Resources.log_blue;
+        }
+
+        private void LogFileIcon_MouseLeave(object sender, EventArgs e)
+        {
+            logFileIcon.Image = Resources.log_white;
+        }
+
+        private void LogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Log.Show();
         }
 
         #endregion

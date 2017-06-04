@@ -44,13 +44,16 @@ namespace DiskSpace
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.diskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTimer = new System.Windows.Forms.Timer(this.components);
             this.titleIcon = new System.Windows.Forms.PictureBox();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
-            this.diskManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logFileIcon = new System.Windows.Forms.PictureBox();
+            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logFileIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFreeSpace
@@ -126,6 +129,7 @@ namespace DiskSpace
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.quitToolStripMenuItem,
+            this.logToolStripMenuItem,
             this.showToolStripMenuItem,
             this.toolStripSeparator1,
             this.diskCleanupToolStripMenuItem,
@@ -133,7 +137,7 @@ namespace DiskSpace
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(202, 178);
+            this.contextMenuStrip.Size = new System.Drawing.Size(196, 206);
             this.contextMenuStrip.MouseLeave += new System.EventHandler(this.ContextMenuStrip_MouseLeave);
             // 
             // settingsToolStripMenuItem
@@ -141,7 +145,7 @@ namespace DiskSpace
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -149,7 +153,7 @@ namespace DiskSpace
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -157,22 +161,32 @@ namespace DiskSpace
             // 
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
-            this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Show;
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.ShowHide;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
             // 
             // diskCleanupToolStripMenuItem
             // 
+            this.diskCleanupToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.diskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
-            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
+            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
             this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
+            // 
+            // diskManagementToolStripMenuItem
+            // 
+            this.diskManagementToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.diskManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
+            this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.diskManagementToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.DiskManagement;
+            this.diskManagementToolStripMenuItem.Click += new System.EventHandler(this.DiskManagementToolStripMenuItem_Click);
             // 
             // checkTimer
             // 
@@ -184,10 +198,10 @@ namespace DiskSpace
             this.titleIcon.BackColor = System.Drawing.Color.Transparent;
             this.titleIcon.ContextMenuStrip = this.contextMenuStrip;
             this.titleIcon.Image = global::DiskSpace.Properties.Resources.ssd;
-            this.titleIcon.Location = new System.Drawing.Point(4, 0);
+            this.titleIcon.Location = new System.Drawing.Point(4, 4);
             this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.titleIcon.Name = "titleIcon";
-            this.titleIcon.Size = new System.Drawing.Size(32, 32);
+            this.titleIcon.Size = new System.Drawing.Size(28, 28);
             this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.titleIcon.TabIndex = 1;
             this.titleIcon.TabStop = false;
@@ -199,10 +213,10 @@ namespace DiskSpace
             // 
             this.settingsIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.settingsIcon.Image = global::DiskSpace.Properties.Resources.simple_gears;
-            this.settingsIcon.Location = new System.Drawing.Point(284, 69);
+            this.settingsIcon.Location = new System.Drawing.Point(290, 69);
             this.settingsIcon.Margin = new System.Windows.Forms.Padding(0);
             this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(46, 42);
+            this.settingsIcon.Size = new System.Drawing.Size(42, 42);
             this.settingsIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.settingsIcon.TabIndex = 2;
             this.settingsIcon.TabStop = false;
@@ -210,13 +224,28 @@ namespace DiskSpace
             this.settingsIcon.MouseEnter += new System.EventHandler(this.SettingsIcon_MouseEnter);
             this.settingsIcon.MouseLeave += new System.EventHandler(this.SettingsIcon_MouseLeave);
             // 
-            // diskManagementToolStripMenuItem
+            // logFileIcon
             // 
-            this.diskManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
-            this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(201, 28);
-            this.diskManagementToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.DiskManagement;
-            this.diskManagementToolStripMenuItem.Click += new System.EventHandler(this.DiskManagementToolStripMenuItem_Click);
+            this.logFileIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.logFileIcon.Image = global::DiskSpace.Properties.Resources.log_white;
+            this.logFileIcon.Location = new System.Drawing.Point(4, 69);
+            this.logFileIcon.Margin = new System.Windows.Forms.Padding(0);
+            this.logFileIcon.Name = "logFileIcon";
+            this.logFileIcon.Size = new System.Drawing.Size(42, 42);
+            this.logFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logFileIcon.TabIndex = 4;
+            this.logFileIcon.TabStop = false;
+            this.logFileIcon.Click += new System.EventHandler(this.LogFileIcon_Click);
+            this.logFileIcon.MouseEnter += new System.EventHandler(this.LogFileIcon_MouseEnter);
+            this.logFileIcon.MouseLeave += new System.EventHandler(this.LogFileIcon_MouseLeave);
+            // 
+            // logToolStripMenuItem
+            // 
+            this.logToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.logToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Log;
+            this.logToolStripMenuItem.Click += new System.EventHandler(this.LogToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -225,6 +254,7 @@ namespace DiskSpace
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(336, 115);
             this.ContextMenuStrip = this.contextMenuStrip;
+            this.Controls.Add(this.logFileIcon);
             this.Controls.Add(this.titleIcon);
             this.Controls.Add(this.minimizePanel);
             this.Controls.Add(this.settingsIcon);
@@ -242,10 +272,10 @@ namespace DiskSpace
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.VisibleChanged += new System.EventHandler(this.MainForm_VisibleChanged);
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logFileIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,6 +296,8 @@ namespace DiskSpace
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem diskCleanupToolStripMenuItem;
         private ToolStripMenuItem diskManagementToolStripMenuItem;
+        private PictureBox logFileIcon;
+        private ToolStripMenuItem logToolStripMenuItem;
     }
 }
 
