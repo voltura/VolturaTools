@@ -5,7 +5,7 @@ Small tools and utilities for Windows environment
 <a href="https://github.com/voltura/VolturaTools/raw/master/DiskSpaceSetup.msi">Download installer</a>
 
   Small Toolbar enabled app that displays current amount of free space on a selected drive.
-  Supports Email alerts, Balloon tip notifications, also visible via hover over Taskbar icon or application form itself.
+  Supports Email alerts, Balloon tip notifications, also visible via mouse hover over Taskbar icon or application form itself.
   Can be configured to only show/send notifications if specified GB amount limit of free disk space is passed.
 
 Configuration options;
@@ -19,7 +19,7 @@ Configuration options;
   - Email settings: Configure SMTP settings for email feature
   
 Context menu options available via Taskbar icon click or right-click on main form of application;
-  - Show/Hide: Shows/hides the main form of the application that displays the amount of free space on montitored disk
+  - Show/Hide: Shows/hides the main form of the application that displays the amount of free space on monitored disk
   - Log: Displays the application log file
   - Quit: Quits the application
   - Disk clean-up: Launches Windows Disk Clean-up tool (DiskMgr.exe)
@@ -32,6 +32,12 @@ Main form features;
   - Context menu as described above
   - Click on free disk space will show next available disks free space (C -> D and so on), setting automatically updated to monitor selected disk
   - Title bar showns drive that is being monitored and the disk size
+  
+Email Settings form features;
+  - Set SMTP server address and port
+  - Set username and password
+  - Set From/To Email address
+  - Activate/Deactivate SSL usage
   
  # DiskSpaceSetup
    .MSI package for DiskSpace, supports install, uninstall via ControlPanel or though .MSI. Also Repair function.
