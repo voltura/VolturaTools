@@ -183,7 +183,7 @@
     <comment>Settings form</comment>
   </data>
   <data name="ShowNotifications" xml:space="preserve">
-    <value>Free space notifications</value>
+    <value>Show notifications</value>
     <comment>Settings form</comment>
   </data>
   <data name="StartMinimized" xml:space="preserve">
@@ -220,5 +220,21 @@
   <data name="TB" xml:space="preserve">
     <value>TB</value>
     <comment>Terrabyte</comment>
+  </data>
+  <data name="EmailSettings" xml:space="preserve">
+    <value>Email settings - SMTP</value>
+    <comment>Email settings form title</comment>
+  </data>
+  <data name="SendTestEmail" xml:space="preserve">
+    <value>Send test email</value>
+    <comment>Email settings form - send test email button title</comment>
+  </data>
+  <data name="FailedToSendEmail" xml:space="preserve">
+    <value>Failed to send email, check settings.</value>
+    <comment>Send mail error</comment>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+    <comment>Notification</comment>
   </data>
 </root>

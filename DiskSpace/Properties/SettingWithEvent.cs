@@ -14,7 +14,9 @@ namespace DiskSpace.Properties
         [UserScopedSetting]
         [SettingsDescription("Drive to report free space on")]
         [DefaultSettingValue("C")]
-        public string DriveLetter
+#pragma warning disable IDE1006 // Naming Styles
+        public string driveLetter
+#pragma warning restore IDE1006 // Naming Styles
         {
             get => (string) this["driveLetter"];
             set

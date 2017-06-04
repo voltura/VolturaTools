@@ -59,13 +59,13 @@ namespace DiskSpace
             }
             else
             {
-                if (combo != null)
+              //  if (combo != null)
                     using (SolidBrush brush = new SolidBrush(combo.BackColor))
                     {
                         e.Graphics.FillRectangle(brush, e.Bounds);
                     }
             }
-            if (combo != null)
+           // if (combo != null)
                 using (SolidBrush brush = new SolidBrush(combo.ForeColor))
                 {
                     Collection<Drive> drives = (Collection<Drive>) combo.DataSource;

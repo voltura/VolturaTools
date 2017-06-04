@@ -16,6 +16,8 @@ namespace DiskSpace
     {
         #region Private member variables
 
+        private EmailSettingsForm emailSettings = null;
+
         #endregion
 
         #region Protected class properties
@@ -36,88 +38,7 @@ namespace DiskSpace
         {
             InitializeComponent();
             InitializeFormFromSettings();
-        }
-
-        #endregion
-
-        #region Events handling
-
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveSettings();
-        }
-
-        private void UpdateDriveLetterSetting()
-        {
-            Settings.Default.DriveLetter = cmbDrives.SelectedValue.ToString();
-        }
-
-        private void Save_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
-        {
-            UpdateOffset(e);
-        }
-
-        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
-        {
-            MoveForm(e);
-        }
-
-        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
-        {
-            AcceptOnlyNumericNotificationGbInput();
-        }
-
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
-        {
-            FocusMinimizeIcon();
-        }
-
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
-        {
-            UnfocusMinimizeIcon();
-        }
-
-        private void MinimizePanel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void MinimizePanelFrame_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void SettingsForm_Load(object sender, EventArgs e)
-        {
-            InitializeFormFromSettings();
-        }
-
-        private void NotificationLimitGB_MouseEnter(object sender, EventArgs e)
-        {
-            SetActiveBackColorOnNotifictationLimitGb();
-        }
-
-        private void NotificationLimitGB_MouseLeave(object sender, EventArgs e)
-        {
-            if (!txtNotificationLimitGB.Focused)
-            {
-                ResetBackColorOnNotificationLimitGb();
-            }
-        }
-
-        private void NotificationLimitGB_Enter(object sender, EventArgs e)
-        {
-            SetActiveBackColorOnNotifictationLimitGb();
-        }
-
-        private void NotificationLimitGB_Leave(object sender, EventArgs e)
-        {
-            ResetBackColorOnNotificationLimitGb();
+            emailSettings = new EmailSettingsForm();
         }
 
         #endregion
@@ -134,7 +55,7 @@ namespace DiskSpace
 
         private void SetValuesFromSettings()
         {
-            cmbDrives.SelectedValue = Settings.Default.DriveLetter;
+            cmbDrives.SelectedValue = Settings.Default.driveLetter;
             chkNotificationLimit.Checked = Settings.Default.NotificationLimitActive;
             chkStartWithWindows.Checked = Settings.Default.startWithWindows;
             chkAlwaysOnTop.Checked = Settings.Default.alwaysOnTop;
@@ -245,6 +166,98 @@ namespace DiskSpace
         private void ResetBackColorOnNotificationLimitGb()
         {
             txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
+        }
+
+        private void ShowEmailSettingsForm()
+        {
+            emailSettings.ShowDialog(this);
+        }
+
+        #endregion
+
+        #region Events handling
+
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void UpdateDriveLetterSetting()
+        {
+            Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            UpdateOffset(e);
+        }
+
+        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveForm(e);
+        }
+
+        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
+        {
+            AcceptOnlyNumericNotificationGbInput();
+        }
+
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
+
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
+
+        private void MinimizePanel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void MinimizePanelFrame_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            InitializeFormFromSettings();
+        }
+
+        private void NotificationLimitGB_MouseEnter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGb();
+        }
+
+        private void NotificationLimitGB_MouseLeave(object sender, EventArgs e)
+        {
+            if (!txtNotificationLimitGB.Focused)
+            {
+                ResetBackColorOnNotificationLimitGb();
+            }
+        }
+
+        private void NotificationLimitGB_Enter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGb();
+        }
+
+        private void NotificationLimitGB_Leave(object sender, EventArgs e)
+        {
+            ResetBackColorOnNotificationLimitGb();
+        }
+
+        private void ConfigureEmail_Click(object sender, EventArgs e)
+        {
+            emailSettings.ShowDialog(this);
         }
 
         #endregion

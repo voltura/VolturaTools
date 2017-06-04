@@ -8,60 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.CodeDom.Compiler;
-using System.Configuration;
-using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-
 namespace DiskSpace.Properties {
     
     
-    [CompilerGenerated()]
-    [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
-    internal sealed partial class Settings : ApplicationSettingsBase {
+    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(Synchronized(new Settings())));
-
-        //public event System.EventHandler DriveChanged;
-        //private static readonly object Locker = new object();
-
+        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        
         public static Settings Default {
             get {
                 return defaultInstance;
             }
         }
-        
-        ///// <summary>
-        ///// Drive to report free space on
-        ///// </summary>
-        //[global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsDescriptionAttribute("Drive to report free space on")]
-        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        //[global::System.Configuration.DefaultSettingValueAttribute("C")]
-        //public string driveLetter {
-        //    get {
-        //        return ((string)(this["driveLetter"]));
-        //    }
-        //    set {
-        //        lock (Locker)
-        //        {
-        //            if (this["driveLetter"].ToString() != value)
-        //            {
-        //                this["driveLetter"] = value;
-        //                DriveChanged?.Invoke(this, System.EventArgs.Empty);
-        //            }
-        //        }
-        //    }
-        //}
-        
+                
         /// <summary>
         /// Show application form topmost
         /// </summary>
-        [UserScopedSetting()]
-        [SettingsDescription("Show application form topmost")]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("True")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Show application form topmost")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool alwaysOnTop {
             get {
                 return ((bool)(this["alwaysOnTop"]));
@@ -74,10 +42,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Start application without displaying form
         /// </summary>
-        [UserScopedSetting()]
-        [SettingsDescription("Start application without displaying form")]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("True")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Start application without displaying form")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool startMinimized {
             get {
                 return ((bool)(this["startMinimized"]));
@@ -90,10 +58,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Start application automatically with Windows
         /// </summary>
-        [UserScopedSetting()]
-        [SettingsDescription("Start application automatically with Windows")]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("True")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Start application automatically with Windows")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool startWithWindows {
             get {
                 return ((bool)(this["startWithWindows"]));
@@ -106,10 +74,10 @@ namespace DiskSpace.Properties {
         /// <summary>
         /// Display Balloon notification when free disk space changes
         /// </summary>
-        [UserScopedSetting()]
-        [SettingsDescription("Display Balloon notification when free disk space changes")]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("True")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Display Balloon notification when free disk space changes")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool notifyWhenSpaceChange {
             get {
                 return ((bool)(this["notifyWhenSpaceChange"]));
@@ -119,9 +87,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("700")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
         public uint NotificationLimitGB {
             get {
                 return ((uint)(this["NotificationLimitGB"]));
@@ -131,9 +99,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("False")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool NotificationLimitActive {
             get {
                 return ((bool)(this["NotificationLimitActive"]));
@@ -143,9 +111,9 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("700")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("700")]
         public uint NotificatonAmountLimit {
             get {
                 return ((uint)(this["NotificatonAmountLimit"]));
@@ -155,27 +123,111 @@ namespace DiskSpace.Properties {
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("40, 40")]
-        public Point mainFormLocation {
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("40, 40")]
+        public global::System.Drawing.Point mainFormLocation {
             get {
-                return ((Point)(this["mainFormLocation"]));
+                return ((global::System.Drawing.Point)(this["mainFormLocation"]));
             }
             set {
                 this["mainFormLocation"] = value;
             }
         }
         
-        [UserScopedSetting()]
-        [DebuggerNonUserCode()]
-        [DefaultSettingValue("10")]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int logFileSizeMB {
             get {
                 return ((int)(this["logFileSizeMB"]));
             }
             set {
                 this["logFileSizeMB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool sendEmail {
+            get {
+                return ((bool)(this["sendEmail"]));
+            }
+            set {
+                this["sendEmail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool useSSL {
+            get {
+                return ((bool)(this["useSSL"]));
+            }
+            set {
+                this["useSSL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("john.doe@domainname.com")]
+        public string FromEmailAddress {
+            get {
+                return ((string)(this["FromEmailAddress"]));
+            }
+            set {
+                this["FromEmailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("jane.doe@domainname.com")]
+        public string ToEmailAddress {
+            get {
+                return ((string)(this["ToEmailAddress"]));
+            }
+            set {
+                this["ToEmailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.domainname.com")]
+        public string smtpServer {
+            get {
+                return ((string)(this["smtpServer"]));
+            }
+            set {
+                this["smtpServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("john.doe@domainname.com")]
+        public string emailUserName {
+            get {
+                return ((string)(this["emailUserName"]));
+            }
+            set {
+                this["emailUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("password")]
+        public string emailPassword {
+            get {
+                return ((string)(this["emailPassword"]));
+            }
+            set {
+                this["emailPassword"] = value;
             }
         }
     }

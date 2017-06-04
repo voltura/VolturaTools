@@ -40,9 +40,9 @@ namespace DiskSpace
                 {
                     _currentFreeSpace = value;
                     UpdateFreespaceTexts();
-                    ShowBalloonTipNotification();
+                    HandleNotifications();
                     Log.Info = string.Format(CultureInfo.InvariantCulture, "{0} {1:0}{2}{3}",
-                        Settings.Default.DriveLetter,
+                        Settings.Default.driveLetter,
                         value,
                         Resources.GB,
                         Resources.FreeSpace);
@@ -63,9 +63,9 @@ namespace DiskSpace
         /// <summary>
         /// DriveInfo object used to check free disk space
         /// </summary>
-        public DriveInfo Di
+        public DriveInfo DI
         {
-            get => _di ?? (_di = new DriveInfo(Settings.Default.DriveLetter));
+            get => _di ?? (_di = new DriveInfo(Settings.Default.driveLetter));
             set => _di = value;
         }
 
@@ -100,7 +100,7 @@ namespace DiskSpace
         {
             get
             {
-                decimal diskCapacityInGb = Math.Round((decimal)Di.TotalSize / 1024 / 1024 / 1024);
+                decimal diskCapacityInGb = Math.Round((decimal)DI.TotalSize / 1024 / 1024 / 1024);
                 if (diskCapacityInGb / 1024 >= 1M)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
@@ -177,7 +177,7 @@ namespace DiskSpace
                     false);
             }
             UpdateFreespaceTexts();
-            ShowBalloonTipNotification();
+            HandleNotifications();
             TopMost = Settings.Default.alwaysOnTop;
             Visible = !Settings.Default.startMinimized;
             quitToolStripMenuItem.Text = Resources.Quit;
@@ -195,7 +195,7 @@ namespace DiskSpace
 
         private void UpdateTitleText()
         {
-            string titleText = Resources.DiskSpace + Resources.Space + Di.Name.Substring(0,2)
+            string titleText = Resources.DiskSpace + Resources.Space + DI.Name.Substring(0,2)
                 + Resources.Space + DiskSize;
             if (lblTitle.Text != titleText)
             {
@@ -208,10 +208,10 @@ namespace DiskSpace
             try
             {
                 // check driveLetter setting
-                if (string.IsNullOrEmpty(Settings.Default.DriveLetter) ||
-                    (Settings.Default.DriveLetter.Length != 1))
+                if (string.IsNullOrEmpty(Settings.Default.driveLetter) ||
+                    (Settings.Default.driveLetter.Length != 1))
                 {
-                    Settings.Default.DriveLetter = "C";
+                    Settings.Default.driveLetter = "C";
                 }
                 DriveInfo[] allDrives = DriveInfo.GetDrives();
                 bool configuredDriveExists = false;
@@ -222,7 +222,7 @@ namespace DiskSpace
                     {
                         foundDrive = d.Name;
                     }
-                    if (d.Name.Contains(Settings.Default.DriveLetter))
+                    if (d.Name.Contains(Settings.Default.driveLetter))
                     {
                         configuredDriveExists = true;
                         break;
@@ -230,7 +230,7 @@ namespace DiskSpace
                 }
                 if (!configuredDriveExists)
                 {
-                    Settings.Default.DriveLetter =
+                    Settings.Default.driveLetter =
                         (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1)
                         ? "C" : foundDrive.Substring(0, 1);
                 }
@@ -322,7 +322,7 @@ namespace DiskSpace
 
         private void UpdateNotificationFreeSpaceText(string freeSpaceFormText)
         {
-            string freeSpaceInfoText = Settings.Default.DriveLetter +
+            string freeSpaceInfoText = Settings.Default.driveLetter +
                 Resources.DriveSeparator + freeSpaceFormText + Resources.FreeSpace;
             if (diskSpaceNotifyIcon.BalloonTipText != freeSpaceInfoText)
             {
@@ -339,7 +339,7 @@ namespace DiskSpace
             }
         }
 
-        private void ShowBalloonTipNotification()
+        private void HandleNotifications()
         {
             uint uSpace = Convert.ToUInt32(CurrentFreeSpace);
 
@@ -353,6 +353,14 @@ namespace DiskSpace
                     if (LastNotifiedFreeSpace != CurrentFreeSpace)
                     {
                         LastNotifiedFreeSpace = CurrentFreeSpace;
+                        if (Settings.Default.sendEmail)
+                        {
+                            Mail.Send(ProductName + 
+                                Resources.Space +
+                                ProductVersion + Resources.Notification,
+                                diskSpaceNotifyIcon.Text
+                                );
+                        }
                         diskSpaceNotifyIcon.BalloonTipIcon = limitReached ?
                             ToolTipIcon.Warning : ToolTipIcon.Info;
                         diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
@@ -418,12 +426,12 @@ namespace DiskSpace
 
         private void ChangeMonitoredDrive()
         {
-            string currentDriveLetter = Settings.Default.DriveLetter;
+            string currentDriveLetter = Settings.Default.driveLetter;
             string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
             if (nextDriveLetter != currentDriveLetter)
             {
-                Di = new DriveInfo(nextDriveLetter);
-                Settings.Default.DriveLetter = nextDriveLetter;
+                DI = new DriveInfo(nextDriveLetter);
+                Settings.Default.driveLetter = nextDriveLetter;
                 Settings.Default.Save();
             }
         }
@@ -436,7 +444,7 @@ namespace DiskSpace
                 {
                     p.StartInfo = new ProcessStartInfo(CleanMgrFullPath)
                     {
-                        Arguments = Settings.Default.DriveLetter,
+                        Arguments = Settings.Default.driveLetter,
                         UseShellExecute = false
                     };
                     p.Start();
@@ -468,7 +476,7 @@ namespace DiskSpace
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            CurrentFreeSpace = Math.Round((decimal) Di.AvailableFreeSpace / 1024 / 1024 / 1024, 
+            CurrentFreeSpace = Math.Round((decimal) DI.AvailableFreeSpace / 1024 / 1024 / 1024, 
                 MidpointRounding.ToEven);
             UpdateContextMenuItemText();
             Log.Truncate();
@@ -476,7 +484,7 @@ namespace DiskSpace
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)
         {
-            Di = new DriveInfo(Settings.Default.DriveLetter);
+            DI = new DriveInfo(Settings.Default.driveLetter);
             UpdateFreespaceTexts();
         }
 

@@ -32,5 +32,26 @@
     <Setting Name="logFileSizeMB" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="sendEmail" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="useSSL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FromEmailAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">john.doe@domainname.com</Value>
+    </Setting>
+    <Setting Name="ToEmailAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jane.doe@domainname.com</Value>
+    </Setting>
+    <Setting Name="smtpServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.domainname.com</Value>
+    </Setting>
+    <Setting Name="emailUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">john.doe@domainname.com</Value>
+    </Setting>
+    <Setting Name="emailPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">password</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
