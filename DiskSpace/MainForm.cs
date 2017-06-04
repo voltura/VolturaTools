@@ -342,30 +342,34 @@ namespace DiskSpace
         private void HandleNotifications()
         {
             uint uSpace = Convert.ToUInt32(CurrentFreeSpace);
-
-            if (Settings.Default.notifyWhenSpaceChange)
+            if (!Settings.Default.notifyWhenSpaceChange)
             {
-                bool limitReached = (Settings.Default.NotificationLimitActive &&
-                    Settings.Default.NotificationLimitGB >= uSpace);
-                if ((!Settings.Default.NotificationLimitActive) ||
-                    limitReached)
+                return;
+            }
+            bool limitReached = (Settings.Default.NotificationLimitActive &&
+                Settings.Default.NotificationLimitGB >= uSpace);
+            if ((!Settings.Default.NotificationLimitActive) ||
+                limitReached)
+            {
+                if (LastNotifiedFreeSpace != CurrentFreeSpace)
                 {
-                    if (LastNotifiedFreeSpace != CurrentFreeSpace)
+                    LastNotifiedFreeSpace = CurrentFreeSpace;
+                    if (Settings.Default.sendEmail)
                     {
-                        LastNotifiedFreeSpace = CurrentFreeSpace;
-                        if (Settings.Default.sendEmail)
-                        {
-                            Mail.Send(ProductName + 
-                                Resources.Space +
-                                ProductVersion + Resources.Notification,
-                                diskSpaceNotifyIcon.Text
-                                );
-                        }
-                        diskSpaceNotifyIcon.BalloonTipIcon = limitReached ?
-                            ToolTipIcon.Warning : ToolTipIcon.Info;
-                        diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
-                        diskSpaceNotifyIcon.Visible = true;
+                        Mail.Send(ProductName + 
+                            Resources.Space +
+                            ProductVersion +
+                            Resources.Space +
+                            Resources.Notification,
+                            diskSpaceNotifyIcon.Text + 
+                            Resources.Space +
+                            Resources.ProductURL
+                            );
                     }
+                    diskSpaceNotifyIcon.BalloonTipIcon = limitReached ?
+                        ToolTipIcon.Warning : ToolTipIcon.Info;
+                    diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
+                    diskSpaceNotifyIcon.Visible = true;
                 }
             }
         }

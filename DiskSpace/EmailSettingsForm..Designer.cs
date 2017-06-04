@@ -88,6 +88,7 @@ namespace DiskSpace
             // 
             this.chkUseSsl.AutoSize = true;
             this.chkUseSsl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.chkUseSsl.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkUseSsl.Checked = global::DiskSpace.Properties.Settings.Default.useSSL;
             this.chkUseSsl.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkUseSsl.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DiskSpace.Properties.Settings.Default, "useSSL", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -98,7 +99,7 @@ namespace DiskSpace
             this.chkUseSsl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.chkUseSsl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkUseSsl.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUseSsl.Location = new System.Drawing.Point(16, 197);
+            this.chkUseSsl.Location = new System.Drawing.Point(12, 193);
             this.chkUseSsl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkUseSsl.Name = "chkUseSsl";
             this.chkUseSsl.Size = new System.Drawing.Size(87, 27);
@@ -252,10 +253,10 @@ namespace DiskSpace
             this.btnSendTestEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.btnSendTestEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSendTestEmail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSendTestEmail.Location = new System.Drawing.Point(219, 194);
+            this.btnSendTestEmail.Location = new System.Drawing.Point(219, 186);
             this.btnSendTestEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSendTestEmail.Name = "btnSendTestEmail";
-            this.btnSendTestEmail.Size = new System.Drawing.Size(179, 32);
+            this.btnSendTestEmail.Size = new System.Drawing.Size(179, 40);
             this.btnSendTestEmail.TabIndex = 8;
             this.btnSendTestEmail.Text = "Send test email";
             this.btnSendTestEmail.UseVisualStyleBackColor = false;
@@ -269,10 +270,10 @@ namespace DiskSpace
             this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(404, 194);
+            this.btnSave.Location = new System.Drawing.Point(404, 186);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(132, 32);
+            this.btnSave.Size = new System.Drawing.Size(132, 40);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = global::DiskSpace.Properties.Resources.SaveButtonTitle;
             this.btnSave.UseVisualStyleBackColor = false;

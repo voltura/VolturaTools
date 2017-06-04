@@ -102,10 +102,10 @@ namespace DiskSpace
             this.btnConfigureEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.btnConfigureEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfigureEmail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfigureEmail.Location = new System.Drawing.Point(204, 194);
+            this.btnConfigureEmail.Location = new System.Drawing.Point(204, 184);
             this.btnConfigureEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfigureEmail.Name = "btnConfigureEmail";
-            this.btnConfigureEmail.Size = new System.Drawing.Size(194, 32);
+            this.btnConfigureEmail.Size = new System.Drawing.Size(194, 42);
             this.btnConfigureEmail.TabIndex = 10;
             this.btnConfigureEmail.Text = "Email settings";
             this.btnConfigureEmail.UseVisualStyleBackColor = false;
@@ -191,10 +191,10 @@ namespace DiskSpace
             this.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightBlue;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(404, 194);
+            this.btnSave.Location = new System.Drawing.Point(404, 184);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(132, 32);
+            this.btnSave.Size = new System.Drawing.Size(132, 42);
             this.btnSave.TabIndex = 7;
             this.btnSave.Text = global::DiskSpace.Properties.Resources.SaveButtonTitle;
             this.btnSave.UseVisualStyleBackColor = false;

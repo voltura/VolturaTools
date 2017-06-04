@@ -215,6 +215,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://voltura.github.io/VolturaTools/.
+        /// </summary>
+        internal static string ProductURL {
+            get {
+                return ResourceManager.GetString("ProductURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit.
         /// </summary>
         internal static string Quit {
