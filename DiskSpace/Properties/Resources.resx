@@ -140,7 +140,7 @@
     <comment>Used in main form and balloon notification</comment>
   </data>
   <data name="Hide" xml:space="preserve">
-    <value>Hide</value>
+    <value>Show/Hide</value>
     <comment>Context menu item to hide form</comment>
   </data>
   <data name="Quit" xml:space="preserve">
@@ -155,7 +155,7 @@
     <comment>Context menu item to display settings form and title in settings form</comment>
   </data>
   <data name="Show" xml:space="preserve">
-    <value>Show</value>
+    <value>Show/Hide</value>
     <comment>Context menu item to show form</comment>
   </data>
   <data name="DriveSeparator" xml:space="preserve">

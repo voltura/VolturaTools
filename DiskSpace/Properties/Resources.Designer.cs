@@ -170,7 +170,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hide.
+        ///   Looks up a localized string similar to Show/Hide.
         /// </summary>
         internal static string Hide {
             get {
@@ -270,7 +270,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show.
+        ///   Looks up a localized string similar to Show/Hide.
         /// </summary>
         internal static string Show {
             get {
