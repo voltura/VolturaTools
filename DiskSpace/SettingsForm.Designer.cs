@@ -33,7 +33,7 @@ namespace DiskSpace
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.cmbDrives = new DiskSpace.CustomComboBox();
+            this.cmbDrives = new CustomComboBox();
             this.settingsPanel = new System.Windows.Forms.Panel();
             this.btnConfigureEmail = new System.Windows.Forms.Button();
             this.chkSendEmail = new System.Windows.Forms.CheckBox();

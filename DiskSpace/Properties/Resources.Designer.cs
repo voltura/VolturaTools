@@ -61,7 +61,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Form always on top.
+        ///   Looks up a localized string similar to Always on top.
         /// </summary>
         internal static string AlwaysOnTop {
             get {

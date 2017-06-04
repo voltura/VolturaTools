@@ -163,7 +163,7 @@
     <comment>Used in balloon notification</comment>
   </data>
   <data name="AlwaysOnTop" xml:space="preserve">
-    <value>Form always on top</value>
+    <value>Always on top</value>
     <comment>Settings form</comment>
   </data>
   <data name="DriveToMonitor" xml:space="preserve">
