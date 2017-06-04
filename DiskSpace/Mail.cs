@@ -45,6 +45,8 @@ namespace DiskSpace
                 mailMessage.Body = body;
                 mailMessage.To.Add(Settings.Default.ToEmailAddress);
                 smtpClient.Send(mailMessage);
+                Log.Info = "Mail sent from " + Settings.Default.FromEmailAddress + " to " +
+                           Settings.Default.ToEmailAddress;
                 result = true;
             }
             catch (SmtpException ex)

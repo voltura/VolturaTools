@@ -80,6 +80,7 @@ namespace DiskSpace
                                         allParams.Contains("start=");
             if (calledFromInstaller)
             {
+                Log.Info = "Installer configuration values received";
                 UpdateSettings(startWithWindows, notifications, minimized);
                 if (start)
                 {

@@ -128,6 +128,7 @@ namespace DiskSpace
             }
             catch (Exception ex)
             {
+                Log.Error = ex;
                 Cleanup();
                 MessageBox.Show(this,
                     ex.Message, 
@@ -156,11 +157,13 @@ namespace DiskSpace
             contextMenuStrip.Text = Resources.DiskSpace;
             if (Settings.Default.startMinimized)
             {
+                Log.Info = "Starting minimized";
                 WindowState = FormWindowState.Minimized;
                 Hide();
             }
             else
             {
+                Log.Info = "Showing main form";
                 WindowState = FormWindowState.Normal;
                 Show();
             }
@@ -200,6 +203,7 @@ namespace DiskSpace
             if (lblTitle.Text != titleText)
             {
                 lblTitle.Text = titleText;
+                Log.Info = "Main form title changed to '" + titleText + "'";
             }
         }
 
@@ -233,6 +237,7 @@ namespace DiskSpace
                     Settings.Default.driveLetter =
                         (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1)
                         ? "C" : foundDrive.Substring(0, 1);
+                    Log.Info = "Monitored disk not found, reset to " + Settings.Default.driveLetter;
                 }
             }
             finally
@@ -292,6 +297,7 @@ namespace DiskSpace
 
         private void Cleanup()
         {
+            Log.Info = "Running cleanup";
             ApplicationSettingsForm?.Dispose();
             diskSpaceNotifyIcon?.Dispose();
             contextMenuStrip?.Dispose();
@@ -328,6 +334,7 @@ namespace DiskSpace
             {
                 diskSpaceNotifyIcon.BalloonTipText = freeSpaceInfoText;
                 diskSpaceNotifyIcon.Text = freeSpaceInfoText;
+                Log.Info = "Notification text updated to: " + freeSpaceInfoText;
             }
         }
 
@@ -370,6 +377,7 @@ namespace DiskSpace
                         ToolTipIcon.Warning : ToolTipIcon.Info;
                     diskSpaceNotifyIcon.ShowBalloonTip(limitReached ? 10000 : 500);
                     diskSpaceNotifyIcon.Visible = true;
+                    Log.Info = "Displayed balloon tip";
                 }
             }
         }
@@ -401,6 +409,7 @@ namespace DiskSpace
 
         private void ShowSettingsForm()
         {
+            Log.Info = "Displayed settings form";
             if (ApplicationSettingsForm.Visible)
             {
                 ApplicationSettingsForm.BringToFront();
@@ -435,6 +444,7 @@ namespace DiskSpace
                 DI = new DriveInfo(nextDriveLetter);
                 Settings.Default.driveLetter = nextDriveLetter;
                 Settings.Default.Save();
+                Log.Info = "Now montitoring " + Settings.Default.driveLetter;
             }
         }
 
@@ -450,6 +460,7 @@ namespace DiskSpace
                         UseShellExecute = false
                     };
                     p.Start();
+                    Log.Info = "Started Disk Clean-up";
                 }
             }
         }
@@ -463,6 +474,7 @@ namespace DiskSpace
                     UseShellExecute = true
                 };
                 p.Start();
+                Log.Info = "Started Disk Management";
             }
         }
 
@@ -480,6 +492,7 @@ namespace DiskSpace
         private void DriveLetterSettingChanged(object sender, EventArgs e)
         {
             DI = new DriveInfo(Settings.Default.driveLetter);
+            Log.Info = "Drive letter setting updated to " + Settings.Default.driveLetter;
             UpdateFreespaceTexts();
         }
 
@@ -598,6 +611,7 @@ namespace DiskSpace
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Log.Info = "Quit clicked";
             if (WindowState == FormWindowState.Normal && Visible)
             {
                 Settings.Default.mainFormLocation = Location;
@@ -638,6 +652,7 @@ namespace DiskSpace
 
         private void LogFileIcon_Click(object sender, EventArgs e)
         {
+            Log.Info = "Display log file requested from main form";
             Log.Show();
         }
 
@@ -653,6 +668,7 @@ namespace DiskSpace
 
         private void LogToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Log.Info = "Display log file requested from context menu";
             Log.Show();
         }
 
