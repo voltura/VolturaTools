@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Mail;
 using DiskSpace.Properties;
 
@@ -21,6 +22,7 @@ namespace DiskSpace
         /// <param name="subject"></param>
         /// <param name="body"></param>
         /// <returns></returns>
+        [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static bool Send(string subject, string body)
         {
             bool result = false;

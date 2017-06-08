@@ -64,7 +64,7 @@ namespace DiskSpace.Forms
         /// <summary>
         /// DriveInfo object used to check free disk space
         /// </summary>
-        public DriveInfo DI
+        public DriveInfo DrvInfo
         {
             get => _di ?? (_di = new DriveInfo(Settings.Default.driveLetter));
             set => _di = value;
@@ -101,7 +101,7 @@ namespace DiskSpace.Forms
         {
             get
             {
-                decimal diskCapacityInGb = Math.Round((decimal)DI.TotalSize / 1024 / 1024 / 1024);
+                decimal diskCapacityInGb = Math.Round((decimal)DrvInfo.TotalSize / 1024 / 1024 / 1024);
                 if (diskCapacityInGb / 1024 >= 1M)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
@@ -199,7 +199,7 @@ namespace DiskSpace.Forms
 
         private void UpdateTitleText()
         {
-            string titleText = Resources.DiskSpace + Resources.Space + DI.Name.Substring(0,2)
+            string titleText = Resources.DiskSpace + Resources.Space + DrvInfo.Name.Substring(0,2)
                 + Resources.Space + DiskSize;
             if (lblTitle.Text != titleText)
             {
@@ -442,7 +442,7 @@ namespace DiskSpace.Forms
             string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
             if (nextDriveLetter != currentDriveLetter)
             {
-                DI = new DriveInfo(nextDriveLetter);
+                DrvInfo = new DriveInfo(nextDriveLetter);
                 Settings.Default.driveLetter = nextDriveLetter;
                 Settings.Default.Save();
                 Log.Info = "Now montitoring " + Settings.Default.driveLetter;
@@ -485,14 +485,14 @@ namespace DiskSpace.Forms
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            CurrentFreeSpace = Math.Round((decimal) DI.AvailableFreeSpace / 1024 / 1024 / 1024, 
+            CurrentFreeSpace = Math.Round((decimal) DrvInfo.AvailableFreeSpace / 1024 / 1024 / 1024, 
                 MidpointRounding.ToEven);
             Log.Truncate();
         }
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)
         {
-            DI = new DriveInfo(Settings.Default.driveLetter);
+            DrvInfo = new DriveInfo(Settings.Default.driveLetter);
             Log.Info = "Drive letter setting updated to " + Settings.Default.driveLetter;
             UpdateFreespaceTexts();
         }

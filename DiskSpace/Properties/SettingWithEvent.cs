@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DiskSpace.Properties
 {
@@ -14,6 +15,7 @@ namespace DiskSpace.Properties
         [UserScopedSetting]
         [SettingsDescription("Drive to report free space on")]
         [DefaultSettingValue("C")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
 #pragma warning disable IDE1006 // Naming Styles
         public string driveLetter
 #pragma warning restore IDE1006 // Naming Styles

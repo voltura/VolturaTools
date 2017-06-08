@@ -142,8 +142,8 @@ namespace DiskSpace.Forms
 
         private void SendTestEmail()
         {
-            if (Mail.Send("Test email from " + ProductName + ProductVersion,
-                "Test email from " + ProductName + ProductVersion))
+            if (Mail.Send("Test email from " + ProductName + Resources.Space + ProductVersion,
+                "This is a test email from " + ProductName + Resources.Space + ProductVersion))
             {
                 return;
             }

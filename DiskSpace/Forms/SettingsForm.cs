@@ -16,7 +16,7 @@ namespace DiskSpace.Forms
     {
         #region Private member variables
 
-        private EmailSettingsForm emailSettings = null;
+        private readonly EmailSettingsForm _emailSettings;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace DiskSpace.Forms
         {
             InitializeComponent();
             InitializeFormFromSettings();
-            emailSettings = new EmailSettingsForm();
+            _emailSettings = new EmailSettingsForm();
         }
 
         #endregion
@@ -170,7 +170,7 @@ namespace DiskSpace.Forms
 
         private void ShowEmailSettingsForm()
         {
-            emailSettings.ShowDialog(this);
+            _emailSettings.ShowDialog(this);
         }
 
         #endregion
@@ -257,7 +257,7 @@ namespace DiskSpace.Forms
 
         private void ConfigureEmail_Click(object sender, EventArgs e)
         {
-            emailSettings.ShowDialog(this);
+            ShowEmailSettingsForm();
         }
 
         #endregion

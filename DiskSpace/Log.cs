@@ -80,6 +80,7 @@ namespace DiskSpace
             Init();
         }
 
+        [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static void Show()
         {
             string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
