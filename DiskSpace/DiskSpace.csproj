@@ -220,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\computer_hardware_ssd_icon_jpT_icon.ico" />
+    <Content Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Computer-Hardware-Ssd-icon.png" />

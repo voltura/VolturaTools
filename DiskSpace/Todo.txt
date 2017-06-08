@@ -1,0 +1,5 @@
+﻿TODO
+
+1. Show/Hide issue - make sure that if the user cannot see the main form and clicks context menu main form is always displayed
+2. When mouse over freespace text in main form change forecolor to deep blue
+3. Add gray SSD image to resources and when mouse over main form icon display gray image
