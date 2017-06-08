@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using DiskSpace.Forms;
 using DiskSpace.Properties;
 
 #endregion

@@ -56,13 +56,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>computer_hardware_ssd_icon_jpT_icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>DiskSpace.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Properties\DiskSpace.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -117,37 +118,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomColorsRenderer.cs" />
-    <Compile Include="CustomComboBox.cs">
+    <Compile Include="Forms\Controls\CustomColorsRenderer.cs" />
+    <Compile Include="Forms\Controls\CustomComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drive.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Forms\MessageForm..cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MessageForm..Designer.cs">
+      <DependentUpon>MessageForm..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="LocalDrives.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Mail.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\SettingWithEvent.cs" />
-    <Compile Include="EmailSettingsForm..cs">
+    <Compile Include="Forms\EmailSettingsForm..cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EmailSettingsForm..Designer.cs">
+    <Compile Include="Forms\EmailSettingsForm..Designer.cs">
       <DependentUpon>EmailSettingsForm..cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForm.cs">
+    <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForm.Designer.cs">
+    <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MessageForm..resx">
+      <DependentUpon>MessageForm..cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -160,13 +171,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="EmailSettingsForm..resx">
+    <EmbeddedResource Include="Forms\EmailSettingsForm..resx">
       <DependentUpon>EmailSettingsForm..cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DiskSpace.pfx" />
+    <None Include="Properties\DiskSpace.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -179,7 +190,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Properties\App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\simple_gears.gif" />
@@ -205,18 +216,17 @@
     </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="CustomDictionary.xml" />
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\computer_hardware_ssd_icon_jpT_icon.ico" />
+    <Content Include="Resources\computer_hardware_ssd_icon_jpT_icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Computer-Hardware-Ssd-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="computer_hardware_ssd_icon_jpT_icon.ico" />
-    <None Include="Resources\log_white.png" />
-    <None Include="Resources\log_blue.png" />
+    <None Include="Resources\infoIcon.png" />
+    <None Include="Resources\log_.log_file_file_format_document_extension_format-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

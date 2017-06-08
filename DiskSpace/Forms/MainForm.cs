@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
+using DiskSpace.Forms.Controls;
 using DiskSpace.Properties;
 using Microsoft.Win32;
 
 #endregion
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     /// <summary>
     /// The application main form

@@ -7,7 +7,7 @@ using DiskSpace.Properties;
 
 #endregion
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     /// <summary>
     /// Settings form
@@ -142,15 +142,15 @@ namespace DiskSpace
 
         private void SendTestEmail()
         {
-            if (!Mail.Send("Test email from DiskSpace", "Test email from DiskSpace"))
+            if (Mail.Send("Test email from " + ProductName + ProductVersion,
+                "Test email from " + ProductName + ProductVersion))
             {
-                MessageBox.Show(
-                    Resources.FailedToSendEmail,
-                    ProductName + ProductVersion,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1,
-                    MessageBoxOptions.DefaultDesktopOnly);
+                return;
+            }
+            using (MessageForm message = new MessageForm())
+            {
+                message.SetMessage(Resources.FailedToSendEmail);
+                message.ShowDialog();
             }
         }
 

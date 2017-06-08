@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace DiskSpace
+namespace DiskSpace.Forms.Controls
 {
     /// <summary>
     /// Customize menu item selected colors

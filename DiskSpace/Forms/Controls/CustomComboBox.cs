@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace DiskSpace
+namespace DiskSpace.Forms.Controls
 {
     /// <summary>
     /// Combobox with custom colors

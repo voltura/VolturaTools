@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
+using DiskSpace.Forms.Controls;
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     partial class SettingsForm
     {
@@ -33,7 +34,7 @@ namespace DiskSpace
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.cmbDrives = new CustomComboBox();
+            this.cmbDrives = new DiskSpace.Forms.Controls.CustomComboBox();
             this.settingsPanel = new System.Windows.Forms.Panel();
             this.btnConfigureEmail = new System.Windows.Forms.Button();
             this.chkSendEmail = new System.Windows.Forms.CheckBox();
@@ -356,6 +357,7 @@ namespace DiskSpace
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(548, 269);
+            this.ControlBox = false;
             this.Controls.Add(this.titleIcon);
             this.Controls.Add(this.minimizePanelFrame);
             this.Controls.Add(this.settingsPanel);
@@ -368,6 +370,7 @@ namespace DiskSpace
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
+            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);

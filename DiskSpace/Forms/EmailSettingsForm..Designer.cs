@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     partial class EmailSettingsForm
     {
@@ -337,6 +337,7 @@ namespace DiskSpace
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(548, 269);
+            this.ControlBox = false;
             this.Controls.Add(this.titleIcon);
             this.Controls.Add(this.minimizePanelFrame);
             this.Controls.Add(this.settingsPanel);
@@ -349,6 +350,7 @@ namespace DiskSpace
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EmailSettingsForm";
+            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);

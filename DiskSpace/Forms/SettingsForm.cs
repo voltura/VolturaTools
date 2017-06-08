@@ -7,7 +7,7 @@ using DiskSpace.Properties;
 
 #endregion
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     /// <summary>
     /// Settings form

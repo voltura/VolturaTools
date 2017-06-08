@@ -153,6 +153,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to send email, check settings..
         /// </summary>
         internal static string FailedToSendEmail {
@@ -176,6 +185,16 @@ namespace DiskSpace.Properties {
         internal static string GB {
             get {
                 return ResourceManager.GetString("GB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap infoIcon {
+            get {
+                object obj = ResourceManager.GetObject("infoIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -205,6 +224,15 @@ namespace DiskSpace.Properties {
             get {
                 object obj = ResourceManager.GetObject("log_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string MessageTitle {
+            get {
+                return ResourceManager.GetString("MessageTitle", resourceCulture);
             }
         }
         
@@ -241,6 +269,15 @@ namespace DiskSpace.Properties {
         internal static string NotificationLimitText {
             get {
                 return ResourceManager.GetString("NotificationLimitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         

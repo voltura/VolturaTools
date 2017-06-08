@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_62F1BC54865D4AC79DDABF11342AE1C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_A2425A65601A4DBD93FB5A8280719FD2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -34,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B8A86A946FFC4EDBB69259B0FA058D77"
+        "OwnerKey" = "8:_348B067C436BED92BE6E2B8F538D10E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_348B067C436BED92BE6E2B8F538D10E3"
+        "OwnerKey" = "8:_B8A86A946FFC4EDBB69259B0FA058D77"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -183,6 +189,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_62F1BC54865D4AC79DDABF11342AE1C9"
+            {
+            "SourcePath" = "8:..\\DiskSpace\\Resources\\computer_hardware_ssd_icon_jpT_icon.ico"
+            "TargetName" = "8:computer_hardware_ssd_icon_jpT_icon.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_A52D817334224D0CA8A2DF8403AF3169"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2425A65601A4DBD93FB5A8280719FD2"
             {
             "SourcePath" = "8:..\\DiskSpace\\Resources\\banner.bmp"
@@ -271,7 +297,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DiskSpace"
         "ProductCode" = "8:{34A89ADA-B5A0-42BF-828D-D327BFFAAA90}"
-        "PackageCode" = "8:{FC9A85C0-639E-44E4-A5FA-7F16E6666E22}"
+        "PackageCode" = "8:{87CE8216-DEDE-4C1B-BFED-8916F15553DE}"
         "UpgradeCode" = "8:{A6FA47D0-36C0-47D3-990B-F1078F6A425A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -397,12 +423,12 @@
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "IconIndex" = "3:32512"
+            "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_B8A86A946FFC4EDBB69259B0FA058D77"
             "Folder" = "8:_0AD90E23983B4B4EB7C214989A247AC5"
             "WorkingFolder" = "8:_A52D817334224D0CA8A2DF8403AF3169"
-            "Icon" = "8:_B8A86A946FFC4EDBB69259B0FA058D77"
+            "Icon" = "8:_62F1BC54865D4AC79DDABF11342AE1C9"
             "Feature" = "8:"
             }
         }
@@ -1092,7 +1118,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B8A86A946FFC4EDBB69259B0FA058D77"
             {
-            "SourcePath" = "8:..\\DiskSpace\\obj\\x64\\Debug\\DiskSpace.exe"
+            "SourcePath" = "8:..\\DiskSpace\\obj\\x64\\Release\\DiskSpace.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A52D817334224D0CA8A2DF8403AF3169"

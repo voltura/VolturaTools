@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DiskSpace
+namespace DiskSpace.Forms
 {
     partial class MainForm
     {
@@ -41,6 +41,7 @@ namespace DiskSpace
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.diskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,6 @@ namespace DiskSpace
             this.titleIcon = new System.Windows.Forms.PictureBox();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.logFileIcon = new System.Windows.Forms.PictureBox();
-            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
@@ -137,7 +137,7 @@ namespace DiskSpace
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(196, 206);
+            this.contextMenuStrip.Size = new System.Drawing.Size(196, 178);
             this.contextMenuStrip.MouseLeave += new System.EventHandler(this.ContextMenuStrip_MouseLeave);
             // 
             // settingsToolStripMenuItem
@@ -156,6 +156,14 @@ namespace DiskSpace
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
+            // 
+            // logToolStripMenuItem
+            // 
+            this.logToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.logToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Log;
+            this.logToolStripMenuItem.Click += new System.EventHandler(this.LogToolStripMenuItem_Click);
             // 
             // showToolStripMenuItem
             // 
@@ -201,7 +209,7 @@ namespace DiskSpace
             this.titleIcon.Location = new System.Drawing.Point(4, 4);
             this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.titleIcon.Name = "titleIcon";
-            this.titleIcon.Size = new System.Drawing.Size(28, 28);
+            this.titleIcon.Size = new System.Drawing.Size(26, 26);
             this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.titleIcon.TabIndex = 1;
             this.titleIcon.TabStop = false;
@@ -239,14 +247,6 @@ namespace DiskSpace
             this.logFileIcon.MouseEnter += new System.EventHandler(this.LogFileIcon_MouseEnter);
             this.logFileIcon.MouseLeave += new System.EventHandler(this.LogFileIcon_MouseLeave);
             // 
-            // logToolStripMenuItem
-            // 
-            this.logToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
-            this.logToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Log;
-            this.logToolStripMenuItem.Click += new System.EventHandler(this.LogToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,6 +254,7 @@ namespace DiskSpace
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(336, 115);
             this.ContextMenuStrip = this.contextMenuStrip;
+            this.ControlBox = false;
             this.Controls.Add(this.logFileIcon);
             this.Controls.Add(this.titleIcon);
             this.Controls.Add(this.minimizePanel);
@@ -267,9 +268,9 @@ namespace DiskSpace
             this.Location = new System.Drawing.Point(40, 40);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.contextMenuStrip.ResumeLayout(false);
