@@ -69,6 +69,8 @@ namespace DiskSpace.Forms
             this.lblFreeSpace.TabIndex = 1;
             this.lblFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFreeSpace.Click += new System.EventHandler(this.FreeSpace_Click);
+            this.lblFreeSpace.MouseEnter += new System.EventHandler(this.FreeSpace_MouseEnter);
+            this.lblFreeSpace.MouseLeave += new System.EventHandler(this.FreeSpace_MouseLeave);
             // 
             // minimizePanel
             // 

@@ -479,6 +479,11 @@ namespace DiskSpace.Forms
             }
         }
 
+        private void ChangeFreespaceColor(Color color)
+        {
+            lblFreeSpace.ForeColor = color;
+        }
+
         #endregion
 
         #region Event handling
@@ -671,6 +676,16 @@ namespace DiskSpace.Forms
         {
             Log.Info = "Display log file requested from context menu";
             Log.Show();
+        }
+
+        private void FreeSpace_MouseEnter(object sender, EventArgs e)
+        {
+            ChangeFreespaceColor(Color.DeepSkyBlue);
+        }
+
+        private void FreeSpace_MouseLeave(object sender, EventArgs e)
+        {
+            ChangeFreespaceColor(Color.White);
         }
 
         #endregion
