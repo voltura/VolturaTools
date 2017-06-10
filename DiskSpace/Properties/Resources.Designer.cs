@@ -181,6 +181,16 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gearsIconBlue {
+            get {
+                object obj = ResourceManager.GetObject("gearsIconBlue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gearsIconWhite {
             get {
                 object obj = ResourceManager.GetObject("gearsIconWhite", resourceCulture);

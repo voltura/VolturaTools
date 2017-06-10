@@ -299,7 +299,7 @@ namespace DiskSpace.Forms
 
         private void FocusSettingsIcon()
         {
-            settingsIcon.Image = Resources.ssdIconGreyPng;
+            settingsIcon.Image = Resources.gearsIconBlue;
         }
 
         private void FocusTitleIcon()
