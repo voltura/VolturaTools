@@ -341,8 +341,8 @@ namespace DiskSpace.Forms
             // titleIcon
             // 
             this.titleIcon.BackColor = System.Drawing.Color.Transparent;
-            this.titleIcon.Image = global::DiskSpace.Properties.Resources.simple_gears;
-            this.titleIcon.InitialImage = global::DiskSpace.Properties.Resources.simple_gears;
+            this.titleIcon.Image = global::DiskSpace.Properties.Resources.gearsIconWhite;
+            this.titleIcon.InitialImage = global::DiskSpace.Properties.Resources.gearsIconWhite;
             this.titleIcon.Location = new System.Drawing.Point(4, 0);
             this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.titleIcon.Name = "titleIcon";
@@ -388,7 +388,7 @@ namespace DiskSpace.Forms
         private CheckBox chkStartMinimized;
         private CheckBox chkDisplayNotifications;
         private CheckBox chkAlwaysOnTop;
-        private CustomComboBox cmbDrives;
+        private DiskSpace.Forms.Controls.CustomComboBox cmbDrives;
         private Label lblDrive;
         private Button btnSave;
         private Label lblSettingsTitle;

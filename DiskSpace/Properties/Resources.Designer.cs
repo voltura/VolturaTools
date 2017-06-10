@@ -89,16 +89,6 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon computer_hardware_ssd_icon_jpT_icon {
-            get {
-                object obj = ResourceManager.GetObject("computer_hardware_ssd_icon_jpT_icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Disk clean-up.
         /// </summary>
         internal static string Diskcleanup {
@@ -191,9 +181,19 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap infoIcon {
+        internal static System.Drawing.Bitmap gearsIconWhite {
             get {
-                object obj = ResourceManager.GetObject("infoIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("gearsIconWhite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap infoIconWhite {
+            get {
+                object obj = ResourceManager.GetObject("infoIconWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -210,9 +210,9 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap log_blue {
+        internal static System.Drawing.Bitmap logIconBlue {
             get {
-                object obj = ResourceManager.GetObject("log_blue", resourceCulture);
+                object obj = ResourceManager.GetObject("logIconBlue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -220,9 +220,9 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap log_white {
+        internal static System.Drawing.Bitmap logIconWhite {
             get {
-                object obj = ResourceManager.GetObject("log_white", resourceCulture);
+                object obj = ResourceManager.GetObject("logIconWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -345,26 +345,6 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap simple_gears {
-            get {
-                object obj = ResourceManager.GetObject("simple_gears", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap simple_gears_grey {
-            get {
-                object obj = ResourceManager.GetObject("simple_gears_grey", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to  .
         /// </summary>
         internal static string Space {
@@ -376,9 +356,29 @@ namespace DiskSpace.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ssd {
+        internal static System.Drawing.Bitmap ssdIconGreyPng {
             get {
-                object obj = ResourceManager.GetObject("ssd", resourceCulture);
+                object obj = ResourceManager.GetObject("ssdIconGreyPng", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon ssdIconWhite {
+            get {
+                object obj = ResourceManager.GetObject("ssdIconWhite", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ssdIconWhitePng {
+            get {
+                object obj = ResourceManager.GetObject("ssdIconWhitePng", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

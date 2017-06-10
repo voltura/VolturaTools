@@ -96,7 +96,7 @@ namespace DiskSpace
 #pragma warning disable IDE0017 // Simplify object initialization
                 process = new Process();
 #pragma warning restore IDE0017 // Simplify object initialization
-                process.StartInfo = new ProcessStartInfo(logFile) { UseShellExecute = true };
+                process.StartInfo = new ProcessStartInfo(logFile) {UseShellExecute = true};
                 process.Start();
             }
             catch (InvalidOperationException ex)
@@ -120,14 +120,11 @@ namespace DiskSpace
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         internal static string Info
         {
-            private get
-            {
-                return string.Empty;
-            }
+            private get { return string.Empty; }
             set
             {
-                Trace.TraceInformation("{0} {1}", 
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture), 
+                Trace.TraceInformation("{0} {1}",
+                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
                     value);
             }
         }
@@ -139,18 +136,15 @@ namespace DiskSpace
         internal static Exception Error
         {
             // ReSharper disable once UnusedMember.Local
-            private get
-            {
-                return new ArgumentNullException(Resources.DiskSpace);
-            }
+            private get { return new ArgumentNullException(Resources.DiskSpace); }
             set
             {
-                Trace.TraceError("{0} {1}", 
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture), 
+                Trace.TraceError("{0} {1}",
+                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
                     value);
             }
         }
-                
+
         #endregion
     }
 }

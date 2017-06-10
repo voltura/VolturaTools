@@ -13,7 +13,7 @@ namespace DiskSpace
     public static class LocalDrives
     {
         #region Public static functions
-        
+
         /// <summary>
         /// Local drives
         /// </summary>

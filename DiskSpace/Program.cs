@@ -1,12 +1,4 @@
-﻿#region To-do
-
-// Display disk properties using below techniques
-// https://msdn.microsoft.com/en-us/library/aa394173(v=vs.85).aspx
-// https://docs.microsoft.com/en-us/windows-hardware/drivers/install/invoking-a-device-properties-dialog-box-from-a-command-line-prompt
-
-#endregion
-
-#region Using statements
+﻿#region Using statements
 
 using System;
 using System.Diagnostics;
@@ -19,6 +11,7 @@ using DiskSpace.Properties;
 #endregion
 
 [assembly: CLSCompliant(true)]
+
 namespace DiskSpace
 {
     static class Program
@@ -76,9 +69,9 @@ namespace DiskSpace
             bool minimized = allParams.Contains("minimized=1");
             bool start = allParams.Contains("start=1");
             bool calledFromInstaller = allParams.Contains("autorun=") &&
-                                        allParams.Contains("notifications=") &&
-                                        allParams.Contains("minimized=") &&
-                                        allParams.Contains("start=");
+                                       allParams.Contains("notifications=") &&
+                                       allParams.Contains("minimized=") &&
+                                       allParams.Contains("start=");
             if (calledFromInstaller)
             {
                 Log.Info = "Installer configuration values received";

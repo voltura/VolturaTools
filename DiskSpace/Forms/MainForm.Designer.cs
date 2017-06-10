@@ -115,12 +115,10 @@ namespace DiskSpace.Forms
             // diskSpaceNotifyIcon
             // 
             this.diskSpaceNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.diskSpaceNotifyIcon.ContextMenuStrip = this.contextMenuStrip;
             this.diskSpaceNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("diskSpaceNotifyIcon.Icon")));
             this.diskSpaceNotifyIcon.Visible = true;
             this.diskSpaceNotifyIcon.BalloonTipClicked += new System.EventHandler(this.DiskSpaceNotifyIcon_BalloonTipClicked);
             this.diskSpaceNotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DiskSpaceNotifyIcon_MouseClick);
-            this.diskSpaceNotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.DiskSpaceNotifyIcon_MouseDoubleClick);
             // 
             // contextMenuStrip
             // 
@@ -138,9 +136,9 @@ namespace DiskSpace.Forms
             this.diskManagementToolStripMenuItem});
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(196, 178);
-            this.contextMenuStrip.MouseLeave += new System.EventHandler(this.ContextMenuStrip_MouseLeave);
+            this.contextMenuStrip.Size = new System.Drawing.Size(196, 206);
             // 
             // settingsToolStripMenuItem
             // 
@@ -206,8 +204,8 @@ namespace DiskSpace.Forms
             // titleIcon
             // 
             this.titleIcon.BackColor = System.Drawing.Color.Transparent;
-            this.titleIcon.ContextMenuStrip = this.contextMenuStrip;
-            this.titleIcon.Image = global::DiskSpace.Properties.Resources.ssd;
+            this.titleIcon.Image = global::DiskSpace.Properties.Resources.ssdIconWhitePng;
+            this.titleIcon.InitialImage = global::DiskSpace.Properties.Resources.ssdIconWhitePng;
             this.titleIcon.Location = new System.Drawing.Point(4, 4);
             this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.titleIcon.Name = "titleIcon";
@@ -217,12 +215,14 @@ namespace DiskSpace.Forms
             this.titleIcon.TabStop = false;
             this.titleIcon.Click += new System.EventHandler(this.TitleIcon_Click);
             this.titleIcon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseDown);
+            this.titleIcon.MouseEnter += new System.EventHandler(this.TitleIcon_MouseEnter);
+            this.titleIcon.MouseLeave += new System.EventHandler(this.TitleIcon_MouseLeave);
             this.titleIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitleIcon_MouseMove);
             // 
             // settingsIcon
             // 
             this.settingsIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
-            this.settingsIcon.Image = global::DiskSpace.Properties.Resources.simple_gears;
+            this.settingsIcon.Image = global::DiskSpace.Properties.Resources.gearsIconWhite;
             this.settingsIcon.Location = new System.Drawing.Point(290, 69);
             this.settingsIcon.Margin = new System.Windows.Forms.Padding(0);
             this.settingsIcon.Name = "settingsIcon";
@@ -237,7 +237,7 @@ namespace DiskSpace.Forms
             // logFileIcon
             // 
             this.logFileIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
-            this.logFileIcon.Image = global::DiskSpace.Properties.Resources.log_white;
+            this.logFileIcon.Image = global::DiskSpace.Properties.Resources.logIconWhite;
             this.logFileIcon.Location = new System.Drawing.Point(4, 69);
             this.logFileIcon.Margin = new System.Windows.Forms.Padding(0);
             this.logFileIcon.Name = "logFileIcon";
@@ -255,7 +255,6 @@ namespace DiskSpace.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(336, 115);
-            this.ContextMenuStrip = this.contextMenuStrip;
             this.ControlBox = false;
             this.Controls.Add(this.logFileIcon);
             this.Controls.Add(this.titleIcon);
@@ -290,7 +289,6 @@ namespace DiskSpace.Forms
         private Panel minimizePanel;
         private Label lblTitle;
         private Panel minimizeContainerPanel;
-        private NotifyIcon diskSpaceNotifyIcon;
         private ContextMenuStrip contextMenuStrip;
         private ToolStripMenuItem showToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
@@ -301,6 +299,7 @@ namespace DiskSpace.Forms
         private ToolStripMenuItem diskManagementToolStripMenuItem;
         private PictureBox logFileIcon;
         private ToolStripMenuItem logToolStripMenuItem;
+        private NotifyIcon diskSpaceNotifyIcon;
     }
 }
 

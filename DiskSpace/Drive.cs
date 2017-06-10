@@ -11,7 +11,7 @@
         /// Drive name
         /// </summary>
         public string DriveName { get; set; }
-        
+
         /// <summary>
         /// Description
         /// </summary>

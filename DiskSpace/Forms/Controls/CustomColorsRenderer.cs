@@ -21,7 +21,7 @@ namespace DiskSpace.Forms.Controls
         {
         }
 
-#endregion
+        #endregion
 
         #region Private class
 
@@ -34,6 +34,6 @@ namespace DiskSpace.Forms.Controls
             public override Color MenuItemSelectedGradientEnd => Color.DeepSkyBlue;
         }
 
-#endregion
+        #endregion
     }
 }

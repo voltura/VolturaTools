@@ -27,15 +27,15 @@
     <ProductName>DiskSpace</ProductName>
     <PublisherName>Voltura AB</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -45,6 +45,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>bin\Debug\DiskSpace.xml</DocumentationFile>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,8 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>ssdIconWhite.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -123,11 +124,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drive.cs" />
-    <Compile Include="Forms\MessageForm..cs">
+    <Compile Include="Forms\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MessageForm..Designer.cs">
-      <DependentUpon>MessageForm..cs</DependentUpon>
+    <Compile Include="Forms\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\GlobalSuppressions.cs" />
     <Compile Include="LocalDrives.cs" />
@@ -141,12 +142,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\SettingWithEvent.cs" />
-    <Compile Include="Forms\EmailSettingsForm..cs">
+    <Compile Include="Forms\EmailSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmailSettingsForm..Designer.cs">
-      <DependentUpon>EmailSettingsForm..cs</DependentUpon>
+    <Compile Include="Forms\EmailSettingsForm.Designer.cs">
+      <DependentUpon>EmailSettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
@@ -154,25 +160,21 @@
     <Compile Include="Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\MessageForm..resx">
-      <DependentUpon>MessageForm..cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MessageForm.resx">
+      <DependentUpon>MessageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Forms\EmailSettingsForm..resx">
-      <DependentUpon>EmailSettingsForm..cs</DependentUpon>
+    <EmbeddedResource Include="Forms\EmailSettingsForm.resx">
+      <DependentUpon>EmailSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -191,12 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\simple_gears.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\simple_gears_grey.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -219,15 +215,16 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\computer_hardware_ssd_icon_jpT_icon.ico" />
+    <Content Include="Resources\gearsIconBlue.gif" />
+    <Content Include="Resources\gearsIconWhite.gif" />
+    <Content Include="Resources\infoIconWhite.png" />
+    <Content Include="Resources\logIconBlue.png" />
+    <Content Include="Resources\logIconWhite.png" />
+    <Content Include="Resources\ssdIconGreyPng.png" />
+    <Content Include="Resources\ssdIconWhite.ico" />
+    <Content Include="Resources\ssdIconWhitePng.png" />
+    <Content Include="ssdIconWhite.ico" />
     <Content Include="Todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Computer-Hardware-Ssd-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\infoIcon.png" />
-    <None Include="Resources\log_.log_file_file_format_document_extension_format-512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

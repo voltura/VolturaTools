@@ -89,27 +89,33 @@ namespace DiskSpace.Forms
         {
             if (chkNotificationLimit.DataBindings.Count == 0)
             {
-                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Settings.Default, "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkNotificationLimit.DataBindings.Add(new Binding("Checked", Settings.Default,
+                    "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (txtNotificationLimitGB.DataBindings.Count == 0)
             {
-                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Settings.Default, "NotificatonAmountLimit", true, DataSourceUpdateMode.OnPropertyChanged));
+                txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Settings.Default, "NotificatonAmountLimit",
+                    true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkStartWithWindows.DataBindings.Count == 0)
             {
-                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Settings.Default, "startWithWindows", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkStartWithWindows.DataBindings.Add(new Binding("Checked", Settings.Default, "startWithWindows", true,
+                    DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkAlwaysOnTop.DataBindings.Count == 0)
             {
-                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Settings.Default, "alwaysOnTop", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Settings.Default, "alwaysOnTop", true,
+                    DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkDisplayNotifications.DataBindings.Count == 0)
             {
-                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Settings.Default, "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Settings.Default,
+                    "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
             }
             if (chkStartMinimized.DataBindings.Count == 0)
             {
-                chkStartMinimized.DataBindings.Add(new Binding("Checked", Settings.Default, "startMinimized", true, DataSourceUpdateMode.OnPropertyChanged));
+                chkStartMinimized.DataBindings.Add(new Binding("Checked", Settings.Default, "startMinimized", true,
+                    DataSourceUpdateMode.OnPropertyChanged));
             }
         }
 
@@ -150,7 +156,8 @@ namespace DiskSpace.Forms
 
         private void UpdateNotificationLimitSetting()
         {
-            Settings.Default.NotificationLimitGB = uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notificationLimit : 10;
+            Settings.Default.NotificationLimitGB =
+                uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notificationLimit : 10;
         }
 
         private void UnfocusMinimizeIcon()

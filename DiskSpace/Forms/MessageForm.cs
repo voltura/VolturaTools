@@ -14,7 +14,6 @@ namespace DiskSpace.Forms
     /// </summary>
     public partial class MessageForm : Form
     {
-
         #region Public methods
 
         /// <summary>
