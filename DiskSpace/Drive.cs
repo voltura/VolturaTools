@@ -19,14 +19,14 @@
 
         #endregion
 
-        #region Public constructor
+        #region Internal constructor
 
         /// <summary>
         /// Drive constructor
         /// </summary>
         /// <param name="driveName"></param>
         /// <param name="description"></param>
-        public Drive(string driveName, string description)
+        internal Drive(string driveName, string description)
         {
             DriveName = driveName;
             Description = description;

@@ -45,34 +45,16 @@ namespace DiskSpace.Forms.Controls
 
         private void CustomComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            if (e.Index < 0)
-            {
-                return;
-            }
-            ComboBox combo = sender as ComboBox;
+            if (e.Index < 0) return;
+            var combo = sender as ComboBox;
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
-            {
-                using (SolidBrush brush = new SolidBrush(HighlightColor))
-                {
+                using (var brush = new SolidBrush(HighlightColor))
                     e.Graphics.FillRectangle(brush, e.Bounds);
-                }
-            }
-            else
-            {
-                if (combo != null)
-                    using (SolidBrush brush = new SolidBrush(combo.BackColor))
-                    {
-                        e.Graphics.FillRectangle(brush, e.Bounds);
-                    }
-            }
-            if (combo != null)
-                using (SolidBrush brush = new SolidBrush(combo.ForeColor))
-                {
-                    Collection<Drive> drives = (Collection<Drive>) combo.DataSource;
-                    e.Graphics.DrawString(drives[e.Index].Description, e.Font,
-                        brush,
-                        new Point(e.Bounds.X, e.Bounds.Y));
-                }
+            else if (combo != null) using (var brush = new SolidBrush(combo.BackColor))
+                    e.Graphics.FillRectangle(brush, e.Bounds);
+            if (combo != null) using (var brush = new SolidBrush(combo.ForeColor))
+                    e.Graphics.DrawString(((Collection<Drive>)combo.DataSource)[e.Index].Description, e.Font,
+                        brush, new Point(e.Bounds.X, e.Bounds.Y));
             e.DrawFocusRectangle();
         }
 

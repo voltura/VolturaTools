@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -11,10 +12,9 @@ using DiskSpace.Properties;
 #endregion
 
 [assembly: CLSCompliant(true)]
-
 namespace DiskSpace
 {
-    static class Program
+    internal static class Program
     {
         #region Application entrypoint
 
@@ -22,7 +22,7 @@ namespace DiskSpace
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
             if (StartedWithCommandLineArguments(args))
@@ -37,11 +37,10 @@ namespace DiskSpace
 
         #region Private static methods and functions
 
-        static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
+        private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
             Log.Error = (Exception) e.ExceptionObject;
-            Log.Info = "=== Application ended ===";
-            Log.Close();
+            Log.Close("=== Application ended ===");
             Environment.Exit(1);
         }
 
@@ -52,34 +51,25 @@ namespace DiskSpace
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
-            Log.Info = "=== Application ended ===";
-            Log.Close();
+            Log.Close("=== Application ended ===");
         }
 
-        private static bool StartedWithCommandLineArguments(string[] args)
-        {
-            return args.Length != 0;
-        }
+        private static bool StartedWithCommandLineArguments(IReadOnlyCollection<string> args) => args.Count != 0;
 
         private static void HandleCommandLineExecution(string[] args)
         {
-            string allParams = string.Join("|", args);
-            bool startWithWindows = allParams.Contains("autorun=1");
-            bool notifications = allParams.Contains("notifications=1");
-            bool minimized = allParams.Contains("minimized=1");
-            bool start = allParams.Contains("start=1");
-            bool calledFromInstaller = allParams.Contains("autorun=") &&
-                                       allParams.Contains("notifications=") &&
-                                       allParams.Contains("minimized=") &&
-                                       allParams.Contains("start=");
+            var allParams = string.Join(" ", args);
+            var startWithWindows = allParams.Contains("autorun=1");
+            var notifications = allParams.Contains("notifications=1");
+            var minimized = allParams.Contains("minimized=1");
+            var start = allParams.Contains("start=1");
+            var calledFromInstaller = allParams.Contains("autorun=") && allParams.Contains("notifications=") &&
+                                       allParams.Contains("minimized=") && allParams.Contains("start=");
             if (calledFromInstaller)
             {
                 Log.Info = "Installer configuration values received";
                 UpdateSettings(startWithWindows, notifications, minimized);
-                if (start)
-                {
-                    StartApplicationAsSeparateProcess();
-                }
+                if (start) StartApplicationAsSeparateProcess();
                 return;
             }
             ShowCommandLineUsage();

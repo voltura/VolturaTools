@@ -10,15 +10,15 @@ namespace DiskSpace
     /// <summary>
     /// Lists local drives
     /// </summary>
-    public static class LocalDrives
+    internal static class LocalDrives
     {
-        #region Public static functions
+        #region Internal static functions
 
         /// <summary>
         /// Local drives
         /// </summary>
         /// <returns></returns>
-        public static Collection<Drive> Drives()
+        internal static Collection<Drive> Drives()
         {
             Collection<Drive> drives = new Collection<Drive>();
             string space = string.Empty.PadLeft(1);
@@ -40,7 +40,7 @@ namespace DiskSpace
         /// </summary>
         /// <param name="currentDriveLetter">Currently monitoried drive</param>
         /// <returns>Next drive letter after given drive</returns>
-        public static string GetNextDriveLetter(string currentDriveLetter)
+        internal static string GetNextDriveLetter(string currentDriveLetter)
         {
             Collection<string> driveLetters = DriveLetters;
             if (driveLetters.Count <= 1)

@@ -27,7 +27,7 @@ namespace DiskSpace
             FileStream fs = null;
             try
             {
-                string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
                 fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append);
                 Trace.Listeners.Clear();
                 var traceListener = new TextWriterTraceListener(fs);
@@ -42,6 +42,12 @@ namespace DiskSpace
             }
         }
 
+        internal static void Close(string info)
+        {
+            Info = info;
+            Close();
+        }
+
         internal static void Close()
         {
             Truncate();
@@ -54,19 +60,17 @@ namespace DiskSpace
         internal static void Truncate()
         {
             Trace.Close();
-            string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            FileInfo fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
+            var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+            var fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
             if (fi.Exists)
             {
-                int trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
+                var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
                 if (fi.Length > trimSize)
-                {
-                    using (MemoryStream ms = new MemoryStream(trimSize))
-                    {
-                        using (FileStream s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
+                    using (var ms = new MemoryStream(trimSize))
+                        using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
                         {
                             s.Seek(-trimSize, SeekOrigin.End);
-                            byte[] bytes = new byte[trimSize];
+                            var bytes = new byte[trimSize];
                             s.Read(bytes, 0, trimSize);
                             ms.Write(bytes, 0, trimSize);
                             ms.Position = 0;
@@ -74,22 +78,23 @@ namespace DiskSpace
                             s.Position = 0;
                             ms.CopyTo(s);
                         }
-                    }
-                }
             }
             Init();
+        }
+
+        internal static void Show(string info)
+        {
+            Info = info;
+            Show();
         }
 
         [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static void Show()
         {
-            string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+            var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
             logFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile);
-            FileInfo fi = new FileInfo(logFile);
-            if (!fi.Exists)
-            {
-                return;
-            }
+            var fi = new FileInfo(logFile);
+            if (!fi.Exists) return;
             Process process = null;
             try
             {

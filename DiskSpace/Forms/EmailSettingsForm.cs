@@ -14,10 +14,6 @@ namespace DiskSpace.Forms
     /// </summary>
     public partial class EmailSettingsForm : Form
     {
-        #region Private member variables
-
-        #endregion
-
         #region Protected class properties
 
         /// <summary>
@@ -42,50 +38,23 @@ namespace DiskSpace.Forms
 
         #region Events handling
 
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveSettings();
-        }
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e) => SaveSettings();
 
-        private void Save_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void Save_Click(object sender, EventArgs e) => Close();
 
-        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
-        {
-            UpdateOffset(e);
-        }
+        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e) => UpdateOffset(e);
 
-        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
-        {
-            MoveForm(e);
-        }
+        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e) => MoveForm(e);
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
-        {
-            FocusMinimizeIcon();
-        }
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e) => FocusMinimizeIcon();
 
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
-        {
-            UnfocusMinimizeIcon();
-        }
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e) => UnfocusMinimizeIcon();
 
-        private void MinimizePanel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void MinimizePanel_Click(object sender, EventArgs e) => Close();
 
-        private void MinimizePanelFrame_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void MinimizePanelFrame_Click(object sender, EventArgs e) => Close();
 
-        private void SettingsForm_Load(object sender, EventArgs e)
-        {
-            InitializeFormFromSettings();
-        }
+        private void SettingsForm_Load(object sender, EventArgs e) => InitializeFormFromSettings();
 
         private void SendTestEmail_Click(object sender, EventArgs e)
         {
@@ -97,10 +66,7 @@ namespace DiskSpace.Forms
 
         #region Private methods
 
-        private void InitializeFormFromSettings()
-        {
-            SetControlTextsFromResources();
-        }
+        private void InitializeFormFromSettings() => SetControlTextsFromResources();
 
         private void SetControlTextsFromResources()
         {
@@ -116,42 +82,24 @@ namespace DiskSpace.Forms
             Settings.Default.Save();
         }
 
-        private void FocusMinimizeIcon()
-        {
-            minimizePanel.BackColor = Color.LightGray;
-        }
+        private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
 
         private void MoveForm(MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                Top = Cursor.Position.Y - Offset.Y;
-                Left = Cursor.Position.X - Offset.X;
-            }
+            if (e.Button != MouseButtons.Left) return;
+            Top = Cursor.Position.Y - Offset.Y;
+            Left = Cursor.Position.X - Offset.X;
         }
 
-        private void UpdateOffset(MouseEventArgs e)
-        {
-            Offset = new Point(e.X, e.Y);
-        }
+        private void UpdateOffset(MouseEventArgs e) => Offset = new Point(e.X, e.Y);
 
-        private void UnfocusMinimizeIcon()
-        {
-            minimizePanel.BackColor = Color.White;
-        }
+        private void UnfocusMinimizeIcon() => minimizePanel.BackColor = Color.White;
 
         private void SendTestEmail()
         {
             if (Mail.Send("Test email from " + ProductName + Resources.Space + ProductVersion,
-                "This is a test email from " + ProductName + Resources.Space + ProductVersion))
-            {
-                return;
-            }
-            using (MessageForm message = new MessageForm())
-            {
-                message.SetMessage(Resources.FailedToSendEmail);
-                message.ShowDialog();
-            }
+                "This is a test email from " + ProductName + Resources.Space + ProductVersion, Settings.Default)) return;
+            using (var message = new MessageForm(Resources.FailedToSendEmail)) message.ShowDialog();
         }
 
         #endregion
