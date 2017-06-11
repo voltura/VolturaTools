@@ -2,7 +2,7 @@
 ==============
 1. Show/Hide issue - make sure that if the user cannot see the main form and clicks context menu main form is always displayed
 2. * DONE * When mouse over freespace text in main form change forecolor to deep sky blue
-3. Add gray SSD image to resources and when mouse over main form icon display gray image
+3. * DONE * Add gray SSD image to resources and when mouse over main form icon display gray image
 4. Fix bug that notification is not displayed / sent when changing monitoring to a drive that is below notification limit
 5. Clean up the notification settings, separate email notifications from balloon notification rules
 6. Add monitoring of all drives as an option in drop-down
