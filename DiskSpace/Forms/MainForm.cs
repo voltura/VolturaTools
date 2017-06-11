@@ -90,7 +90,7 @@ namespace DiskSpace.Forms
             get
             {
                 var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
-                string cleanMgrFullPath = Path.Combine(systemPath, "cleanmgr.exe");
+                var cleanMgrFullPath = Path.Combine(systemPath, "cleanmgr.exe");
                 return cleanMgrFullPath;
             }
         }
@@ -99,7 +99,7 @@ namespace DiskSpace.Forms
         {
             get
             {
-                decimal diskCapacityInGb = Math.Round((decimal) ActiveDriveInfo.TotalSize / 1024 / 1024 / 1024);
+                var diskCapacityInGb = Math.Round((decimal) ActiveDriveInfo.TotalSize / 1024 / 1024 / 1024);
                 if (diskCapacityInGb / 1024 >= 1M)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
@@ -149,7 +149,7 @@ namespace DiskSpace.Forms
         {
             Log.Info = "Init Application";
             contextMenuStrip.Renderer = new CustomColorsRenderer();
-            ValidateSettings();
+            ValidateDriveSettings();
             ChangeFormVisibilityBasedOnSettings();
             SetStartWithWindowsBasedOnSetting();
             UpdateFreespaceTexts();
@@ -180,12 +180,10 @@ namespace DiskSpace.Forms
                 var appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
                     Application.ExecutablePath);
                 Registry.SetValue(regKeyPath, "DiskSpace", appPath);
+                return;
             }
-            else
-            {
-                Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace",
-                    false);
-            }
+            Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace",
+                false);
         }
 
         private void ChangeFormVisibilityBasedOnSettings()
@@ -215,7 +213,7 @@ namespace DiskSpace.Forms
             Log.Info = "Main form title changed to '" + titleText + "'";
         }
 
-        private static void ValidateSettings()
+        private static void ValidateDriveSettings()
         {
             try
             {
@@ -229,10 +227,7 @@ namespace DiskSpace.Forms
                 var foundDrive = string.Empty;
                 foreach (var d in allDrives)
                 {
-                    if (string.IsNullOrEmpty(foundDrive))
-                    {
-                        foundDrive = d.Name;
-                    }
+                    foundDrive = d.Name;
                     if (!d.Name.Contains(Settings.Default.driveLetter)) continue;
                     configuredDriveExists = true;
                     break;
@@ -453,6 +448,12 @@ namespace DiskSpace.Forms
 
         private void ChangeFreespaceColor(Color color) => lblFreeSpace.ForeColor = color;
 
+        private void ShowContextMenuStrip()
+        {
+            if (contextMenuStrip.Visible) return;
+            contextMenuStrip.Show(Cursor.Position);
+        }
+
         #endregion
 
         #region Event handling
@@ -469,6 +470,7 @@ namespace DiskSpace.Forms
             ActiveDriveInfo = new DriveInfo(Settings.Default.driveLetter);
             Log.Info = "Drive letter setting updated to " + Settings.Default.driveLetter;
             UpdateFreespaceTexts();
+            HandleNotifications();
         }
 
         private void Title_MouseDown(object sender, MouseEventArgs e) => SaveOffsetAndLocation(e);
@@ -505,10 +507,7 @@ namespace DiskSpace.Forms
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (!contextMenuStrip.Visible)
-                {
-                    contextMenuStrip.Show(Cursor.Position);
-                }
+                ShowContextMenuStrip();
             }
             else
             {

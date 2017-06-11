@@ -8,14 +8,14 @@ using System.Windows.Forms;
 namespace DiskSpace.Forms.Controls
 {
     /// <summary>
-    /// Customize menu item selected colors
+    ///     Customize menu item selected colors
     /// </summary>
     public class CustomColorsRenderer : ToolStripProfessionalRenderer
     {
         #region Constructor
 
         /// <summary>
-        /// Constructor
+        ///     Constructor
         /// </summary>
         public CustomColorsRenderer() : base(new CustomColors())
         {

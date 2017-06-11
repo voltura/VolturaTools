@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿#region Using statements
+
+using System.ComponentModel;
 using System.Windows.Forms;
+
+#endregion
 
 namespace DiskSpace.Forms
 {
@@ -9,6 +13,8 @@ namespace DiskSpace.Forms
         /// Required designer variable.
         /// </summary>
         private IContainer components = null;
+
+        #region Protected methods
 
         /// <summary>
         /// Clean up any resources being used.
@@ -23,6 +29,8 @@ namespace DiskSpace.Forms
             base.Dispose(disposing);
         }
 
+        #endregion
+        
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -360,10 +368,12 @@ namespace DiskSpace.Forms
             this.minimizePanelFrame.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
+
+        #region Components
+
         private Button btnSave;
         private Label lblSettingsTitle;
         private Panel settingsPanel;
@@ -384,5 +394,7 @@ namespace DiskSpace.Forms
         private TextBox txtEmailPassword;
         private Label lblPassword;
         private CheckBox chkUseSsl;
+
+        #endregion
     }
 }

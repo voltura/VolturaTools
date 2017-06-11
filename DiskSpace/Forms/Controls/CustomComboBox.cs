@@ -9,19 +9,19 @@ using System.Windows.Forms;
 namespace DiskSpace.Forms.Controls
 {
     /// <summary>
-    /// Combobox with custom colors
+    ///     Combobox with custom colors
     /// </summary>
     public class CustomComboBox : ComboBox
     {
         #region Public properties
 
         /// <summary>
-        /// DrawMode
+        ///     DrawMode
         /// </summary>
         public new DrawMode DrawMode { get; set; }
 
         /// <summary>
-        /// Highlight color
+        ///     Highlight color
         /// </summary>
         public Color HighlightColor { get; set; }
 
@@ -30,7 +30,7 @@ namespace DiskSpace.Forms.Controls
         #region Public constructor
 
         /// <summary>
-        /// Constructor, sets highlight color
+        ///     Constructor, sets highlight color
         /// </summary>
         public CustomComboBox()
         {
@@ -49,12 +49,20 @@ namespace DiskSpace.Forms.Controls
             var combo = sender as ComboBox;
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
                 using (var brush = new SolidBrush(HighlightColor))
+                {
                     e.Graphics.FillRectangle(brush, e.Bounds);
-            else if (combo != null) using (var brush = new SolidBrush(combo.BackColor))
+                }
+            else if (combo != null)
+                using (var brush = new SolidBrush(combo.BackColor))
+                {
                     e.Graphics.FillRectangle(brush, e.Bounds);
-            if (combo != null) using (var brush = new SolidBrush(combo.ForeColor))
-                    e.Graphics.DrawString(((Collection<Drive>)combo.DataSource)[e.Index].Description, e.Font,
+                }
+            if (combo != null)
+                using (var brush = new SolidBrush(combo.ForeColor))
+                {
+                    e.Graphics.DrawString(((Collection<Drive>) combo.DataSource)[e.Index].Description, e.Font,
                         brush, new Point(e.Bounds.X, e.Bounds.Y));
+                }
             e.DrawFocusRectangle();
         }
 

@@ -1,19 +1,19 @@
 ﻿namespace DiskSpace
 {
     /// <summary>
-    /// Drive info
+    ///     Drive info
     /// </summary>
     public class Drive
     {
         #region Public properties
 
         /// <summary>
-        /// Drive name
+        ///     Drive name
         /// </summary>
         public string DriveName { get; set; }
 
         /// <summary>
-        /// Description
+        ///     Description
         /// </summary>
         public string Description { get; set; }
 
@@ -22,7 +22,7 @@
         #region Internal constructor
 
         /// <summary>
-        /// Drive constructor
+        ///     Drive constructor
         /// </summary>
         /// <param name="driveName"></param>
         /// <param name="description"></param>

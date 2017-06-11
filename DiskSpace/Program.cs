@@ -12,6 +12,7 @@ using DiskSpace.Properties;
 #endregion
 
 [assembly: CLSCompliant(true)]
+
 namespace DiskSpace
 {
     internal static class Program
@@ -19,7 +20,7 @@ namespace DiskSpace
         #region Application entrypoint
 
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         private static void Main(string[] args)
@@ -54,7 +55,10 @@ namespace DiskSpace
             Log.Close("=== Application ended ===");
         }
 
-        private static bool StartedWithCommandLineArguments(IReadOnlyCollection<string> args) => args.Count != 0;
+        private static bool StartedWithCommandLineArguments(IReadOnlyCollection<string> args)
+        {
+            return args.Count != 0;
+        }
 
         private static void HandleCommandLineExecution(string[] args)
         {
@@ -64,7 +68,7 @@ namespace DiskSpace
             var minimized = allParams.Contains("minimized=1");
             var start = allParams.Contains("start=1");
             var calledFromInstaller = allParams.Contains("autorun=") && allParams.Contains("notifications=") &&
-                                       allParams.Contains("minimized=") && allParams.Contains("start=");
+                                      allParams.Contains("minimized=") && allParams.Contains("start=");
             if (calledFromInstaller)
             {
                 Log.Info = "Installer configuration values received";
@@ -77,7 +81,7 @@ namespace DiskSpace
 
         private static void ShowCommandLineUsage()
         {
-            string executable = Path.GetFileName(Application.ExecutablePath);
+            var executable = Path.GetFileName(Application.ExecutablePath);
             Log.Info = string.Format(CultureInfo.InvariantCulture,
                 Resources.CommandLineTip, executable);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
@@ -86,7 +90,7 @@ namespace DiskSpace
 
         private static void StartApplicationAsSeparateProcess()
         {
-            using (Process p = new Process())
+            using (var p = new Process())
             {
                 p.StartInfo = new ProcessStartInfo(Application.ExecutablePath)
                 {
@@ -97,7 +101,7 @@ namespace DiskSpace
         }
 
         /// <summary>
-        /// Update settings
+        ///     Update settings
         /// </summary>
         /// <param name="startWithWindows">Start application when Windows starts</param>
         /// <param name="notifications">Display balloon tip notifications</param>

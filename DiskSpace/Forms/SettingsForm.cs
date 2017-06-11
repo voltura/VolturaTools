@@ -10,7 +10,7 @@ using DiskSpace.Properties;
 namespace DiskSpace.Forms
 {
     /// <summary>
-    /// Settings form
+    ///     Settings form
     /// </summary>
     public partial class SettingsForm : Form
     {
@@ -23,7 +23,7 @@ namespace DiskSpace.Forms
         #region Protected class properties
 
         /// <summary>
-        /// Mouse location offset used form form movement
+        ///     Mouse location offset used form form movement
         /// </summary>
         protected Point Offset { get; set; }
 
@@ -32,7 +32,7 @@ namespace DiskSpace.Forms
         #region Constructor
 
         /// <summary>
-        /// Settings form constructor
+        ///     Settings form constructor
         /// </summary>
         public SettingsForm()
         {

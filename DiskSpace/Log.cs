@@ -13,14 +13,14 @@ using DiskSpace.Properties;
 namespace DiskSpace
 {
     /// <summary>
-    /// Application log
+    ///     Application log
     /// </summary>
     internal static class Log
     {
         #region Internal methods
 
         /// <summary>
-        /// Init log
+        ///     Init log
         /// </summary>
         internal static void Init()
         {
@@ -55,7 +55,7 @@ namespace DiskSpace
         }
 
         /// <summary>
-        /// Truncate log
+        ///     Truncate log
         /// </summary>
         internal static void Truncate()
         {
@@ -67,17 +67,17 @@ namespace DiskSpace
                 var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
                 if (fi.Length > trimSize)
                     using (var ms = new MemoryStream(trimSize))
-                        using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
-                        {
-                            s.Seek(-trimSize, SeekOrigin.End);
-                            var bytes = new byte[trimSize];
-                            s.Read(bytes, 0, trimSize);
-                            ms.Write(bytes, 0, trimSize);
-                            ms.Position = 0;
-                            s.SetLength(trimSize);
-                            s.Position = 0;
-                            ms.CopyTo(s);
-                        }
+                    using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
+                    {
+                        s.Seek(-trimSize, SeekOrigin.End);
+                        var bytes = new byte[trimSize];
+                        s.Read(bytes, 0, trimSize);
+                        ms.Write(bytes, 0, trimSize);
+                        ms.Position = 0;
+                        s.SetLength(trimSize);
+                        s.Position = 0;
+                        ms.CopyTo(s);
+                    }
             }
             Init();
         }
@@ -119,7 +119,7 @@ namespace DiskSpace
         #region Public static log properties
 
         /// <summary>
-        /// Log info
+        ///     Log info
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
@@ -135,7 +135,7 @@ namespace DiskSpace
         }
 
         /// <summary>
-        /// Log error
+        ///     Log error
         /// </summary>
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static Exception Error

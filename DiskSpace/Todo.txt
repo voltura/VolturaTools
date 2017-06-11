@@ -10,6 +10,6 @@
 8. Add all settings to installer
 9. Change graphics in installer (banner image + if possible add same form theme as in main application)
 10. * Fixed * Context menu displayed from diskspaceNotificationIcon displays window in taskbar without icon
-11. Display disk properties using below techniques
+11. *SKIPPED * Display disk properties using below techniques
 https://msdn.microsoft.com/en-us/library/aa394173(v=vs.85).aspx
 https://docs.microsoft.com/en-us/windows-hardware/drivers/install/invoking-a-device-properties-dialog-box-from-a-command-line-prompt

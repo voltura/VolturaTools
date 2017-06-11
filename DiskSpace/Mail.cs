@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Mail;
 using DiskSpace.Properties;
 
@@ -10,22 +11,22 @@ using DiskSpace.Properties;
 namespace DiskSpace
 {
     /// <summary>
-    /// Mail class
+    ///     Mail class
     /// </summary>
     internal static class Mail
     {
         #region Internal functions
 
         /// <summary>
-        /// Send email over SMTP using settings
+        ///     Send email over SMTP using settings
         /// </summary>
         /// <param name="subject">Subject text</param>
         /// <param name="body">Body text</param>
         /// <param name="settings">Settings class</param>
         /// <returns>Success</returns>
         [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
-        internal static bool Send(string subject, 
-            string body, 
+        internal static bool Send(string subject,
+            string body,
             Settings settings)
         {
             var result = false;
@@ -93,7 +94,7 @@ namespace DiskSpace
                 smtpClient = new SmtpClient(settings.smtpServer);
 #pragma warning restore IDE0017 // Simplify object initialization
                 smtpClient.Port = 587;
-                smtpClient.Credentials = new System.Net.NetworkCredential(
+                smtpClient.Credentials = new NetworkCredential(
                     settings.emailUserName,
                     settings.emailPassword);
                 smtpClient.EnableSsl = settings.useSSL;

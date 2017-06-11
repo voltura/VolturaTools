@@ -10,14 +10,14 @@ using DiskSpace.Properties;
 namespace DiskSpace.Forms
 {
     /// <summary>
-    /// Settings form
+    ///     Settings form
     /// </summary>
     public partial class EmailSettingsForm : Form
     {
         #region Protected class properties
 
         /// <summary>
-        /// Mouse location offset used form form movement
+        ///     Mouse location offset used form form movement
         /// </summary>
         protected Point Offset { get; set; }
 
@@ -26,7 +26,7 @@ namespace DiskSpace.Forms
         #region Constructor
 
         /// <summary>
-        /// Settings form constructor
+        ///     Settings form constructor
         /// </summary>
         public EmailSettingsForm()
         {
@@ -58,7 +58,7 @@ namespace DiskSpace.Forms
 
         private void SendTestEmail_Click(object sender, EventArgs e)
         {
-            Settings.Default.Save();
+            SaveSettings();
             SendTestEmail();
         }
 
@@ -76,11 +76,7 @@ namespace DiskSpace.Forms
             btnSendTestEmail.Text = Resources.SendTestEmail;
         }
 
-        private void SaveSettings()
-        {
-            UnfocusMinimizeIcon();
-            Settings.Default.Save();
-        }
+        private void SaveSettings() => Settings.Default.Save();
 
         private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
 

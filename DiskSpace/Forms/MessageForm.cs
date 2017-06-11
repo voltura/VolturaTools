@@ -17,9 +17,9 @@ namespace DiskSpace.Forms
         #region Public methods
 
         /// <summary>
-        /// Set message to display in form
+        ///     Set message to display in form
         /// </summary>
-        /// <param name="messageText"></param>
+        /// <param name="messageText">Message text</param>
         public void SetMessage(string messageText) => lblMessage.Text = messageText;
 
         #endregion
@@ -33,9 +33,10 @@ namespace DiskSpace.Forms
 
         #endregion
 
-        #region Constructor
+        #region Constructors
+
         /// <summary>
-        /// Settings form constructor
+        ///     Settings form constructor
         /// </summary>
         /// <param name="messageText">Message text</param>
         public MessageForm(string messageText)
@@ -46,7 +47,7 @@ namespace DiskSpace.Forms
         }
 
         /// <summary>
-        /// Settings form constructor
+        ///     Settings form constructor
         /// </summary>
         public MessageForm()
         {
