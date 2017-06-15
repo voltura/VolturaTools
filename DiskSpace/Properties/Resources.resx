@@ -265,4 +265,20 @@
   <data name="gearsIconBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gearsIconBlue.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CurrentVersionFileBaseUrl" xml:space="preserve">
+    <value>https://github.com/voltura/VolturaTools/tree/master/DiskSpace/Properties/</value>
+    <comment>Url to version file</comment>
+  </data>
+  <data name="CurrentVersionFileName" xml:space="preserve">
+    <value>AssemblyInfo.cs</value>
+    <comment>Text file with current application version inside</comment>
+  </data>
+  <data name="AssemblyVersion" xml:space="preserve">
+    <value>AssemblyVersion</value>
+    <comment>AssemblyVersion</comment>
+  </data>
+  <data name="CheckForUpdate" xml:space="preserve">
+    <value>Check for update</value>
+    <comment>Check for update in context menu</comment>
+  </data>
 </root>

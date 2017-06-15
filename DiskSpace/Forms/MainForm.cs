@@ -454,6 +454,13 @@ namespace DiskSpace.Forms
             contextMenuStrip.Show(Cursor.Position);
         }
 
+        private static void CheckForUpdate()
+        {
+            if (Updater.UpdateAvailable())
+            {
+            }
+        }
+
         #endregion
 
         #region Event handling
@@ -567,6 +574,8 @@ namespace DiskSpace.Forms
         private void TitleIcon_MouseEnter(object sender, EventArgs e) => FocusTitleIcon();
 
         private void TitleIcon_MouseLeave(object sender, EventArgs e) => UnfocusTitleIcon();
+
+        private void CheckForUpdateToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate();
 
         #endregion
     }
