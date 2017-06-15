@@ -150,6 +150,22 @@ namespace DiskSpace
             }
         }
 
+        /// <summary>
+        ///     Log an error string
+        /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal static string ErrorString
+        {
+            // ReSharper disable once UnusedMember.Local
+            private get { return Resources.DiskSpace; }
+            set
+            {
+                Trace.TraceError("{0} {1}",
+                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
+                    value);
+            }
+        }
+
         #endregion
     }
 }

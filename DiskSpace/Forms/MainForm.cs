@@ -247,22 +247,18 @@ namespace DiskSpace.Forms
 
         private void SaveOffsetAndLocation(MouseEventArgs e)
         {
-            if (WindowState == FormWindowState.Normal)
-            {
-                Settings.Default.mainFormLocation = Location;
-            }
+            if (WindowState != FormWindowState.Normal) return;
+            Settings.Default.mainFormLocation = Location;
             Offset = new Point(e.X, e.Y);
         }
 
         private void MoveMainFormAndSaveLocation(MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button != MouseButtons.Left ||
+                WindowState != FormWindowState.Normal) return;
             Top = Cursor.Position.Y - Offset.Y;
             Left = Cursor.Position.X - Offset.X;
-            if (WindowState == FormWindowState.Normal)
-            {
-                Settings.Default.mainFormLocation = Location;
-            }
+            Settings.Default.mainFormLocation = Location;
         }
 
         private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
@@ -294,15 +290,13 @@ namespace DiskSpace.Forms
 
         private void SaveMainFormLocation()
         {
-            if (WindowState == FormWindowState.Normal && Visible)
+            if (WindowState != FormWindowState.Normal || !Visible) return;
+            Settings.Default.mainFormLocation = Location;
+            if (Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
             {
-                Settings.Default.mainFormLocation = Location;
-                if (Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
-                {
-                    Settings.Default.mainFormLocation = new Point(1, 1);
-                }
-                Settings.Default.Save();
+                Settings.Default.mainFormLocation = new Point(1, 1);
             }
+            Settings.Default.Save();
         }
 
         private void UpdateFreespaceTexts()
@@ -396,7 +390,7 @@ namespace DiskSpace.Forms
             }
         }
 
-        private void ShowContextMenuAtTitleIcon() => diskSpaceNotifyIcon.ContextMenuStrip.Show(Cursor.Position);
+        private void ShowContextMenuAtTitleIcon() => contextMenuStrip?.Show(Cursor.Position);
 
         private void SetMainFormLocationFromSettings()
         {
@@ -450,15 +444,13 @@ namespace DiskSpace.Forms
 
         private void ShowContextMenuStrip()
         {
-            if (contextMenuStrip.Visible) return;
-            contextMenuStrip.Show(Cursor.Position);
+            if (contextMenuStrip != null && contextMenuStrip.Visible) return;
+            contextMenuStrip?.Show(Cursor.Position);
         }
 
         private static void CheckForUpdate()
         {
-            if (Updater.UpdateAvailable())
-            {
-            }
+            Updater.UpdateAvailable();
         }
 
         #endregion

@@ -57,6 +57,35 @@ namespace DiskSpace.Forms
 
         #endregion
 
+        #region Public static methods
+
+        /// <summary>
+        ///     Display a message
+        /// </summary>
+        /// <param name="messageText"></param>
+        public static void DisplayMessage(string messageText)
+        {
+            using (var message = new MessageForm(messageText))
+            {
+                message.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        ///     Logs and displays message
+        /// </summary>
+        /// <param name="messageText"></param>
+        public static void LogAndDisplayMessage(string messageText)
+        {
+            Log.Info = messageText;
+            using (var message = new MessageForm(messageText))
+            {
+                message.ShowDialog();
+            }
+        }
+
+        #endregion
+
         #region Events handling
 
         private void OK_Click(object sender, EventArgs e) => Close();

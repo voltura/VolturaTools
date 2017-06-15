@@ -107,7 +107,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/voltura/VolturaTools/tree/master/DiskSpace/Properties/.
+        ///   Looks up a localized string similar to https://github.com/voltura/VolturaTools/raw/master/DiskSpace/Properties/.
         /// </summary>
         internal static string CurrentVersionFileBaseUrl {
             get {

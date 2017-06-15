@@ -95,7 +95,7 @@ namespace DiskSpace.Forms
         {
             if (Mail.Send("Test email from " + ProductName + Resources.Space + ProductVersion,
                 "This is a test email from " + ProductName + Resources.Space + ProductVersion, Settings.Default)) return;
-            using (var message = new MessageForm(Resources.FailedToSendEmail)) message.ShowDialog();
+            MessageForm.LogAndDisplayMessage(Resources.FailedToSendEmail);
         }
 
         #endregion

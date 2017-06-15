@@ -2,8 +2,6 @@
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
-using System.Xml;
 using DiskSpace.Forms;
 using DiskSpace.Properties;
 using System.Windows.Forms;
@@ -32,28 +30,40 @@ namespace DiskSpace
                         Resources.CurrentVersionFileName);
                     webClient.DownloadFile(versionFileUri, localFile);
                     var infoDocument = File.ReadAllText(localFile);
+                    var currentVer = Application.ProductVersion;
                     var version = infoDocument.Substring(
                         infoDocument.LastIndexOf(
                             Resources.AssemblyVersion, StringComparison.Ordinal)
-                    ).Substring(69, 7);
-                    using (var message = new MessageForm())
+                    ).Substring(17, currentVer.Length);
+                    result = currentVer != version;
+                    if (!int.TryParse(version.Replace(".", ""),
+                        NumberStyles.Integer, new NumberFormatInfo(), out int _))
                     {
-                        var currentVer = Application.ProductVersion;
-                        result = currentVer != version;
-                        message.SetMessage(result
+                        Log.ErrorString = "Could not retrieve version online.";
+                        MessageForm.DisplayMessage("Could not retrieve version online.");
+                    }
+                    else
+                    {
+                        MessageForm.LogAndDisplayMessage(result
                             ? "New version available! Version " + version
                             : "Latest version already installed, version " + currentVer);
-                        message.ShowDialog();
                     }
                 }
+            }
+            catch (WebException webException)
+            {
+                Log.Error = webException;
+                MessageForm.DisplayMessage("Could not check version online, see log for details.");
             }
             catch (IndexOutOfRangeException indexOutOfRangeException)
             {
                 Log.Error = indexOutOfRangeException;
+                MessageForm.LogAndDisplayMessage("Could not check version online, invalid content.");
             }
             catch (Exception e)
             {
                 Log.Error = e;
+                MessageForm.DisplayMessage("Could not check version online, fatal error. Restart application.");
                 throw;
             }
             return result;
