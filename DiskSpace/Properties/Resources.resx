@@ -281,4 +281,7 @@
     <value>Check for update</value>
     <comment>Check for update in context menu</comment>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
 </root>

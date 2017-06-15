@@ -40,6 +40,7 @@ namespace DiskSpace.Forms
             this.diskSpaceNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,7 @@ namespace DiskSpace.Forms
             this.titleIcon = new System.Windows.Forms.PictureBox();
             this.settingsIcon = new System.Windows.Forms.PictureBox();
             this.logFileIcon = new System.Windows.Forms.PictureBox();
-            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingsIcon)).BeginInit();
@@ -128,6 +129,7 @@ namespace DiskSpace.Forms
             this.contextMenuStrip.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.checkForUpdateToolStripMenuItem,
             this.quitToolStripMenuItem,
@@ -140,7 +142,7 @@ namespace DiskSpace.Forms
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(196, 234);
+            this.contextMenuStrip.Size = new System.Drawing.Size(196, 262);
             // 
             // settingsToolStripMenuItem
             // 
@@ -150,6 +152,14 @@ namespace DiskSpace.Forms
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
+            // 
+            // checkForUpdateToolStripMenuItem
+            // 
+            this.checkForUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.checkForUpdateToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.CheckForUpdate;
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.CheckForUpdateToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
@@ -251,13 +261,13 @@ namespace DiskSpace.Forms
             this.logFileIcon.MouseEnter += new System.EventHandler(this.LogFileIcon_MouseEnter);
             this.logFileIcon.MouseLeave += new System.EventHandler(this.LogFileIcon_MouseLeave);
             // 
-            // checkForUpdateToolStripMenuItem
+            // aboutToolStripMenuItem
             // 
-            this.checkForUpdateToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
-            this.checkForUpdateToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.CheckForUpdate;
-            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.CheckForUpdateToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.aboutToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.About;
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.About_Click);
             // 
             // MainForm
             // 
@@ -311,6 +321,7 @@ namespace DiskSpace.Forms
         private ToolStripMenuItem logToolStripMenuItem;
         private NotifyIcon diskSpaceNotifyIcon;
         private ToolStripMenuItem checkForUpdateToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
