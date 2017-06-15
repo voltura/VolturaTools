@@ -18,9 +18,10 @@ Configuration options;
   - Email notifications: Send email when free space changes or when notification limit is reached
   - Email settings: Configure SMTP settings for email feature
   
-Context menu options available via Taskbar icon click or right-click on main form of application;
+Context menu options available via Taskbar icon click or right-click on main form title icon;
   - Show/Hide: Shows/hides the main form of the application that displays the amount of free space on monitored disk
-  - Log: Displays the application log file
+  - Show Log: Displays the application log file
+  - Check for update - Checks if new version exists online 
   - Quit: Quits the application
   - Disk clean-up: Launches Windows Disk Clean-up tool (DiskMgr.exe)
   - Disk Management: Launches Windows Disk Management
