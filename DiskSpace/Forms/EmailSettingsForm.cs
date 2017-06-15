@@ -76,7 +76,7 @@ namespace DiskSpace.Forms
             btnSendTestEmail.Text = Resources.SendTestEmail;
         }
 
-        private void SaveSettings() => Settings.Default.Save();
+        private static void SaveSettings() => Settings.Default.Save();
 
         private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
 
