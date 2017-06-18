@@ -284,4 +284,13 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="AllDrives" xml:space="preserve">
+    <value>All drives</value>
+  </data>
+  <data name="CDrive" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="Star" xml:space="preserve">
+    <value>*</value>
+  </data>
 </root>

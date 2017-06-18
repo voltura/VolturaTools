@@ -70,6 +70,15 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All drives.
+        /// </summary>
+        internal static string AllDrives {
+            get {
+                return ResourceManager.GetString("AllDrives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always on top.
         /// </summary>
         internal static string AlwaysOnTop {
@@ -94,6 +103,15 @@ namespace DiskSpace.Properties {
             get {
                 object obj = ResourceManager.GetObject("banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        internal static string CDrive {
+            get {
+                return ResourceManager.GetString("CDrive", resourceCulture);
             }
         }
         
@@ -435,6 +453,15 @@ namespace DiskSpace.Properties {
             get {
                 object obj = ResourceManager.GetObject("ssdIconWhitePng", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.
+        /// </summary>
+        internal static string Star {
+            get {
+                return ResourceManager.GetString("Star", resourceCulture);
             }
         }
         
