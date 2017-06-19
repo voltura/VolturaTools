@@ -40,6 +40,7 @@ namespace DiskSpace.Forms
             this.btnOK = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
             this.settingsPanel = new System.Windows.Forms.Panel();
+            this.Link = new System.Windows.Forms.LinkLabel();
             this.minimizePanelFrame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).BeginInit();
             this.settingsPanel.SuspendLayout();
@@ -119,7 +120,7 @@ namespace DiskSpace.Forms
             this.lblMessage.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.lblMessage.Location = new System.Drawing.Point(12, 10);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(524, 157);
+            this.lblMessage.Size = new System.Drawing.Size(524, 108);
             this.lblMessage.TabIndex = 10;
             this.lblMessage.Text = "Message";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -129,6 +130,7 @@ namespace DiskSpace.Forms
             this.settingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
+            this.settingsPanel.Controls.Add(this.Link);
             this.settingsPanel.Controls.Add(this.lblMessage);
             this.settingsPanel.Controls.Add(this.btnOK);
             this.settingsPanel.Location = new System.Drawing.Point(0, 32);
@@ -136,6 +138,20 @@ namespace DiskSpace.Forms
             this.settingsPanel.Name = "settingsPanel";
             this.settingsPanel.Size = new System.Drawing.Size(548, 237);
             this.settingsPanel.TabIndex = 2;
+            // 
+            // Link
+            // 
+            this.Link.ActiveLinkColor = System.Drawing.Color.LightSkyBlue;
+            this.Link.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Link.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
+            this.Link.LinkColor = System.Drawing.Color.DeepSkyBlue;
+            this.Link.Location = new System.Drawing.Point(12, 146);
+            this.Link.Name = "Link";
+            this.Link.Size = new System.Drawing.Size(524, 23);
+            this.Link.TabIndex = 11;
+            this.Link.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.Link_LinkClicked);
             // 
             // MessageForm
             // 
@@ -175,5 +191,6 @@ namespace DiskSpace.Forms
         private Button btnOK;
         private Label lblMessage;
         private Panel settingsPanel;
+        private LinkLabel Link;
     }
 }

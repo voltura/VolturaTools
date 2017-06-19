@@ -570,9 +570,8 @@ namespace DiskSpace.Forms
         private void CheckForUpdateToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate();
 
         private void About_Click(object sender, EventArgs e) =>
-            MessageForm.LogAndDisplayMessage(Application.ProductName + 
-                "\n" + Application.ProductVersion + 
-                "\n\n" + Resources.ProductURL);
+            MessageForm.LogAndDisplayLinkMessage(Application.ProductName + 
+                "\n" + Application.ProductVersion);
 
         #endregion
     }

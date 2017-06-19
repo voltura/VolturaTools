@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using DiskSpace.Properties;
@@ -21,6 +22,11 @@ namespace DiskSpace.Forms
         /// </summary>
         /// <param name="messageText">Message text</param>
         public void SetMessage(string messageText) => lblMessage.Text = messageText;
+        
+        /// <summary>
+        ///     Set link to product URL
+        /// </summary>
+        public void SetLink() => Link.Text = Resources.ProductURL;
 
         #endregion
 
@@ -84,6 +90,20 @@ namespace DiskSpace.Forms
             }
         }
 
+        /// <summary>
+        ///     Logs and displays message with Product URL link
+        /// </summary>
+        /// <param name="messageText"></param>
+        public static void LogAndDisplayLinkMessage(string messageText)
+        {
+            Log.Info = messageText;
+            using (var message = new MessageForm(messageText))
+            {
+                message.SetLink();
+                message.ShowDialog();
+            }
+        }
+
         #endregion
 
         #region Events handling
@@ -101,6 +121,8 @@ namespace DiskSpace.Forms
         private void MinimizePanel_Click(object sender, EventArgs e) => Close();
 
         private void MinimizePanelFrame_Click(object sender, EventArgs e) => Close();
+
+        private void Link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => OpenUrl();
 
         #endregion
 
@@ -125,6 +147,19 @@ namespace DiskSpace.Forms
         private void UpdateOffset(MouseEventArgs e) => Offset = new Point(e.X, e.Y);
 
         private void UnfocusMinimizeIcon() => minimizePanel.BackColor = Color.White;
+
+        private void OpenUrl()
+        {
+            using (var p = new Process())
+            {
+                p.StartInfo = new ProcessStartInfo
+                {
+                    UseShellExecute = true,
+                    FileName = Link.Text
+                };
+                p.Start();
+            }
+        }
 
         #endregion
     }
