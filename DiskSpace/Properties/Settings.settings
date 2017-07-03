@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="DiskSpace.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DiskSpace.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="driveLetter" Description="Drive to report free space on" Type="System.String" Scope="User">
@@ -10,16 +8,13 @@
     <Setting Name="alwaysOnTop" Description="Show application form topmost" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="startMinimized" Description="Start application without displaying form" Type="System.Boolean"
-             Scope="User">
+    <Setting Name="startMinimized" Description="Start application without displaying form" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="startWithWindows" Description="Start application automatically with Windows" Type="System.Boolean"
-             Scope="User">
+    <Setting Name="startWithWindows" Description="Start application automatically with Windows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="notifyWhenSpaceChange" Description="Display Balloon notification when free disk space changes"
-             Type="System.Boolean" Scope="User">
+    <Setting Name="notifyWhenSpaceChange" Description="Display Balloon notification when free disk space changes" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="NotificationLimitGB" Type="System.UInt32" Scope="User">
@@ -57,6 +52,9 @@
     </Setting>
     <Setting Name="emailPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">password</Value>
+    </Setting>
+    <Setting Name="smtpPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">587</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -180,6 +180,7 @@
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\DiskSpace.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

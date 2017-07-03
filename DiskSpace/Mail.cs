@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Mail;
 using DiskSpace.Properties;
+using System.Globalization;
 
 #endregion
 
@@ -93,7 +94,7 @@ namespace DiskSpace
                 // ReSharper disable once UseObjectOrCollectionInitializer
                 smtpClient = new SmtpClient(settings.smtpServer);
 #pragma warning restore IDE0017 // Simplify object initialization
-                smtpClient.Port = 587;
+                smtpClient.Port = Convert.ToInt32(settings.smtpPort, CultureInfo.InvariantCulture);
                 smtpClient.Credentials = new NetworkCredential(
                     settings.emailUserName,
                     settings.emailPassword);

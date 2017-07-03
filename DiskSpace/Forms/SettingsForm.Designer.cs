@@ -159,6 +159,7 @@ namespace DiskSpace.Forms
             this.txtNotificationLimitGB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtNotificationLimitGB.TextChanged += new System.EventHandler(this.NotificationLimitGB_TextChanged);
             this.txtNotificationLimitGB.Enter += new System.EventHandler(this.NotificationLimitGB_Enter);
+            this.txtNotificationLimitGB.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NotificationLimitGB_KeyDown);
             this.txtNotificationLimitGB.Leave += new System.EventHandler(this.NotificationLimitGB_Leave);
             this.txtNotificationLimitGB.MouseEnter += new System.EventHandler(this.NotificationLimitGB_MouseEnter);
             this.txtNotificationLimitGB.MouseLeave += new System.EventHandler(this.NotificationLimitGB_MouseLeave);

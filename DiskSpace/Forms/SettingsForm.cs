@@ -167,8 +167,25 @@ namespace DiskSpace.Forms
 
         private void AcceptOnlyNumericNotificationGbInput()
         {
-            if (uint.TryParse(txtNotificationLimitGB.Text, out uint _)) return;
-            txtNotificationLimitGB.Text = string.Empty;
+            if (string.IsNullOrEmpty(txtNotificationLimitGB.Text)) return;
+            var isInt = int.TryParse(txtNotificationLimitGB.Text, out int i);
+            if (i < 0)
+            {
+                txtNotificationLimitGB.Text = txtNotificationLimitGB.Text.TrimStart(new char[] { '-' });
+            }
+            while (!isInt && !string.IsNullOrEmpty(txtNotificationLimitGB.Text))
+            {
+                if (txtNotificationLimitGB.Text.Length > 1 && !isInt)
+                {
+                    txtNotificationLimitGB.Text = txtNotificationLimitGB.Text.Substring(0, 
+                        txtNotificationLimitGB.Text.Length - 1);
+                }
+                isInt = uint.TryParse(txtNotificationLimitGB.Text, out uint _);
+                if ((txtNotificationLimitGB.Text.Length == 1) && !isInt)
+                {
+                    txtNotificationLimitGB.Text = string.Empty;
+                }
+            }
         }
 
         private void MoveForm(MouseEventArgs e)
@@ -190,6 +207,19 @@ namespace DiskSpace.Forms
         private void ResetBackColorOnNotificationLimitGb() => txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
 
         private void ShowEmailSettingsForm() => _emailSettings.ShowDialog(this);
+
+        private static void OnlyAllowNumericInput(KeyEventArgs e)
+        {
+            if (!((e.KeyValue > 47 && e.KeyValue < 58) ||
+                e.KeyCode == Keys.Enter ||
+                e.KeyCode == Keys.Escape ||
+                e.KeyCode == Keys.Back ||
+                e.KeyCode == Keys.Left ||
+                e.KeyCode == Keys.Right))
+            {
+                e.SuppressKeyPress = true;
+            }
+        }
 
         #endregion
 
@@ -230,6 +260,8 @@ namespace DiskSpace.Forms
         private void NotificationLimitGB_Leave(object sender, EventArgs e) => ResetBackColorOnNotificationLimitGb();
 
         private void ConfigureEmail_Click(object sender, EventArgs e) => ShowEmailSettingsForm();
+
+        private void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e) => OnlyAllowNumericInput(e);
 
         #endregion
     }
