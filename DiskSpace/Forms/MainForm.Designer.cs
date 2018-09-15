@@ -58,14 +58,16 @@ namespace DiskSpace.Forms
             // 
             // lblFreeSpace
             // 
+            this.lblFreeSpace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFreeSpace.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.lblFreeSpace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblFreeSpace.Font = new System.Drawing.Font("Segoe UI Black", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFreeSpace.ForeColor = System.Drawing.Color.White;
-            this.lblFreeSpace.Location = new System.Drawing.Point(0, 32);
+            this.lblFreeSpace.Location = new System.Drawing.Point(0, 62);
             this.lblFreeSpace.Margin = new System.Windows.Forms.Padding(0);
             this.lblFreeSpace.Name = "lblFreeSpace";
-            this.lblFreeSpace.Size = new System.Drawing.Size(336, 83);
+            this.lblFreeSpace.Size = new System.Drawing.Size(672, 161);
             this.lblFreeSpace.TabIndex = 1;
             this.lblFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFreeSpace.Click += new System.EventHandler(this.FreeSpace_Click);
@@ -76,10 +78,10 @@ namespace DiskSpace.Forms
             // 
             this.minimizePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minimizePanel.BackColor = System.Drawing.Color.White;
-            this.minimizePanel.Location = new System.Drawing.Point(303, 7);
+            this.minimizePanel.Location = new System.Drawing.Point(606, 14);
             this.minimizePanel.Margin = new System.Windows.Forms.Padding(0);
             this.minimizePanel.Name = "minimizePanel";
-            this.minimizePanel.Size = new System.Drawing.Size(25, 8);
+            this.minimizePanel.Size = new System.Drawing.Size(50, 16);
             this.minimizePanel.TabIndex = 2;
             this.minimizePanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MinimizePanel_MouseClick);
             this.minimizePanel.MouseEnter += new System.EventHandler(this.MinimizePanel_MouseEnter);
@@ -93,8 +95,8 @@ namespace DiskSpace.Forms
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
-            this.lblTitle.Size = new System.Drawing.Size(332, 32);
+            this.lblTitle.Padding = new System.Windows.Forms.Padding(56, 0, 0, 0);
+            this.lblTitle.Size = new System.Drawing.Size(664, 62);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Title_MouseDown);
@@ -103,10 +105,10 @@ namespace DiskSpace.Forms
             // minimizeContainerPanel
             // 
             this.minimizeContainerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minimizeContainerPanel.Location = new System.Drawing.Point(300, 0);
+            this.minimizeContainerPanel.Location = new System.Drawing.Point(600, 0);
             this.minimizeContainerPanel.Margin = new System.Windows.Forms.Padding(0);
             this.minimizeContainerPanel.Name = "minimizeContainerPanel";
-            this.minimizeContainerPanel.Size = new System.Drawing.Size(34, 32);
+            this.minimizeContainerPanel.Size = new System.Drawing.Size(68, 62);
             this.minimizeContainerPanel.TabIndex = 3;
             this.minimizeContainerPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MinimizeContainerPanel_MouseClick);
             this.minimizeContainerPanel.MouseEnter += new System.EventHandler(this.MinimizeContainerPanel_MouseEnter);
@@ -138,14 +140,14 @@ namespace DiskSpace.Forms
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(196, 206);
+            this.contextMenuStrip.Size = new System.Drawing.Size(356, 310);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.settingsToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Settings;
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -153,7 +155,7 @@ namespace DiskSpace.Forms
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.quitToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Quit;
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -161,7 +163,7 @@ namespace DiskSpace.Forms
             // 
             this.logToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.logToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Log;
             this.logToolStripMenuItem.Click += new System.EventHandler(this.LogToolStripMenuItem_Click);
             // 
@@ -169,21 +171,21 @@ namespace DiskSpace.Forms
             // 
             this.showToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.showToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.ShowHide;
             this.showToolStripMenuItem.Click += new System.EventHandler(this.ShowToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(352, 6);
             // 
             // diskCleanupToolStripMenuItem
             // 
             this.diskCleanupToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.diskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
-            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
             this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
             // 
@@ -192,7 +194,7 @@ namespace DiskSpace.Forms
             this.diskManagementToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.diskManagementToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
-            this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(195, 28);
+            this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(355, 50);
             this.diskManagementToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.DiskManagement;
             this.diskManagementToolStripMenuItem.Click += new System.EventHandler(this.DiskManagementToolStripMenuItem_Click);
             // 
@@ -206,11 +208,11 @@ namespace DiskSpace.Forms
             this.titleIcon.BackColor = System.Drawing.Color.Transparent;
             this.titleIcon.Image = global::DiskSpace.Properties.Resources.ssdIconWhitePng;
             this.titleIcon.InitialImage = global::DiskSpace.Properties.Resources.ssdIconWhitePng;
-            this.titleIcon.Location = new System.Drawing.Point(4, 4);
-            this.titleIcon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.titleIcon.Location = new System.Drawing.Point(8, 8);
+            this.titleIcon.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.titleIcon.Name = "titleIcon";
-            this.titleIcon.Size = new System.Drawing.Size(26, 26);
-            this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.titleIcon.Size = new System.Drawing.Size(52, 50);
+            this.titleIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.titleIcon.TabIndex = 1;
             this.titleIcon.TabStop = false;
             this.titleIcon.Click += new System.EventHandler(this.TitleIcon_Click);
@@ -221,13 +223,14 @@ namespace DiskSpace.Forms
             // 
             // settingsIcon
             // 
+            this.settingsIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.settingsIcon.Image = global::DiskSpace.Properties.Resources.gearsIconWhite;
-            this.settingsIcon.Location = new System.Drawing.Point(290, 69);
+            this.settingsIcon.Location = new System.Drawing.Point(580, 134);
             this.settingsIcon.Margin = new System.Windows.Forms.Padding(0);
             this.settingsIcon.Name = "settingsIcon";
-            this.settingsIcon.Size = new System.Drawing.Size(42, 42);
-            this.settingsIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.settingsIcon.Size = new System.Drawing.Size(84, 81);
+            this.settingsIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.settingsIcon.TabIndex = 2;
             this.settingsIcon.TabStop = false;
             this.settingsIcon.Click += new System.EventHandler(this.SettingsIcon_Click);
@@ -238,11 +241,11 @@ namespace DiskSpace.Forms
             // 
             this.logFileIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.logFileIcon.Image = global::DiskSpace.Properties.Resources.logIconWhite;
-            this.logFileIcon.Location = new System.Drawing.Point(4, 69);
+            this.logFileIcon.Location = new System.Drawing.Point(8, 134);
             this.logFileIcon.Margin = new System.Windows.Forms.Padding(0);
             this.logFileIcon.Name = "logFileIcon";
-            this.logFileIcon.Size = new System.Drawing.Size(42, 42);
-            this.logFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logFileIcon.Size = new System.Drawing.Size(84, 81);
+            this.logFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logFileIcon.TabIndex = 4;
             this.logFileIcon.TabStop = false;
             this.logFileIcon.Click += new System.EventHandler(this.LogFileIcon_Click);
@@ -251,10 +254,10 @@ namespace DiskSpace.Forms
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(240F, 240F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.ClientSize = new System.Drawing.Size(336, 115);
+            this.ClientSize = new System.Drawing.Size(672, 223);
             this.ControlBox = false;
             this.Controls.Add(this.logFileIcon);
             this.Controls.Add(this.titleIcon);
@@ -267,7 +270,7 @@ namespace DiskSpace.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(40, 40);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";

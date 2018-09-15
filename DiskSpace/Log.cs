@@ -22,23 +22,24 @@ namespace DiskSpace
         /// <summary>
         ///     Init log
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Init()
         {
             FileStream fs = null;
             try
             {
-                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append);
                 Trace.Listeners.Clear();
+                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+                
+                fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
                 var traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
-                Trace.UseGlobalLock = true;
+                Trace.UseGlobalLock = false;
             }
             catch
             {
                 fs?.Dispose();
-                throw;
             }
         }
 
@@ -51,33 +52,43 @@ namespace DiskSpace
         internal static void Close()
         {
             Truncate();
+            Trace.Flush();
             Trace.Close();
         }
 
         /// <summary>
         ///     Truncate log
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Truncate()
         {
+            Trace.Flush();
             Trace.Close();
-            var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            var fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
-            if (fi.Exists)
+            Trace.Listeners.Clear();
+            try
             {
-                var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
-                if (fi.Length > trimSize)
-                    using (var ms = new MemoryStream(trimSize))
-                    using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        s.Seek(-trimSize, SeekOrigin.End);
-                        var bytes = new byte[trimSize];
-                        s.Read(bytes, 0, trimSize);
-                        ms.Write(bytes, 0, trimSize);
-                        ms.Position = 0;
-                        s.SetLength(trimSize);
-                        s.Position = 0;
-                        ms.CopyTo(s);
-                    }
+                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+                var fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
+                if (fi.Exists)
+                {
+                    var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
+                    if (fi.Length > trimSize)
+                        using (var ms = new MemoryStream(trimSize))
+                        using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
+                        {
+                            s.Seek(-trimSize, SeekOrigin.End);
+                            var bytes = new byte[trimSize];
+                            s.Read(bytes, 0, trimSize);
+                            ms.Write(bytes, 0, trimSize);
+                            ms.Position = 0;
+                            s.SetLength(trimSize);
+                            s.Position = 0;
+                            ms.CopyTo(s);
+                        }
+                }
+            }
+            catch
+            {
             }
             Init();
         }
@@ -121,6 +132,7 @@ namespace DiskSpace
         /// <summary>
         ///     Log info
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         internal static string Info
@@ -128,15 +140,22 @@ namespace DiskSpace
             private get { return string.Empty; }
             set
             {
-                Trace.TraceInformation("{0} {1}",
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
-                    value);
+                try
+                {
+                    Trace.TraceInformation("{0} {1}",
+                        DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
+                        value);
+                }
+                catch
+                {
+                }
             }
         }
 
         /// <summary>
         ///     Log error
         /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static Exception Error
         {
@@ -144,9 +163,15 @@ namespace DiskSpace
             private get { return new ArgumentNullException(Resources.DiskSpace); }
             set
             {
-                Trace.TraceError("{0} {1}",
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
-                    value);
+                try
+                {
+                    Trace.TraceError("{0} {1}",
+                        DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
+                        value);
+                }
+                catch
+                {
+                }
             }
         }
 
