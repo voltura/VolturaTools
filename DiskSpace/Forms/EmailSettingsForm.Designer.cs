@@ -176,13 +176,16 @@ namespace DiskSpace.Forms
             // 
             this.txtSmtpPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.txtSmtpPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSmtpPort.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DiskSpace.Properties.Settings.Default, "smtpPort", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtSmtpPort.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold);
             this.txtSmtpPort.ForeColor = System.Drawing.Color.White;
             this.txtSmtpPort.Location = new System.Drawing.Point(478, 105);
             this.txtSmtpPort.Name = "txtSmtpPort";
             this.txtSmtpPort.Size = new System.Drawing.Size(58, 30);
             this.txtSmtpPort.TabIndex = 15;
-            this.txtSmtpPort.Text = "587";
+            this.txtSmtpPort.Text = global::DiskSpace.Properties.Settings.Default.smtpPort;
+            this.txtSmtpPort.TextChanged += new System.EventHandler(this.SmtpPort_TextChanged);
+            this.txtSmtpPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SmtpPort_KeyDown);
             // 
             // lblSmtpServer
             // 
@@ -368,6 +371,7 @@ namespace DiskSpace.Forms
             this.minimizePanelFrame.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.titleIcon)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

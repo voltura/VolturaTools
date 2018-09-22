@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DiskSpace.Properties;
+using System.Linq;
 
 #endregion
 
@@ -62,6 +63,10 @@ namespace DiskSpace.Forms
             SendTestEmail();
         }
 
+        private void SmtpPort_TextChanged(object sender, EventArgs e) => AllowIntNumberOnly();
+
+        private void SmtpPort_KeyDown(object sender, KeyEventArgs e) => OnlyAllowNumericInput(e);
+
         #endregion
 
         #region Private methods
@@ -95,7 +100,42 @@ namespace DiskSpace.Forms
         {
             if (Mail.Send("Test email from " + ProductName + Resources.Space + ProductVersion,
                 "This is a test email from " + ProductName + Resources.Space + ProductVersion, Settings.Default)) return;
-            using (var message = new MessageForm(Resources.FailedToSendEmail)) message.ShowDialog();
+            MessageForm.LogAndDisplayMessage(Resources.FailedToSendEmail);
+        }
+
+        private void AllowIntNumberOnly()
+        {
+            if (string.IsNullOrEmpty(txtSmtpPort.Text)) return;
+            var isInt = int.TryParse(txtSmtpPort.Text, out int i);
+            if (i < 0)
+            {
+                txtSmtpPort.Text = txtSmtpPort.Text.TrimStart(new char[] { '-'});
+            }
+            while (!isInt && !string.IsNullOrEmpty(txtSmtpPort.Text))
+            {
+                if (txtSmtpPort.Text.Length > 1 && !isInt)
+                {
+                    txtSmtpPort.Text = txtSmtpPort.Text.Substring(0, txtSmtpPort.Text.Length - 1);
+                }
+                isInt = uint.TryParse(txtSmtpPort.Text, out uint _);
+                if ((txtSmtpPort.Text.Length == 1) && !isInt)
+                {
+                    txtSmtpPort.Text = string.Empty;
+                }
+            }
+        }
+
+        private static void OnlyAllowNumericInput(KeyEventArgs e)
+        {
+            if (!((e.KeyValue > 47 && e.KeyValue < 58) ||
+                e.KeyCode == Keys.Enter ||
+                e.KeyCode == Keys.Escape ||
+                e.KeyCode == Keys.Back ||
+                e.KeyCode == Keys.Left ||
+                e.KeyCode == Keys.Right))
+            {
+                e.SuppressKeyPress = true;
+            }
         }
 
         #endregion

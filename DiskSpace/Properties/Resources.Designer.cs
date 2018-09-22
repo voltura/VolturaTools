@@ -61,11 +61,38 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All drives.
+        /// </summary>
+        internal static string AllDrives {
+            get {
+                return ResourceManager.GetString("AllDrives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Always on top.
         /// </summary>
         internal static string AlwaysOnTop {
             get {
                 return ResourceManager.GetString("AlwaysOnTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AssemblyVersion.
+        /// </summary>
+        internal static string AssemblyVersion {
+            get {
+                return ResourceManager.GetString("AssemblyVersion", resourceCulture);
             }
         }
         
@@ -80,11 +107,47 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        internal static string CDrive {
+            get {
+                return ResourceManager.GetString("CDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check for update.
+        /// </summary>
+        internal static string CheckForUpdate {
+            get {
+                return ResourceManager.GetString("CheckForUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \nUsage:\n{0} autorun=[1] notifications=[1] minimized=[1] start=[1]\n\nautorun=1\t\tStart with Windows\nnotifications=1\tShow notifications when disk space changes\nminimized=1\t\tStart in Taskbar only, do not show form when launching\nstart=1\t\t\tStart application after configuration\n\nExamples:\nConfigure not to start with Windows, display notifications, not minimized at startup and launch after configuration:\n{0} autorun= notifications=1 minimized= start=1\n\nConfigure to start with Windows, minimized [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandLineTip {
             get {
                 return ResourceManager.GetString("CommandLineTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/voltura/VolturaTools/raw/master/DiskSpace/Properties/.
+        /// </summary>
+        internal static string CurrentVersionFileBaseUrl {
+            get {
+                return ResourceManager.GetString("CurrentVersionFileBaseUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AssemblyInfo.cs.
+        /// </summary>
+        internal static string CurrentVersionFileName {
+            get {
+                return ResourceManager.GetString("CurrentVersionFileName", resourceCulture);
             }
         }
         
@@ -390,6 +453,15 @@ namespace DiskSpace.Properties {
             get {
                 object obj = ResourceManager.GetObject("ssdIconWhitePng", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.
+        /// </summary>
+        internal static string Star {
+            get {
+                return ResourceManager.GetString("Star", resourceCulture);
             }
         }
         
