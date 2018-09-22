@@ -155,7 +155,6 @@ namespace DiskSpace.Forms
             UpdateFreespaceTexts();
             HandleNotifications();
             SetTextsFromResources();
-            showToolStripMenuItem.Text = Resources.ShowHide;
             Settings.Default.DriveChanged += DriveLetterSettingChanged;
             checkTimer.Enabled = true;
         }
@@ -169,6 +168,7 @@ namespace DiskSpace.Forms
             diskCleanupToolStripMenuItem.Text = Resources.Diskcleanup;
             diskManagementToolStripMenuItem.Text = Resources.DiskManagement;
             diskCleanupToolStripMenuItem.Enabled = File.Exists(CleanMgrFullPath);
+            showToolStripMenuItem.Text = Resources.ShowHide;
             UpdateTitleText();
         }
 
