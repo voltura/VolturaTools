@@ -450,7 +450,6 @@ namespace DiskSpace.Forms
 
         private static void CheckForUpdate()
         {
-            Updater.UpdateAvailable();
         }
 
         #endregion

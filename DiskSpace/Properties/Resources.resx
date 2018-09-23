@@ -249,7 +249,7 @@
   </data>
   <data name="TB" xml:space="preserve">
     <value>TB</value>
-    <comment>Terrabyte</comment>
+    <comment>Terabyte</comment>
   </data>
   <data name="DiskManagement" xml:space="preserve">
     <value>Disk Management</value>

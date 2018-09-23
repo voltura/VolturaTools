@@ -122,27 +122,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\Controls\CustomColorsRenderer.cs" />
-    <Compile Include="Forms\Controls\CustomComboBox.cs">
+    <Compile Include="Controls\CustomColorsRenderer.cs" />
+    <Compile Include="Controls\CustomComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Drive.cs" />
-    <Compile Include="Forms\MessageForm.cs">
+    <Compile Include="Forms\EmailSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MessageForm.Designer.cs">
-      <DependentUpon>MessageForm.cs</DependentUpon>
+    <Compile Include="Forms\EmailSettingsForm.Designer.cs">
+      <DependentUpon>EmailSettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\GlobalSuppressions.cs" />
-    <Compile Include="LocalDrives.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="Mail.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\GlobalSuppressions.cs" />
+    <Compile Include="LocalDrives.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -151,18 +163,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\SettingWithEvent.cs" />
-    <Compile Include="Forms\EmailSettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EmailSettingsForm.Designer.cs">
+    <Compile Include="Updater.cs" />
+    <EmbeddedResource Include="Forms\EmailSettingsForm.resx">
       <DependentUpon>EmailSettingsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MessageForm.resx">
       <DependentUpon>MessageForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -176,12 +180,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmailSettingsForm.resx">
-      <DependentUpon>EmailSettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\App.config" />
     <None Include="DiskSpace.pfx.snk" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
