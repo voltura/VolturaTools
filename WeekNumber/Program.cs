@@ -27,7 +27,7 @@ internal class Program : IDisposable
         ni.Icon = GetTextIcon(ref w);
         ni.Text = w;
         t = new Timer() { Interval = 1000, Enabled = true };
-        t.Tick += delegate (object o, EventArgs e)
+        t.Tick += delegate
         {
             if (ni.Text != w)
             {
