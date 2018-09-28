@@ -8,10 +8,11 @@ internal class Program : IDisposable
     NotifyIcon ni = null;
     Timer t = null;
     Bitmap b = null;
-    readonly Font f = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
     Icon i = null;
     Graphics g = null;
     string w = null;
+    readonly Font f = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
+    readonly ContextMenu cm = new ContextMenu(new MenuItem[1] { new MenuItem("E&xit WeekNumber", delegate { Application.Exit(); }) { DefaultItem = true } });
 
     [STAThread]
     static void Main()
@@ -24,18 +25,23 @@ internal class Program : IDisposable
     {
         ThisWeek(ref w);
         ni = new NotifyIcon() { Visible = true };
+        ni.ContextMenu = cm;
         ni.Icon = GetTextIcon(ref w);
         ni.Text = w;
-        t = new Timer() { Interval = 1000, Enabled = true };
+        t = new Timer() { Interval = 60000, Enabled = true };
         t.Tick += delegate
         {
-            if (ni.Text != w)
+            lock (this)
             {
-                ThisWeek(ref w);
-                ni.Icon?.Dispose();
-                ni.Icon = GetTextIcon(ref w);
+                if (ni.Text != w)
+                {
+                    ThisWeek(ref w);
+                    ni.Icon?.Dispose();
+                    ni.Icon = GetTextIcon(ref w);
+                }
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+                Application.DoEvents();
             }
         };
     }
@@ -55,7 +61,9 @@ internal class Program : IDisposable
         g?.Dispose();
         b = new Bitmap(48, 48);
         g = Graphics.FromImage(b);
-        g.DrawString(t, f, Brushes.White, 0f, 0f);
+        g.FillRectangle(Brushes.Black, 1, 1, 46, 46);
+        g.DrawString(t, f, Brushes.White, -4f, 4f);
+        g.DrawRectangle(Pens.White, 0, 0, 47, 47);
         i = Icon.FromHandle(b.GetHicon());
         b?.Dispose();
         g?.Dispose();
@@ -66,9 +74,11 @@ internal class Program : IDisposable
     {
         t?.Stop();
         t?.Dispose();
-        b.Dispose();
-        ni.Icon?.Dispose();
+        b?.Dispose();
+        f?.Dispose();
+        ni?.ContextMenu?.Dispose();
+        ni?.Icon?.Dispose();
         ni?.Dispose();
-        f.Dispose();
+        cm?.Dispose();
     }
 }
