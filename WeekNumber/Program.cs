@@ -16,7 +16,7 @@ internal class Program : IDisposable
     [STAThread]
     static void Main()
     {
-        Program p = new Program();
+        new Program();
         Application.Run();
     }
 
