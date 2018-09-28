@@ -64,6 +64,8 @@ internal class Program : IDisposable
 
     public void Dispose()
     {
+        t?.Stop();
+        t?.Dispose();
         b.Dispose();
         ni.Icon?.Dispose();
         ni?.Dispose();
