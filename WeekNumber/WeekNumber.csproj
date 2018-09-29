@@ -55,9 +55,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>CMD /C TASKKILL /IM $(TargetFileName) /T /F</PreBuildEvent>
+    <PreBuildEvent>CMD /C TASKKILL /IM $(TargetFileName) /FI "STATUS eq RUNNING" /T /F</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>powershell start-process "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release powershell start-process "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

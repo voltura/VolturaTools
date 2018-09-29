@@ -3,9 +3,11 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 internal class Program : IDisposable
 {
+    const string REGRUN = @"Software\Microsoft\Windows\CurrentVersion\Run\";
     NotifyIcon _notifyIcon = null;
     ContextMenu _contextMenu = null;
     Timer _timer = null;
@@ -33,10 +35,12 @@ internal class Program : IDisposable
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
     public Program()
     {
-        _contextMenu = new ContextMenu(new MenuItem[3]
+        try
         {
-            new MenuItem("&About " + Application.ProductName + "\tshift+A", 
-                delegate 
+            _contextMenu = new ContextMenu(new MenuItem[4]
+            {
+            new MenuItem("&About " + Application.ProductName + "\tshift+A",
+                delegate
                 {
                     if (_contextMenu.MenuItems.Count > 0)
                     {
@@ -46,27 +50,63 @@ internal class Program : IDisposable
                     if (_contextMenu.MenuItems.Count > 0) _contextMenu.MenuItems[0].Enabled = true;
                 }
             ) { DefaultItem = true },
-            new MenuItem("-"),
-            new MenuItem("E&xit " + Application.ProductName + "\tshift+X", delegate { Dispose(); Application.Exit(); }) { }
-        });
-        _oldWeek = _week = ThisWeek;
-        _notifyIcon = new NotifyIcon() { Visible = true };
-        _notifyIcon.ContextMenu = _contextMenu;
-        SetWeekIcon(ref _week);
-        _timer = new Timer() { Interval = 60000, Enabled = true };
-        _timer.Tick += delegate
-        {
-            Application.DoEvents();
-            lock (this)
-            {
-                _week = ThisWeek;
-                if (_oldWeek != _week)
+            new MenuItem("&Start with Windows\tshift+S",
+                delegate
                 {
-                    _oldWeek = _week;
-                    SetWeekIcon(ref _week);
+                    if (_contextMenu.MenuItems.Count > 0)
+                    {
+                        _contextMenu.MenuItems[1].Enabled = false;
+                        using (RegistryKey cu = Registry.CurrentUser)
+                        {
+                            if (Registry.GetValue(@"HKEY_CURRENT_USER\" + REGRUN, Application.ProductName, null) == null)
+                            {
+                                cu.OpenSubKey(REGRUN, true).SetValue(Application.ProductName, Application.ExecutablePath);
+                                _contextMenu.MenuItems[1].Checked = true;
+                            }
+                            else
+                            {
+                                cu.OpenSubKey(REGRUN, true).DeleteValue(Application.ProductName);
+                                _contextMenu.MenuItems[1].Checked = false;
+                            }
+                            cu.Flush();
+                        }
+                    }
+                    if (_contextMenu.MenuItems.Count > 0) _contextMenu.MenuItems[1].Enabled = true;
                 }
-            }
-        };
+            ) { Index = 1 },
+            new MenuItem("-"),
+            new MenuItem("E&xit " + Application.ProductName + "\tshift+X",
+                delegate
+                {
+                    Dispose();
+                    Application.Exit();
+                }
+            )
+            });
+            _contextMenu.MenuItems[1].Checked = Registry.GetValue(@"HKEY_CURRENT_USER\" + REGRUN, Application.ProductName, null) != null;
+            _oldWeek = _week = ThisWeek;
+            _notifyIcon = new NotifyIcon() { Visible = true };
+            _notifyIcon.ContextMenu = _contextMenu;
+            SetWeekIcon(ref _week);
+            _timer = new Timer() { Interval = 60000, Enabled = true };
+            _timer.Tick += delegate
+            {
+                Application.DoEvents();
+                lock (this)
+                {
+                    _week = ThisWeek;
+                    if (_oldWeek != _week)
+                    {
+                        _oldWeek = _week;
+                        SetWeekIcon(ref _week);
+                    }
+                }
+            };
+        } catch (Exception ex)
+        {
+            MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + "\t" + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
+        }
     }
 
     int ThisWeek => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
@@ -74,20 +114,29 @@ internal class Program : IDisposable
                 DayOfWeek.Monday);
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2204:LiteralsShouldBeSpelledCorrectly")]
     void SetWeekIcon(ref int t)
     {
-        _notifyIcon.Text = "Week " + _week;
-        Bitmap bitmap = new Bitmap(48, 48);
-        Graphics graphics = Graphics.FromImage(bitmap);
-        graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 6f);
-        graphics.DrawRectangle(new Pen(Color.White, 3f), 1, 1, 45, 45);
-        IntPtr hicon = bitmap.GetHicon();
-        Icon icon = Icon.FromHandle(hicon);
-        if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-        _notifyIcon.Icon = icon;
-        bitmap.Dispose();
-        graphics.Dispose();
+        try
+        {
+            _notifyIcon.Text = "Week " + _week;
+            using (Bitmap bitmap = new Bitmap(48, 48))
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
+                graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 6f);
+                graphics.DrawRectangle(new Pen(Color.White, 3f), 1, 1, 45, 45);
+                IntPtr hicon = bitmap.GetHicon();
+                Icon icon = Icon.FromHandle(hicon);
+                if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                _notifyIcon.Icon = icon;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + "\t" + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
+        }
     }
 
     public void Dispose()
