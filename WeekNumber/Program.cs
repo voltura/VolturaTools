@@ -1,5 +1,4 @@
-﻿// Program
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
