@@ -128,9 +128,10 @@ internal class Program : IDisposable
                 graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 6f);
                 graphics.DrawRectangle(new Pen(Color.White, 3f), 1, 1, 45, 45);
                 IntPtr hicon = bitmap.GetHicon();
-                Icon icon = Icon.FromHandle(hicon);
-                if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-                _notifyIcon.Icon = icon;
+                Icon oldIcon = _notifyIcon.Icon;
+                _notifyIcon.Icon = Icon.FromHandle(hicon);
+                if (oldIcon != null) NativeMethods.DestroyIcon(oldIcon.Handle);
+                oldIcon?.Dispose();
             }
         }
         catch (Exception ex)
