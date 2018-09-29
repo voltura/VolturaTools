@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("WeekNumber")]
+[assembly: AssemblyTitle("WeekNumber by Voltura AB")]
 [assembly: AssemblyDescription("WeekNumber by Voltura AB")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Voltura AB")]
