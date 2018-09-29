@@ -78,11 +78,12 @@ namespace WeekNumber
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + 
+                                ex.ToString(), Application.ProductName + " " + Application.ProductVersion, 
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Dispose();
                             Application.Exit();
                         }
-
                     }
                 }
             };
@@ -97,7 +98,7 @@ namespace WeekNumber
                         if (_contextMenu.MenuItems.Count > 0)
                         {
                             _contextMenu.MenuItems[0].Enabled = false;
-                            MessageBox.Show(_about, _aboutTitle, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show(_about, _aboutTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         if (_contextMenu.MenuItems.Count > 0)
                         {
@@ -109,27 +110,36 @@ namespace WeekNumber
                     },
                     new MenuItem("&Start with Windows\tshift+S", delegate
                     {
-                        if (_contextMenu.MenuItems.Count > 0)
+                        try
                         {
-                            _contextMenu.MenuItems[1].Enabled = false;
-                            using (RegistryKey registryKey = Registry.CurrentUser)
+                            if (_contextMenu.MenuItems.Count > 0)
                             {
-                                if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) == null)
+                                _contextMenu.MenuItems[1].Enabled = false;
+                                using (RegistryKey registryKey = Registry.CurrentUser)
                                 {
-                                    registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).SetValue(Application.ProductName, Application.ExecutablePath);
-                                    _contextMenu.MenuItems[1].Checked = true;
+                                    if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) == null)
+                                    {
+                                        registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).SetValue(Application.ProductName, Application.ExecutablePath);
+                                        _contextMenu.MenuItems[1].Checked = true;
+                                    }
+                                    else
+                                    {
+                                        registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).DeleteValue(Application.ProductName);
+                                        _contextMenu.MenuItems[1].Checked = false;
+                                    }
+                                    registryKey.Flush();
                                 }
-                                else
-                                {
-                                    registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).DeleteValue(Application.ProductName);
-                                    _contextMenu.MenuItems[1].Checked = false;
-                                }
-                                registryKey.Flush();
+                            }
+                            if (_contextMenu.MenuItems.Count > 0)
+                            {
+                                _contextMenu.MenuItems[1].Enabled = true;
                             }
                         }
-                        if (_contextMenu.MenuItems.Count > 0)
+                        catch (Exception ex)
                         {
-                            _contextMenu.MenuItems[1].Enabled = true;
+                            MessageBox.Show("Could not Update registry. Please report to feedback@voltura.se!\r\r" +
+                                ex.ToString(), Application.ProductName + " " + Application.ProductVersion,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     })
                     {
