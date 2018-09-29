@@ -1,181 +1,184 @@
-﻿using Microsoft.Win32;
+﻿#region Using statements
+
+using Microsoft.Win32;
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-using System.Globalization;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-internal class Program : IDisposable
+#endregion
+
+namespace WeekNumber
 {
-    internal static class NativeMethods
+    internal class Program : IDisposable
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool DestroyIcon(IntPtr handle);
-    }
+        #region Private variables
 
-    private NotifyIcon _notifyIcon;
-    private ContextMenu _contextMenu;
-    private Timer _timer;
-    private int _week;
-    private int _oldWeek;
-    private static readonly string _about = Application.ProductName + " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
-    private static readonly string _aboutTitle = Application.ProductName + " version " + Application.ProductVersion;
-    private readonly Font _font = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
-    private int ThisWeek => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        private NotifyIcon _notifyIcon;
+        private ContextMenu _contextMenu;
+        private readonly Timer _timer;
+        private int _week, _oldWeek;
+        private static readonly string _about = Application.ProductName + " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
+        private static readonly string _aboutTitle = Application.ProductName + " version " + Application.ProductVersion;
 
-    [STAThread]
-    [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults")]
-    private static void Main()
-    {
-        new Program();
-        Application.Run();
-    }
+        #endregion
 
-    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "voltura")]
-    [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
-    public Program()
-    {
-        try
+        #region Application starting point
+
+        [STAThread]
+        private static void Main()
         {
-            _contextMenu = new ContextMenu(new MenuItem[4]
+            new Program(); Application.Run();
+        }
+
+        #endregion
+
+        #region Constructor
+
+        public Program()
+        {
+            try
             {
-                new MenuItem("&About " + Application.ProductName + "\tshift+A", delegate
-                {
-                    if (_contextMenu.MenuItems.Count > 0)
-                    {
-                        _contextMenu.MenuItems[0].Enabled = false;
-                        MessageBox.Show(_about, _aboutTitle, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    if (_contextMenu.MenuItems.Count > 0)
-                    {
-                        _contextMenu.MenuItems[0].Enabled = true;
-                    }
-                })
-                {
-                    DefaultItem = true
-                },
-                new MenuItem("&Start with Windows\tshift+S", delegate
-                {
-                    if (_contextMenu.MenuItems.Count > 0)
-                    {
-                        _contextMenu.MenuItems[1].Enabled = false;
-                        using (RegistryKey registryKey = Registry.CurrentUser)
-                        {
-                            if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) == null)
-                            {
-                                registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).SetValue(Application.ProductName, Application.ExecutablePath);
-                                _contextMenu.MenuItems[1].Checked = true;
-                            }
-                            else
-                            {
-                                registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).DeleteValue(Application.ProductName);
-                                _contextMenu.MenuItems[1].Checked = false;
-                            }
-                            registryKey.Flush();
-                        }
-                    }
-                    if (_contextMenu.MenuItems.Count > 0)
-                    {
-                        _contextMenu.MenuItems[1].Enabled = true;
-                    }
-                })
-                {
-                    Index = 1
-                },
-                new MenuItem("-"),
-                new MenuItem("E&xit " + Application.ProductName + "\tshift+X", delegate
-                {
-                    Dispose();
-                    Application.Exit();
-                })
-            });
-            _contextMenu.MenuItems[1].Checked = (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) != null);
-            _oldWeek = (_week = ThisWeek);
-            _notifyIcon = new NotifyIcon
+                CreateContextMenu();
+                Week.InitiateWeek(ref _oldWeek, ref _week);
+                CreateNotifyIcon(ref _notifyIcon, ref _contextMenu);
+                Week.SetWeekIcon(ref _week, ref _notifyIcon);
+                InitiateTimer(ref _timer);
+            }
+            catch (Exception ex)
             {
-                Visible = true
-            };
-            _notifyIcon.ContextMenu = _contextMenu;
-            SetWeekIcon(ref _week);
-            _timer = new Timer
+                MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), 
+                    Application.ProductName + " " + Application.ProductVersion, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                Application.Exit();
+            }
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private void InitiateTimer(ref Timer timer)
+        {
+            timer = new Timer
             {
                 Interval = 60000,
                 Enabled = true
             };
-            _timer.Tick += delegate
+            timer.Tick += delegate
             {
                 Application.DoEvents();
                 lock (this)
                 {
-                    _week = ThisWeek;
+                    _week = Week.ThisWeek;
                     if (_oldWeek != _week)
                     {
                         _oldWeek = _week;
-                        SetWeekIcon(ref _week);
+                        try
+                        {
+                            Week.SetWeekIcon(ref _week, ref _notifyIcon);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                            Dispose();
+                            Application.Exit();
+                        }
+
                     }
                 }
             };
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            Application.Exit();
-        }
-    }
 
-    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "voltura")]
-    [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
-    private void SetWeekIcon(ref int t)
-    {
-        try
+        private void CreateContextMenu()
         {
-            _notifyIcon.Text = "Week " + _week;
-            using (Bitmap bitmap = new Bitmap(48, 48))
+            _contextMenu = new ContextMenu(new MenuItem[4]
             {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
-                {
-                    graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-                    graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 6f);
-                    graphics.DrawRectangle(new Pen(Color.White, 3f), 1, 1, 45, 45);
-                    IntPtr hicon = bitmap.GetHicon();
-                    Icon prevIcon = _notifyIcon.Icon;
-                    _notifyIcon.Icon = Icon.FromHandle(hicon);
-                    if (prevIcon != null)
+                    new MenuItem("&About " + Application.ProductName + "\tshift+A", delegate
                     {
-                        NativeMethods.DestroyIcon(prevIcon.Handle);
-                    }
-                    prevIcon?.Dispose();
-                }
+                        if (_contextMenu.MenuItems.Count > 0)
+                        {
+                            _contextMenu.MenuItems[0].Enabled = false;
+                            MessageBox.Show(_about, _aboutTitle, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        if (_contextMenu.MenuItems.Count > 0)
+                        {
+                            _contextMenu.MenuItems[0].Enabled = true;
+                        }
+                    })
+                    {
+                        DefaultItem = true
+                    },
+                    new MenuItem("&Start with Windows\tshift+S", delegate
+                    {
+                        if (_contextMenu.MenuItems.Count > 0)
+                        {
+                            _contextMenu.MenuItems[1].Enabled = false;
+                            using (RegistryKey registryKey = Registry.CurrentUser)
+                            {
+                                if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) == null)
+                                {
+                                    registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).SetValue(Application.ProductName, Application.ExecutablePath);
+                                    _contextMenu.MenuItems[1].Checked = true;
+                                }
+                                else
+                                {
+                                    registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).DeleteValue(Application.ProductName);
+                                    _contextMenu.MenuItems[1].Checked = false;
+                                }
+                                registryKey.Flush();
+                            }
+                        }
+                        if (_contextMenu.MenuItems.Count > 0)
+                        {
+                            _contextMenu.MenuItems[1].Enabled = true;
+                        }
+                    })
+                    {
+                        Index = 1
+                    },
+                    new MenuItem("-"),
+                    new MenuItem("E&xit " + Application.ProductName + "\tshift+X", delegate
+                    {
+                        Dispose();
+                        Application.Exit();
+                    })
+            });
+            _contextMenu.MenuItems[1].Checked = (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) != null);
+        }
+
+        private void CreateNotifyIcon(ref NotifyIcon notifyIcon, ref ContextMenu contextMenu)
+        {
+            notifyIcon = new NotifyIcon
+            {
+                Visible = true
+            };
+            notifyIcon.ContextMenu = contextMenu;
+        }
+
+        #endregion
+
+        #region IDisposable methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _notifyIcon.Visible = false;
+                _timer?.Stop();
+                _timer?.Dispose();
+                NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                _notifyIcon?.ContextMenu?.Dispose();
+                _notifyIcon?.Icon?.Dispose();
+                _notifyIcon?.Dispose();
+                _contextMenu.Dispose();
             }
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            Application.Exit();
-        }
-    }
 
-    public void Dispose()
-    {
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _notifyIcon.Visible = false;
-            _timer?.Stop();
-            _timer?.Dispose();
-            _font.Dispose();
-            NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-            _notifyIcon?.ContextMenu?.Dispose();
-            _notifyIcon?.Icon?.Dispose();
-            _notifyIcon?.Dispose();
-            _contextMenu.Dispose();
-        }
+        #endregion
     }
 }
