@@ -80,7 +80,7 @@ internal class Program : IDisposable
         Bitmap bitmap = new Bitmap(48, 48);
         Graphics graphics = Graphics.FromImage(bitmap);
         graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 4f);
+        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 5f);
         graphics.DrawRectangle(Pens.White, 0, 0, 47, 47);
         IntPtr hicon = bitmap.GetHicon();
         Icon icon = Icon.FromHandle(hicon);
