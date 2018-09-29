@@ -80,8 +80,8 @@ internal class Program : IDisposable
         Bitmap bitmap = new Bitmap(48, 48);
         Graphics graphics = Graphics.FromImage(bitmap);
         graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 5f);
-        graphics.DrawRectangle(Pens.White, 0, 0, 47, 47);
+        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 6f);
+        graphics.DrawRectangle(new Pen(Color.White, 3f), 1, 1, 45, 45);
         IntPtr hicon = bitmap.GetHicon();
         Icon icon = Icon.FromHandle(hicon);
         if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
