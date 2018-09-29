@@ -58,6 +58,9 @@
     <PreBuildEvent>CMD /C TASKKILL /IM $(TargetFileName) /FI "STATUS eq RUNNING" /T /F</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release powershell start-process "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+    copy /y "$(TargetPath)" "$(ProjectDir)\"
+    powershell start-process "$(TargetPath)"
+)</PostBuildEvent>
   </PropertyGroup>
 </Project>

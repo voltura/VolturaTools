@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Win32;
 
 internal class Program : IDisposable
@@ -25,14 +26,15 @@ internal class Program : IDisposable
     }    
 
     [STAThread]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults")]
+    [SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults")]
     static void Main()
     {
         new Program();
         Application.Run();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "voltura")]
+    [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
     public Program()
     {
         try
@@ -110,11 +112,10 @@ internal class Program : IDisposable
     }
 
     int ThisWeek => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
-                DateTime.Now, CalendarWeekRule.FirstFourDayWeek,
-                DayOfWeek.Monday);
+                DateTime.Now, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2204:LiteralsShouldBeSpelledCorrectly")]
+    [SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "voltura")]
+    [SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
     void SetWeekIcon(ref int t)
     {
         try
