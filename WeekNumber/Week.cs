@@ -30,7 +30,10 @@ namespace WeekNumber
                     {
                         graphics.DrawString(weekNumber.ToString(), font, Brushes.White, -6f, 6f);
                     }
-                    graphics.DrawRectangle(new Pen(Color.White, 4f), 2, 2, 60, 60);
+                    using (Pen whitePen = new Pen(Color.White, 4f))
+                    {
+                        graphics.DrawRectangle(whitePen, 2, 2, 60, 60);
+                    }
                     IntPtr hicon = bitmap.GetHicon();
                     Icon prevIcon = notifyIcon.Icon;
                     notifyIcon.Icon = Icon.FromHandle(hicon);
