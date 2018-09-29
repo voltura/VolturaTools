@@ -5,14 +5,22 @@ using System;
 
 internal class Program : IDisposable
 {
-    NotifyIcon ni = null;
-    Timer t = null;
-    Bitmap b = null;
-    Icon i = null;
-    Graphics g = null;
-    string w = null;
-    readonly Font f = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
-    readonly ContextMenu cm = new ContextMenu(new MenuItem[1] { new MenuItem("E&xit WeekNumber", delegate { Application.Exit(); }) { DefaultItem = true } });
+    NotifyIcon _notifyIcon = null;
+    ContextMenu _contextMenu = null;
+    Timer _timer = null;
+    Icon _icon = null;
+    Bitmap _bitmap = null;
+    Graphics _graphics = null;
+    int _week, _oldWeek;
+    static readonly string _about = Application.ProductName + " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
+    static readonly string _aboutTitle = Application.ProductName + " version " + Application.ProductVersion;
+    readonly Font _font = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
+
+    static internal class NativeMethods
+    {
+        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        public static extern bool DestroyIcon(IntPtr handle);
+    }    
 
     [STAThread]
     static void Main()
@@ -23,62 +31,88 @@ internal class Program : IDisposable
 
     public Program()
     {
-        ThisWeek(ref w);
-        ni = new NotifyIcon() { Visible = true };
-        ni.ContextMenu = cm;
-        ni.Icon = GetTextIcon(ref w);
-        ni.Text = w;
-        t = new Timer() { Interval = 60000, Enabled = true };
-        t.Tick += delegate
+        _contextMenu = new ContextMenu(new MenuItem[3]
         {
+            new MenuItem("&About " + Application.ProductName + "\tshift+A", 
+                delegate 
+                {
+                    if (_contextMenu.MenuItems.Count > 0)
+                    {
+                        _contextMenu.MenuItems[0].Enabled = false;
+                        MessageBox.Show(_about, _aboutTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    if (_contextMenu.MenuItems.Count > 0) _contextMenu.MenuItems[0].Enabled = true;
+                }
+            ) { DefaultItem = true },
+            new MenuItem("-"),
+            new MenuItem("E&xit " + Application.ProductName + "\tshift+X", delegate { Dispose(); Application.Exit(); }) { }
+        });
+        _oldWeek = _week = ThisWeek;
+        _notifyIcon = new NotifyIcon() { Visible = true };
+        _notifyIcon.ContextMenu = _contextMenu;
+        SetWeekIcon(ref _week);
+        _timer = new Timer() { Interval = 60000, Enabled = true };
+        _timer.Tick += delegate
+        {
+            Application.DoEvents();
             lock (this)
             {
-                if (ni.Text != w)
+                _week = ThisWeek;
+                if (_oldWeek != _week)
                 {
-                    ThisWeek(ref w);
-                    ni.Icon?.Dispose();
-                    ni.Icon = GetTextIcon(ref w);
+                    _oldWeek = _week;
+                    SetWeekIcon(ref _week);
                 }
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                Application.DoEvents();
             }
         };
     }
 
-    void ThisWeek(ref string w)
-    {
-        int iw = CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
-            DateTime.Now, CalendarWeekRule.FirstFourDayWeek,
-            DayOfWeek.Monday);
-        w = iw.ToString();
-    }
+    int ThisWeek => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
+                DateTime.Now, CalendarWeekRule.FirstFourDayWeek,
+                DayOfWeek.Monday);
 
-    Icon GetTextIcon(ref string t)
+    Icon SetWeekIcon(ref int t)
     {
-        i?.Dispose();
-        b?.Dispose();
-        g?.Dispose();
-        b = new Bitmap(48, 48);
-        g = Graphics.FromImage(b);
-        g.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-        g.DrawString(t, f, Brushes.White, -4f, 4f);
-        g.DrawRectangle(Pens.White, 0, 0, 47, 47);
-        i = Icon.FromHandle(b.GetHicon());
-        b?.Dispose();
-        g?.Dispose();
-        return i;
+        _notifyIcon.Text = "Week " + _week;
+        _bitmap = new Bitmap(48, 48);
+        _graphics = Graphics.FromImage(_bitmap);
+        _graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
+        _graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 4f);
+        _graphics.DrawRectangle(Pens.White, 0, 0, 47, 47);
+        IntPtr hicon = _bitmap.GetHicon();
+        if (_icon is null == false) NativeMethods.DestroyIcon(_icon.Handle);
+        _icon = Icon.FromHandle(hicon);
+        if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+        _notifyIcon.Icon = _icon;
+        _bitmap.Dispose();
+        _graphics.Dispose();
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        return _icon;
     }
 
     public void Dispose()
     {
-        t?.Stop();
-        t?.Dispose();
-        b?.Dispose();
-        f?.Dispose();
-        ni?.ContextMenu?.Dispose();
-        ni?.Icon?.Dispose();
-        ni?.Dispose();
-        cm?.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _notifyIcon.Visible = false;
+            _timer?.Stop();
+            _timer?.Dispose();
+            _bitmap.Dispose();
+            _font.Dispose();
+            NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+            NativeMethods.DestroyIcon(_icon.Handle);
+            _notifyIcon?.ContextMenu?.Dispose();
+            _notifyIcon?.Icon?.Dispose();
+            _notifyIcon?.Dispose();
+            _icon?.Dispose();
+            _contextMenu.Dispose();
+        }
     }
 }
