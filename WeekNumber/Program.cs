@@ -15,7 +15,6 @@ internal class Program : IDisposable
         public static extern bool DestroyIcon(IntPtr handle);
     }
 
-    private const string REGRUN = "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\";
     private NotifyIcon _notifyIcon;
     private ContextMenu _contextMenu;
     private Timer _timer;
