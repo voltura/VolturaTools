@@ -50,17 +50,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <None Include="WeekNumber.exe" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>CMD /C TASKKILL /IM $(TargetFileName) /FI "STATUS eq RUNNING" /T /F</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Release (
-    copy /y "$(TargetPath)" "$(ProjectDir)\"
-    powershell start-process "$(TargetPath)"
+     powershell start-process "$(TargetPath)"
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
