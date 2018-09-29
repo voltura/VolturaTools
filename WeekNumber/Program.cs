@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 using System;
+using System.Runtime.InteropServices;
 
 internal class Program : IDisposable
 {
@@ -18,17 +19,20 @@ internal class Program : IDisposable
 
     static internal class NativeMethods
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DestroyIcon(IntPtr handle);
     }    
 
     [STAThread]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1806:DoNotIgnoreMethodResults")]
     static void Main()
     {
         new Program();
         Application.Run();
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
     public Program()
     {
         _contextMenu = new ContextMenu(new MenuItem[3]
@@ -71,6 +75,7 @@ internal class Program : IDisposable
                 DateTime.Now, CalendarWeekRule.FirstFourDayWeek,
                 DayOfWeek.Monday);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
     Icon SetWeekIcon(ref int t)
     {
         _notifyIcon.Text = "Week " + _week;
@@ -86,8 +91,8 @@ internal class Program : IDisposable
         _notifyIcon.Icon = _icon;
         _bitmap.Dispose();
         _graphics.Dispose();
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
+//        GC.Collect();
+  //      GC.WaitForPendingFinalizers();
         return _icon;
     }
 
