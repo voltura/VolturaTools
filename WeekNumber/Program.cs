@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
 using System.Drawing;
 using System.Globalization;
-using System;
+using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 internal class Program : IDisposable
