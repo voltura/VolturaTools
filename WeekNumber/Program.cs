@@ -9,11 +9,9 @@ internal class Program : IDisposable
     NotifyIcon _notifyIcon = null;
     ContextMenu _contextMenu = null;
     Timer _timer = null;
-    Icon _icon = null;
-    Bitmap _bitmap = null;
-    Graphics _graphics = null;
     int _week, _oldWeek;
-    static readonly string _about = Application.ProductName + " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
+    static readonly string _about = Application.ProductName + 
+        " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
     static readonly string _aboutTitle = Application.ProductName + " version " + Application.ProductVersion;
     readonly Font _font = new Font(FontFamily.GenericMonospace, 26f, FontStyle.Bold);
 
@@ -76,24 +74,20 @@ internal class Program : IDisposable
                 DayOfWeek.Monday);
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters")]
-    Icon SetWeekIcon(ref int t)
+    void SetWeekIcon(ref int t)
     {
         _notifyIcon.Text = "Week " + _week;
-        _bitmap = new Bitmap(48, 48);
-        _graphics = Graphics.FromImage(_bitmap);
-        _graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
-        _graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 4f);
-        _graphics.DrawRectangle(Pens.White, 0, 0, 47, 47);
-        IntPtr hicon = _bitmap.GetHicon();
-        if (_icon is null == false) NativeMethods.DestroyIcon(_icon.Handle);
-        _icon = Icon.FromHandle(hicon);
+        Bitmap bitmap = new Bitmap(48, 48);
+        Graphics graphics = Graphics.FromImage(bitmap);
+        graphics.FillRectangle(Brushes.Black, 1, 1, 46, 46);
+        graphics.DrawString(t.ToString(), _font, Brushes.White, -4f, 4f);
+        graphics.DrawRectangle(Pens.White, 0, 0, 47, 47);
+        IntPtr hicon = bitmap.GetHicon();
+        Icon icon = Icon.FromHandle(hicon);
         if (_notifyIcon.Icon is null == false) NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-        _notifyIcon.Icon = _icon;
-        _bitmap.Dispose();
-        _graphics.Dispose();
-//        GC.Collect();
-  //      GC.WaitForPendingFinalizers();
-        return _icon;
+        _notifyIcon.Icon = icon;
+        bitmap.Dispose();
+        graphics.Dispose();
     }
 
     public void Dispose()
@@ -109,14 +103,11 @@ internal class Program : IDisposable
             _notifyIcon.Visible = false;
             _timer?.Stop();
             _timer?.Dispose();
-            _bitmap.Dispose();
             _font.Dispose();
             NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-            NativeMethods.DestroyIcon(_icon.Handle);
             _notifyIcon?.ContextMenu?.Dispose();
             _notifyIcon?.Icon?.Dispose();
             _notifyIcon?.Dispose();
-            _icon?.Dispose();
             _contextMenu.Dispose();
         }
     }
