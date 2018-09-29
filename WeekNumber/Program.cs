@@ -106,7 +106,7 @@ internal class Program : IDisposable
             };
         } catch (Exception ex)
         {
-            MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + "\t" + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }
     }
@@ -136,7 +136,7 @@ internal class Program : IDisposable
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + "\t" + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Could not set Icon. Please report to feedback@voltura.se!\r\r" + ex.ToString(), Application.ProductName + " " + Application.ProductVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }
     }
