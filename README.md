@@ -2,7 +2,7 @@
 Small tools and utilities for Windows environment
 
 # WeekNumber
-<a href="https://github.com/voltura/VolturaTools/raw/master/WeekNumber/WeekNumber.exe">Download executable</a>
+<a href="https://github.com/voltura/VolturaTools/releases/download/v1.0.0.0/WeekNumber.exe">Download executable</a>
 
   Small Toolbar app that displays current week number.
   
