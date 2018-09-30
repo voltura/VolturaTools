@@ -26,13 +26,15 @@ namespace WeekNumber
                 using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
                     graphics.FillRectangle(Brushes.Black, 2, 2, 62, 62);
-                    using (Font font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold))
-                    {
-                        graphics.DrawString(weekNumber.ToString(), font, Brushes.White, -6f, 6f);
-                    }
                     using (Pen whitePen = new Pen(Color.White, 4f))
                     {
                         graphics.DrawRectangle(whitePen, 2, 2, 60, 60);
+                    }
+                    graphics.FillRectangle(Brushes.White, 10, 2, 6, 12);
+                    graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
+                    using (Font font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold))
+                    {
+                        graphics.DrawString(weekNumber.ToString(), font, Brushes.White, -6f, 10f);
                     }
                     IntPtr hicon = bitmap.GetHicon();
                     Icon prevIcon = notifyIcon.Icon;
