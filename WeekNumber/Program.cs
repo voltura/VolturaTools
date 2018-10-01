@@ -50,7 +50,7 @@ namespace WeekNumber
             {
                 MessageBox.Show(Text.UnhandledException + ex.ToString(), 
                     Text.ApplicationNameAndVersion, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
         }
