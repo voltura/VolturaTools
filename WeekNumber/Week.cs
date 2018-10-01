@@ -38,10 +38,15 @@ namespace WeekNumber
                     }
                     IntPtr hicon = bitmap.GetHicon();
                     Icon prevIcon = notifyIcon.Icon;
-                    notifyIcon.Icon = Icon.FromHandle(hicon);
+                    Icon newIcon = Icon.FromHandle(hicon);
+                    notifyIcon.Icon = new Icon(newIcon, SystemInformation.SmallIconSize);
                     if (prevIcon != null)
                     {
                         NativeMethods.DestroyIcon(prevIcon.Handle);
+                    }
+                    if (newIcon != null)
+                    {
+                        NativeMethods.DestroyIcon(newIcon.Handle);
                     }
                     prevIcon?.Dispose();
                 }
