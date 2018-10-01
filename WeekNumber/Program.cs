@@ -48,8 +48,8 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong. Please report to feedback@voltura.se!\r\r" + ex.ToString(), 
-                    Application.ProductName + " " + Application.ProductVersion, 
+                MessageBox.Show(Text.UnhandledException + ex.ToString(), 
+                    Text.ApplicationNameAndVersion, 
                     MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 Application.Exit();
             }
