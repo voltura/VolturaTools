@@ -1,5 +1,11 @@
-﻿using System.Reflection;
+﻿#region Using statements
+
+using System.Reflection;
 using System.Runtime.InteropServices;
+
+#endregion
+
+#region Assembly information
 
 [assembly: AssemblyTitle("WeekNumber by Voltura AB")]
 [assembly: AssemblyDescription("WeekNumber by Voltura AB")]
@@ -13,3 +19,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("550adc75-8afb-4813-ac91-8c8c6cb681ae")]
 [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+#endregion
