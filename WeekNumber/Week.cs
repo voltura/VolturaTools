@@ -49,6 +49,7 @@ namespace WeekNumber
                         NativeMethods.DestroyIcon(newIcon.Handle);
                     }
                     prevIcon?.Dispose();
+                    newIcon?.Dispose();
                 }
             }
         }
