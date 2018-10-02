@@ -27,8 +27,8 @@ namespace WeekNumber
         {
             if (!_mutex.WaitOne(TimeSpan.Zero, true)) return;
             Application.EnableVisualStyles();
-            new Program();
             Application.Run();
+            new Program();
             _mutex.ReleaseMutex();
         }
 
@@ -47,7 +47,7 @@ namespace WeekNumber
             catch (Exception ex)
             {
                 Message.ShowError(Text.UnhandledException, ex);
-                Application.Exit();
+                Dispose();
             }
         }
 
@@ -76,7 +76,6 @@ namespace WeekNumber
                     {
                         Message.ShowError(Text.FailedToSetIcon, ex); 
                         Dispose();
-                        Application.Exit();
                     }
                 }
             };
@@ -90,6 +89,7 @@ namespace WeekNumber
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+            Application.Exit();
         }
 
         protected virtual void Dispose(bool disposing)
