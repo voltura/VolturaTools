@@ -83,12 +83,8 @@ namespace WeekNumber
             {
                     new MenuItem("&About " + Application.ProductName + "\tshift+A", delegate
                     {
-                        if (_contextMenu.MenuItems.Count > 0)
-                        {
                             _contextMenu.MenuItems[0].Enabled = false;
-                            MessageBox.Show(Text.About, Text.ApplicationNameAndVersion, 
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                            Message.ShowMessage(Text.About);
                         if (_contextMenu.MenuItems.Count > 0)
                         {
                             _contextMenu.MenuItems[0].Enabled = true;
@@ -103,20 +99,15 @@ namespace WeekNumber
                         {
                             lock (_lockObject)
                             {
-                                if (_contextMenu.MenuItems.Count > 0)
-                                {
-                                    _contextMenu.MenuItems[1].Enabled = false;
-                                    Settings.StartWithWindows = !Settings.StartWithWindows;
-                                    _contextMenu.MenuItems[1].Checked = Settings.StartWithWindows;
-                                    _contextMenu.MenuItems[1].Enabled = true;
-                                }
+                                _contextMenu.MenuItems[1].Enabled = false;
+                                _contextMenu.MenuItems[1].Checked = !_contextMenu.MenuItems[1].Checked;
+                                Settings.StartWithWindows = _contextMenu.MenuItems[1].Checked;
+                                _contextMenu.MenuItems[1].Enabled = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(Text.FailedToUpdateRegistry +
-                                ex.ToString(), Text.ApplicationNameAndVersion,
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Message.ShowError(Text.FailedToUpdateRegistry, ex);
                         }
                     })
                     {

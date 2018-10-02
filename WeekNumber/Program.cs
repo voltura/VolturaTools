@@ -25,13 +25,11 @@ namespace WeekNumber
         [STAThread]
         private static void Main()
         {
-            if (_mutex.WaitOne(TimeSpan.Zero, true))
-            {
-                Application.EnableVisualStyles();
-                new Program();
-                Application.Run();
-                _mutex.ReleaseMutex();
-            }
+            if (!_mutex.WaitOne(TimeSpan.Zero, true)) return;
+            Application.EnableVisualStyles();
+            new Program();
+            Application.Run();
+            _mutex.ReleaseMutex();
         }
 
         #endregion
@@ -48,9 +46,7 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                MessageBox.Show(Text.UnhandledException + ex.ToString(), 
-                    Text.ApplicationNameAndVersion, 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Message.ShowError(Text.UnhandledException, ex);
                 Application.Exit();
             }
         }
@@ -78,9 +74,7 @@ namespace WeekNumber
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(Text.FailedToSetIcon + 
-                            ex.ToString(), Text.ApplicationNameAndVersion, 
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Message.ShowError(Text.FailedToSetIcon, ex); 
                         Dispose();
                         Application.Exit();
                     }
