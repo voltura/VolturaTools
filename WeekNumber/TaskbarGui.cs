@@ -1,6 +1,5 @@
 ﻿#region Using statements
 
-using Microsoft.Win32;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -107,23 +106,8 @@ namespace WeekNumber
                                 if (_contextMenu.MenuItems.Count > 0)
                                 {
                                     _contextMenu.MenuItems[1].Enabled = false;
-                                    using (RegistryKey registryKey = Registry.CurrentUser)
-                                    {
-                                        if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) == null)
-                                        {
-                                            registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).SetValue(Application.ProductName, Application.ExecutablePath);
-                                            _contextMenu.MenuItems[1].Checked = true;
-                                        }
-                                        else
-                                        {
-                                            registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", writable: true).DeleteValue(Application.ProductName);
-                                            _contextMenu.MenuItems[1].Checked = false;
-                                        }
-                                        registryKey.Flush();
-                                    }
-                                }
-                                if (_contextMenu.MenuItems.Count > 0)
-                                {
+                                    Settings.StartWithWindows = !Settings.StartWithWindows;
+                                    _contextMenu.MenuItems[1].Checked = Settings.StartWithWindows;
                                     _contextMenu.MenuItems[1].Enabled = true;
                                 }
                             }
@@ -145,7 +129,7 @@ namespace WeekNumber
                         Application.Exit();
                     })
             });
-            _contextMenu.MenuItems[1].Checked = (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) != null);
+            _contextMenu.MenuItems[1].Checked = Settings.StartWithWindows;
         }
 
         private void CreateNotifyIcon(ref NotifyIcon notifyIcon, ref ContextMenu contextMenu)
