@@ -83,8 +83,8 @@ namespace WeekNumber
             {
                     new MenuItem("&About " + Application.ProductName + "\tshift+A", delegate
                     {
-                            _contextMenu.MenuItems[0].Enabled = false;
-                            Message.ShowMessage(Text.About);
+                        _contextMenu.MenuItems[0].Enabled = false;
+                        Message.ShowMessage(Text.About);
                         if (_contextMenu.MenuItems.Count > 0)
                         {
                             _contextMenu.MenuItems[0].Enabled = true;
