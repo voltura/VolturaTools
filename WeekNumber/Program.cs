@@ -98,7 +98,7 @@ namespace WeekNumber
             {
                 _timer?.Stop();
                 _timer?.Dispose();
-                _gui.Dispose();
+                _gui?.Dispose();
             }
         }
 
