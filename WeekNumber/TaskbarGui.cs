@@ -14,7 +14,6 @@ namespace WeekNumber
 
         private NotifyIcon _notifyIcon;
         private ContextMenu _contextMenu;
-        private static readonly object _lockObject = new object();
 
         #endregion
 
@@ -22,22 +21,60 @@ namespace WeekNumber
 
         public TaskbarGui(int week)
         {
-            CreateContextMenu();
-            CreateNotifyIcon(ref _notifyIcon, ref _contextMenu);
-            SetWeekIcon(week, ref _notifyIcon);
+            _contextMenu = GetContextMenu;
+            _notifyIcon = GetNotifyIcon(ref _contextMenu);
+            UpdateIcon(week, ref _notifyIcon);
+        }
+
+        #endregion
+
+        #region Event handling
+
+        public event EventHandler UserClose;
+
+        protected virtual void OnUserClose() => UserClose?.Invoke(this, new EventArgs());
+
+        private void StartWithWindowsClick(object o, EventArgs e)
+        {
+            try
+            {
+                MenuItem mi = (MenuItem)o;
+                mi.Enabled = false;
+                mi.Checked = !mi.Checked;
+                Settings.StartWithWindows = mi.Checked;
+                if (mi != null)
+                {
+                    mi.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Show(Text.FailedToUpdateRegistry, ex);
+            }
+        }
+
+        private void AboutClick(object o, EventArgs e)
+        {
+            MenuItem mi = (MenuItem)o;
+            mi.Enabled = false;
+            Message.Show(Text.About);
+            if (mi != null)
+            {
+                mi.Enabled = true;
+            }
         }
 
         #endregion
 
         #region Internal method
 
-        internal void UpdateWeek(int week) => SetWeekIcon(week, ref _notifyIcon);
+        internal void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
 
         #endregion
 
         #region Private static methods
 
-        private static void SetWeekIcon(int weekNumber, ref NotifyIcon notifyIcon)
+        private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
             notifyIcon.Text = Text.Week + weekNumber;
             using (Bitmap bitmap = new Bitmap(64, 64))
@@ -75,62 +112,31 @@ namespace WeekNumber
 
         #endregion
 
-        #region Private methods
+        #region Private properties
 
-        private void CreateContextMenu()
+        private ContextMenu GetContextMenu => new ContextMenu(new MenuItem[4]
         {
-            _contextMenu = new ContextMenu(new MenuItem[4]
-            {
-                    new MenuItem("&About " + Application.ProductName + "\tshift+A", delegate
-                    {
-                        _contextMenu.MenuItems[0].Enabled = false;
-                        Message.ShowMessage(Text.About);
-                        if (_contextMenu.MenuItems.Count > 0)
-                        {
-                            _contextMenu.MenuItems[0].Enabled = true;
-                        }
-                    })
-                    {
-                        DefaultItem = true
-                    },
-                    new MenuItem("&Start with Windows\tshift+S", delegate
-                    {
-                        try
-                        {
-                            lock (_lockObject)
-                            {
-                                _contextMenu.MenuItems[1].Enabled = false;
-                                _contextMenu.MenuItems[1].Checked = !_contextMenu.MenuItems[1].Checked;
-                                Settings.StartWithWindows = _contextMenu.MenuItems[1].Checked;
-                                _contextMenu.MenuItems[1].Enabled = true;
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Message.ShowError(Text.FailedToUpdateRegistry, ex);
-                        }
-                    })
-                    {
-                        Index = 1
-                    },
-                    new MenuItem("-"),
-                    new MenuItem("E&xit " + Application.ProductName + "\tshift+X", delegate
-                    {
-                        Dispose();
-                        Application.Exit();
-                    })
-            });
-            _contextMenu.MenuItems[1].Checked = Settings.StartWithWindows;
-        }
+            AboutMenuItem,
+            StartWithWindowsMenuItem,
+            new MenuItem(Text.SeparatorMenu),
+            new MenuItem(Text.ExitMenu, delegate { OnUserClose(); })
+        });
 
-        private void CreateNotifyIcon(ref NotifyIcon notifyIcon, ref ContextMenu contextMenu)
+        private MenuItem AboutMenuItem => new MenuItem(Text.AboutMenu, new EventHandler(AboutClick))
         {
-            notifyIcon = new NotifyIcon
-            {
-                Visible = true
-            };
-            notifyIcon.ContextMenu = contextMenu;
-        }
+            DefaultItem = true
+        };
+
+        private MenuItem StartWithWindowsMenuItem => new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick))
+        {
+            Checked = Settings.StartWithWindows
+        };
+
+        #endregion
+
+        #region Private function
+
+        private NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
         #endregion
 
@@ -148,10 +154,14 @@ namespace WeekNumber
             {
                 _notifyIcon.Visible = false;
                 NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                _notifyIcon?.ContextMenu?.MenuItems?.Clear();
                 _notifyIcon?.ContextMenu?.Dispose();
                 _notifyIcon?.Icon?.Dispose();
                 _notifyIcon?.Dispose();
-                _contextMenu.Dispose();
+                if (_contextMenu != null)
+                {
+                    _contextMenu.Dispose();
+                }
             }
         }
 

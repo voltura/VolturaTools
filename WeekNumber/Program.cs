@@ -12,11 +12,11 @@ namespace WeekNumber
     {
         #region Private variables
 
-        private readonly System.Windows.Forms.Timer _timer;
+        private Week _week;
+        private TaskbarGui _gui;
+        private System.Windows.Forms.Timer _timer;
         private static readonly object _lockObject = new object();
         private static readonly Mutex _mutex = new Mutex(true, "550adc75-8afb-4813-ac91-8c8c6cb681ae");
-        private readonly TaskbarGui _gui;
-        private readonly Week _week;
 
         #endregion
 
@@ -25,60 +25,77 @@ namespace WeekNumber
         [STAThread]
         private static void Main()
         {
-            if (!_mutex.WaitOne(TimeSpan.Zero, true)) return;
-            Application.EnableVisualStyles();
-            Application.Run();
-            new Program();
-            _mutex.ReleaseMutex();
+            if (_mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                Application.EnableVisualStyles();
+                Program program = new Program();
+                program.Run();
+                Application.Run();
+                _mutex.ReleaseMutex();
+            }
         }
 
         #endregion
 
-        #region Constructor
+        #region Private properties
 
-        public Program()
+        private System.Windows.Forms.Timer GetTimer
+        {
+            get
+            {
+                var timer = new System.Windows.Forms.Timer
+                {
+                    Interval = 60000,
+                    Enabled = true
+                };
+                timer.Tick += new EventHandler(OnTimerTick);
+                return timer;
+            }
+        }
+
+        #endregion
+
+        #region Event handler
+
+        private void OnTimerTick(object sender, EventArgs e)
+        {
+            if (!_week.WasChanged())
+            {
+                return;
+            }
+            Application.DoEvents();
+            lock (_lockObject)
+            {
+                try
+                {
+                    _gui.UpdateIcon(Week.Current);
+                }
+                catch (Exception ex)
+                {
+                    Message.Show(Text.FailedToSetIcon, ex); 
+                    Dispose();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Private method
+
+        private void Run()
         {
             try
             {
                 _week = new Week();
                 _gui = new TaskbarGui(Week.Current);
-                InitiateTimer(ref _timer);
+                _gui.UserClose += new EventHandler(delegate { Dispose(); });
+                _timer = GetTimer;
             }
             catch (Exception ex)
             {
-                Message.ShowError(Text.UnhandledException, ex);
+                Message.Show(Text.UnhandledException, ex);
                 Dispose();
             }
-        }
-
-        #endregion
-
-        #region Private methods
-
-        private void InitiateTimer(ref System.Windows.Forms.Timer timer)
-        {
-            timer = new System.Windows.Forms.Timer
-            {
-                Interval = 60000,
-                Enabled = true
-            };
-            timer.Tick += delegate
-            {
-                Application.DoEvents();
-                if (!_week.WasChanged()) return;
-                lock (_lockObject)
-                {
-                    try
-                    {
-                        _gui.UpdateWeek(Week.Current);
-                    }
-                    catch (Exception ex)
-                    {
-                        Message.ShowError(Text.FailedToSetIcon, ex); 
-                        Dispose();
-                    }
-                }
-            };
         }
 
         #endregion
@@ -98,7 +115,10 @@ namespace WeekNumber
             {
                 _timer?.Stop();
                 _timer?.Dispose();
-                _gui?.Dispose();
+                if (_gui != null)
+                {
+                    _gui.Dispose();
+                }
             }
         }
 

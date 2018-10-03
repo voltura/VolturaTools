@@ -11,17 +11,10 @@ namespace WeekNumber
     {
         #region Internal static methods
 
-        internal static void ShowError(string text, Exception ex)
+        internal static void Show(string text, Exception ex = null)
         {
-            MessageBox.Show(text + ex.ToString(),
-                Text.ApplicationNameAndVersion,
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        internal static void ShowMessage(string text)
-        {
-            MessageBox.Show(text, Text.ApplicationNameAndVersion,
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(ex is null ? text : text + ex.ToString(), Text.ApplicationNameAndVersion,
+                MessageBoxButtons.OK, ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error);
         }
 
         #endregion
