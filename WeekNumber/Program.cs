@@ -27,9 +27,9 @@ namespace WeekNumber
         {
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
-                Application.EnableVisualStyles();
                 Program program = new Program();
                 program.Run();
+                Application.EnableVisualStyles();
                 Application.Run();
                 _mutex.ReleaseMutex();
             }

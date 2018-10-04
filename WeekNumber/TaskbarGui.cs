@@ -88,7 +88,7 @@ namespace WeekNumber
                     }
                     graphics.FillRectangle(Brushes.White, 10, 2, 6, 12);
                     graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
-                    using (Font font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold))
+                    using (Font font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold))
                     {
                         graphics.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
                     }
@@ -114,12 +114,12 @@ namespace WeekNumber
 
         #region Private properties
 
-        private ContextMenu GetContextMenu => new ContextMenu(new MenuItem[4]
+        private ContextMenu GetContextMenu => new ContextMenu(new[]
         {
             new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
             new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
             new MenuItem(Text.SeparatorMenu),
-            new MenuItem(Text.ExitMenu, delegate { OnUserClose(); })
+            new MenuItem(Text.ExitMenu, delegate { OnUserClose(); })// { OwnerDraw = }
         });
 
         #endregion
