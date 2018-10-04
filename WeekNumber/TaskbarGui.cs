@@ -19,7 +19,7 @@ namespace WeekNumber
 
         #region Constructor
 
-        public TaskbarGui(int week)
+        public TaskbarGui(int week = 1)
         {
             _contextMenu = GetContextMenu;
             _notifyIcon = GetNotifyIcon(ref _contextMenu);
@@ -90,7 +90,7 @@ namespace WeekNumber
                     graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
                     using (Font font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold))
                     {
-                        graphics.DrawString(weekNumber.ToString(), font, Brushes.White, -6f, 10f);
+                        graphics.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
                     }
                     IntPtr hicon = bitmap.GetHicon();
                     Icon prevIcon = notifyIcon.Icon;
@@ -116,21 +116,11 @@ namespace WeekNumber
 
         private ContextMenu GetContextMenu => new ContextMenu(new MenuItem[4]
         {
-            AboutMenuItem,
-            StartWithWindowsMenuItem,
+            new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
+            new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
             new MenuItem(Text.SeparatorMenu),
             new MenuItem(Text.ExitMenu, delegate { OnUserClose(); })
         });
-
-        private MenuItem AboutMenuItem => new MenuItem(Text.AboutMenu, new EventHandler(AboutClick))
-        {
-            DefaultItem = true
-        };
-
-        private MenuItem StartWithWindowsMenuItem => new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick))
-        {
-            Checked = Settings.StartWithWindows
-        };
 
         #endregion
 
