@@ -86,6 +86,7 @@
     <Compile Include="TaskbarGui.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="Week.cs" />
+    <Compile Include="WeekApplicationContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="settings.manifest">

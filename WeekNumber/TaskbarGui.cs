@@ -30,10 +30,6 @@ namespace WeekNumber
 
         #region Event handling
 
-        public event EventHandler UserClose;
-
-        protected virtual void OnUserClose() => UserClose?.Invoke(this, new EventArgs());
-
         private void StartWithWindowsClick(object o, EventArgs e)
         {
             try
@@ -119,7 +115,7 @@ namespace WeekNumber
             new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
             new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
             new MenuItem(Text.SeparatorMenu),
-            new MenuItem(Text.ExitMenu, delegate { OnUserClose(); })// { OwnerDraw = }
+            new MenuItem(Text.ExitMenu, delegate {  Application.Exit(); })
         });
 
         #endregion
@@ -142,8 +138,14 @@ namespace WeekNumber
         {
             if (disposing)
             {
-                _notifyIcon.Visible = false;
-                NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                if (_notifyIcon != null)
+                {
+                    _notifyIcon.Visible = false;
+                }
+                if (_notifyIcon.Icon != null)
+                {
+                    NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                }
                 _notifyIcon?.ContextMenu?.MenuItems?.Clear();
                 _notifyIcon?.ContextMenu?.Dispose();
                 _notifyIcon?.Icon?.Dispose();
