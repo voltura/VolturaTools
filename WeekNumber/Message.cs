@@ -9,7 +9,7 @@ namespace WeekNumber
 {
     internal static class Message
     {
-        #region Show Information or Error dialoge method
+        #region Show Information or Error dialog method
 
         internal static void Show(string text, Exception ex = null)
         {
