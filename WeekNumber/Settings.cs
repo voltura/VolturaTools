@@ -9,7 +9,7 @@ namespace WeekNumber
 {
     internal static class Settings
     {
-        #region Internal static property
+        #region Internal static property that updates registry for application to start when Windows start
 
         internal static bool StartWithWindows
         {

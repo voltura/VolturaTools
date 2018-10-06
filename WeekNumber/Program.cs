@@ -11,7 +11,7 @@ namespace WeekNumber
 {
     internal class Program
     {
-        #region Private variable
+        #region Private variable to allow only one instance of application
 
         private static readonly Mutex _mutex = new Mutex(true, "550adc75-8afb-4813-ac91-8c8c6cb681ae");
 
@@ -25,8 +25,7 @@ namespace WeekNumber
             if (_mutex.WaitOne(TimeSpan.Zero, true))
             {
                 Application.EnableVisualStyles();
-                Application.VisualStyleState =
-                                    VisualStyleState.ClientAndNonClientAreasEnabled;
+                Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 WeekApplicationContext context = new WeekApplicationContext();
                 if (context?._gui != null)
                 {

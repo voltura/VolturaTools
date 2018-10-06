@@ -8,7 +8,7 @@ namespace WeekNumber
 {
     internal static class Text
     {
-        #region Static texts variables
+        #region Static string variables
 
         internal static readonly string About = Application.ProductName + " by Voltura AB\r\rhttps://github.com/voltura/VolturaTools\r\rFree for all.";
         internal static readonly string AboutMenu = "About " + Application.ProductName;

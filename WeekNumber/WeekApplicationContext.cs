@@ -13,7 +13,7 @@ namespace WeekNumber
 
         private Week _week = null;
         public TaskbarGui _gui = null;
-        private readonly System.Windows.Forms.Timer _timer = null;
+        private readonly Timer _timer = null;
 
         #endregion
 
@@ -30,21 +30,23 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
+                _timer?.Stop();
                 Message.Show(Text.UnhandledException, ex);
+                Application.Exit();
             }
         }
 
         #endregion
 
-        #region Private properties
+        #region Private Timer property
 
-        private System.Windows.Forms.Timer GetTimer
+        private Timer GetTimer
         {
             get
             {
-                var timer = new System.Windows.Forms.Timer
+                var timer = new Timer
                 {
-                    Interval = 6000,
+                    Interval = 60000,
                     Enabled = true
                 };
                 timer.Tick += new EventHandler(OnTimerTick);
@@ -54,12 +56,9 @@ namespace WeekNumber
 
         #endregion
 
-        #region Event handlers
+        #region Private event handlers
 
-        private void OnApplicationExit(object sender, EventArgs e)
-        {
-            Cleanup(forceExit: false);
-        }
+        private void OnApplicationExit(object sender, EventArgs e) => Cleanup(forceExit: false);
 
         private void OnTimerTick(object sender, EventArgs e)
         {
@@ -67,39 +66,35 @@ namespace WeekNumber
             {
                 return;
             }
-            var timer = (System.Windows.Forms.Timer)sender;
-            timer.Enabled = false;
+            var timer = (Timer)sender;
+            timer?.Stop();
             Application.DoEvents();
             try
             {
-                _gui.UpdateIcon(Week.Current);
+                _gui?.UpdateIcon(Week.Current);
             }
             catch (Exception ex)
             {
                 Message.Show(Text.FailedToSetIcon, ex);
                 Cleanup();
+                return;
             }
-            finally
-            {
-                if (timer != null)
-                {
-                    timer.Enabled = true;
-                }
-            }
+            timer?.Start();
         }
 
         #endregion
 
-        #region Private method
+        #region Private Cleanup method
 
         private void Cleanup(bool forceExit = true)
         {
             _timer?.Stop();
             _timer?.Dispose();
             _gui?.Dispose();
+            _gui = null;
             if (forceExit)
             {
-                Application.ExitThread();
+                Application.Exit();
             }
         }
 

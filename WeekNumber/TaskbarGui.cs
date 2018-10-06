@@ -19,9 +19,9 @@ namespace WeekNumber
 
         #region Constructor
 
-        public TaskbarGui(int week = 1)
+        internal TaskbarGui(int week = 1)
         {
-            _contextMenu = GetContextMenu;
+            CreateContextMenu(ref _contextMenu);
             _notifyIcon = GetNotifyIcon(ref _contextMenu);
             UpdateIcon(week, ref _notifyIcon);
         }
@@ -62,13 +62,13 @@ namespace WeekNumber
 
         #endregion
 
-        #region Internal method
+        #region Internal UpdateIcon method
 
         internal void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
 
         #endregion
 
-        #region Private static methods
+        #region Private static UpdateIcon method
 
         private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
@@ -108,21 +108,24 @@ namespace WeekNumber
 
         #endregion
 
-        #region Private properties
+        #region Private helper property to create NotifyIcon
 
-        private ContextMenu GetContextMenu => new ContextMenu(new[]
-        {
-            new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
-            new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
-            new MenuItem(Text.SeparatorMenu),
-            new MenuItem(Text.ExitMenu, delegate {  Application.Exit(); })
-        });
+        private NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
         #endregion
 
-        #region Private function
+        #region Private method to create ContextMenu
 
-        private NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        private void CreateContextMenu(ref ContextMenu c)
+        {
+            c = new ContextMenu(new[]
+            {
+                new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
+                new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
+                new MenuItem(Text.SeparatorMenu),
+                new MenuItem(Text.ExitMenu, delegate { Application.Exit(); })
+            });
+        }
 
         #endregion
 
@@ -149,11 +152,10 @@ namespace WeekNumber
                 _notifyIcon?.ContextMenu?.MenuItems?.Clear();
                 _notifyIcon?.ContextMenu?.Dispose();
                 _notifyIcon?.Icon?.Dispose();
+                _contextMenu?.Dispose();
+                _contextMenu = null;
                 _notifyIcon?.Dispose();
-                if (_contextMenu != null)
-                {
-                    _contextMenu.Dispose();
-                }
+                _notifyIcon = null;
             }
         }
 
