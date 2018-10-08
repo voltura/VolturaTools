@@ -30,11 +30,11 @@ namespace WeekNumber
 
         #region Event handling
 
-        private void StartWithWindowsClick(object o, EventArgs e)
+        private static void StartWithWindowsClick(object o, EventArgs e)
         {
             try
             {
-                MenuItem mi = (MenuItem)o;
+                var mi = (MenuItem)o;
                 mi.Enabled = false;
                 mi.Checked = !mi.Checked;
                 Settings.StartWithWindows = mi.Checked;
@@ -49,9 +49,9 @@ namespace WeekNumber
             }
         }
 
-        private void AboutClick(object o, EventArgs e)
+        private static void AboutClick(object o, EventArgs e)
         {
-            MenuItem mi = (MenuItem)o;
+            var mi = (MenuItem)o;
             mi.Enabled = false;
             Message.Show(Text.About);
             if (mi != null)
@@ -73,35 +73,33 @@ namespace WeekNumber
         private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
             notifyIcon.Text = Text.Week + weekNumber;
-            using (Bitmap bitmap = new Bitmap(64, 64))
+            using (var bitmap = new Bitmap(64, 64))
+            using (var graphics = Graphics.FromImage(bitmap))
             {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
+                graphics.FillRectangle(Brushes.Black, 2, 2, 62, 62);
+                using (var whitePen = new Pen(Color.White, 4f))
                 {
-                    graphics.FillRectangle(Brushes.Black, 2, 2, 62, 62);
-                    using (Pen whitePen = new Pen(Color.White, 4f))
-                    {
-                        graphics.DrawRectangle(whitePen, 2, 2, 60, 60);
-                    }
-                    graphics.FillRectangle(Brushes.White, 10, 2, 6, 12);
-                    graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
-                    using (Font font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold))
-                    {
-                        graphics.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
-                    }
-                    IntPtr hicon = bitmap.GetHicon();
-                    Icon prevIcon = notifyIcon.Icon;
-                    Icon newIcon = Icon.FromHandle(hicon);
-                    notifyIcon.Icon = new Icon(newIcon, SystemInformation.SmallIconSize);
-                    if (prevIcon != null)
-                    {
-                        NativeMethods.DestroyIcon(prevIcon.Handle);
-                    }
-                    if (newIcon != null)
-                    {
-                        NativeMethods.DestroyIcon(newIcon.Handle);
-                    }
-                    prevIcon?.Dispose();
-                    newIcon?.Dispose();
+                    graphics.DrawRectangle(whitePen, 2, 2, 60, 60);
+                }
+                graphics.FillRectangle(Brushes.White, 10, 2, 6, 12);
+                graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
+                using (var font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold))
+                {
+                    graphics.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
+                }
+                var bHicon = bitmap.GetHicon();
+                var prevIcon = notifyIcon.Icon;
+                var newIcon = Icon.FromHandle(bHicon);
+                notifyIcon.Icon = new Icon(newIcon, SystemInformation.SmallIconSize);
+                if (prevIcon != null)
+                {
+                    NativeMethods.DestroyIcon(prevIcon.Handle);
+                    prevIcon.Dispose();
+                }
+                if (newIcon != null)
+                {
+                    NativeMethods.DestroyIcon(newIcon.Handle);
+                    newIcon.Dispose();
                 }
             }
         }
@@ -110,18 +108,18 @@ namespace WeekNumber
 
         #region Private helper property to create NotifyIcon
 
-        private NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
         #endregion
 
         #region Private method to create ContextMenu
 
-        private void CreateContextMenu(ref ContextMenu c)
+        private static void CreateContextMenu(ref ContextMenu c)
         {
             c = new ContextMenu(new[]
             {
-                new MenuItem(Text.AboutMenu, new EventHandler(AboutClick)) { DefaultItem = true },
-                new MenuItem(Text.StartWithWindowsMenu, new EventHandler(StartWithWindowsClick)) { Checked = Settings.StartWithWindows },
+                new MenuItem(Text.AboutMenu, AboutClick) { DefaultItem = true },
+                new MenuItem(Text.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
                 new MenuItem(Text.SeparatorMenu),
                 new MenuItem(Text.ExitMenu, delegate { Application.Exit(); })
             });
@@ -139,24 +137,25 @@ namespace WeekNumber
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (!disposing)
             {
-                if (_notifyIcon != null)
-                {
-                    _notifyIcon.Visible = false;
-                }
-                if (_notifyIcon.Icon != null)
+                return;
+            }
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.Visible = false;
+                if (_notifyIcon?.Icon != null)
                 {
                     NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                    _notifyIcon?.Icon?.Dispose();
                 }
-                _notifyIcon?.ContextMenu?.MenuItems?.Clear();
-                _notifyIcon?.ContextMenu?.Dispose();
-                _notifyIcon?.Icon?.Dispose();
-                _contextMenu?.Dispose();
-                _contextMenu = null;
-                _notifyIcon?.Dispose();
+                _notifyIcon.ContextMenu?.MenuItems.Clear();
+                _notifyIcon.ContextMenu?.Dispose();
+                _notifyIcon.Dispose();
                 _notifyIcon = null;
             }
+            _contextMenu?.Dispose();
+            _contextMenu = null;
         }
 
         #endregion

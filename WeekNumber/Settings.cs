@@ -16,19 +16,18 @@ namespace WeekNumber
             get => Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) != null;
             set
             {
-                using (RegistryKey registryKey = Registry.CurrentUser)
+                using (var registryKey = Registry.CurrentUser)
+                using (var regRun = registryKey?.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", true))
                 {
                     if (value)
                     {
-                        registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", true).SetValue(Application.ProductName, 
-                            Application.ExecutablePath);
+                        regRun?.SetValue(Application.ProductName, Application.ExecutablePath);
                     }
-                    else if (Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", 
-                        Application.ProductName, null) != null)
+                    else
                     {
-                        registryKey.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", true).DeleteValue(Application.ProductName);
+                        regRun?.DeleteValue(Application.ProductName);
                     }
-                    registryKey.Flush();
+                    registryKey?.Flush();
                 }
             }
         }

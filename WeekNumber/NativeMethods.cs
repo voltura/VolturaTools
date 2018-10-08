@@ -13,7 +13,7 @@ namespace WeekNumber
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool DestroyIcon(IntPtr handle);
+        internal static extern bool DestroyIcon(IntPtr handle);
 
         #endregion
     }

@@ -25,10 +25,10 @@ namespace WeekNumber
 
         public bool WasChanged()
         {
-            bool changed = _week != Week.Current;
+            var changed = _week != Current;
             if (changed)
             {
-                _week = Week.Current;
+                _week = Current;
             }
             return changed;
         }

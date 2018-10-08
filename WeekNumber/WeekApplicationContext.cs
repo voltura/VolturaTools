@@ -9,11 +9,16 @@ namespace WeekNumber
 {
     internal class WeekApplicationContext : ApplicationContext
     {
+        #region Internal Taskbar GUI
+
+        internal TaskbarGui Gui;
+
+        #endregion
+
         #region Private variables
 
-        private Week _week = null;
-        public TaskbarGui _gui = null;
-        private readonly Timer _timer = null;
+        private readonly Week _week;
+        private readonly Timer _timer;
 
         #endregion
 
@@ -23,9 +28,9 @@ namespace WeekNumber
         {
             try
             {
-                Application.ApplicationExit += new EventHandler(OnApplicationExit);
+                Application.ApplicationExit += OnApplicationExit;
                 _week = new Week();
-                _gui = new TaskbarGui(Week.Current);
+                Gui = new TaskbarGui(Week.Current);
                 _timer = GetTimer;
             }
             catch (Exception ex)
@@ -49,7 +54,7 @@ namespace WeekNumber
                     Interval = 60000,
                     Enabled = true
                 };
-                timer.Tick += new EventHandler(OnTimerTick);
+                timer.Tick += OnTimerTick;
                 return timer;
             }
         }
@@ -58,7 +63,7 @@ namespace WeekNumber
 
         #region Private event handlers
 
-        private void OnApplicationExit(object sender, EventArgs e) => Cleanup(forceExit: false);
+        private void OnApplicationExit(object sender, EventArgs e) => Cleanup(false);
 
         private void OnTimerTick(object sender, EventArgs e)
         {
@@ -71,7 +76,7 @@ namespace WeekNumber
             Application.DoEvents();
             try
             {
-                _gui?.UpdateIcon(Week.Current);
+                Gui?.UpdateIcon(Week.Current);
             }
             catch (Exception ex)
             {
@@ -90,8 +95,8 @@ namespace WeekNumber
         {
             _timer?.Stop();
             _timer?.Dispose();
-            _gui?.Dispose();
-            _gui = null;
+            Gui?.Dispose();
+            Gui = null;
             if (forceExit)
             {
                 Application.Exit();
