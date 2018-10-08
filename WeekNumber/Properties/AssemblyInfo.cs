@@ -3,7 +3,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-#endregion
+#endregion Using statements
 
 #region Assembly information
 
@@ -20,4 +20,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.2.*")]
 [assembly: AssemblyFileVersion("1.2.0.0")]
 
-#endregion
+#endregion Assembly information

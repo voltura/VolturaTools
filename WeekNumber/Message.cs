@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Forms;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -17,6 +17,6 @@ namespace WeekNumber
                 MessageBoxButtons.OK, ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error);
         }
 
-        #endregion
+        #endregion Show Information or Error dialog method
     }
 }

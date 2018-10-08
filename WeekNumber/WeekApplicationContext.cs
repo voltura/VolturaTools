@@ -3,7 +3,7 @@
 using System;
 using System.Windows.Forms;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -13,14 +13,14 @@ namespace WeekNumber
 
         internal TaskbarGui Gui;
 
-        #endregion
+        #endregion Internal Taskbar GUI
 
         #region Private variables
 
         private readonly Week _week;
         private readonly Timer _timer;
 
-        #endregion
+        #endregion Private variables
 
         #region Constructor
 
@@ -41,7 +41,7 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Private Timer property
 
@@ -59,7 +59,7 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Private Timer property
 
         #region Private event handlers
 
@@ -87,7 +87,7 @@ namespace WeekNumber
             timer?.Start();
         }
 
-        #endregion
+        #endregion Private event handlers
 
         #region Private Cleanup method
 
@@ -103,6 +103,6 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Private Cleanup method
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -15,7 +15,7 @@ namespace WeekNumber
         private NotifyIcon _notifyIcon;
         private ContextMenu _contextMenu;
 
-        #endregion
+        #endregion Private variables
 
         #region Constructor
 
@@ -26,7 +26,7 @@ namespace WeekNumber
             UpdateIcon(week, ref _notifyIcon);
         }
 
-        #endregion
+        #endregion Constructor
 
         #region Event handling
 
@@ -60,13 +60,13 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Event handling
 
         #region Internal UpdateIcon method
 
         internal void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
 
-        #endregion
+        #endregion Internal UpdateIcon method
 
         #region Private static UpdateIcon method
 
@@ -104,13 +104,13 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Private static UpdateIcon method
 
         #region Private helper property to create NotifyIcon
 
         private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
-        #endregion
+        #endregion Private helper property to create NotifyIcon
 
         #region Private method to create ContextMenu
 
@@ -125,7 +125,7 @@ namespace WeekNumber
             });
         }
 
-        #endregion
+        #endregion Private method to create ContextMenu
 
         #region IDisposable methods
 
@@ -158,6 +158,6 @@ namespace WeekNumber
             _contextMenu = null;
         }
 
-        #endregion
+        #endregion IDisposable methods
     }
 }

@@ -3,7 +3,7 @@
 using Microsoft.Win32;
 using System.Windows.Forms;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -32,6 +32,6 @@ namespace WeekNumber
             }
         }
 
-        #endregion
+        #endregion Internal static property that updates registry for application to start when Windows start
     }
 }

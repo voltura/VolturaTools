@@ -3,7 +3,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -15,6 +15,6 @@ namespace WeekNumber
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool DestroyIcon(IntPtr handle);
 
-        #endregion
+        #endregion External user32.dll function to free GDI+ icon from memory
     }
 }

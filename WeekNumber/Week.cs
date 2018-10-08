@@ -3,7 +3,7 @@
 using System;
 using System.Globalization;
 
-#endregion
+#endregion Using statements
 
 namespace WeekNumber
 {
@@ -13,13 +13,13 @@ namespace WeekNumber
 
         private int _week;
 
-        #endregion
+        #endregion Private variable that holds active week
 
         #region Constructor that initiates active week
 
         public Week() => _week = Current;
 
-        #endregion
+        #endregion Constructor that initiates active week
 
         #region Public function to check if week has changed
 
@@ -33,13 +33,13 @@ namespace WeekNumber
             return changed;
         }
 
-        #endregion
+        #endregion Public function to check if week has changed
 
         #region Public static property that returns current week based on (hardcoded) calendar rule
 
-        public static int Current => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, 
+        public static int Current => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
             CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
 
-        #endregion
+        #endregion Public static property that returns current week based on (hardcoded) calendar rule
     }
 }
