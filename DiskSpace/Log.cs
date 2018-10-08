@@ -137,7 +137,7 @@ namespace DiskSpace
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         internal static string Info
         {
-            private get { return string.Empty; }
+            private get => string.Empty;
             set
             {
                 try
@@ -160,7 +160,7 @@ namespace DiskSpace
         internal static Exception Error
         {
             // ReSharper disable once UnusedMember.Local
-            private get { return new ArgumentNullException(Resources.DiskSpace); }
+            private get => new ArgumentNullException(Resources.DiskSpace);
             set
             {
                 try
@@ -182,13 +182,10 @@ namespace DiskSpace
         internal static string ErrorString
         {
             // ReSharper disable once UnusedMember.Local
-            private get { return Resources.DiskSpace; }
-            set
-            {
-                Trace.TraceError("{0} {1}",
+            private get => Resources.DiskSpace;
+            set => Trace.TraceError("{0} {1}",
                     DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
                     value);
-            }
         }
 
         #endregion
