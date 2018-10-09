@@ -103,7 +103,7 @@ namespace WeekNumber
             graphics?.FillRectangle(Brushes.White, 48, 2, 6, 12);
         }
 
-        private static void DrawWeekNumberOnGraphics(int weekNumber = 1, Graphics graphics)
+        private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
         {
             using (var font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold))
             {
