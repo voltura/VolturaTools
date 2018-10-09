@@ -94,20 +94,20 @@ namespace WeekNumber
 
         private static void DrawBackgroundOnGraphics(Graphics graphics)
         {
-            graphics.FillRectangle(Brushes.Black, 2, 2, 62, 62);
+            graphics?.FillRectangle(Brushes.Black, 2, 2, 62, 62);
             using (var whitePen = new Pen(Color.White, 4f))
             {
-                graphics.DrawRectangle(whitePen, 2, 2, 60, 60);
+                graphics?.DrawRectangle(whitePen, 2, 2, 60, 60);
             }
-            graphics.FillRectangle(Brushes.White, 10, 2, 6, 12);
-            graphics.FillRectangle(Brushes.White, 48, 2, 6, 12);
+            graphics?.FillRectangle(Brushes.White, 10, 2, 6, 12);
+            graphics?.FillRectangle(Brushes.White, 48, 2, 6, 12);
         }
 
-        private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
+        private static void DrawWeekNumberOnGraphics(int weekNumber = 1, Graphics graphics)
         {
             using (var font = new Font(FontFamily.GenericMonospace, 12f, FontStyle.Bold))
             {
-                graphics.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -6f, 10f);
             }
         }
 
