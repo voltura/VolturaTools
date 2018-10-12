@@ -93,6 +93,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGui.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Program.cs" />

@@ -11,7 +11,7 @@ namespace WeekNumber
     {
         #region Internal Taskbar GUI
 
-        internal TaskbarGui Gui;
+        internal IGui Gui;
 
         #endregion Internal Taskbar GUI
 

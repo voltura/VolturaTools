@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace WeekNumber
 {
-    internal class TaskbarGui : IDisposable
+    internal class TaskbarGui : IDisposable, IGui
     {
         #region Private variables
 
@@ -62,11 +62,11 @@ namespace WeekNumber
 
         #endregion Event handling
 
-        #region Internal UpdateIcon method
+        #region Public UpdateIcon method
 
-        internal void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
+        public void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
 
-        #endregion Internal UpdateIcon method
+        #endregion Public UpdateIcon method
 
         #region Private static UpdateIcon method
 
