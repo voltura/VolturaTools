@@ -1,3 +1,6 @@
+language: csharp
+solution: Voltura Tools.sln
+
 # Build all branches, *including* master:
 branches:
   only:
