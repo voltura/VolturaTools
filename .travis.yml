@@ -1,0 +1,5 @@
+# Build all branches, *including* master:
+branches:
+  only:
+  - master
+  - /.*/
