@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiskSpace", "DiskSpace\DiskSpace.csproj", "{7192A019-B0AC-4307-96B6-F2FA0C4CF77C}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DiskSpaceSetup", "DiskSpaceSetup\DiskSpaceSetup.vdproj", "{73DDE078-A263-4B90-91FF-476331051B79}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeekNumber", "WeekNumber\WeekNumber.csproj", "{82D086D4-E145-4487-81FA-28BD3B1577D2}"
 EndProject
 Global
