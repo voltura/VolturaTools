@@ -179,7 +179,7 @@ namespace DiskSpace.Forms
                 const string regKeyPath = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
                 var appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
                     Application.ExecutablePath);
-                Registry.SetValue(regKeyPath, "DiskSpace", appPath);
+                Registry.SetValue(regKeyPath, nameof(DiskSpace), appPath);
                 return;
             }
             Registry.CurrentUser.DeleteSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\DiskSpace",
@@ -327,7 +327,7 @@ namespace DiskSpace.Forms
 
         private void HandleNotifications()
         {
-            uint uSpace = Convert.ToUInt32(CurrentFreeSpace);
+            var uSpace = Convert.ToUInt32(CurrentFreeSpace);
             if (!Settings.Default.notifyWhenSpaceChange) return;
             var limitReached = (Settings.Default.NotificationLimitActive &&
                                  Settings.Default.NotificationLimitGB >= uSpace);
@@ -448,10 +448,6 @@ namespace DiskSpace.Forms
             contextMenuStrip?.Show(Cursor.Position);
         }
 
-        private static void CheckForUpdate()
-        {
-        }
-
         #endregion
 
         #region Event handling
@@ -515,7 +511,7 @@ namespace DiskSpace.Forms
 
         private void DiskSpaceNotifyIcon_BalloonTipClicked(object sender, EventArgs e) => ToogleFormVisibility();
 
-        private void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e) => LaunchDiskManagement();
+        private static void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e) => LaunchDiskManagement();
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -548,15 +544,15 @@ namespace DiskSpace.Forms
 
         private void FreeSpace_Click(object sender, EventArgs e) => ChangeMonitoredDrive();
 
-        private void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e) => LaunchCleanManager();
+        private static void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e) => LaunchCleanManager();
 
-        private void LogFileIcon_Click(object sender, EventArgs e) => Log.Show("Display log file requested from main form");
+        private static void LogFileIcon_Click(object sender, EventArgs e) => Log.Show("Display log file requested from main form");
 
         private void LogFileIcon_MouseEnter(object sender, EventArgs e) => logFileIcon.Image = Resources.logIconBlue;
 
         private void LogFileIcon_MouseLeave(object sender, EventArgs e) => logFileIcon.Image = Resources.logIconWhite;
 
-        private void LogToolStripMenuItem_Click(object sender, EventArgs e) => Log.Show("Display log file requested from context menu");
+        private static void LogToolStripMenuItem_Click(object sender, EventArgs e) => Log.Show("Display log file requested from context menu");
 
         private void FreeSpace_MouseEnter(object sender, EventArgs e) => ChangeFreespaceColor(Color.DeepSkyBlue);
 
@@ -565,12 +561,6 @@ namespace DiskSpace.Forms
         private void TitleIcon_MouseEnter(object sender, EventArgs e) => FocusTitleIcon();
 
         private void TitleIcon_MouseLeave(object sender, EventArgs e) => UnfocusTitleIcon();
-
-        private void CheckForUpdateToolStripMenuItem_Click(object sender, EventArgs e) => CheckForUpdate();
-
-        private void About_Click(object sender, EventArgs e) =>
-            MessageForm.LogAndDisplayLinkMessage(Application.ProductName + 
-                "\n" + Application.ProductVersion);
 
         #endregion
     }

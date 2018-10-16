@@ -177,7 +177,7 @@ namespace DiskSpace.Forms
             {
                 if (txtNotificationLimitGB.Text.Length > 1 && !isInt)
                 {
-                    txtNotificationLimitGB.Text = txtNotificationLimitGB.Text.Substring(0, 
+                    txtNotificationLimitGB.Text = txtNotificationLimitGB.Text.Substring(0x0,
                         txtNotificationLimitGB.Text.Length - 1);
                 }
                 isInt = uint.TryParse(txtNotificationLimitGB.Text, out uint _);
@@ -261,7 +261,7 @@ namespace DiskSpace.Forms
 
         private void ConfigureEmail_Click(object sender, EventArgs e) => ShowEmailSettingsForm();
 
-        private void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e) => OnlyAllowNumericInput(e);
+        private static void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e) => OnlyAllowNumericInput(e);
 
         #endregion
     }

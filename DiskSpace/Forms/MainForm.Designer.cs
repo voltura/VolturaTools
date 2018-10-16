@@ -165,7 +165,7 @@ namespace DiskSpace.Forms
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
             this.logToolStripMenuItem.Size = new System.Drawing.Size(421, 60);
             this.logToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Log;
-            this.logToolStripMenuItem.Click += new System.EventHandler(this.LogToolStripMenuItem_Click);
+            this.logToolStripMenuItem.Click += new System.EventHandler(MainForm.LogToolStripMenuItem_Click);
             // 
             // showToolStripMenuItem
             // 
@@ -187,7 +187,7 @@ namespace DiskSpace.Forms
             this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
             this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(421, 60);
             this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
-            this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(this.DiskCleanupToolStripMenuItem_Click);
+            this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(MainForm.DiskCleanupToolStripMenuItem_Click);
             // 
             // diskManagementToolStripMenuItem
             // 
@@ -196,7 +196,7 @@ namespace DiskSpace.Forms
             this.diskManagementToolStripMenuItem.Name = "diskManagementToolStripMenuItem";
             this.diskManagementToolStripMenuItem.Size = new System.Drawing.Size(421, 60);
             this.diskManagementToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.DiskManagement;
-            this.diskManagementToolStripMenuItem.Click += new System.EventHandler(this.DiskManagementToolStripMenuItem_Click);
+            this.diskManagementToolStripMenuItem.Click += new System.EventHandler(MainForm.DiskManagementToolStripMenuItem_Click);
             // 
             // checkTimer
             // 
@@ -248,7 +248,7 @@ namespace DiskSpace.Forms
             this.logFileIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logFileIcon.TabIndex = 4;
             this.logFileIcon.TabStop = false;
-            this.logFileIcon.Click += new System.EventHandler(this.LogFileIcon_Click);
+            this.logFileIcon.Click += new System.EventHandler(MainForm.LogFileIcon_Click);
             this.logFileIcon.MouseEnter += new System.EventHandler(this.LogFileIcon_MouseEnter);
             this.logFileIcon.MouseLeave += new System.EventHandler(this.LogFileIcon_MouseLeave);
             // 
