@@ -67,7 +67,7 @@ namespace DiskSpace.Forms
             this.lblFreeSpace.Location = new System.Drawing.Point(0, 74);
             this.lblFreeSpace.Margin = new System.Windows.Forms.Padding(0);
             this.lblFreeSpace.Name = "lblFreeSpace";
-            this.lblFreeSpace.Size = new System.Drawing.Size(806, 193);
+            this.lblFreeSpace.Size = new System.Drawing.Size(810, 193);
             this.lblFreeSpace.TabIndex = 1;
             this.lblFreeSpace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFreeSpace.Click += new System.EventHandler(this.FreeSpace_Click);
@@ -78,7 +78,7 @@ namespace DiskSpace.Forms
             // 
             this.minimizePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.minimizePanel.BackColor = System.Drawing.Color.White;
-            this.minimizePanel.Location = new System.Drawing.Point(727, 17);
+            this.minimizePanel.Location = new System.Drawing.Point(731, 17);
             this.minimizePanel.Margin = new System.Windows.Forms.Padding(0);
             this.minimizePanel.Name = "minimizePanel";
             this.minimizePanel.Size = new System.Drawing.Size(60, 19);
@@ -105,7 +105,7 @@ namespace DiskSpace.Forms
             // minimizeContainerPanel
             // 
             this.minimizeContainerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minimizeContainerPanel.Location = new System.Drawing.Point(720, 0);
+            this.minimizeContainerPanel.Location = new System.Drawing.Point(724, 0);
             this.minimizeContainerPanel.Margin = new System.Windows.Forms.Padding(0);
             this.minimizeContainerPanel.Name = "minimizeContainerPanel";
             this.minimizeContainerPanel.Size = new System.Drawing.Size(82, 74);
@@ -140,7 +140,7 @@ namespace DiskSpace.Forms
             this.contextMenuStrip.Name = "contextMenuStrip";
             this.contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.contextMenuStrip.ShowImageMargin = false;
-            this.contextMenuStrip.Size = new System.Drawing.Size(422, 436);
+            this.contextMenuStrip.Size = new System.Drawing.Size(422, 370);
             // 
             // settingsToolStripMenuItem
             // 
@@ -226,7 +226,7 @@ namespace DiskSpace.Forms
             this.settingsIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(76)))), ((int)(((byte)(76)))));
             this.settingsIcon.Image = global::DiskSpace.Properties.Resources.gearsIconWhite;
-            this.settingsIcon.Location = new System.Drawing.Point(696, 161);
+            this.settingsIcon.Location = new System.Drawing.Point(700, 161);
             this.settingsIcon.Margin = new System.Windows.Forms.Padding(0);
             this.settingsIcon.Name = "settingsIcon";
             this.settingsIcon.Size = new System.Drawing.Size(101, 97);
@@ -257,7 +257,7 @@ namespace DiskSpace.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(288F, 288F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.ClientSize = new System.Drawing.Size(806, 268);
+            this.ClientSize = new System.Drawing.Size(810, 267);
             this.ControlBox = false;
             this.Controls.Add(this.logFileIcon);
             this.Controls.Add(this.titleIcon);
