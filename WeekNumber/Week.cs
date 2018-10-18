@@ -1,7 +1,9 @@
 ﻿#region Using statements
 
 using System;
+using System.Configuration;
 using System.Globalization;
+using System.ComponentModel;
 
 #endregion Using statements
 
@@ -37,8 +39,25 @@ namespace WeekNumber
 
         #region Public static property that returns current week based on (hardcoded) calendar rule
 
-        public static int Current => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
-            CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        public int Current
+        {
+            get
+            {
+                var dayOfWeekSetting = ConfigurationManager.AppSettings.Get(@"DayOfWeek");
+                Enum dayOfWeekEnum = DayOfWeek.Sunday;
+                var dayOfWeek = (DayOfWeek)
+                    TypeDescriptor.GetConverter(dayOfWeekEnum)
+                    .ConvertFrom(dayOfWeekSetting);
+                var calendarWeekRuleSetting = ConfigurationManager.AppSettings
+                    .Get(@"CalendarWeekRule");
+                Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
+                var calendarWeekRule = (CalendarWeekRule)
+                    TypeDescriptor.GetConverter(calendarWeekRuleEnum)
+                    .ConvertFrom(calendarWeekRuleSetting);
+                return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now,
+                    calendarWeekRule, dayOfWeek);
+            }
+        }
 
         #endregion Public static property that returns current week based on (hardcoded) calendar rule
     }

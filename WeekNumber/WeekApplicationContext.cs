@@ -30,7 +30,7 @@ namespace WeekNumber
             {
                 Application.ApplicationExit += OnApplicationExit;
                 _week = new Week();
-                Gui = new TaskbarGui(Week.Current);
+                Gui = new TaskbarGui(_week.Current);
                 _timer = GetTimer;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace WeekNumber
             Application.DoEvents();
             try
             {
-                Gui?.UpdateIcon(Week.Current);
+                Gui?.UpdateIcon(_week.Current);
             }
             catch (Exception ex)
             {

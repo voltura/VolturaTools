@@ -89,6 +89,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -105,6 +106,9 @@
     <Compile Include="WeekApplicationContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\settings.manifest">
       <SubType>Designer</SubType>
     </None>
