@@ -37,7 +37,7 @@ namespace WeekNumber
 
         #endregion Public function to check if week has changed
 
-        #region Public static property that returns current week based on (hardcoded) calendar rule
+        #region Public property that returns current week based on calendar rule
 
         public int Current
         {
@@ -59,6 +59,6 @@ namespace WeekNumber
             }
         }
 
-        #endregion Public static property that returns current week based on (hardcoded) calendar rule
+        #endregion Public property that returns current week based on calendar rule
     }
 }
