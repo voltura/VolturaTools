@@ -2,8 +2,8 @@
 
 using System;
 using System.Configuration;
-using System.Globalization;
 using System.ComponentModel;
+using System.Globalization;
 
 #endregion Using statements
 
@@ -19,12 +19,19 @@ namespace WeekNumber
 
         #region Constructor that initiates active week
 
+        /// <summary>
+        /// Initiates the week to current
+        /// </summary>
         public Week() => _week = Current;
 
         #endregion Constructor that initiates active week
 
         #region Public function to check if week has changed
 
+        /// <summary>
+        /// Returns if week was changed since last check
+        /// </summary>
+        /// <returns>true|false</returns>
         public bool WasChanged()
         {
             var changed = _week != Current;
@@ -39,6 +46,9 @@ namespace WeekNumber
 
         #region Public property that returns current week based on calendar rule
 
+        /// <summary>
+        /// Returns current week based on calendar rules in application settings
+        /// </summary>
         public int Current
         {
             get

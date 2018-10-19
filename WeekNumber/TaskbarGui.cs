@@ -64,6 +64,10 @@ namespace WeekNumber
 
         #region Public UpdateIcon method
 
+        /// <summary>
+        /// Updates icon on GUI with given week number
+        /// </summary>
+        /// <param name="weekNumber"></param>
         public void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
 
         #endregion Public UpdateIcon method
@@ -146,6 +150,9 @@ namespace WeekNumber
 
         #region IDisposable methods
 
+        /// <summary>
+        /// Disposes the GUI resources
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
