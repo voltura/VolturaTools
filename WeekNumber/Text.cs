@@ -16,8 +16,9 @@ namespace WeekNumber
         internal static readonly string ExitMenu = "Exit " + Application.ProductName;
         internal static readonly string FailedToSetIcon = "Could not set Icon. Please report to feedback@voltura.se!\r\r";
         internal static readonly string FailedToUpdateRegistry = "Could not update registry. Please report to feedback@voltura.se!\r\r";
-        internal static readonly string StartWithWindowsMenu = "Start with Windows";
+        internal static readonly string SettingsMenu = "Settings >";
         internal static readonly string SeparatorMenu = "-";
+        internal static readonly string StartWithWindowsMenu = "Start with Windows";
         internal static readonly string UnhandledException = "Something went wrong. Please report to feedback@voltura.se!\r\r";
         internal static readonly string Week = "Week ";
 

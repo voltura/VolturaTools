@@ -129,7 +129,8 @@ namespace WeekNumber
 
         #region Private helper property to create NotifyIcon
 
-        private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => 
+            new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
         #endregion Private helper property to create NotifyIcon
 
@@ -140,6 +141,7 @@ namespace WeekNumber
             c = new ContextMenu(new[]
             {
                 new MenuItem(Text.AboutMenu, AboutClick) { DefaultItem = true },
+                //new MenuItem(Text.SettingsMenu, AboutClick),
                 new MenuItem(Text.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
                 new MenuItem(Text.SeparatorMenu),
                 new MenuItem(Text.ExitMenu, delegate { Application.Exit(); })
