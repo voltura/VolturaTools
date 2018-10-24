@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -29,6 +30,39 @@ namespace WeekNumber
         #endregion Constructor
 
         #region Event handling
+
+        private static void FirstDayOfWeekClick(object o, EventArgs e)
+        {
+            try
+            {
+                var mi = (MenuItem)o;
+                mi.Enabled = false;
+                var newCheckState = !mi.Checked;
+                foreach (MenuItem m in mi.Parent.MenuItems)
+                {
+                    m.Checked = false;
+                }
+                mi.Checked = newCheckState;
+                UpdateDayOfWeekSetting(mi);
+                if (mi != null)
+                {
+                    mi.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Show(Text.FailedToUpdateDayOfWeek, ex);
+            }
+        }
+
+        private static void UpdateDayOfWeekSetting(MenuItem mi)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings[@"DayOfWeek"].Value = mi.Text;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
 
         private static void StartWithWindowsClick(object o, EventArgs e)
         {
@@ -129,7 +163,7 @@ namespace WeekNumber
 
         #region Private helper property to create NotifyIcon
 
-        private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) => 
+        private static NotifyIcon GetNotifyIcon(ref ContextMenu contextMenu) =>
             new NotifyIcon { Visible = true, ContextMenu = contextMenu };
 
         #endregion Private helper property to create NotifyIcon
@@ -141,7 +175,18 @@ namespace WeekNumber
             c = new ContextMenu(new[]
             {
                 new MenuItem(Text.AboutMenu, AboutClick) { DefaultItem = true },
-                //new MenuItem(Text.SettingsMenu, AboutClick),
+                new MenuItem(Text.SettingsMenu, new MenuItem[1] {
+                    new MenuItem(Text.FirstDayOfWeekMenu, new MenuItem[7] {
+                        new MenuItem(nameof(DayOfWeek.Monday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Monday) },
+                        new MenuItem(nameof(DayOfWeek.Tuesday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Tuesday) },
+                        new MenuItem(nameof(DayOfWeek.Wednesday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Wednesday) },
+                        new MenuItem(nameof(DayOfWeek.Thursday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Thursday) },
+                        new MenuItem(nameof(DayOfWeek.Friday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Friday) },
+                        new MenuItem(nameof(DayOfWeek.Saturday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Saturday) },
+                        new MenuItem(nameof(DayOfWeek.Sunday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Sunday) }
+                    })
+                    //,new MenuItem(Text.CalendarRuleMenu, ... })
+                }),
                 new MenuItem(Text.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
                 new MenuItem(Text.SeparatorMenu),
                 new MenuItem(Text.ExitMenu, delegate { Application.Exit(); })
