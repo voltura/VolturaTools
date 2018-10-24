@@ -53,13 +53,13 @@ namespace WeekNumber
         {
             get
             {
-                var dayOfWeekSetting = ConfigurationManager.AppSettings.Get(@"DayOfWeek");
+                var dayOfWeekSetting = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek));
                 Enum dayOfWeekEnum = DayOfWeek.Sunday;
                 var dayOfWeek = (DayOfWeek)
                     TypeDescriptor.GetConverter(dayOfWeekEnum)
                     .ConvertFrom(dayOfWeekSetting);
                 var calendarWeekRuleSetting = ConfigurationManager.AppSettings
-                    .Get(@"CalendarWeekRule");
+                    .Get(nameof(CalendarWeekRule));
                 Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
                 var calendarWeekRule = (CalendarWeekRule)
                     TypeDescriptor.GetConverter(calendarWeekRuleEnum)

@@ -3,6 +3,7 @@
 using System;
 using System.Configuration;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -43,7 +44,7 @@ namespace WeekNumber
                     m.Checked = false;
                 }
                 mi.Checked = newCheckState;
-                UpdateDayOfWeekSetting(mi);
+                UpdateSetting(nameof(DayOfWeek), mi.Text);
                 if (mi != null)
                 {
                     mi.Enabled = true;
@@ -55,11 +56,35 @@ namespace WeekNumber
             }
         }
 
-        private static void UpdateDayOfWeekSetting(MenuItem mi)
+        private static void CalendarWeekRuleClick(object o, EventArgs e)
+        {
+            try
+            {
+                var mi = (MenuItem)o;
+                mi.Enabled = false;
+                var newCheckState = !mi.Checked;
+                foreach (MenuItem m in mi.Parent.MenuItems)
+                {
+                    m.Checked = false;
+                }
+                mi.Checked = newCheckState;
+                UpdateSetting(nameof(CalendarWeekRule), mi.Text);
+                if (mi != null)
+                {
+                    mi.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Message.Show(Text.FailedToUpdateCalendarWeekRule, ex);
+            }
+        }
+
+        private static void UpdateSetting(string setting, string value)
         {
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
-            settings[@"DayOfWeek"].Value = mi.Text;
+            settings[setting].Value = value;
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
@@ -175,19 +200,23 @@ namespace WeekNumber
             c = new ContextMenu(new[]
             {
                 new MenuItem(Text.AboutMenu, AboutClick) { DefaultItem = true },
-                new MenuItem(Text.SettingsMenu, new MenuItem[1] {
+                new MenuItem(Text.SettingsMenu, new MenuItem[3] {
+                    new MenuItem(Text.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
                     new MenuItem(Text.FirstDayOfWeekMenu, new MenuItem[7] {
-                        new MenuItem(nameof(DayOfWeek.Monday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Monday) },
-                        new MenuItem(nameof(DayOfWeek.Tuesday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Tuesday) },
-                        new MenuItem(nameof(DayOfWeek.Wednesday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Wednesday) },
-                        new MenuItem(nameof(DayOfWeek.Thursday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Thursday) },
-                        new MenuItem(nameof(DayOfWeek.Friday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Friday) },
-                        new MenuItem(nameof(DayOfWeek.Saturday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Saturday) },
-                        new MenuItem(nameof(DayOfWeek.Sunday), FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(@"DayOfWeek") == nameof(DayOfWeek.Sunday) }
+                        new MenuItem(Text.Monday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Monday) },
+                        new MenuItem(Text.Tuesday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Tuesday) },
+                        new MenuItem(Text.Wednesday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Wednesday) },
+                        new MenuItem(Text.Thursday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Thursday) },
+                        new MenuItem(Text.Friday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Friday) },
+                        new MenuItem(Text.Saturday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Saturday) },
+                        new MenuItem(Text.Sunday, FirstDayOfWeekClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek)) == nameof(DayOfWeek.Sunday) }
+                    }),
+                    new MenuItem(Text.CalendarRuleMenu,  new MenuItem[3] {
+                        new MenuItem(Text.FirstDay, CalendarWeekRuleClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(CalendarWeekRule)) == nameof(CalendarWeekRule.FirstDay) },
+                        new MenuItem(Text.FirstFourDayWeek, CalendarWeekRuleClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(CalendarWeekRule)) == nameof(CalendarWeekRule.FirstFourDayWeek) },
+                        new MenuItem(Text.FirstFullWeek, CalendarWeekRuleClick) { Checked = ConfigurationManager.AppSettings.Get(nameof(CalendarWeekRule)) == nameof(CalendarWeekRule.FirstFullWeek) }
                     })
-                    //,new MenuItem(Text.CalendarRuleMenu, ... })
                 }),
-                new MenuItem(Text.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
                 new MenuItem(Text.SeparatorMenu),
                 new MenuItem(Text.ExitMenu, delegate { Application.Exit(); })
             });
