@@ -37,11 +37,21 @@ namespace WeekNumber
 
         #region Internal static methods
 
-        internal static bool SettingIsValue(string setting, string value) =>
-            ConfigurationManager.AppSettings.Get(setting) == value;
+        internal static bool SettingIsValue(string setting, string value)
+        {
+            CreateSettings();
+            return ConfigurationManager.AppSettings.Get(setting) == value;
+        }
+
+        internal static string GetSetting(string setting)
+        {
+            CreateSettings();
+            return ConfigurationManager.AppSettings.Get(setting);
+        }
 
         internal static void UpdateSetting(string setting, string value)
         {
+            CreateSettings();
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var settings = configFile.AppSettings.Settings;
             settings[setting].Value = value;
@@ -50,5 +60,25 @@ namespace WeekNumber
         }
 
         #endregion Internal static methods
+
+        #region Private method that creates the application settings file if needed
+
+        private static void CreateSettings()
+        {
+            var settingsFile = Application.ExecutablePath + ".config";
+            if (!System.IO.File.Exists(settingsFile))
+            {
+                const string xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+<configuration>
+  <appSettings>
+    <add key=""DayOfWeek"" value=""Monday""/>
+    <add key=""CalendarWeekRule"" value=""FirstFourDayWeek""/>
+  </appSettings>
+</configuration>";
+                System.IO.File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);
+            }
+        }
+
+        #endregion Private method that creates the application settings file if needed
     }
 }

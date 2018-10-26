@@ -69,7 +69,7 @@ namespace WeekNumber
                     m.Checked = false;
                 }
                 mi.Checked = newCheckState;
-                Settings.UpdateSetting(nameof(CalendarWeekRule), mi.Text);
+                Settings.UpdateSetting(nameof(CalendarWeekRule), mi.Text.Replace(" ", string.Empty));
                 if (mi != null)
                 {
                     mi.Enabled = true;

@@ -1,7 +1,6 @@
 ﻿#region Using statements
 
 using System;
-using System.Configuration;
 using System.ComponentModel;
 using System.Globalization;
 
@@ -53,13 +52,12 @@ namespace WeekNumber
         {
             get
             {
-                var dayOfWeekSetting = ConfigurationManager.AppSettings.Get(nameof(DayOfWeek));
+                var dayOfWeekSetting = Settings.GetSetting(nameof(DayOfWeek));
                 Enum dayOfWeekEnum = DayOfWeek.Sunday;
                 var dayOfWeek = (DayOfWeek)
                     TypeDescriptor.GetConverter(dayOfWeekEnum)
                     .ConvertFrom(dayOfWeekSetting);
-                var calendarWeekRuleSetting = ConfigurationManager.AppSettings
-                    .Get(nameof(CalendarWeekRule));
+                var calendarWeekRuleSetting = Settings.GetSetting(nameof(CalendarWeekRule));
                 Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
                 var calendarWeekRule = (CalendarWeekRule)
                     TypeDescriptor.GetConverter(calendarWeekRuleEnum)
