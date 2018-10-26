@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using Microsoft.Win32;
+using System.Configuration;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -33,5 +34,21 @@ namespace WeekNumber
         }
 
         #endregion Internal static property that updates registry for application to start when Windows start
+
+        #region Internal static methods
+
+        internal static bool SettingIsValue(string setting, string value) =>
+            ConfigurationManager.AppSettings.Get(setting) == value;
+
+        internal static void UpdateSetting(string setting, string value)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings[setting].Value = value;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
+
+        #endregion Internal static methods
     }
 }
