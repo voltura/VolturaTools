@@ -1,4 +1,5 @@
-﻿#region Using statements
+﻿using System.Resources;
+#region Using statements
 
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -19,5 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: Guid("550adc75-8afb-4813-ac91-8c8c6cb681ae")]
 [assembly: AssemblyVersion("1.3.*")]
 [assembly: AssemblyFileVersion("1.3.0.0")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
 #endregion Assembly information
+

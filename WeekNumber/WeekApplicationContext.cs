@@ -36,7 +36,7 @@ namespace WeekNumber
             catch (Exception ex)
             {
                 _timer?.Stop();
-                Message.Show(Text.UnhandledException, ex);
+                Message.Show(Properties.Resources.UnhandledException, ex);
                 Application.Exit();
             }
         }
@@ -80,7 +80,7 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                Message.Show(Text.FailedToSetIcon, ex);
+                Message.Show(Properties.Resources.FailedToSetIcon, ex);
                 Cleanup();
                 return;
             }
