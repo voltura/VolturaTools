@@ -21,7 +21,7 @@ namespace WeekNumber
         /// <summary>
         /// Initiates the week to current
         /// </summary>
-        public Week() => _week = Current;
+        public Week() => _week = Current();
 
         #endregion Constructor that initiates active week
 
@@ -39,9 +39,9 @@ namespace WeekNumber
         internal readonly static string Friday = nameof(DayOfWeek.Friday);
         internal readonly static string Saturday = nameof(DayOfWeek.Saturday);
         internal readonly static string Sunday = nameof(DayOfWeek.Sunday);
-        internal static readonly string FirstDaySeparatedString = "First Day";
-        internal static readonly string FirstFourDayWeekSeparatedString = "First Four Day Week";
-        internal static readonly string FirstFullWeekSeparatedString = "First Full Week";
+        internal readonly static string FirstDaySeparatedString = "First Day";
+        internal readonly static string FirstFourDayWeekSeparatedString = "First Four Day Week";
+        internal readonly static string FirstFullWeekSeparatedString = "First Full Week";
 
         #endregion Internal static week constants
 
@@ -53,10 +53,10 @@ namespace WeekNumber
         /// <returns>true|false</returns>
         public bool WasChanged()
         {
-            var changed = _week != Current;
+            var changed = _week != Current();
             if (changed)
             {
-                _week = Current;
+                _week = Current();
             }
             return changed;
         }
@@ -68,20 +68,17 @@ namespace WeekNumber
         /// <summary>
         /// Returns current week based on calendar rules in application settings
         /// </summary>
-        public int Current
+        public static int Current()
         {
-            get
-            {
-                var dayOfWeekSetting = Settings.GetSetting(DayOfWeekString);
-                Enum dayOfWeekEnum = DayOfWeek.Sunday;
-                var dayOfWeek = (DayOfWeek) TypeDescriptor.GetConverter(dayOfWeekEnum)
-                    .ConvertFrom(dayOfWeekSetting);
-                var calendarWeekRuleSetting = Settings.GetSetting(CalendarWeekRuleString);
-                Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
-                var calendarWeekRule = (CalendarWeekRule) TypeDescriptor.GetConverter(calendarWeekRuleEnum)
-                    .ConvertFrom(calendarWeekRuleSetting);
-                return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
-            }
+            var dayOfWeekSetting = Settings.GetSetting(DayOfWeekString);
+            Enum dayOfWeekEnum = DayOfWeek.Sunday;
+            var dayOfWeek = (DayOfWeek) TypeDescriptor.GetConverter(dayOfWeekEnum)
+                .ConvertFrom(dayOfWeekSetting);
+            var calendarWeekRuleSetting = Settings.GetSetting(CalendarWeekRuleString);
+            Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
+            var calendarWeekRule = (CalendarWeekRule) TypeDescriptor.GetConverter(calendarWeekRuleEnum)
+                .ConvertFrom(calendarWeekRuleSetting);
+            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
         }
 
         #endregion Public property that returns current week based on calendar rule
