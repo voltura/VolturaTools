@@ -68,7 +68,7 @@ namespace WeekNumber
         /// <summary>
         /// Get current week based on calendar rules in application settings
         /// </summary>
-        /// <returns>current week as int based on calendar rules in application settings</returns>
+        /// <returns>Current week as int based on calendar rules in application settings</returns>
         public static int Current()
         {
             var dayOfWeekSetting = Settings.GetSetting(DayOfWeekString);
