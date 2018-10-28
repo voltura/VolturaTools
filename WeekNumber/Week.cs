@@ -25,7 +25,7 @@ namespace WeekNumber
 
         #endregion Constructor that initiates active week
 
-        #region Internal static week constants
+        #region Internal static week strings
 
         internal readonly static string CalendarWeekRuleString = nameof(CalendarWeekRule);
         internal readonly static string FirstDay = nameof(CalendarWeekRule.FirstDay);
@@ -43,7 +43,7 @@ namespace WeekNumber
         internal readonly static string FirstFourDayWeekSeparatedString = "First Four Day Week";
         internal readonly static string FirstFullWeekSeparatedString = "First Full Week";
 
-        #endregion Internal static week constants
+        #endregion Internal static week strings
 
         #region Public function to check if week has changed
 
@@ -63,11 +63,12 @@ namespace WeekNumber
 
         #endregion Public function to check if week has changed
 
-        #region Public property that returns current week based on calendar rule
+        #region Public function that returns current week based on calendar rule
 
         /// <summary>
-        /// Returns current week based on calendar rules in application settings
+        /// Get current week based on calendar rules in application settings
         /// </summary>
+        /// <returns>current week as int based on calendar rules in application settings</returns>
         public static int Current()
         {
             var dayOfWeekSetting = Settings.GetSetting(DayOfWeekString);
@@ -81,6 +82,6 @@ namespace WeekNumber
             return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
         }
 
-        #endregion Public property that returns current week based on calendar rule
+        #endregion Public function that returns current week based on calendar rule
     }
 }
