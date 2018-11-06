@@ -75,9 +75,9 @@ namespace WeekNumber
 
         private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
         {
-            using (var font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold, GraphicsUnit.Point, 0, false))
+            using (var font = new Font(FontFamily.GenericMonospace, 100f, FontStyle.Bold, GraphicsUnit.Pixel, 0, false))
             {
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -10f, 22f);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -14f, 20f);
             }
         }
 
