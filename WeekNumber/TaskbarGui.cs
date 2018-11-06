@@ -43,7 +43,7 @@ namespace WeekNumber
         private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
             notifyIcon.Text = Properties.Resources.Week + weekNumber;
-            using (var bitmap = new Bitmap(64, 64))
+            using (var bitmap = new Bitmap(128, 128))
             using (var graphics = Graphics.FromImage(bitmap))
             {
                 DrawBackgroundOnGraphics(graphics);
@@ -64,20 +64,20 @@ namespace WeekNumber
 
         private static void DrawBackgroundOnGraphics(Graphics graphics)
         {
-            graphics?.FillRectangle(Brushes.Black, 2, 2, 62, 62);
-            using (var whitePen = new Pen(Color.White, 4f))
+            graphics?.FillRectangle(Brushes.Black, 4, 4, 124, 124);
+            using (var whitePen = new Pen(Color.White, 8f))
             {
-                graphics?.DrawRectangle(whitePen, 2, 2, 60, 60);
+                graphics?.DrawRectangle(whitePen, 4, 4, 120, 120);
             }
-            graphics?.FillRectangle(Brushes.White, 10, 2, 6, 12);
-            graphics?.FillRectangle(Brushes.White, 48, 2, 6, 12);
+            graphics?.FillRectangle(Brushes.White, 20, 2, 12, 24);
+            graphics?.FillRectangle(Brushes.White, 96, 2, 12, 24);
         }
 
         private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
         {
-            using (var font = new Font(FontFamily.GenericMonospace, 18f, FontStyle.Bold, GraphicsUnit.Point, 0, false))
+            using (var font = new Font(FontFamily.GenericMonospace, 36f, FontStyle.Bold, GraphicsUnit.Point, 0, false))
             {
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -5f, 11f);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -10f, 22f);
             }
         }
 
