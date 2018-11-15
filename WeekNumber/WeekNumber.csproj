@@ -108,6 +108,7 @@
     <Compile Include="TaskbarGui.cs" />
     <Compile Include="Week.cs" />
     <Compile Include="WeekApplicationContext.cs" />
+    <Compile Include="WeekIcon.cs" />
     <Compile Include="WeekNumberContextMenu.cs" />
   </ItemGroup>
   <ItemGroup>

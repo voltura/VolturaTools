@@ -38,10 +38,7 @@ namespace WeekNumber
                         new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
                         new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
                     }),
-                    new MenuItem(Resources.ColorsMenu,  new MenuItem[2] {
-                        new MenuItem(Resources.ForegroundMenu, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
-                        new MenuItem(Resources.BackgroundMenu, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) }
-                    }),
+                    new MenuItem(Resources.ColorsMenu,  ColorMenuClick),
                     new MenuItem(Resources.SaveIconMenu, SaveIconClick)
                 }),
                 new MenuItem(Resources.SeparatorMenu),
@@ -68,6 +65,21 @@ namespace WeekNumber
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToUpdateDayOfWeek, ex);
+            }
+        }
+
+        private static void ColorMenuClick(object o, EventArgs e)
+        {
+            try
+            {
+                var mi = (MenuItem)o;
+                mi.Enabled = false;
+                Message.Show(Resources.NotImplementedYet);
+                EnableMenuItem(mi);
+            }
+            catch (Exception ex)
+            {
+                Message.Show(Resources.FailedToSetIcon, ex);
             }
         }
 
@@ -116,7 +128,22 @@ namespace WeekNumber
         {
             var mi = (MenuItem)o;
             mi.Enabled = false;
-            //TODO: Display save file dialog
+            using (var saveFileDialog = new SaveFileDialog()
+            {
+                Title = Resources.SaveIconMenu,
+                AddExtension = true,
+                DefaultExt = ".ico",
+                FileName = Application.ProductName + ".ico",
+                SupportMultiDottedExtensions = false,
+                OverwritePrompt = true,
+                CheckPathExists = true
+            })
+            {
+                if (DialogResult.OK == saveFileDialog.ShowDialog())
+                {
+                    var success = WeekIcon.SaveIcon(Week.Current(), saveFileDialog.FileName);
+                }
+            }
             EnableMenuItem(mi);
         }
 

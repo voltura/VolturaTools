@@ -85,9 +85,9 @@ namespace WeekNumber {
         /// <summary>
         ///   Looks up a localized string similar to Background.
         /// </summary>
-        internal static string BackgroundMenu {
+        internal static string Background {
             get {
-                return ResourceManager.GetString("BackgroundMenu", resourceCulture);
+                return ResourceManager.GetString("Background", resourceCulture);
             }
         }
         
@@ -101,7 +101,7 @@ namespace WeekNumber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors.
+        ///   Looks up a localized string similar to Icon colors....
         /// </summary>
         internal static string ColorsMenu {
             get {
@@ -183,9 +183,18 @@ namespace WeekNumber {
         /// <summary>
         ///   Looks up a localized string similar to Foreground.
         /// </summary>
-        internal static string ForegroundMenu {
+        internal static string Foreground {
             get {
-                return ResourceManager.GetString("ForegroundMenu", resourceCulture);
+                return ResourceManager.GetString("Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, this function is not implemented yet..
+        /// </summary>
+        internal static string NotImplementedYet {
+            get {
+                return ResourceManager.GetString("NotImplementedYet", resourceCulture);
             }
         }
         

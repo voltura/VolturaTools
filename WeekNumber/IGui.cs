@@ -10,6 +10,7 @@
         /// </summary>
         /// <param name="weekNumber"></param>
         void UpdateIcon(int weekNumber);
+
         /// <summary>
         /// Disposes GUI
         /// </summary>
