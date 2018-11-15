@@ -42,7 +42,7 @@ namespace WeekNumber
 
         private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
-            notifyIcon.Text = Properties.Resources.Week + weekNumber;
+            notifyIcon.Text = Resources.Week + weekNumber;
             using (var bitmap = new Bitmap(128, 128))
             using (var graphics = Graphics.FromImage(bitmap))
             {

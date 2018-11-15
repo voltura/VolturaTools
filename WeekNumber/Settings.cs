@@ -73,6 +73,8 @@ namespace WeekNumber
   <appSettings>
     <add key=""DayOfWeek"" value=""Monday""/>
     <add key=""CalendarWeekRule"" value=""FirstFourDayWeek""/>
+    <add key=""Background"" value=""Color.Black""/>
+    <add key=""Foreground"" value=""Color.White""/>
   </appSettings>
 </configuration>";
                 System.IO.File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);

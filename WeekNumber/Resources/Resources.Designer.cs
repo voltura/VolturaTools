@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WeekNumber.Properties {
+namespace WeekNumber {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WeekNumber.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeekNumber.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WeekNumber.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -83,11 +83,29 @@ namespace WeekNumber.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        internal static string BackgroundMenu {
+            get {
+                return ResourceManager.GetString("BackgroundMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar week rule.
         /// </summary>
         internal static string CalendarRuleMenu {
             get {
                 return ResourceManager.GetString("CalendarRuleMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Colors.
+        /// </summary>
+        internal static string ColorsMenu {
+            get {
+                return ResourceManager.GetString("ColorsMenu", resourceCulture);
             }
         }
         
@@ -159,6 +177,24 @@ namespace WeekNumber.Properties {
         internal static string FirstDayOfWeekMenu {
             get {
                 return ResourceManager.GetString("FirstDayOfWeekMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Foreground.
+        /// </summary>
+        internal static string ForegroundMenu {
+            get {
+                return ResourceManager.GetString("ForegroundMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save icon....
+        /// </summary>
+        internal static string SaveIconMenu {
+            get {
+                return ResourceManager.GetString("SaveIconMenu", resourceCulture);
             }
         }
         

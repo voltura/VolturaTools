@@ -21,10 +21,10 @@ namespace WeekNumber
         {
             ContextMenu = new ContextMenu(new MenuItem[4]
             {
-                new MenuItem(Properties.Resources.AboutMenu, AboutClick) { DefaultItem = true },
-                new MenuItem(Properties.Resources.SettingsMenu, new MenuItem[3] {
-                    new MenuItem(Properties.Resources.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
-                    new MenuItem(Properties.Resources.FirstDayOfWeekMenu, new MenuItem[7] {
+                new MenuItem(Resources.AboutMenu, AboutClick) { DefaultItem = true },
+                new MenuItem(Resources.SettingsMenu, new MenuItem[5] {
+                    new MenuItem(Resources.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
+                    new MenuItem(Resources.FirstDayOfWeekMenu, new MenuItem[7] {
                         new MenuItem(Week.Monday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Monday) },
                         new MenuItem(Week.Tuesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Tuesday) },
                         new MenuItem(Week.Wednesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Wednesday) },
@@ -33,14 +33,19 @@ namespace WeekNumber
                         new MenuItem(Week.Saturday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Saturday) },
                         new MenuItem(Week.Sunday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Sunday) }
                     }),
-                    new MenuItem(Properties.Resources.CalendarRuleMenu,  new MenuItem[3] {
+                    new MenuItem(Resources.CalendarRuleMenu,  new MenuItem[3] {
                         new MenuItem(Week.FirstDaySeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
-                        new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick){ Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
-                        new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick){ Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
-                    })
+                        new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
+                        new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
+                    }),
+                    new MenuItem(Resources.ColorsMenu,  new MenuItem[2] {
+                        new MenuItem(Resources.ForegroundMenu, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
+                        new MenuItem(Resources.BackgroundMenu, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) }
+                    }),
+                    new MenuItem(Resources.SaveIconMenu, SaveIconClick)
                 }),
-                new MenuItem(Properties.Resources.SeparatorMenu),
-                new MenuItem(Properties.Resources.ExitMenu, ExitMenuClick)
+                new MenuItem(Resources.SeparatorMenu),
+                new MenuItem(Resources.ExitMenu, ExitMenuClick)
             });
         }
 
@@ -62,7 +67,7 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                Message.Show(Properties.Resources.FailedToUpdateDayOfWeek, ex);
+                Message.Show(Resources.FailedToUpdateDayOfWeek, ex);
             }
         }
 
@@ -79,7 +84,7 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                Message.Show(Properties.Resources.FailedToUpdateCalendarWeekRule, ex);
+                Message.Show(Resources.FailedToUpdateCalendarWeekRule, ex);
             }
         }
 
@@ -95,7 +100,7 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                Message.Show(Properties.Resources.FailedToUpdateRegistry, ex);
+                Message.Show(Resources.FailedToUpdateRegistry, ex);
             }
         }
 
@@ -103,7 +108,15 @@ namespace WeekNumber
         {
             var mi = (MenuItem)o;
             mi.Enabled = false;
-            Message.Show(Properties.Resources.About);
+            Message.Show(Resources.About);
+            EnableMenuItem(mi);
+        }
+
+        private static void SaveIconClick(object o, EventArgs e)
+        {
+            var mi = (MenuItem)o;
+            mi.Enabled = false;
+            //TODO: Display save file dialog
             EnableMenuItem(mi);
         }
 

@@ -128,8 +128,14 @@ Free for all.</value>
   <data name="AboutMenu" xml:space="preserve">
     <value>About WeekNumber</value>
   </data>
+  <data name="BackgroundMenu" xml:space="preserve">
+    <value>Background</value>
+  </data>
   <data name="CalendarRuleMenu" xml:space="preserve">
     <value>Calendar week rule</value>
+  </data>
+  <data name="ColorsMenu" xml:space="preserve">
+    <value>Colors</value>
   </data>
   <data name="ExitMenu" xml:space="preserve">
     <value>Exit WeekNumber</value>
@@ -159,6 +165,12 @@ Please report to feedback@voltura.se!</value>
   </data>
   <data name="FirstDayOfWeekMenu" xml:space="preserve">
     <value>First day of week</value>
+  </data>
+  <data name="ForegroundMenu" xml:space="preserve">
+    <value>Foreground</value>
+  </data>
+  <data name="SaveIconMenu" xml:space="preserve">
+    <value>Save icon...</value>
   </data>
   <data name="SeparatorMenu" xml:space="preserve">
     <value>-</value>
