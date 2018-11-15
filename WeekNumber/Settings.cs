@@ -2,6 +2,7 @@
 
 using Microsoft.Win32;
 using System.Configuration;
+using System.Globalization;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -68,13 +69,21 @@ namespace WeekNumber
             var settingsFile = Application.ExecutablePath + ".config";
             if (!System.IO.File.Exists(settingsFile))
             {
-                const string xml = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                var currentCultureInfo = CultureInfo.CurrentCulture;
+                var firstDay = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
+                var calendarWeekRule = currentCultureInfo.DateTimeFormat.CalendarWeekRule;
+                var xml = $@"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <appSettings>
+<<<<<<< HEAD
     <add key=""DayOfWeek"" value=""Monday""/>
     <add key=""CalendarWeekRule"" value=""FirstFourDayWeek""/>
     <add key=""Background"" value=""Color.Black""/>
     <add key=""Foreground"" value=""Color.White""/>
+=======
+    <add key=""DayOfWeek"" value=""{firstDay}""/>
+    <add key=""CalendarWeekRule"" value=""{calendarWeekRule}"" />
+>>>>>>> 554a7c547975b1269e94159adc5d4c07309c871f
   </appSettings>
 </configuration>";
                 System.IO.File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);
