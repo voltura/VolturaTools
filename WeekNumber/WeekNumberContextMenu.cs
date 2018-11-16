@@ -19,34 +19,7 @@ namespace WeekNumber
 
         internal WeekNumberContextMenu()
         {
-            ContextMenu = new ContextMenu(new MenuItem[4]
-            {
-                new MenuItem(Resources.AboutMenu, AboutClick) { DefaultItem = true },
-                new MenuItem(Resources.SettingsMenu, new MenuItem[5] {
-                    new MenuItem(Resources.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
-                    new MenuItem(Resources.FirstDayOfWeekMenu, new MenuItem[7] {
-                        new MenuItem(Week.Monday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Monday) },
-                        new MenuItem(Week.Tuesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Tuesday) },
-                        new MenuItem(Week.Wednesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Wednesday) },
-                        new MenuItem(Week.Thursday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Thursday) },
-                        new MenuItem(Week.Friday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Friday) },
-                        new MenuItem(Week.Saturday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Saturday) },
-                        new MenuItem(Week.Sunday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Sunday) }
-                    }),
-                    new MenuItem(Resources.CalendarRuleMenu, new MenuItem[3] {
-                        new MenuItem(Week.FirstDaySeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
-                        new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
-                        new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
-                    }),
-                    new MenuItem(Resources.ColorsMenu, new MenuItem[2] {
-                        new MenuItem(Resources.ForegroundMenu, ColorMenuClick) { Name = Resources.Foreground },
-                        new MenuItem(Resources.BackgroundMenu, ColorMenuClick) { Name = Resources.Background }
-                    }),
-                    new MenuItem(Resources.SaveIconMenu, SaveIconClick)
-                }),
-                new MenuItem(Resources.SeparatorMenu),
-                new MenuItem(Resources.ExitMenu, ExitMenuClick)
-            });
+            CreateContextMenu();
         }
 
         #endregion Internal constructor
@@ -77,7 +50,7 @@ namespace WeekNumber
             {
                 var mi = (MenuItem)o;
                 mi.Enabled = false;
-                using (ColorDialog cd = new ColorDialog()
+                using (ColorDialog cd = new ColorDialog
                 {
                     AllowFullOpen = false,
                     FullOpen = false,
@@ -144,7 +117,7 @@ namespace WeekNumber
         {
             var mi = (MenuItem)o;
             mi.Enabled = false;
-            using (var saveFileDialog = new SaveFileDialog()
+            using (var saveFileDialog = new SaveFileDialog
             {
                 Title = Resources.SaveIconMenu,
                 AddExtension = true,
@@ -165,7 +138,58 @@ namespace WeekNumber
 
         #endregion Event handling
 
-        #region Private static helper methods for menuitem
+        #region Private method for context menu creation
+
+        private void CreateContextMenu()
+        {
+            ContextMenu = new ContextMenu(new MenuItem[4]
+            {
+                new MenuItem(Resources.AboutMenu, AboutClick) { DefaultItem = true },
+                new MenuItem(Resources.SettingsMenu, new MenuItem[5] {
+                    new MenuItem(Resources.StartWithWindowsMenu, StartWithWindowsClick) { Checked = Settings.StartWithWindows },
+                    FirstDayOfWeekMenu(),
+                    CalendarRuleMenu(),
+                    ColorsMenu(),
+                    new MenuItem(Resources.SaveIconMenu, SaveIconClick)
+                }),
+                new MenuItem(Resources.SeparatorMenu),
+                new MenuItem(Resources.ExitMenu, ExitMenuClick)
+            });
+        }
+
+        #endregion Private method for context menu creation
+
+        #region Private static helper methods for menu items
+
+        private static MenuItem ColorsMenu()
+        {
+            return new MenuItem(Resources.ColorsMenu, new MenuItem[2] {
+                        new MenuItem(Resources.ForegroundMenu, ColorMenuClick) { Name = Resources.Foreground },
+                        new MenuItem(Resources.BackgroundMenu, ColorMenuClick) { Name = Resources.Background }
+                    });
+        }
+
+        private static MenuItem CalendarRuleMenu()
+        {
+            return new MenuItem(Resources.CalendarRuleMenu, new MenuItem[3] {
+                        new MenuItem(Week.FirstDaySeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
+                        new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
+                        new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
+                    });
+        }
+
+        private static MenuItem FirstDayOfWeekMenu()
+        {
+            return new MenuItem(Resources.FirstDayOfWeekMenu, new MenuItem[7] {
+                        new MenuItem(Week.Monday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Monday) },
+                        new MenuItem(Week.Tuesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Tuesday) },
+                        new MenuItem(Week.Wednesday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Wednesday) },
+                        new MenuItem(Week.Thursday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Thursday) },
+                        new MenuItem(Week.Friday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Friday) },
+                        new MenuItem(Week.Saturday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Saturday) },
+                        new MenuItem(Week.Sunday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Sunday) }
+                    });
+        }
 
         private static void EnableMenuItem(MenuItem mi)
         {
@@ -188,7 +212,7 @@ namespace WeekNumber
             mi.Checked = true;
         }
 
-        #endregion Private static helper methods for menuitem
+        #endregion Private static helper methods for menu items
 
         #region IDisposable methods
 

@@ -10,12 +10,18 @@ namespace WeekNumber
 {
     internal static class WeekIcon
     {
+        #region Icon Size
+
+        private static readonly int _size = 256;
+
+        #endregion Icon Size
+
         #region Internal static functions
 
         internal static Icon GetIcon(int weekNumber)
         {
             Icon icon = null;
-            using (var bitmap = new Bitmap(128, 128))
+            using (var bitmap = new Bitmap(_size, _size))
             using (var graphics = Graphics.FromImage(bitmap))
             {
                 DrawBackgroundOnGraphics(graphics);
@@ -40,13 +46,14 @@ namespace WeekNumber
 
         internal static bool SaveIcon(int weekNumber, string fullPath)
         {
-            bool result = true;
+            var result = true;
             Icon icon = null;
 
             try
             {
                 icon = GetIcon(weekNumber);
-                using (FileStream fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                using (FileStream fs = new FileStream(fullPath, FileMode.Create, 
+                    FileAccess.Write, FileShare.None))
                 {
                     icon.Save(fs);
                 }
@@ -69,22 +76,36 @@ namespace WeekNumber
 
         private static void DrawBackgroundOnGraphics(Graphics graphics)
         {
-            graphics?.FillRectangle(Brushes.Black, 4, 4, 124, 124);
-            using (var whitePen = new Pen(Color.White, 8f))
+            var backgroundColor = Color.FromName(Settings.GetSetting(Resources.Background));
+            var foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
+            using (var foregroundBrush = new SolidBrush(foregroundColor))
+            using (var backgroundBrush = new SolidBrush(backgroundColor))
             {
-                graphics?.DrawRectangle(whitePen, 4, 4, 120, 120);
+                var inset = (float)System.Math.Abs(_size * .03125);
+                graphics?.FillRectangle(backgroundBrush, inset, inset, _size - inset, _size - inset);
+                using (var pen = new Pen(foregroundColor, inset * 2))
+                {
+                    graphics?.DrawRectangle(pen, inset, inset, _size - inset * 2, _size - inset * 2);
+                }
+                var leftInset = (float)System.Math.Abs(_size * .15625);
+                var rightInset = (float)System.Math.Abs(_size * .75);
+                graphics?.FillRectangle(foregroundBrush, leftInset, inset / 2, inset * 3, inset * 5);
+                graphics?.FillRectangle(foregroundBrush, rightInset, inset / 2, inset * 3, inset * 5);
             }
-            graphics?.FillRectangle(Brushes.White, 20, 2, 12, 24);
-            graphics?.FillRectangle(Brushes.White, 96, 2, 12, 24);
         }
 
         private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
         {
-            using (var font = new Font(FontFamily.GenericMonospace, 100f, FontStyle.Bold, GraphicsUnit.Pixel, 0, false))
+            var fontSize = (float)System.Math.Abs(_size * .78125);
+            var insetX = (float)-System.Math.Abs(fontSize * .14);
+            var insetY = (float)System.Math.Abs(fontSize * .2);
+            var foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
+
+            using (var font = new Font(FontFamily.GenericMonospace, fontSize, FontStyle.Bold, 
+                GraphicsUnit.Pixel, 0, false))
+            using (Brush brush = new SolidBrush(foregroundColor))
             {
-                var color = Color.FromName(Settings.GetSetting(Resources.Foreground));
-                Brush brush = new SolidBrush(color);
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, brush, -14f, 20f);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, brush, insetX, insetY);
             }
         }
 
