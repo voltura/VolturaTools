@@ -41,9 +41,11 @@ namespace WeekNumber
         internal static bool SaveIcon(int weekNumber, string fullPath)
         {
             bool result = true;
+            Icon icon = null;
+
             try
             {
-                var icon = GetIcon(weekNumber);
+                icon = GetIcon(weekNumber);
                 using (FileStream fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                     icon.Save(fs);
@@ -52,6 +54,10 @@ namespace WeekNumber
             catch (System.Exception)
             {
                 result = false;
+            }
+            finally
+            {
+                CleanupIcon(ref icon);
             }
             return result;
         }
