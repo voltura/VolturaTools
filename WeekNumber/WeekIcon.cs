@@ -51,8 +51,9 @@ namespace WeekNumber
                     icon.Save(fs);
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                Message.Show(Resources.UnhandledException, ex);
                 result = false;
             }
             finally
