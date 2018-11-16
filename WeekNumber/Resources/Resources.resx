@@ -131,11 +131,14 @@ Free for all.</value>
   <data name="Background" xml:space="preserve">
     <value>Background</value>
   </data>
+  <data name="BackgroundMenu" xml:space="preserve">
+    <value>Background</value>
+  </data>
   <data name="CalendarRuleMenu" xml:space="preserve">
     <value>Calendar week rule</value>
   </data>
   <data name="ColorsMenu" xml:space="preserve">
-    <value>Icon colors...</value>
+    <value>Icon colors</value>
   </data>
   <data name="ExitMenu" xml:space="preserve">
     <value>Exit WeekNumber</value>
@@ -149,6 +152,9 @@ Please report to feedback@voltura.se!</value>
     <value>Could not calendar week rule setting. 
 
 Please report to feedback@voltura.se!</value>
+  </data>
+  <data name="FailedToUpdateColor" xml:space="preserve">
+    <value>Could not update color.</value>
   </data>
   <data name="FailedToUpdateDayOfWeek" xml:space="preserve">
     <value>Could not update first day of week setting.
@@ -166,7 +172,13 @@ Please report to feedback@voltura.se!</value>
   <data name="FirstDayOfWeekMenu" xml:space="preserve">
     <value>First day of week</value>
   </data>
+  <data name="ForceRedraw" xml:space="preserve">
+    <value>ForceRedraw</value>
+  </data>
   <data name="Foreground" xml:space="preserve">
+    <value>Foreground</value>
+  </data>
+  <data name="ForegroundMenu" xml:space="preserve">
     <value>Foreground</value>
   </data>
   <data name="NotImplementedYet" xml:space="preserve">

@@ -67,7 +67,7 @@ namespace WeekNumber
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            if (!_week.WasChanged())
+            if ((!_week.WasChanged()) && Settings.GetSetting(Resources.ForceRedraw) == false.ToString())
             {
                 return;
             }
@@ -77,6 +77,7 @@ namespace WeekNumber
             try
             {
                 Gui?.UpdateIcon(Week.Current());
+                Settings.UpdateSetting(Resources.ForceRedraw, false.ToString());
             }
             catch (Exception ex)
             {

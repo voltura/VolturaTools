@@ -82,7 +82,9 @@ namespace WeekNumber
         {
             using (var font = new Font(FontFamily.GenericMonospace, 100f, FontStyle.Bold, GraphicsUnit.Pixel, 0, false))
             {
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, Brushes.White, -14f, 20f);
+                var color = Color.FromName(Settings.GetSetting(Resources.Foreground));
+                Brush brush = new SolidBrush(color);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, brush, -14f, 20f);
             }
         }
 

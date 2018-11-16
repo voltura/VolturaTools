@@ -33,12 +33,15 @@ namespace WeekNumber
                         new MenuItem(Week.Saturday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Saturday) },
                         new MenuItem(Week.Sunday, FirstDayOfWeekClick) { Checked = Settings.SettingIsValue(Week.DayOfWeekString, Week.Sunday) }
                     }),
-                    new MenuItem(Resources.CalendarRuleMenu,  new MenuItem[3] {
+                    new MenuItem(Resources.CalendarRuleMenu, new MenuItem[3] {
                         new MenuItem(Week.FirstDaySeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstDay) },
                         new MenuItem(Week.FirstFourDayWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFourDayWeek) },
                         new MenuItem(Week.FirstFullWeekSeparatedString, CalendarWeekRuleClick) { Checked = Settings.SettingIsValue(Week.CalendarWeekRuleString, Week.FirstFullWeek) }
                     }),
-                    new MenuItem(Resources.ColorsMenu,  ColorMenuClick),
+                    new MenuItem(Resources.ColorsMenu, new MenuItem[2] {
+                        new MenuItem(Resources.ForegroundMenu, ColorMenuClick) { Name = Resources.Foreground },
+                        new MenuItem(Resources.BackgroundMenu, ColorMenuClick) { Name = Resources.Background }
+                    }),
                     new MenuItem(Resources.SaveIconMenu, SaveIconClick)
                 }),
                 new MenuItem(Resources.SeparatorMenu),
@@ -74,12 +77,25 @@ namespace WeekNumber
             {
                 var mi = (MenuItem)o;
                 mi.Enabled = false;
-                Message.Show(Resources.NotImplementedYet);
+                using (ColorDialog cd = new ColorDialog()
+                {
+                    AllowFullOpen = false,
+                    FullOpen = false,
+                    SolidColorOnly = true,
+                    ShowHelp = false,
+                    Color = System.Drawing.Color.FromName(Settings.GetSetting(mi.Name))
+                }
+                )
+                {
+                    cd.ShowDialog();
+                    Settings.UpdateSetting(mi.Name, cd.Color.Name);
+                    Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
+                }
                 EnableMenuItem(mi);
             }
             catch (Exception ex)
             {
-                Message.Show(Resources.FailedToSetIcon, ex);
+                Message.Show(Resources.FailedToUpdateColor, ex);
             }
         }
 

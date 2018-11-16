@@ -92,6 +92,15 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background.
+        /// </summary>
+        internal static string BackgroundMenu {
+            get {
+                return ResourceManager.GetString("BackgroundMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendar week rule.
         /// </summary>
         internal static string CalendarRuleMenu {
@@ -101,7 +110,7 @@ namespace WeekNumber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Icon colors....
+        ///   Looks up a localized string similar to Icon colors.
         /// </summary>
         internal static string ColorsMenu {
             get {
@@ -137,6 +146,15 @@ namespace WeekNumber {
         internal static string FailedToUpdateCalendarWeekRule {
             get {
                 return ResourceManager.GetString("FailedToUpdateCalendarWeekRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not update color..
+        /// </summary>
+        internal static string FailedToUpdateColor {
+            get {
+                return ResourceManager.GetString("FailedToUpdateColor", resourceCulture);
             }
         }
         
@@ -181,11 +199,29 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ForceRedraw.
+        /// </summary>
+        internal static string ForceRedraw {
+            get {
+                return ResourceManager.GetString("ForceRedraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Foreground.
         /// </summary>
         internal static string Foreground {
             get {
                 return ResourceManager.GetString("Foreground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Foreground.
+        /// </summary>
+        internal static string ForegroundMenu {
+            get {
+                return ResourceManager.GetString("ForegroundMenu", resourceCulture);
             }
         }
         
