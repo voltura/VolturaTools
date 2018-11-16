@@ -9,6 +9,10 @@ Small tools and utilities for Windows environment
 Configuration options;
   - Context menu: About WeekNumber - displays about box with Github link
   - Context menu: Start with Windows - Toogle if WeekNumber.exe shall be automatically started with Windows or not (Checkbox indication)
+  - Context menu: Save icon... - Lets user save current icon to file
+  - Context menu: First day of week - Lets user select what day is the first of the week
+  - Context menu: Calendar week rule - Lets user specify rule for first week of year
+  - Context menu: Icon colors... - Lets user specify icon colors
   - Context menu: Exit WeekNumber - Closes the application
 
 # DiskSpace 
