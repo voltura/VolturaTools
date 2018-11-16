@@ -141,7 +141,7 @@ namespace WeekNumber
             {
                 if (DialogResult.OK == saveFileDialog.ShowDialog())
                 {
-                    var success = WeekIcon.SaveIcon(Week.Current(), saveFileDialog.FileName);
+                    WeekIcon.SaveIcon(Week.Current(), saveFileDialog.FileName);
                 }
             }
             EnableMenuItem(mi);
