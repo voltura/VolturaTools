@@ -354,7 +354,7 @@ namespace WeekNumber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  version .
+        ///   Looks up a localized string similar to version.
         /// </summary>
         internal static string Version {
             get {
