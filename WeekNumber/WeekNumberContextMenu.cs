@@ -147,7 +147,7 @@ namespace WeekNumber
                 {
                     DefaultItem = true
                 },
-                new MenuItem(Resources.SettingsMenu, new MenuItem[5] 
+                new MenuItem(Resources.SettingsMenu, new MenuItem[5]
                 {
                     new MenuItem(Resources.StartWithWindowsMenu, StartWithWindowsClick)
                     {
