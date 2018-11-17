@@ -88,8 +88,8 @@ namespace WeekNumber
                     graphics?.DrawRectangle(pen, inset, inset, _size - inset * 2, _size - inset * 2);
                 }
                 var leftInset = (float)System.Math.Abs(_size * .15625);
-                var rightInset = (float)System.Math.Abs(_size * .75);
                 graphics?.FillRectangle(foregroundBrush, leftInset, inset / 2, inset * 3, inset * 5);
+                var rightInset = (float)System.Math.Abs(_size * .75);
                 graphics?.FillRectangle(foregroundBrush, rightInset, inset / 2, inset * 3, inset * 5);
             }
         }

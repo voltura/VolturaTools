@@ -23,4 +23,3 @@ using System.Runtime.InteropServices;
 [assembly: NeutralResourcesLanguage("en-US")]
 
 #endregion Assembly information
-
