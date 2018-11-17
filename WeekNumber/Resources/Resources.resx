@@ -166,11 +166,17 @@ Please report to feedback@voltura.se!</value>
 
 Please report to feedback@voltura.se!</value>
   </data>
-  <data name="FirstDay" xml:space="preserve">
+  <data name="FirstDayMenu" xml:space="preserve">
     <value>First Day</value>
   </data>
   <data name="FirstDayOfWeekMenu" xml:space="preserve">
-    <value>First day of week</value>
+    <value>First Day Of Week</value>
+  </data>
+  <data name="FirstFourDayWeekMenu" xml:space="preserve">
+    <value>First Four Day Week</value>
+  </data>
+  <data name="FirstFullWeekMenu" xml:space="preserve">
+    <value>First Full Week</value>
   </data>
   <data name="ForceRedraw" xml:space="preserve">
     <value>ForceRedraw</value>
@@ -181,8 +187,17 @@ Please report to feedback@voltura.se!</value>
   <data name="ForegroundMenu" xml:space="preserve">
     <value>Foreground</value>
   </data>
+  <data name="FridayMenu" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="MondayMenu" xml:space="preserve">
+    <value>Monday</value>
+  </data>
   <data name="NotImplementedYet" xml:space="preserve">
     <value>Sorry, this function is not implemented yet.</value>
+  </data>
+  <data name="SaturdayMenu" xml:space="preserve">
+    <value>Saturday</value>
   </data>
   <data name="SaveIconMenu" xml:space="preserve">
     <value>Save icon...</value>
@@ -197,6 +212,15 @@ Please report to feedback@voltura.se!</value>
   <data name="StartWithWindowsMenu" xml:space="preserve">
     <value>Start with Windows</value>
   </data>
+  <data name="SundayMenu" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="ThursdayMenu" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="TuesdayMenu" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
   <data name="UnhandledException" xml:space="preserve">
     <value>Something went wrong. 
 
@@ -204,6 +228,9 @@ Please report to feedback@voltura.se!</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value> version </value>
+  </data>
+  <data name="WednesdayMenu" xml:space="preserve">
+    <value>Wednesday</value>
   </data>
   <data name="Week" xml:space="preserve">
     <value>Week </value>

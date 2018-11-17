@@ -38,9 +38,6 @@ namespace WeekNumber
         internal readonly static string Friday = nameof(DayOfWeek.Friday);
         internal readonly static string Saturday = nameof(DayOfWeek.Saturday);
         internal readonly static string Sunday = nameof(DayOfWeek.Sunday);
-        internal readonly static string FirstDaySeparatedString = "First Day";
-        internal readonly static string FirstFourDayWeekSeparatedString = "First Four Day Week";
-        internal readonly static string FirstFullWeekSeparatedString = "First Full Week";
 
         #endregion Internal static week strings
 

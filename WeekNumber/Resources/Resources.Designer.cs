@@ -183,18 +183,36 @@ namespace WeekNumber {
         /// <summary>
         ///   Looks up a localized string similar to First Day.
         /// </summary>
-        internal static string FirstDay {
+        internal static string FirstDayMenu {
             get {
-                return ResourceManager.GetString("FirstDay", resourceCulture);
+                return ResourceManager.GetString("FirstDayMenu", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First day of week.
+        ///   Looks up a localized string similar to First Day Of Week.
         /// </summary>
         internal static string FirstDayOfWeekMenu {
             get {
                 return ResourceManager.GetString("FirstDayOfWeekMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Four Day Week.
+        /// </summary>
+        internal static string FirstFourDayWeekMenu {
+            get {
+                return ResourceManager.GetString("FirstFourDayWeekMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Full Week.
+        /// </summary>
+        internal static string FirstFullWeekMenu {
+            get {
+                return ResourceManager.GetString("FirstFullWeekMenu", resourceCulture);
             }
         }
         
@@ -226,11 +244,38 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friday.
+        /// </summary>
+        internal static string FridayMenu {
+            get {
+                return ResourceManager.GetString("FridayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monday.
+        /// </summary>
+        internal static string MondayMenu {
+            get {
+                return ResourceManager.GetString("MondayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, this function is not implemented yet..
         /// </summary>
         internal static string NotImplementedYet {
             get {
                 return ResourceManager.GetString("NotImplementedYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saturday.
+        /// </summary>
+        internal static string SaturdayMenu {
+            get {
+                return ResourceManager.GetString("SaturdayMenu", resourceCulture);
             }
         }
         
@@ -271,6 +316,33 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sunday.
+        /// </summary>
+        internal static string SundayMenu {
+            get {
+                return ResourceManager.GetString("SundayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thursday.
+        /// </summary>
+        internal static string ThursdayMenu {
+            get {
+                return ResourceManager.GetString("ThursdayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuesday.
+        /// </summary>
+        internal static string TuesdayMenu {
+            get {
+                return ResourceManager.GetString("TuesdayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something went wrong. 
         ///
         ///Please report to feedback@voltura.se!.
@@ -287,6 +359,15 @@ namespace WeekNumber {
         internal static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wednesday.
+        /// </summary>
+        internal static string WednesdayMenu {
+            get {
+                return ResourceManager.GetString("WednesdayMenu", resourceCulture);
             }
         }
         
