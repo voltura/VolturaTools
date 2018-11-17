@@ -13,7 +13,8 @@ namespace WeekNumber
 
         internal static void Show(string text, Exception ex = null)
         {
-            MessageBox.Show(ex is null ? text : text + ex, Application.ProductName + Resources.Version + Application.ProductVersion,
+            MessageBox.Show(ex is null ? text : $@"{text} {ex}",
+                Application.ProductName + Resources.Version + Application.ProductVersion,
                 MessageBoxButtons.OK, ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error);
         }
 
