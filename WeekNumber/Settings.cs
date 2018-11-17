@@ -3,6 +3,7 @@
 using Microsoft.Win32;
 using System.Configuration;
 using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -67,7 +68,7 @@ namespace WeekNumber
         private static void CreateSettings()
         {
             var settingsFile = Application.ExecutablePath + ".config";
-            if (!System.IO.File.Exists(settingsFile))
+            if (!File.Exists(settingsFile))
             {
                 var currentCultureInfo = CultureInfo.CurrentCulture;
                 var firstDay = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
@@ -82,7 +83,7 @@ namespace WeekNumber
     <add key=""ForceRedraw"" value=""False""/>
   </appSettings>
 </configuration>";
-                System.IO.File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);
+                File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);
             }
         }
 

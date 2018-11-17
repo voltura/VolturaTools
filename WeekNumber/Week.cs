@@ -1,7 +1,6 @@
 ﻿#region Using statements
 
 using System;
-using System.ComponentModel;
 using System.Globalization;
 
 #endregion Using statements
@@ -71,15 +70,15 @@ namespace WeekNumber
         /// <returns>Current week as int based on calendar rules in application settings</returns>
         public static int Current()
         {
-            var dayOfWeekSetting = Settings.GetSetting(DayOfWeekString);
-            Enum dayOfWeekEnum = DayOfWeek.Sunday;
-            var dayOfWeek = (DayOfWeek) TypeDescriptor.GetConverter(dayOfWeekEnum)
-                .ConvertFrom(dayOfWeekSetting);
-            var calendarWeekRuleSetting = Settings.GetSetting(CalendarWeekRuleString);
-            Enum calendarWeekRuleEnum = CalendarWeekRule.FirstFourDayWeek;
-            var calendarWeekRule = (CalendarWeekRule) TypeDescriptor.GetConverter(calendarWeekRuleEnum)
-                .ConvertFrom(calendarWeekRuleSetting);
-            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
+            var currentCultureInfo = CultureInfo.CurrentCulture;
+            var dayOfWeek = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
+            var calendarWeekRule = currentCultureInfo.DateTimeFormat.CalendarWeekRule;
+            dayOfWeek = Enum.TryParse(Settings.GetSetting(DayOfWeekString), true, out dayOfWeek) ?
+                dayOfWeek : DayOfWeek.Monday;
+            calendarWeekRule = Enum.TryParse(Settings.GetSetting(CalendarWeekRuleString), true,
+                out calendarWeekRule) ? calendarWeekRule : CalendarWeekRule.FirstFourDayWeek;
+            return CultureInfo.CurrentCulture.Calendar.
+                GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
         }
 
         #endregion Public function that returns current week based on calendar rule
