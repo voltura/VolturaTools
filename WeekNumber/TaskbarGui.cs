@@ -26,6 +26,7 @@ namespace WeekNumber
             _notifyIcon = GetNotifyIcon(_contextMenu.ContextMenu);
             _notifyIcon.Click += NotifyIcon_Click;
             UpdateIcon(week, ref _notifyIcon);
+            SayWeek();
         }
 
         #endregion Constructor
@@ -59,11 +60,20 @@ namespace WeekNumber
             var eobj = e as MouseEventArgs;
             if (eobj.Button == MouseButtons.Left)
             {
-                _speak?.Sentence(Resources.ClearThroat + Resources.Week + Week.Current());
+                SayWeek();
             }
         }
 
         #endregion Events
+
+        #region Private method to speak week number
+
+        private void SayWeek()
+        {
+            _speak?.Sentence(Resources.ClearThroat + Resources.Week + Week.Current());
+        }
+
+        #endregion Private method to speak week number
 
         #region Private helper property to create NotifyIcon
 
