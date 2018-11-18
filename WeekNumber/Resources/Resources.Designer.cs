@@ -289,6 +289,24 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Colors reset.
+        /// </summary>
+        internal static string ResetColors {
+            get {
+                return ResourceManager.GetString("ResetColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset colors.
+        /// </summary>
+        internal static string ResetColorsMenu {
+            get {
+                return ResourceManager.GetString("ResetColorsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         internal static string SaturdayMenu {

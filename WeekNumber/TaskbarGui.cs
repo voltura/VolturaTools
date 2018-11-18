@@ -13,6 +13,7 @@ namespace WeekNumber
 
         private NotifyIcon _notifyIcon;
         private readonly WeekNumberContextMenu _contextMenu;
+        private readonly Speak _speak;
 
         #endregion Private variables
 
@@ -20,8 +21,10 @@ namespace WeekNumber
 
         internal TaskbarGui(int week = 1)
         {
-            _contextMenu = new WeekNumberContextMenu();
+            _speak = new Speak();
+            _contextMenu = new WeekNumberContextMenu(ref _speak);
             _notifyIcon = GetNotifyIcon(_contextMenu.ContextMenu);
+            _notifyIcon.Click += NotifyIcon_Click;
             UpdateIcon(week, ref _notifyIcon);
         }
 
@@ -48,6 +51,19 @@ namespace WeekNumber
         }
 
         #endregion Private static UpdateIcon method
+
+        #region Events
+
+        private void NotifyIcon_Click(object sender, EventArgs e)
+        {
+            var eobj = e as MouseEventArgs;
+            if (eobj.Button == MouseButtons.Left)
+            {
+                _speak?.Sentence(Resources.ClearThroat + Resources.Week + Week.Current());
+            }
+        }
+
+        #endregion Events
 
         #region Private helper property to create NotifyIcon
 

@@ -9,7 +9,11 @@ namespace WeekNumber
 {
     internal class WeekNumberContextMenu : IDisposable
     {
-        private readonly Speak _speak = new Speak();
+        #region Private variables
+
+        private readonly Speak _speak;
+
+        #endregion Private variables
 
         #region Internal context menu
 
@@ -19,8 +23,9 @@ namespace WeekNumber
 
         #region Internal contructor
 
-        internal WeekNumberContextMenu()
+        internal WeekNumberContextMenu(ref Speak speak)
         {
+            _speak = speak;
             CreateContextMenu();
         }
 
@@ -53,6 +58,12 @@ namespace WeekNumber
                 var mi = (MenuItem)o;
                 SayColorSelect(mi.Name);
                 mi.Enabled = false;
+                if (mi.Name == Resources.ResetColors)
+                {
+                    Settings.UpdateSetting(Resources.Foreground, System.Drawing.Color.White.Name);
+                    Settings.UpdateSetting(Resources.Background, System.Drawing.Color.Black.Name);
+                }
+                else
                 using (ColorDialog cd = new ColorDialog
                 {
                     AllowFullOpen = false,
@@ -64,17 +75,13 @@ namespace WeekNumber
                 {
                     cd.ShowDialog();
                     Settings.UpdateSetting(mi.Name, cd.Color.Name);
-                    Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
                 }
+                Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
                 EnableMenuItem(mi);
             }
             catch (Exception ex)
             {
-                Message.Show(Resources.FailedToUpdateColor, ex, _speak);
-            }
-            finally
-            {
-                _speak?.Cancel();
+                Message.Show(Resources.FailedToUpdateColor, ex);
             }
         }
 
@@ -177,7 +184,7 @@ namespace WeekNumber
 
         private MenuItem ColorsMenu()
         {
-            return new MenuItem(Resources.ColorsMenu, new MenuItem[2]
+            return new MenuItem(Resources.ColorsMenu, new MenuItem[3]
             {
                 new MenuItem(Resources.ForegroundMenu, ColorMenuClick)
                 {
@@ -186,6 +193,10 @@ namespace WeekNumber
                 new MenuItem(Resources.BackgroundMenu, ColorMenuClick)
                 {
                     Name = Resources.Background
+                },
+                new MenuItem(Resources.ResetColorsMenu, ColorMenuClick)
+                {
+                    Name = Resources.ResetColors
                 }
             });
         }
@@ -287,15 +298,19 @@ namespace WeekNumber
             }
         }
 
-        private void SayColorSelect(string colorType)
+        private void SayColorSelect(string input)
         {
-            if (colorType == Resources.Background)
+            if (input == Resources.Background)
             {
                 _speak?.Sentence(Resources.SelectBackgroundColor);
             }
-            else
+            else if (input == Resources.Foreground)
             {
                 _speak?.Sentence(Resources.SelectForegroundColor);
+            }
+            else
+            {
+                _speak?.Sentence(Resources.ClearThroat + input);
             }
         }
 
@@ -318,7 +333,6 @@ namespace WeekNumber
             {
                 return;
             }
-            _speak.Dispose(true);
             CleanupContextMenu();
         }
 

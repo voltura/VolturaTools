@@ -22,15 +22,13 @@ namespace WeekNumber
             speak?.Sentence(Resources.ClearThroat + text);
             MessageBox.Show(ex is null ? text : $"{text}\r\n{ex}", _caption,
                 MessageBoxButtons.OK, ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-            speak?.Cancel();
         }
 
-        internal static void Show(string text, Speak speak = null)
+        internal static void Show(string text, Speak speak)
         {
             speak?.Sentence(Resources.ClearThroat + _caption);
             MessageBox.Show(text, _caption,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-            speak?.Cancel();
         }
 
         #endregion Show Information or Error dialog methods

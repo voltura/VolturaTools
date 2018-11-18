@@ -1,67 +1,35 @@
-﻿#region Using statements
+﻿#region Using statement
 
-using System.Speech.Synthesis;
-using System;
+using SpeechLib;
 
-#endregion Using statements
+#endregion Using statement
 
 namespace WeekNumber
 {
-    internal class Speak : IDisposable
+    internal class Speak
     {
-        #region Private variables
+        #region Private variable
 
-        private readonly SpeechSynthesizer _synth;
-        private bool _disposedValue;
+        private readonly SpVoice _voice = new SpVoice();
 
-        #endregion Private variables
+        #endregion Private variable
 
         #region Constructor
 
         internal Speak()
         {
-            _synth = new SpeechSynthesizer();
-            _synth.SetOutputToDefaultAudioDevice();
+            _voice = new SpVoice();
         }
 
         #endregion Constructor
 
-        #region Internal methods & properties
+        #region Internal method
 
         internal void Sentence(string sentence)
         {
-            _synth.SpeakAsyncCancelAll();
-            _synth.SpeakAsync(sentence);
+            _voice.Speak(sentence, SpeechVoiceSpeakFlags.SVSFlagsAsync);
         }
 
-        internal void Cancel()
-        {
-            _synth.SpeakAsyncCancelAll();
-        }
-
-        #endregion Internal methods
-
-        #region IDisposable Support
-
-        internal virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    Cancel();
-                    _synth.Dispose();
-                }
-                _disposedValue = true;
-            }
-        }
-
-        void IDisposable.Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
+        #endregion Internal method
     }
 }
