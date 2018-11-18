@@ -9,6 +9,8 @@ namespace WeekNumber
 {
     internal class WeekNumberContextMenu : IDisposable
     {
+        private readonly Speak _speak = new Speak();
+
         #region Internal context menu
 
         internal ContextMenu ContextMenu { get; private set; }
@@ -44,11 +46,12 @@ namespace WeekNumber
             }
         }
 
-        private static void ColorMenuClick(object o, EventArgs e)
+        private void ColorMenuClick(object o, EventArgs e)
         {
             try
             {
                 var mi = (MenuItem)o;
+                SayColorSelect(mi.Name);
                 mi.Enabled = false;
                 using (ColorDialog cd = new ColorDialog
                 {
@@ -67,7 +70,11 @@ namespace WeekNumber
             }
             catch (Exception ex)
             {
-                Message.Show(Resources.FailedToUpdateColor, ex);
+                Message.Show(Resources.FailedToUpdateColor, ex, _speak);
+            }
+            finally
+            {
+                _speak?.Cancel();
             }
         }
 
@@ -88,7 +95,7 @@ namespace WeekNumber
             }
         }
 
-        private static void StartWithWindowsClick(object o, EventArgs e)
+        private void StartWithWindowsClick(object o, EventArgs e)
         {
             try
             {
@@ -96,6 +103,7 @@ namespace WeekNumber
                 mi.Enabled = false;
                 mi.Checked = !mi.Checked;
                 Settings.StartWithWindows = mi.Checked;
+                SayStartWithWindowsSetting();
                 EnableMenuItem(mi);
             }
             catch (Exception ex)
@@ -104,11 +112,11 @@ namespace WeekNumber
             }
         }
 
-        private static void AboutClick(object o, EventArgs e)
+        private void AboutClick(object o, EventArgs e)
         {
             var mi = (MenuItem)o;
             mi.Enabled = false;
-            Message.Show(Resources.About);
+            Message.Show(Resources.About, _speak);
             EnableMenuItem(mi);
         }
 
@@ -165,9 +173,9 @@ namespace WeekNumber
 
         #endregion Private method for context menu creation
 
-        #region Private static helper methods for menu items
+        #region Private helper methods for menu items
 
-        private static MenuItem ColorsMenu()
+        private MenuItem ColorsMenu()
         {
             return new MenuItem(Resources.ColorsMenu, new MenuItem[2]
             {
@@ -267,7 +275,31 @@ namespace WeekNumber
             mi.Checked = true;
         }
 
-        #endregion Private static helper methods for menu items
+        private void SayStartWithWindowsSetting()
+        {
+            if (Settings.StartWithWindows)
+            {
+                _speak?.Sentence(Resources.ClearThroat + Resources.StartWithWindows);
+            }
+            else
+            {
+                _speak?.Sentence(Resources.ClearThroat + Resources.NotStartWithWindows);
+            }
+        }
+
+        private void SayColorSelect(string colorType)
+        {
+            if (colorType == Resources.Background)
+            {
+                _speak?.Sentence(Resources.SelectBackgroundColor);
+            }
+            else
+            {
+                _speak?.Sentence(Resources.SelectForegroundColor);
+            }
+        }
+
+        #endregion Private helper methods for menu items
 
         #region IDisposable methods
 
@@ -286,6 +318,7 @@ namespace WeekNumber
             {
                 return;
             }
+            _speak.Dispose(true);
             CleanupContextMenu();
         }
 

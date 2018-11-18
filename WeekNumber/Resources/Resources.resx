@@ -137,6 +137,9 @@ Free for all.</value>
   <data name="CalendarRuleMenu" xml:space="preserve">
     <value>Calendar week rule</value>
   </data>
+  <data name="ClearThroat" xml:space="preserve">
+    <value>   a!   </value>
+  </data>
   <data name="ColorsMenu" xml:space="preserve">
     <value>Icon colors</value>
   </data>
@@ -196,11 +199,20 @@ Please report to feedback@voltura.se!</value>
   <data name="NotImplementedYet" xml:space="preserve">
     <value>Sorry, this function is not implemented yet.</value>
   </data>
+  <data name="NotStartWithWindows" xml:space="preserve">
+    <value>WeekNumber will not start with Windows</value>
+  </data>
   <data name="SaturdayMenu" xml:space="preserve">
     <value>Saturday</value>
   </data>
   <data name="SaveIconMenu" xml:space="preserve">
     <value>Save icon...</value>
+  </data>
+  <data name="SelectBackgroundColor" xml:space="preserve">
+    <value>Please select background color</value>
+  </data>
+  <data name="SelectForegroundColor" xml:space="preserve">
+    <value>Please select foreground color</value>
   </data>
   <data name="SeparatorMenu" xml:space="preserve">
     <value>-</value>
@@ -208,6 +220,9 @@ Please report to feedback@voltura.se!</value>
   </data>
   <data name="SettingsMenu" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>WeekNumber set to start with Windows</value>
   </data>
   <data name="StartWithWindowsMenu" xml:space="preserve">
     <value>Start with Windows</value>

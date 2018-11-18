@@ -110,6 +110,15 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to    a!   .
+        /// </summary>
+        internal static string ClearThroat {
+            get {
+                return ResourceManager.GetString("ClearThroat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Icon colors.
         /// </summary>
         internal static string ColorsMenu {
@@ -271,6 +280,15 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to WeekNumber will not start with Windows.
+        /// </summary>
+        internal static string NotStartWithWindows {
+            get {
+                return ResourceManager.GetString("NotStartWithWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saturday.
         /// </summary>
         internal static string SaturdayMenu {
@@ -289,6 +307,24 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select background color.
+        /// </summary>
+        internal static string SelectBackgroundColor {
+            get {
+                return ResourceManager.GetString("SelectBackgroundColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select foreground color.
+        /// </summary>
+        internal static string SelectForegroundColor {
+            get {
+                return ResourceManager.GetString("SelectForegroundColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -.
         /// </summary>
         internal static string SeparatorMenu {
@@ -303,6 +339,15 @@ namespace WeekNumber {
         internal static string SettingsMenu {
             get {
                 return ResourceManager.GetString("SettingsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WeekNumber set to start with Windows.
+        /// </summary>
+        internal static string StartWithWindows {
+            get {
+                return ResourceManager.GetString("StartWithWindows", resourceCulture);
             }
         }
         
