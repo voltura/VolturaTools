@@ -110,7 +110,7 @@ namespace WeekNumber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to    a!   .
+        ///   Looks up a localized string similar to    !   .
         /// </summary>
         internal static string ClearThroat {
             get {
