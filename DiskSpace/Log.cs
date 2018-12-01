@@ -30,16 +30,16 @@ namespace DiskSpace
             {
                 Trace.Listeners.Clear();
                 var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                
                 fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
                 var traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
                 Trace.UseGlobalLock = false;
             }
-            catch
+            catch (Exception ex)
             {
                 fs?.Dispose();
+                Debug.WriteLine(ex);
             }
         }
 
@@ -87,8 +87,9 @@ namespace DiskSpace
                         }
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
             }
             Init();
         }
@@ -109,10 +110,12 @@ namespace DiskSpace
             Process process = null;
             try
             {
+#pragma warning disable CC0009 // Use object initializer
 #pragma warning disable IDE0017 // Simplify object initialization
                 process = new Process();
 #pragma warning restore IDE0017 // Simplify object initialization
-                process.StartInfo = new ProcessStartInfo(logFile) {UseShellExecute = true};
+#pragma warning restore CC0009 // Use object initializer
+                process.StartInfo = new ProcessStartInfo(logFile) { UseShellExecute = true };
                 process.Start();
             }
             catch (InvalidOperationException ex)
@@ -146,8 +149,9 @@ namespace DiskSpace
                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
                         value);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Debug.WriteLine(ex);
                 }
             }
         }
@@ -169,8 +173,9 @@ namespace DiskSpace
                         DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
                         value);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Debug.WriteLine(ex);
                 }
             }
         }
