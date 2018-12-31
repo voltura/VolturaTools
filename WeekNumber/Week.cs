@@ -74,10 +74,39 @@ namespace WeekNumber
                 dayOfWeek : DayOfWeek.Monday;
             calendarWeekRule = Enum.TryParse(Settings.GetSetting(CalendarWeekRuleString), true,
                 out calendarWeekRule) ? calendarWeekRule : CalendarWeekRule.FirstFourDayWeek;
-            return CultureInfo.CurrentCulture.Calendar.
+            var week = CultureInfo.CurrentCulture.Calendar.
                 GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
+            if (week == 53 && (!YearHas53Weeks(DateTime.Now.Year)))
+            {
+                week = 1;
+            }
+            return week;
         }
 
         #endregion Public function that returns current week based on calendar rule
+
+        #region Private helper functions to determine if it is week 1 or 53
+
+        private static bool YearHas53Weeks(int year)
+        {
+            return Weeks(year) == 53;
+        }
+
+        private static int Weeks(int year)
+        {
+            var w = 52;
+            if (P(year) == 4 || P(year - 1) == 3)
+            {
+                w++;
+            }
+            return w; // returns the number of weeks in that year
+        }
+
+        private static int P(int year)
+        {
+            return (int)(year + Math.Floor(year / 4f) - Math.Floor(year / 100f) + Math.Floor(year / 400f)) % 7;
+        }
+
+        #endregion Private helper functions to determine if it is week 1 or 53
     }
 }
