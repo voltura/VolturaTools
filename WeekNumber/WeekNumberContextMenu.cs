@@ -63,8 +63,7 @@ namespace WeekNumber
                     Settings.UpdateSetting(Resources.Foreground, System.Drawing.Color.White.Name);
                     Settings.UpdateSetting(Resources.Background, System.Drawing.Color.Black.Name);
                 }
-                else
-                using (ColorDialog cd = new ColorDialog
+                else using (ColorDialog cd = new ColorDialog
                 {
                     AllowFullOpen = false,
                     FullOpen = false,
@@ -162,7 +161,7 @@ namespace WeekNumber
                 {
                     DefaultItem = true
                 },
-                new MenuItem(Resources.SettingsMenu, new MenuItem[5]
+                new MenuItem(Resources.SettingsMenu, new MenuItem[6]
                 {
                     new MenuItem(Resources.StartWithWindowsMenu, StartWithWindowsClick)
                     {
@@ -171,11 +170,24 @@ namespace WeekNumber
                     FirstDayOfWeekMenu(),
                     CalendarRuleMenu(),
                     ColorsMenu(),
+                    new MenuItem(Resources.MuteAllSoundsMenu, MuteAllSoundsClick)
+                    {
+                        Checked = Settings.MuteAllSounds
+                    },
                     new MenuItem(Resources.SaveIconMenu, SaveIconClick)
                 }),
                 new MenuItem(Resources.SeparatorMenu),
                 new MenuItem(Resources.ExitMenu, ExitMenuClick)
             });
+        }
+
+        private static void MuteAllSoundsClick(object o, EventArgs e)
+        {
+            var mi = (MenuItem)o;
+            mi.Enabled = false;
+            mi.Checked = !mi.Checked;
+            Settings.MuteAllSounds = mi.Checked;
+            EnableMenuItem(mi);
         }
 
         #endregion Private method for context menu creation

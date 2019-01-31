@@ -13,13 +13,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Voltura AB")]
 [assembly: AssemblyProduct("WeekNumber")]
-[assembly: AssemblyCopyright("Copyright © Voltura AB 2018")]
+[assembly: AssemblyCopyright("Copyright © Voltura AB 2018-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("550adc75-8afb-4813-ac91-8c8c6cb681ae")]
-[assembly: AssemblyVersion("1.5.*")]
-[assembly: AssemblyFileVersion("1.5")]
+[assembly: AssemblyVersion("1.6.*")]
+[assembly: AssemblyFileVersion("1.6")]
 [assembly: NeutralResourcesLanguage("en-US")]
 
 #endregion Assembly information

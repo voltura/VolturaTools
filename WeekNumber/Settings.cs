@@ -37,6 +37,16 @@ namespace WeekNumber
 
         #endregion Internal static property that updates registry for application to start when Windows start
 
+        #region Internal static property for MuteAllSounds setting
+
+        internal static bool MuteAllSounds
+        {
+            get => SettingIsValue(nameof(MuteAllSounds), true.ToString());
+            set => UpdateSetting(nameof(MuteAllSounds), value.ToString());
+        }
+
+        #endregion Internal static property for MuteAllSounds setting
+
         #region Internal static methods
 
         internal static bool SettingIsValue(string setting, string value)
@@ -81,6 +91,7 @@ namespace WeekNumber
     <add key=""Background"" value=""Black""/>
     <add key=""Foreground"" value=""White""/>
     <add key=""ForceRedraw"" value=""False""/>
+    <add key=""MuteAllSounds"" value=""False""/>
   </appSettings>
 </configuration>";
                 File.WriteAllText(settingsFile, xml, System.Text.Encoding.UTF8);

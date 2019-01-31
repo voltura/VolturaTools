@@ -196,6 +196,9 @@ Please report to feedback@voltura.se!</value>
   <data name="MondayMenu" xml:space="preserve">
     <value>Monday</value>
   </data>
+  <data name="MuteAllSoundsMenu" xml:space="preserve">
+    <value>Mute all sounds</value>
+  </data>
   <data name="NotImplementedYet" xml:space="preserve">
     <value>Sorry, this function is not implemented yet.</value>
   </data>

@@ -271,6 +271,15 @@ namespace WeekNumber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mute all sounds.
+        /// </summary>
+        internal static string MuteAllSoundsMenu {
+            get {
+                return ResourceManager.GetString("MuteAllSoundsMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, this function is not implemented yet..
         /// </summary>
         internal static string NotImplementedYet {
