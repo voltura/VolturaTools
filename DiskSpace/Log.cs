@@ -30,7 +30,8 @@ namespace DiskSpace
             {
                 Trace.Listeners.Clear();
                 var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                fs = new FileStream(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
+                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                fs = new FileStream(Path.Combine(appDataFolder, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
                 var traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
@@ -68,7 +69,8 @@ namespace DiskSpace
             try
             {
                 var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                var fi = new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile));
+                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var fi = new FileInfo(Path.Combine(appDataFolder, logFile));
                 if (fi.Exists)
                 {
                     var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
@@ -104,7 +106,8 @@ namespace DiskSpace
         internal static void Show()
         {
             var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            logFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, logFile);
+            var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            logFile = Path.Combine(appDataFolder, logFile);
             var fi = new FileInfo(logFile);
             if (!fi.Exists) return;
             Process process = null;
