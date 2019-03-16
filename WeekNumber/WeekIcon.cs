@@ -28,7 +28,7 @@ namespace WeekNumber
                 DrawWeekNumberOnGraphics(weekNumber, graphics);
                 var bHicon = bitmap.GetHicon();
                 var newIcon = Icon.FromHandle(bHicon);
-                icon = new Icon(newIcon, SystemInformation.SmallIconSize);
+                icon = new Icon(newIcon, _size, _size);
                 CleanupIcon(ref newIcon);
             }
             return icon;
@@ -105,7 +105,7 @@ namespace WeekNumber
                 GraphicsUnit.Pixel, 0, false))
             using (Brush brush = new SolidBrush(foregroundColor))
             {
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0').Substring(0, 2), font, brush, insetX, insetY);
+                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0'), font, brush, insetX, insetY);
             }
         }
 
