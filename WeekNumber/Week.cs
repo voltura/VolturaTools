@@ -20,24 +20,27 @@ namespace WeekNumber
         /// <summary>
         /// Initiates the week to current
         /// </summary>
-        public Week() => _week = Current();
+        public Week()
+        {
+            _week = Current();
+        }
 
         #endregion Constructor that initiates active week
 
         #region Internal static week strings
 
-        internal readonly static string CalendarWeekRuleString = nameof(CalendarWeekRule);
-        internal readonly static string FirstDay = nameof(CalendarWeekRule.FirstDay);
-        internal readonly static string FirstFourDayWeek = nameof(CalendarWeekRule.FirstFourDayWeek);
-        internal readonly static string FirstFullWeek = nameof(CalendarWeekRule.FirstFullWeek);
-        internal readonly static string DayOfWeekString = nameof(DayOfWeek);
-        internal readonly static string Monday = nameof(DayOfWeek.Monday);
-        internal readonly static string Tuesday = nameof(DayOfWeek.Tuesday);
-        internal readonly static string Wednesday = nameof(DayOfWeek.Wednesday);
-        internal readonly static string Thursday = nameof(DayOfWeek.Thursday);
-        internal readonly static string Friday = nameof(DayOfWeek.Friday);
-        internal readonly static string Saturday = nameof(DayOfWeek.Saturday);
-        internal readonly static string Sunday = nameof(DayOfWeek.Sunday);
+        internal static readonly string CalendarWeekRuleString = nameof(CalendarWeekRule);
+        internal static readonly string FirstDay = nameof(CalendarWeekRule.FirstDay);
+        internal static readonly string FirstFourDayWeek = nameof(CalendarWeekRule.FirstFourDayWeek);
+        internal static readonly string FirstFullWeek = nameof(CalendarWeekRule.FirstFullWeek);
+        internal static readonly string DayOfWeekString = nameof(DayOfWeek);
+        internal static readonly string Monday = nameof(DayOfWeek.Monday);
+        internal static readonly string Tuesday = nameof(DayOfWeek.Tuesday);
+        internal static readonly string Wednesday = nameof(DayOfWeek.Wednesday);
+        internal static readonly string Thursday = nameof(DayOfWeek.Thursday);
+        internal static readonly string Friday = nameof(DayOfWeek.Friday);
+        internal static readonly string Saturday = nameof(DayOfWeek.Saturday);
+        internal static readonly string Sunday = nameof(DayOfWeek.Sunday);
 
         #endregion Internal static week strings
 
@@ -49,7 +52,7 @@ namespace WeekNumber
         /// <returns>true|false</returns>
         public bool WasChanged()
         {
-            var changed = _week != Current();
+            bool changed = _week != Current();
             if (changed)
             {
                 _week = Current();
@@ -67,14 +70,14 @@ namespace WeekNumber
         /// <returns>Current week as int based on calendar rules in application settings</returns>
         public static int Current()
         {
-            var currentCultureInfo = CultureInfo.CurrentCulture;
-            var dayOfWeek = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
-            var calendarWeekRule = currentCultureInfo.DateTimeFormat.CalendarWeekRule;
+            CultureInfo currentCultureInfo = CultureInfo.CurrentCulture;
+            DayOfWeek dayOfWeek = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
+            CalendarWeekRule calendarWeekRule = currentCultureInfo.DateTimeFormat.CalendarWeekRule;
             dayOfWeek = Enum.TryParse(Settings.GetSetting(DayOfWeekString), true, out dayOfWeek) ?
                 dayOfWeek : DayOfWeek.Monday;
             calendarWeekRule = Enum.TryParse(Settings.GetSetting(CalendarWeekRuleString), true,
                 out calendarWeekRule) ? calendarWeekRule : CalendarWeekRule.FirstFourDayWeek;
-            var week = CultureInfo.CurrentCulture.Calendar.
+            int week = CultureInfo.CurrentCulture.Calendar.
                 GetWeekOfYear(DateTime.Now, calendarWeekRule, dayOfWeek);
             if (week == 53 && (!YearHas53Weeks(DateTime.Now.Year)))
             {
@@ -94,7 +97,7 @@ namespace WeekNumber
 
         private static int Weeks(int year)
         {
-            var w = 52;
+            int w = 52;
             if (P(year) == 4 || P(year - 1) == 3)
             {
                 w++;

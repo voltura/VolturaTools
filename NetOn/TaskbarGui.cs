@@ -14,6 +14,7 @@ namespace NetOn
         private NotifyIcon _notifyIcon;
         private readonly NetOnContextMenu _contextMenu;
         private readonly Speak _speak;
+        private readonly string _externalIP;
 
         #endregion Private variables
 
@@ -21,8 +22,9 @@ namespace NetOn
 
         internal TaskbarGui(int status = 1)
         {
+            _externalIP = Network.GetExternalIP();
             _speak = new Speak();
-            _contextMenu = new NetOnContextMenu(ref _speak);
+            _contextMenu = new NetOnContextMenu(ref _speak, ref _externalIP);
             _notifyIcon = GetNotifyIcon(_contextMenu.ContextMenu);
             _notifyIcon.Click += NotifyIcon_Click;
             UpdateIcon(status, ref _notifyIcon);
@@ -37,16 +39,19 @@ namespace NetOn
         /// Updates icon on GUI with given status number
         /// </summary>
         /// <param name="NetOn"></param>
-        public void UpdateIcon(int NetOn) => UpdateIcon(NetOn, ref _notifyIcon);
+        public void UpdateIcon(int NetOn)
+        {
+            UpdateIcon(NetOn, ref _notifyIcon);
+        }
 
         #endregion Public UpdateIcon method
 
         #region Private static UpdateIcon method
 
-        private static void UpdateIcon(int NetOn, ref NotifyIcon notifyIcon)
+        private void UpdateIcon(int NetOn, ref NotifyIcon notifyIcon)
         {
-            notifyIcon.Text = (NetOn == 1) ? Resources.Network + Resources.Enabled : Resources.Network + Resources.Disabled;
-            var prevIcon = notifyIcon.Icon;
+            notifyIcon.Text = (NetOn == 1) ? _externalIP + Environment.NewLine + Resources.Network + Resources.Enabled : Resources.Network + Resources.Disabled;
+            System.Drawing.Icon prevIcon = notifyIcon.Icon;
             notifyIcon.Icon = NetOnIcon.GetIcon(NetOn);
             NetOnIcon.CleanupIcon(ref prevIcon);
         }
@@ -57,7 +62,7 @@ namespace NetOn
 
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
-            var eobj = e as MouseEventArgs;
+            MouseEventArgs eobj = e as MouseEventArgs;
             if (eobj.Button == MouseButtons.Left)
             {
                 ChangeStatus();
@@ -97,8 +102,10 @@ namespace NetOn
 
         #region Private helper property to create NotifyIcon
 
-        private static NotifyIcon GetNotifyIcon(ContextMenu contextMenu) =>
-            new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        private static NotifyIcon GetNotifyIcon(ContextMenu contextMenu)
+        {
+            return new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        }
 
         #endregion Private helper property to create NotifyIcon
 

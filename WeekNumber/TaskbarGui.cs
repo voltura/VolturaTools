@@ -37,7 +37,10 @@ namespace WeekNumber
         /// Updates icon on GUI with given week number
         /// </summary>
         /// <param name="weekNumber"></param>
-        public void UpdateIcon(int weekNumber) => UpdateIcon(weekNumber, ref _notifyIcon);
+        public void UpdateIcon(int weekNumber)
+        {
+            UpdateIcon(weekNumber, ref _notifyIcon);
+        }
 
         #endregion Public UpdateIcon method
 
@@ -46,7 +49,7 @@ namespace WeekNumber
         private static void UpdateIcon(int weekNumber, ref NotifyIcon notifyIcon)
         {
             notifyIcon.Text = Resources.Week + weekNumber;
-            var prevIcon = notifyIcon.Icon;
+            System.Drawing.Icon prevIcon = notifyIcon.Icon;
             notifyIcon.Icon = WeekIcon.GetIcon(weekNumber);
             WeekIcon.CleanupIcon(ref prevIcon);
         }
@@ -57,7 +60,7 @@ namespace WeekNumber
 
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
-            var eobj = e as MouseEventArgs;
+            MouseEventArgs eobj = e as MouseEventArgs;
             if (eobj.Button == MouseButtons.Left)
             {
                 SayWeek();
@@ -77,8 +80,10 @@ namespace WeekNumber
 
         #region Private helper property to create NotifyIcon
 
-        private static NotifyIcon GetNotifyIcon(ContextMenu contextMenu) =>
-            new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        private static NotifyIcon GetNotifyIcon(ContextMenu contextMenu)
+        {
+            return new NotifyIcon { Visible = true, ContextMenu = contextMenu };
+        }
 
         #endregion Private helper property to create NotifyIcon
 

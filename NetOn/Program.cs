@@ -28,11 +28,14 @@ namespace NetOn
             }
             Application.EnableVisualStyles();
             Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-            var context = new NetOnApplicationContext();
-            if (context?.Gui != null)
+            using (NetOnApplicationContext context = new NetOnApplicationContext())
             {
-                Application.Run(context);
+                if (context?.Gui != null)
+                {
+                    Application.Run(context);
+                }
             }
+
             Mutex.ReleaseMutex();
         }
 

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DiskSpace.Forms;
+using DiskSpace.Properties;
+using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using DiskSpace.Forms;
-using DiskSpace.Properties;
 using System.Windows.Forms;
 
 namespace DiskSpace
@@ -19,19 +19,19 @@ namespace DiskSpace
         /// <returns>true|false</returns>
         public static bool UpdateAvailable()
         {
-            var result = false;
+            bool result = false;
             try
             {
-                using (var webClient = new WebClient())
+                using (WebClient webClient = new WebClient())
                 {
-                    var versionFileUri = new Uri(Resources.CurrentVersionFileBaseUrl +
+                    Uri versionFileUri = new Uri(Resources.CurrentVersionFileBaseUrl +
                                                  Resources.CurrentVersionFileName);
-                    var localFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    string localFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                         Resources.CurrentVersionFileName);
                     webClient.DownloadFile(versionFileUri, localFile);
-                    var infoDocument = File.ReadAllText(localFile);
-                    var currentVer = Application.ProductVersion;
-                    var version = infoDocument.Substring(
+                    string infoDocument = File.ReadAllText(localFile);
+                    string currentVer = Application.ProductVersion;
+                    string version = infoDocument.Substring(
                         infoDocument.LastIndexOf(
                             Resources.AssemblyVersion, StringComparison.Ordinal)
                     ).Substring(17, currentVer.Length);

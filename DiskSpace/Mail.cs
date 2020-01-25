@@ -1,11 +1,11 @@
 ﻿#region Using statements
 
+using DiskSpace.Properties;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Net;
 using System.Net.Mail;
-using DiskSpace.Properties;
-using System.Globalization;
 
 #endregion
 
@@ -30,7 +30,7 @@ namespace DiskSpace
             string body,
             Settings settings)
         {
-            var result = false;
+            bool result = false;
             SmtpClient smtpClient = null;
             MailMessage mailMessage = null;
 

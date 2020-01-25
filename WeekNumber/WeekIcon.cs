@@ -2,7 +2,6 @@
 
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 
 #endregion Using statements
 
@@ -21,13 +20,13 @@ namespace WeekNumber
         internal static Icon GetIcon(int weekNumber)
         {
             Icon icon = null;
-            using (var bitmap = new Bitmap(_size, _size))
-            using (var graphics = Graphics.FromImage(bitmap))
+            using (Bitmap bitmap = new Bitmap(_size, _size))
+            using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 DrawBackgroundOnGraphics(graphics);
                 DrawWeekNumberOnGraphics(weekNumber, graphics);
-                var bHicon = bitmap.GetHicon();
-                var newIcon = Icon.FromHandle(bHicon);
+                System.IntPtr bHicon = bitmap.GetHicon();
+                Icon newIcon = Icon.FromHandle(bHicon);
                 icon = new Icon(newIcon, _size, _size);
                 CleanupIcon(ref newIcon);
             }
@@ -46,13 +45,13 @@ namespace WeekNumber
 
         internal static bool SaveIcon(int weekNumber, string fullPath)
         {
-            var result = true;
+            bool result = true;
             Icon icon = null;
 
             try
             {
                 icon = GetIcon(weekNumber);
-                using (FileStream fs = new FileStream(fullPath, FileMode.Create, 
+                using (FileStream fs = new FileStream(fullPath, FileMode.Create,
                     FileAccess.Write, FileShare.None))
                 {
                     icon.Save(fs);
@@ -76,32 +75,32 @@ namespace WeekNumber
 
         private static void DrawBackgroundOnGraphics(Graphics graphics)
         {
-            var backgroundColor = Color.FromName(Settings.GetSetting(Resources.Background));
-            var foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
-            using (var foregroundBrush = new SolidBrush(foregroundColor))
-            using (var backgroundBrush = new SolidBrush(backgroundColor))
+            Color backgroundColor = Color.FromName(Settings.GetSetting(Resources.Background));
+            Color foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
+            using (SolidBrush foregroundBrush = new SolidBrush(foregroundColor))
+            using (SolidBrush backgroundBrush = new SolidBrush(backgroundColor))
             {
-                var inset = (float)System.Math.Abs(_size * .03125);
+                float inset = (float)System.Math.Abs(_size * .03125);
                 graphics?.FillRectangle(backgroundBrush, inset, inset, _size - inset, _size - inset);
-                using (var pen = new Pen(foregroundColor, inset * 2))
+                using (Pen pen = new Pen(foregroundColor, inset * 2))
                 {
                     graphics?.DrawRectangle(pen, inset, inset, _size - inset * 2, _size - inset * 2);
                 }
-                var leftInset = (float)System.Math.Abs(_size * .15625);
+                float leftInset = (float)System.Math.Abs(_size * .15625);
                 graphics?.FillRectangle(foregroundBrush, leftInset, inset / 2, inset * 3, inset * 5);
-                var rightInset = (float)System.Math.Abs(_size * .75);
+                float rightInset = (float)System.Math.Abs(_size * .75);
                 graphics?.FillRectangle(foregroundBrush, rightInset, inset / 2, inset * 3, inset * 5);
             }
         }
 
         private static void DrawWeekNumberOnGraphics(int weekNumber, Graphics graphics)
         {
-            var fontSize = (float)System.Math.Abs(_size * .78125);
-            var insetX = (float)-System.Math.Abs(fontSize * .14);
-            var insetY = (float)System.Math.Abs(fontSize * .2);
-            var foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
+            float fontSize = (float)System.Math.Abs(_size * .78125);
+            float insetX = (float)-System.Math.Abs(fontSize * .14);
+            float insetY = (float)System.Math.Abs(fontSize * .2);
+            Color foregroundColor = Color.FromName(Settings.GetSetting(Resources.Foreground));
 
-            using (var font = new Font(FontFamily.GenericMonospace, fontSize, FontStyle.Bold, 
+            using (Font font = new Font(FontFamily.GenericMonospace, fontSize, FontStyle.Bold,
                 GraphicsUnit.Pixel, 0, false))
             using (Brush brush = new SolidBrush(foregroundColor))
             {

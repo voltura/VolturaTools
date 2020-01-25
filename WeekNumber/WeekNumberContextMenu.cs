@@ -33,13 +33,16 @@ namespace WeekNumber
 
         #region Event handling
 
-        private static void ExitMenuClick(object o, EventArgs e) => Application.Exit();
+        private static void ExitMenuClick(object o, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         private static void FirstDayOfWeekClick(object o, EventArgs e)
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 mi.Enabled = false;
                 CheckMenuItemUncheckSiblings(mi);
                 Settings.UpdateSetting(Week.DayOfWeekString, mi.Name);
@@ -55,7 +58,7 @@ namespace WeekNumber
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 SayColorSelect(mi.Name);
                 mi.Enabled = false;
                 if (mi.Name == Resources.ResetColors)
@@ -63,18 +66,22 @@ namespace WeekNumber
                     Settings.UpdateSetting(Resources.Foreground, System.Drawing.Color.White.Name);
                     Settings.UpdateSetting(Resources.Background, System.Drawing.Color.Black.Name);
                 }
-                else using (ColorDialog cd = new ColorDialog
+                else
                 {
-                    AllowFullOpen = false,
-                    FullOpen = false,
-                    SolidColorOnly = true,
-                    ShowHelp = false,
-                    Color = System.Drawing.Color.FromName(Settings.GetSetting(mi.Name))
-                })
-                {
-                    cd.ShowDialog();
-                    Settings.UpdateSetting(mi.Name, cd.Color.Name);
+                    using (ColorDialog cd = new ColorDialog
+                    {
+                        AllowFullOpen = false,
+                        FullOpen = false,
+                        SolidColorOnly = true,
+                        ShowHelp = false,
+                        Color = System.Drawing.Color.FromName(Settings.GetSetting(mi.Name))
+                    })
+                    {
+                        cd.ShowDialog();
+                        Settings.UpdateSetting(mi.Name, cd.Color.Name);
+                    }
                 }
+
                 Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
                 EnableMenuItem(mi);
             }
@@ -88,10 +95,10 @@ namespace WeekNumber
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 mi.Enabled = false;
                 CheckMenuItemUncheckSiblings(mi);
-                var calendarWeekRuleSetting = mi.Name;
+                string calendarWeekRuleSetting = mi.Name;
                 Settings.UpdateSetting(Week.CalendarWeekRuleString, calendarWeekRuleSetting);
                 EnableMenuItem(mi);
             }
@@ -105,7 +112,7 @@ namespace WeekNumber
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 mi.Enabled = false;
                 mi.Checked = !mi.Checked;
                 Settings.StartWithWindows = mi.Checked;
@@ -120,7 +127,7 @@ namespace WeekNumber
 
         private void AboutClick(object o, EventArgs e)
         {
-            var mi = (MenuItem)o;
+            MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
             Message.Show(Resources.About, _speak);
             EnableMenuItem(mi);
@@ -128,9 +135,9 @@ namespace WeekNumber
 
         private static void SaveIconClick(object o, EventArgs e)
         {
-            var mi = (MenuItem)o;
+            MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
-            using (var saveFileDialog = new SaveFileDialog
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Title = Resources.SaveIconMenu,
                 AddExtension = true,
@@ -183,7 +190,7 @@ namespace WeekNumber
 
         private static void MuteAllSoundsClick(object o, EventArgs e)
         {
-            var mi = (MenuItem)o;
+            MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
             mi.Checked = !mi.Checked;
             Settings.MuteAllSounds = mi.Checked;

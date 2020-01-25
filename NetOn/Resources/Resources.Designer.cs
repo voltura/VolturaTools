@@ -119,6 +119,15 @@ namespace NetOn {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy external IP.
+        /// </summary>
+        internal static string CopyExternalIP {
+            get {
+                return ResourceManager.GetString("CopyExternalIP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to disabled.
         /// </summary>
         internal static string Disabled {

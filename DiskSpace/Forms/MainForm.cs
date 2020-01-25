@@ -1,14 +1,14 @@
 ﻿#region Using statements
 
+using DiskSpace.Forms.Controls;
+using DiskSpace.Properties;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using DiskSpace.Forms.Controls;
-using DiskSpace.Properties;
-using Microsoft.Win32;
 
 #endregion
 
@@ -21,8 +21,8 @@ namespace DiskSpace.Forms
     {
         #region Member variables
 
-        DriveInfo _di;
-        SettingsForm _settingsForm;
+        private DriveInfo _di;
+        private SettingsForm _settingsForm;
         private decimal _currentFreeSpace;
 
         #endregion
@@ -37,7 +37,11 @@ namespace DiskSpace.Forms
             get => _currentFreeSpace;
             set
             {
-                if (_currentFreeSpace == value) return;
+                if (_currentFreeSpace == value)
+                {
+                    return;
+                }
+
                 _currentFreeSpace = value;
                 UpdateFreespaceTexts();
                 HandleNotifications();
@@ -89,8 +93,8 @@ namespace DiskSpace.Forms
         {
             get
             {
-                var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
-                var cleanMgrFullPath = Path.Combine(systemPath, "cleanmgr.exe");
+                string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                string cleanMgrFullPath = Path.Combine(systemPath, "cleanmgr.exe");
                 return cleanMgrFullPath;
             }
         }
@@ -99,7 +103,7 @@ namespace DiskSpace.Forms
         {
             get
             {
-                var diskCapacityInGb = Math.Round((decimal) ActiveDriveInfo.TotalSize / 1024 / 1024 / 1024);
+                decimal diskCapacityInGb = Math.Round((decimal)ActiveDriveInfo.TotalSize / 1024 / 1024 / 1024);
                 if (diskCapacityInGb / 1024 >= 1M)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
@@ -177,7 +181,7 @@ namespace DiskSpace.Forms
             if (Settings.Default.startWithWindows)
             {
                 const string regKeyPath = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-                var appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
+                string appPath = string.Format(CultureInfo.InvariantCulture, "\"{0}\"",
                     Application.ExecutablePath);
                 Registry.SetValue(regKeyPath, nameof(DiskSpace), appPath);
                 return;
@@ -206,9 +210,13 @@ namespace DiskSpace.Forms
 
         private void UpdateTitleText()
         {
-            var titleText = Resources.DiskSpace + Resources.Space + ActiveDriveInfo.Name.Substring(0, 2)
+            string titleText = Resources.DiskSpace + Resources.Space + ActiveDriveInfo.Name.Substring(0, 2)
                                + Resources.Space + DiskSize;
-            if (lblTitle.Text == titleText) return;
+            if (lblTitle.Text == titleText)
+            {
+                return;
+            }
+
             lblTitle.Text = titleText;
             Log.Info = "Main form title changed to '" + titleText + "'";
         }
@@ -222,17 +230,25 @@ namespace DiskSpace.Forms
                 {
                     Settings.Default.driveLetter = "C";
                 }
-                var allDrives = DriveInfo.GetDrives();
-                var configuredDriveExists = false;
-                var foundDrive = string.Empty;
-                foreach (var d in allDrives)
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                bool configuredDriveExists = false;
+                string foundDrive = string.Empty;
+                foreach (DriveInfo d in allDrives)
                 {
                     foundDrive = d.Name;
-                    if (!d.Name.Contains(Settings.Default.driveLetter)) continue;
+                    if (!d.Name.Contains(Settings.Default.driveLetter))
+                    {
+                        continue;
+                    }
+
                     configuredDriveExists = true;
                     break;
                 }
-                if (configuredDriveExists) return;
+                if (configuredDriveExists)
+                {
+                    return;
+                }
+
                 Settings.Default.driveLetter =
                     (string.IsNullOrEmpty(foundDrive) || foundDrive.Length < 1)
                         ? "C"
@@ -247,7 +263,11 @@ namespace DiskSpace.Forms
 
         private void SaveOffsetAndLocation(MouseEventArgs e)
         {
-            if (WindowState != FormWindowState.Normal) return;
+            if (WindowState != FormWindowState.Normal)
+            {
+                return;
+            }
+
             Settings.Default.mainFormLocation = Location;
             Offset = new Point(e.X, e.Y);
         }
@@ -255,23 +275,45 @@ namespace DiskSpace.Forms
         private void MoveMainFormAndSaveLocation(MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left ||
-                WindowState != FormWindowState.Normal) return;
+                WindowState != FormWindowState.Normal)
+            {
+                return;
+            }
+
             Top = Cursor.Position.Y - Offset.Y;
             Left = Cursor.Position.X - Offset.X;
             Settings.Default.mainFormLocation = Location;
         }
 
-        private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
+        private void FocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.LightGray;
+        }
 
-        private void UnfocusMinimizeIcon() => minimizePanel.BackColor = Color.White;
+        private void UnfocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.White;
+        }
 
-        private void UnfocusSettingsIcon() => settingsIcon.Image = Resources.gearsIconWhite;
+        private void UnfocusSettingsIcon()
+        {
+            settingsIcon.Image = Resources.gearsIconWhite;
+        }
 
-        private void FocusSettingsIcon() => settingsIcon.Image = Resources.gearsIconBlue;
+        private void FocusSettingsIcon()
+        {
+            settingsIcon.Image = Resources.gearsIconBlue;
+        }
 
-        private void FocusTitleIcon() => titleIcon.Image = Resources.ssdIconGreyPng;
+        private void FocusTitleIcon()
+        {
+            titleIcon.Image = Resources.ssdIconGreyPng;
+        }
 
-        private void UnfocusTitleIcon() => titleIcon.Image = Resources.ssdIconWhitePng;
+        private void UnfocusTitleIcon()
+        {
+            titleIcon.Image = Resources.ssdIconWhitePng;
+        }
 
         private void MinimizeAndHideMainForm()
         {
@@ -290,7 +332,11 @@ namespace DiskSpace.Forms
 
         private void SaveMainFormLocation()
         {
-            if (WindowState != FormWindowState.Normal || !Visible) return;
+            if (WindowState != FormWindowState.Normal || !Visible)
+            {
+                return;
+            }
+
             Settings.Default.mainFormLocation = Location;
             if (Settings.Default.mainFormLocation.Y + Height > Screen.GetWorkingArea(this).Height)
             {
@@ -302,7 +348,7 @@ namespace DiskSpace.Forms
         private void UpdateFreespaceTexts()
         {
             IFormatProvider formatProvider = CultureInfo.InvariantCulture;
-            var freeSpaceFormText = string.Format(formatProvider, "{0:0.00}", CurrentFreeSpace).Replace(".00", "") +
+            string freeSpaceFormText = string.Format(formatProvider, "{0:0.00}", CurrentFreeSpace).Replace(".00", "") +
                                        Resources.GB;
             UpdateFormFreeSpaceText(freeSpaceFormText);
             UpdateTitleText();
@@ -311,9 +357,13 @@ namespace DiskSpace.Forms
 
         private void UpdateNotificationFreeSpaceText(string freeSpaceFormText)
         {
-            var freeSpaceInfoText = Settings.Default.driveLetter +
+            string freeSpaceInfoText = Settings.Default.driveLetter +
                                        Resources.DriveSeparator + freeSpaceFormText + Resources.FreeSpace;
-            if (diskSpaceNotifyIcon.BalloonTipText == freeSpaceInfoText) return;
+            if (diskSpaceNotifyIcon.BalloonTipText == freeSpaceInfoText)
+            {
+                return;
+            }
+
             diskSpaceNotifyIcon.BalloonTipText = freeSpaceInfoText;
             diskSpaceNotifyIcon.Text = freeSpaceInfoText;
             Log.Info = "Notification text updated to: " + freeSpaceInfoText;
@@ -321,18 +371,34 @@ namespace DiskSpace.Forms
 
         private void UpdateFormFreeSpaceText(string freeSpaceFormText)
         {
-            if (lblFreeSpace.Text == freeSpaceFormText) return;
+            if (lblFreeSpace.Text == freeSpaceFormText)
+            {
+                return;
+            }
+
             lblFreeSpace.Text = freeSpaceFormText;
         }
 
         private void HandleNotifications()
         {
-            var uSpace = Convert.ToUInt32(CurrentFreeSpace);
-            if (!Settings.Default.notifyWhenSpaceChange) return;
-            var limitReached = (Settings.Default.NotificationLimitActive &&
+            uint uSpace = Convert.ToUInt32(CurrentFreeSpace);
+            if (!Settings.Default.notifyWhenSpaceChange)
+            {
+                return;
+            }
+
+            bool limitReached = (Settings.Default.NotificationLimitActive &&
                                  Settings.Default.NotificationLimitGB >= uSpace);
-            if ((Settings.Default.NotificationLimitActive) && !limitReached) return;
-            if (LastNotifiedFreeSpace == CurrentFreeSpace) return;
+            if ((Settings.Default.NotificationLimitActive) && !limitReached)
+            {
+                return;
+            }
+
+            if (LastNotifiedFreeSpace == CurrentFreeSpace)
+            {
+                return;
+            }
+
             LastNotifiedFreeSpace = CurrentFreeSpace;
             if (Settings.Default.sendEmail)
             {
@@ -371,7 +437,11 @@ namespace DiskSpace.Forms
         private void CloseSettingsForm()
         {
             if (ApplicationSettingsForm.WindowState != FormWindowState.Normal ||
-                !ApplicationSettingsForm.Visible) return;
+                !ApplicationSettingsForm.Visible)
+            {
+                return;
+            }
+
             ApplicationSettingsForm.Visible = false;
             ApplicationSettingsForm.Close();
         }
@@ -390,7 +460,10 @@ namespace DiskSpace.Forms
             }
         }
 
-        private void ShowContextMenuAtTitleIcon() => contextMenuStrip?.Show(Cursor.Position);
+        private void ShowContextMenuAtTitleIcon()
+        {
+            contextMenuStrip?.Show(Cursor.Position);
+        }
 
         private void SetMainFormLocationFromSettings()
         {
@@ -403,9 +476,13 @@ namespace DiskSpace.Forms
 
         private void ChangeMonitoredDrive()
         {
-            var currentDriveLetter = Settings.Default.driveLetter;
-            var nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
-            if (nextDriveLetter == currentDriveLetter) return;
+            string currentDriveLetter = Settings.Default.driveLetter;
+            string nextDriveLetter = LocalDrives.GetNextDriveLetter(currentDriveLetter);
+            if (nextDriveLetter == currentDriveLetter)
+            {
+                return;
+            }
+
             ActiveDriveInfo = new DriveInfo(nextDriveLetter);
             Settings.Default.driveLetter = nextDriveLetter;
             Settings.Default.Save();
@@ -414,8 +491,12 @@ namespace DiskSpace.Forms
 
         private static void LaunchCleanManager()
         {
-            if (!File.Exists(CleanMgrFullPath)) return;
-            using (var p = new Process())
+            if (!File.Exists(CleanMgrFullPath))
+            {
+                return;
+            }
+
+            using (Process p = new Process())
             {
                 p.StartInfo = new ProcessStartInfo(CleanMgrFullPath)
                 {
@@ -429,7 +510,7 @@ namespace DiskSpace.Forms
 
         private static void LaunchDiskManagement()
         {
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = new ProcessStartInfo("diskmgmt.msc")
                 {
@@ -440,11 +521,18 @@ namespace DiskSpace.Forms
             }
         }
 
-        private void ChangeFreespaceColor(Color color) => lblFreeSpace.ForeColor = color;
+        private void ChangeFreespaceColor(Color color)
+        {
+            lblFreeSpace.ForeColor = color;
+        }
 
         private void ShowContextMenuStrip()
         {
-            if (contextMenuStrip != null && contextMenuStrip.Visible) return;
+            if (contextMenuStrip != null && contextMenuStrip.Visible)
+            {
+                return;
+            }
+
             contextMenuStrip?.Show(Cursor.Position);
         }
 
@@ -454,7 +542,7 @@ namespace DiskSpace.Forms
 
         private void CheckTimer_Tick(object sender, EventArgs e)
         {
-            CurrentFreeSpace = Math.Round((decimal) ActiveDriveInfo.AvailableFreeSpace / 1024 / 1024 / 1024,
+            CurrentFreeSpace = Math.Round((decimal)ActiveDriveInfo.AvailableFreeSpace / 1024 / 1024 / 1024,
                 MidpointRounding.ToEven);
             Log.Truncate();
         }
@@ -467,29 +555,65 @@ namespace DiskSpace.Forms
             HandleNotifications();
         }
 
-        private void Title_MouseDown(object sender, MouseEventArgs e) => SaveOffsetAndLocation(e);
+        private void Title_MouseDown(object sender, MouseEventArgs e)
+        {
+            SaveOffsetAndLocation(e);
+        }
 
-        private void Title_MouseMove(object sender, MouseEventArgs e) => MoveMainFormAndSaveLocation(e);
+        private void Title_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveMainFormAndSaveLocation(e);
+        }
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e) => FocusMinimizeIcon();
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
 
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e) => UnfocusMinimizeIcon();
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
 
-        private void SettingsIcon_MouseLeave(object sender, EventArgs e) => UnfocusSettingsIcon();
+        private void SettingsIcon_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusSettingsIcon();
+        }
 
-        private void SettingsIcon_MouseEnter(object sender, EventArgs e) => FocusSettingsIcon();
+        private void SettingsIcon_MouseEnter(object sender, EventArgs e)
+        {
+            FocusSettingsIcon();
+        }
 
-        private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e) => FocusMinimizeIcon();
+        private void MinimizeContainerPanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
 
-        private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e) => UnfocusMinimizeIcon();
+        private void MinimizeContainerPanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
 
-        private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e) => MinimizeAndHideMainForm();
+        private void MinimizeContainerPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            MinimizeAndHideMainForm();
+        }
 
-        private void MinimizePanel_MouseClick(object sender, MouseEventArgs e) => MinimizeAndHideMainForm();
+        private void MinimizePanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            MinimizeAndHideMainForm();
+        }
 
-        private void TitleIcon_MouseDown(object sender, MouseEventArgs e) => SaveOffsetAndLocation(e);
+        private void TitleIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            SaveOffsetAndLocation(e);
+        }
 
-        private void TitleIcon_MouseMove(object sender, MouseEventArgs e) => MoveMainFormAndSaveLocation(e);
+        private void TitleIcon_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveMainFormAndSaveLocation(e);
+        }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -509,9 +633,15 @@ namespace DiskSpace.Forms
             }
         }
 
-        private void DiskSpaceNotifyIcon_BalloonTipClicked(object sender, EventArgs e) => ToogleFormVisibility();
+        private void DiskSpaceNotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            ToogleFormVisibility();
+        }
 
-        private static void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e) => LaunchDiskManagement();
+        private static void DiskManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LaunchDiskManagement();
+        }
 
         private void ShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -523,7 +653,10 @@ namespace DiskSpace.Forms
             ToogleFormVisibility();
         }
 
-        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e) => ShowSettingsForm();
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSettingsForm();
+        }
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -536,31 +669,70 @@ namespace DiskSpace.Forms
             Close();
         }
 
-        private void SettingsIcon_Click(object sender, EventArgs e) => SettingsToolStripMenuItem_Click(sender, e);
+        private void SettingsIcon_Click(object sender, EventArgs e)
+        {
+            SettingsToolStripMenuItem_Click(sender, e);
+        }
 
-        private void TitleIcon_Click(object sender, EventArgs e) => ShowContextMenuAtTitleIcon();
+        private void TitleIcon_Click(object sender, EventArgs e)
+        {
+            ShowContextMenuAtTitleIcon();
+        }
 
-        private void MainForm_Load(object sender, EventArgs e) => SetMainFormLocationFromSettings();
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            SetMainFormLocationFromSettings();
+        }
 
-        private void FreeSpace_Click(object sender, EventArgs e) => ChangeMonitoredDrive();
+        private void FreeSpace_Click(object sender, EventArgs e)
+        {
+            ChangeMonitoredDrive();
+        }
 
-        private static void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e) => LaunchCleanManager();
+        private static void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LaunchCleanManager();
+        }
 
-        private static void LogFileIcon_Click(object sender, EventArgs e) => Log.Show("Display log file requested from main form");
+        private static void LogFileIcon_Click(object sender, EventArgs e)
+        {
+            Log.Show("Display log file requested from main form");
+        }
 
-        private void LogFileIcon_MouseEnter(object sender, EventArgs e) => logFileIcon.Image = Resources.logIconBlue;
+        private void LogFileIcon_MouseEnter(object sender, EventArgs e)
+        {
+            logFileIcon.Image = Resources.logIconBlue;
+        }
 
-        private void LogFileIcon_MouseLeave(object sender, EventArgs e) => logFileIcon.Image = Resources.logIconWhite;
+        private void LogFileIcon_MouseLeave(object sender, EventArgs e)
+        {
+            logFileIcon.Image = Resources.logIconWhite;
+        }
 
-        private static void LogToolStripMenuItem_Click(object sender, EventArgs e) => Log.Show("Display log file requested from context menu");
+        private static void LogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Log.Show("Display log file requested from context menu");
+        }
 
-        private void FreeSpace_MouseEnter(object sender, EventArgs e) => ChangeFreespaceColor(Color.DeepSkyBlue);
+        private void FreeSpace_MouseEnter(object sender, EventArgs e)
+        {
+            ChangeFreespaceColor(Color.DeepSkyBlue);
+        }
 
-        private void FreeSpace_MouseLeave(object sender, EventArgs e) => ChangeFreespaceColor(Color.White);
+        private void FreeSpace_MouseLeave(object sender, EventArgs e)
+        {
+            ChangeFreespaceColor(Color.White);
+        }
 
-        private void TitleIcon_MouseEnter(object sender, EventArgs e) => FocusTitleIcon();
+        private void TitleIcon_MouseEnter(object sender, EventArgs e)
+        {
+            FocusTitleIcon();
+        }
 
-        private void TitleIcon_MouseLeave(object sender, EventArgs e) => UnfocusTitleIcon();
+        private void TitleIcon_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusTitleIcon();
+        }
 
         #endregion
     }

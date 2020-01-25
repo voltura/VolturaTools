@@ -20,14 +20,19 @@ namespace DiskSpace
         /// <returns></returns>
         internal static Collection<Drive> Drives()
         {
-            var drives = new Collection<Drive>();
-            var space = string.Empty.PadLeft(1);
-            var allDrives = DriveInfo.GetDrives();
-            foreach (var d in allDrives)
+            Collection<Drive> drives = new Collection<Drive>();
+            string space = string.Empty.PadLeft(1);
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            foreach (DriveInfo d in allDrives)
+            {
                 if (d.DriveType == DriveType.Fixed ||
                     d.DriveType == DriveType.Removable)
+                {
                     drives.Add(new Drive(d.Name.Substring(0, 1),
                         d.Name + space + d.VolumeLabel));
+                }
+            }
+
             return drives;
         }
 
@@ -38,10 +43,13 @@ namespace DiskSpace
         /// <returns>Next drive letter after given drive</returns>
         internal static string GetNextDriveLetter(string currentDriveLetter)
         {
-            var driveLetters = DriveLetters;
+            Collection<string> driveLetters = DriveLetters;
             if (driveLetters.Count <= 1)
+            {
                 return currentDriveLetter;
-            var cdIndex = driveLetters.IndexOf(currentDriveLetter);
+            }
+
+            int cdIndex = driveLetters.IndexOf(currentDriveLetter);
             return cdIndex < driveLetters.Count - 1 ? driveLetters[cdIndex + 1] : driveLetters[0];
         }
 
@@ -57,12 +65,17 @@ namespace DiskSpace
         {
             get
             {
-                var drives = new Collection<string>();
-                var allDrives = DriveInfo.GetDrives();
-                foreach (var d in allDrives)
+                Collection<string> drives = new Collection<string>();
+                DriveInfo[] allDrives = DriveInfo.GetDrives();
+                foreach (DriveInfo d in allDrives)
+                {
                     if (d.DriveType == DriveType.Fixed ||
                         d.DriveType == DriveType.Removable)
+                    {
                         drives.Add(d.Name.Substring(0, 1));
+                    }
+                }
+
                 return drives;
             }
         }

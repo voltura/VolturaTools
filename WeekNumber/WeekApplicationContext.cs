@@ -49,7 +49,7 @@ namespace WeekNumber
         {
             get
             {
-                var timer = new Timer
+                Timer timer = new Timer
                 {
                     Interval = 1000,
                     Enabled = true
@@ -63,7 +63,10 @@ namespace WeekNumber
 
         #region Private event handlers
 
-        private void OnApplicationExit(object sender, EventArgs e) => Cleanup(false);
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            Cleanup(false);
+        }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
@@ -71,7 +74,7 @@ namespace WeekNumber
             //{
             //    return;
             //}
-            var timer = (Timer)sender;
+            Timer timer = (Timer)sender;
             timer?.Stop();
             Application.DoEvents();
             try

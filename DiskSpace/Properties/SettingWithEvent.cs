@@ -20,7 +20,7 @@ namespace DiskSpace.Properties
         public string driveLetter
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => (string) this["driveLetter"];
+            get => (string)this["driveLetter"];
             set
             {
                 lock (Locker)

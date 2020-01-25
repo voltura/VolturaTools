@@ -1,9 +1,9 @@
 ﻿#region Using statements
 
+using DiskSpace.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DiskSpace.Properties;
 
 #endregion
 
@@ -59,7 +59,10 @@ namespace DiskSpace.Forms
             TickCheckboxesBasedOnUserSettings();
         }
 
-        private void SetDriveSelectionFromUserSettings() => cmbDrives.SelectedValue = Settings.Default.driveLetter;
+        private void SetDriveSelectionFromUserSettings()
+        {
+            cmbDrives.SelectedValue = Settings.Default.driveLetter;
+        }
 
         private void TickCheckboxesBasedOnUserSettings()
         {
@@ -78,7 +81,10 @@ namespace DiskSpace.Forms
             Text = Resources.Settings;
         }
 
-        private void SetButtonTextsFromResources() => btnSave.Text = Resources.SaveButtonTitle;
+        private void SetButtonTextsFromResources()
+        {
+            btnSave.Text = Resources.SaveButtonTitle;
+        }
 
         private void SetLabelTextsFromResources()
         {
@@ -115,42 +121,66 @@ namespace DiskSpace.Forms
 
         private void CheckStartMinimizedDataBindings()
         {
-            if (chkStartMinimized.DataBindings.Count != 0) return;
+            if (chkStartMinimized.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             chkStartMinimized.DataBindings.Add(new Binding("Checked", Settings.Default, "startMinimized", true,
                 DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CheckDisplayNotificationsDataBindings()
         {
-            if (chkDisplayNotifications.DataBindings.Count != 0) return;
+            if (chkDisplayNotifications.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             chkDisplayNotifications.DataBindings.Add(new Binding("Checked", Settings.Default,
                 "notifyWhenSpaceChange", true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CheckAlwaysOnTopDataBindings()
         {
-            if (chkAlwaysOnTop.DataBindings.Count != 0) return;
+            if (chkAlwaysOnTop.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             chkAlwaysOnTop.DataBindings.Add(new Binding("Checked", Settings.Default, "alwaysOnTop", true,
                 DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CheckStartWithWindowsDataBindings()
         {
-            if (chkStartWithWindows.DataBindings.Count != 0) return;
+            if (chkStartWithWindows.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             chkStartWithWindows.DataBindings.Add(new Binding("Checked", Settings.Default, "startWithWindows", true,
                 DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CheckNotificationLimitGbDataBindings()
         {
-            if (txtNotificationLimitGB.DataBindings.Count != 0) return;
+            if (txtNotificationLimitGB.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             txtNotificationLimitGB.DataBindings.Add(new Binding("Text", Settings.Default, "NotificatonAmountLimit",
                 true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CheckNotificationLimitDataBinding()
         {
-            if (chkNotificationLimit.DataBindings.Count != 0) return;
+            if (chkNotificationLimit.DataBindings.Count != 0)
+            {
+                return;
+            }
+
             chkNotificationLimit.DataBindings.Add(new Binding("Checked", Settings.Default,
                 "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
         }
@@ -163,12 +193,19 @@ namespace DiskSpace.Forms
             Settings.Default.Save();
         }
 
-        private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
+        private void FocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.LightGray;
+        }
 
         private void AcceptOnlyNumericNotificationGbInput()
         {
-            if (string.IsNullOrEmpty(txtNotificationLimitGB.Text)) return;
-            var isInt = int.TryParse(txtNotificationLimitGB.Text, out int i);
+            if (string.IsNullOrEmpty(txtNotificationLimitGB.Text))
+            {
+                return;
+            }
+
+            bool isInt = int.TryParse(txtNotificationLimitGB.Text, out int i);
             if (i < 0)
             {
                 txtNotificationLimitGB.Text = txtNotificationLimitGB.Text.TrimStart(new char[] { '-' });
@@ -190,23 +227,45 @@ namespace DiskSpace.Forms
 
         private void MoveForm(MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
             Top = Cursor.Position.Y - Offset.Y;
             Left = Cursor.Position.X - Offset.X;
         }
 
-        private void UpdateOffset(MouseEventArgs e) => Offset = new Point(e.X, e.Y);
+        private void UpdateOffset(MouseEventArgs e)
+        {
+            Offset = new Point(e.X, e.Y);
+        }
 
-        private void UpdateNotificationLimitSetting() => Settings.Default.NotificationLimitGB =
-            uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notificationLimit : 10;
+        private void UpdateNotificationLimitSetting()
+        {
+            Settings.Default.NotificationLimitGB =
+uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notificationLimit : 10;
+        }
 
-        private void UnfocusMinimizeIcon() => minimizePanel.BackColor = Color.White;
+        private void UnfocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.White;
+        }
 
-        private void SetActiveBackColorOnNotifictationLimitGb() => txtNotificationLimitGB.BackColor = Color.DeepSkyBlue;
+        private void SetActiveBackColorOnNotifictationLimitGb()
+        {
+            txtNotificationLimitGB.BackColor = Color.DeepSkyBlue;
+        }
 
-        private void ResetBackColorOnNotificationLimitGb() => txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
+        private void ResetBackColorOnNotificationLimitGb()
+        {
+            txtNotificationLimitGB.BackColor = settingsPanel.BackColor;
+        }
 
-        private void ShowEmailSettingsForm() => _emailSettings.ShowDialog(this);
+        private void ShowEmailSettingsForm()
+        {
+            _emailSettings.ShowDialog(this);
+        }
 
         private static void OnlyAllowNumericInput(KeyEventArgs e)
         {
@@ -225,43 +284,95 @@ namespace DiskSpace.Forms
 
         #region Events handling
 
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e) => SaveSettings();
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
+        }
 
-        private void UpdateDriveLetterSetting() => Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+        private void UpdateDriveLetterSetting()
+        {
+            Settings.Default.driveLetter = cmbDrives.SelectedValue.ToString();
+        }
 
-        private void Save_Click(object sender, EventArgs e) => Close();
+        private void Save_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e) => UpdateOffset(e);
+        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            UpdateOffset(e);
+        }
 
-        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e) => MoveForm(e);
+        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveForm(e);
+        }
 
-        private void NotificationLimitGB_TextChanged(object sender, EventArgs e) => AcceptOnlyNumericNotificationGbInput();
+        private void NotificationLimitGB_TextChanged(object sender, EventArgs e)
+        {
+            AcceptOnlyNumericNotificationGbInput();
+        }
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e) => FocusMinimizeIcon();
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
 
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e) => UnfocusMinimizeIcon();
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
 
-        private void MinimizePanel_Click(object sender, EventArgs e) => Close();
+        private void MinimizePanel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void MinimizePanelFrame_Click(object sender, EventArgs e) => Close();
+        private void MinimizePanelFrame_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void SettingsForm_Load(object sender, EventArgs e) => InitializeFormFromSettings();
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+            InitializeFormFromSettings();
+        }
 
-        private void NotificationLimitGB_MouseEnter(object sender, EventArgs e) => SetActiveBackColorOnNotifictationLimitGb();
+        private void NotificationLimitGB_MouseEnter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGb();
+        }
 
         private void NotificationLimitGB_MouseLeave(object sender, EventArgs e)
         {
-            if (txtNotificationLimitGB.Focused) return;
+            if (txtNotificationLimitGB.Focused)
+            {
+                return;
+            }
+
             ResetBackColorOnNotificationLimitGb();
         }
 
-        private void NotificationLimitGB_Enter(object sender, EventArgs e) => SetActiveBackColorOnNotifictationLimitGb();
+        private void NotificationLimitGB_Enter(object sender, EventArgs e)
+        {
+            SetActiveBackColorOnNotifictationLimitGb();
+        }
 
-        private void NotificationLimitGB_Leave(object sender, EventArgs e) => ResetBackColorOnNotificationLimitGb();
+        private void NotificationLimitGB_Leave(object sender, EventArgs e)
+        {
+            ResetBackColorOnNotificationLimitGb();
+        }
 
-        private void ConfigureEmail_Click(object sender, EventArgs e) => ShowEmailSettingsForm();
+        private void ConfigureEmail_Click(object sender, EventArgs e)
+        {
+            ShowEmailSettingsForm();
+        }
 
-        private static void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e) => OnlyAllowNumericInput(e);
+        private static void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e)
+        {
+            OnlyAllowNumericInput(e);
+        }
 
         #endregion
     }

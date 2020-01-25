@@ -12,6 +12,7 @@ namespace NetOn
         #region Private variables
 
         private readonly Speak _speak;
+        private readonly string _externalIP;
 
         #endregion Private variables
 
@@ -23,9 +24,10 @@ namespace NetOn
 
         #region Internal contructor
 
-        internal NetOnContextMenu(ref Speak speak)
+        internal NetOnContextMenu(ref Speak speak, ref string externalIP)
         {
             _speak = speak;
+            _externalIP = externalIP;
             CreateContextMenu();
         }
 
@@ -33,13 +35,16 @@ namespace NetOn
 
         #region Event handling
 
-        private static void ExitMenuClick(object o, EventArgs e) => Application.Exit();
+        private static void ExitMenuClick(object o, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         private void ColorMenuClick(object o, EventArgs e)
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 SayColorSelect(mi.Name);
                 mi.Enabled = false;
                 if (mi.Name == Resources.ResetColors)
@@ -47,18 +52,22 @@ namespace NetOn
                     Settings.UpdateSetting(Resources.Foreground, System.Drawing.Color.White.Name);
                     Settings.UpdateSetting(Resources.Background, System.Drawing.Color.Black.Name);
                 }
-                else using (ColorDialog cd = new ColorDialog
+                else
                 {
-                    AllowFullOpen = false,
-                    FullOpen = false,
-                    SolidColorOnly = true,
-                    ShowHelp = false,
-                    Color = System.Drawing.Color.FromName(Settings.GetSetting(mi.Name))
-                })
-                {
-                    cd.ShowDialog();
-                    Settings.UpdateSetting(mi.Name, cd.Color.Name);
+                    using (ColorDialog cd = new ColorDialog
+                    {
+                        AllowFullOpen = false,
+                        FullOpen = false,
+                        SolidColorOnly = true,
+                        ShowHelp = false,
+                        Color = System.Drawing.Color.FromName(Settings.GetSetting(mi.Name))
+                    })
+                    {
+                        cd.ShowDialog();
+                        Settings.UpdateSetting(mi.Name, cd.Color.Name);
+                    }
                 }
+
                 Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
                 EnableMenuItem(mi);
             }
@@ -72,7 +81,7 @@ namespace NetOn
         {
             try
             {
-                var mi = (MenuItem)o;
+                MenuItem mi = (MenuItem)o;
                 mi.Enabled = false;
                 mi.Checked = !mi.Checked;
                 Settings.StartWithWindows = mi.Checked;
@@ -87,7 +96,7 @@ namespace NetOn
 
         private void AboutClick(object o, EventArgs e)
         {
-            var mi = (MenuItem)o;
+            MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
             Message.Show(Resources.About, _speak);
             EnableMenuItem(mi);
@@ -99,7 +108,7 @@ namespace NetOn
 
         private void CreateContextMenu()
         {
-            ContextMenu = new ContextMenu(new MenuItem[4]
+            ContextMenu = new ContextMenu(new MenuItem[5]
             {
                 new MenuItem(Resources.AboutMenu, AboutClick)
                 {
@@ -117,6 +126,7 @@ namespace NetOn
                         Checked = Settings.MuteAllSounds
                     }
                 }),
+                new MenuItem(Resources.CopyExternalIP, CopyExternalIPClick),
                 new MenuItem(Resources.SeparatorMenu),
                 new MenuItem(Resources.ExitMenu, ExitMenuClick)
             });
@@ -124,11 +134,16 @@ namespace NetOn
 
         private static void MuteAllSoundsClick(object o, EventArgs e)
         {
-            var mi = (MenuItem)o;
+            MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
             mi.Checked = !mi.Checked;
             Settings.MuteAllSounds = mi.Checked;
             EnableMenuItem(mi);
+        }
+
+        private void CopyExternalIPClick(object o, EventArgs e)
+        {
+            Clipboard.SetText(_externalIP);
         }
 
         #endregion Private method for context menu creation

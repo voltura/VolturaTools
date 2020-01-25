@@ -49,7 +49,7 @@ namespace NetOn
         {
             get
             {
-                var timer = new Timer
+                Timer timer = new Timer
                 {
                     Interval = 1000,
                     Enabled = true
@@ -63,11 +63,14 @@ namespace NetOn
 
         #region Private event handlers
 
-        private void OnApplicationExit(object sender, EventArgs e) => Cleanup(false);
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            Cleanup(false);
+        }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            var timer = (Timer)sender;
+            Timer timer = (Timer)sender;
             timer?.Stop();
             Application.DoEvents();
             try

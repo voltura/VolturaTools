@@ -1,7 +1,5 @@
 ﻿#region Using statements
 
-using System;
-using System.Globalization;
 
 #endregion Using statements
 
@@ -20,7 +18,10 @@ namespace NetOn
         /// <summary>
         /// Initiates the status to current
         /// </summary>
-        public Status() => _status = Current();
+        public Status()
+        {
+            _status = Current();
+        }
 
         #endregion Constructor that initiates active status
 
@@ -32,7 +33,7 @@ namespace NetOn
         /// <returns>true|false</returns>
         public bool WasChanged()
         {
-            var changed = _status != Current();
+            bool changed = _status != Current();
             if (changed)
             {
                 _status = Current();
@@ -50,7 +51,7 @@ namespace NetOn
         /// <returns>Current status as int</returns>
         public static int Current()
         {
-            var status = Network.Status();
+            int status = Network.Status();
             return status;
         }
 

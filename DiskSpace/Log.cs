@@ -1,12 +1,12 @@
 ﻿#region Using statements
 
+using DiskSpace.Properties;
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using DiskSpace.Properties;
 
 #endregion
 
@@ -29,10 +29,10 @@ namespace DiskSpace
             try
             {
                 Trace.Listeners.Clear();
-                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+                string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 fs = new FileStream(Path.Combine(appDataFolder, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
-                var traceListener = new TextWriterTraceListener(fs);
+                TextWriterTraceListener traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
                 Trace.UseGlobalLock = false;
@@ -68,18 +68,19 @@ namespace DiskSpace
             Trace.Listeners.Clear();
             try
             {
-                var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                var fi = new FileInfo(Path.Combine(appDataFolder, logFile));
+                string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+                string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                FileInfo fi = new FileInfo(Path.Combine(appDataFolder, logFile));
                 if (fi.Exists)
                 {
-                    var trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
+                    int trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
                     if (fi.Length > trimSize)
-                        using (var ms = new MemoryStream(trimSize))
-                        using (var s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
+                    {
+                        using (MemoryStream ms = new MemoryStream(trimSize))
+                        using (FileStream s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
                         {
                             s.Seek(-trimSize, SeekOrigin.End);
-                            var bytes = new byte[trimSize];
+                            byte[] bytes = new byte[trimSize];
                             s.Read(bytes, 0, trimSize);
                             ms.Write(bytes, 0, trimSize);
                             ms.Position = 0;
@@ -87,6 +88,7 @@ namespace DiskSpace
                             s.Position = 0;
                             ms.CopyTo(s);
                         }
+                    }
                 }
             }
             catch (Exception ex)
@@ -105,11 +107,15 @@ namespace DiskSpace
         [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static void Show()
         {
-            var logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             logFile = Path.Combine(appDataFolder, logFile);
-            var fi = new FileInfo(logFile);
-            if (!fi.Exists) return;
+            FileInfo fi = new FileInfo(logFile);
+            if (!fi.Exists)
+            {
+                return;
+            }
+
             Process process = null;
             try
             {

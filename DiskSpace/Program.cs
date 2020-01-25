@@ -1,13 +1,13 @@
 ﻿#region Using statements
 
+using DiskSpace.Forms;
+using DiskSpace.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using DiskSpace.Forms;
-using DiskSpace.Properties;
 
 #endregion
 
@@ -40,7 +40,7 @@ namespace DiskSpace
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
-            Log.Error = (Exception) e.ExceptionObject;
+            Log.Error = (Exception)e.ExceptionObject;
             Log.Close("=== Application ended ===");
             Environment.Exit(1);
         }
@@ -63,18 +63,22 @@ namespace DiskSpace
 
         private static void HandleCommandLineExecution(string[] args)
         {
-            var allParams = string.Join(" ", args);
-            var startWithWindows = allParams.Contains("autorun=1");
-            var notifications = allParams.Contains("notifications=1");
-            var minimized = allParams.Contains("minimized=1");
-            var start = allParams.Contains("start=1");
-            var calledFromInstaller = allParams.Contains("autorun=") && allParams.Contains("notifications=") &&
+            string allParams = string.Join(" ", args);
+            bool startWithWindows = allParams.Contains("autorun=1");
+            bool notifications = allParams.Contains("notifications=1");
+            bool minimized = allParams.Contains("minimized=1");
+            bool start = allParams.Contains("start=1");
+            bool calledFromInstaller = allParams.Contains("autorun=") && allParams.Contains("notifications=") &&
                                       allParams.Contains("minimized=") && allParams.Contains("start=");
             if (calledFromInstaller)
             {
                 Log.Info = "Installer configuration values received";
                 UpdateSettings(startWithWindows, notifications, minimized);
-                if (start) StartApplicationAsSeparateProcess();
+                if (start)
+                {
+                    StartApplicationAsSeparateProcess();
+                }
+
                 return;
             }
             ShowCommandLineUsage();
@@ -82,7 +86,7 @@ namespace DiskSpace
 
         private static void ShowCommandLineUsage()
         {
-            var executable = Path.GetFileName(Application.ExecutablePath);
+            string executable = Path.GetFileName(Application.ExecutablePath);
             Log.Info = string.Format(CultureInfo.InvariantCulture,
                 Resources.CommandLineTip, executable);
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
@@ -91,7 +95,7 @@ namespace DiskSpace
 
         private static void StartApplicationAsSeparateProcess()
         {
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = new ProcessStartInfo(Application.ExecutablePath)
                 {

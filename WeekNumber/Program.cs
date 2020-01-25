@@ -26,14 +26,25 @@ namespace WeekNumber
             {
                 return;
             }
-            Application.EnableVisualStyles();
-            Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-            var context = new WeekApplicationContext();
-            if (context?.Gui != null)
+            WeekApplicationContext context = null;
+            try
             {
-                Application.Run(context);
+                Application.EnableVisualStyles();
+                Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
+                context = new WeekApplicationContext();
+                if (context?.Gui != null)
+                {
+                    Application.Run(context);
+                }
             }
-            Mutex.ReleaseMutex();
+            finally
+            {
+                //                if (context != null)
+                {
+                    context?.Dispose();
+                }
+                Mutex.ReleaseMutex();
+            }
         }
 
         #endregion Application starting point

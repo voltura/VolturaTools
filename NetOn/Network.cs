@@ -1,5 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Net.Http;
 
 namespace NetOn
 {
@@ -38,33 +38,58 @@ namespace NetOn
 
         internal static int Status()
         {
-            var status = 0;
+            int status = 0;
             // TODO: Get name(s) of network interfaces + make admin elevation
             ProcessStartInfo startInfo = new ProcessStartInfo("netsh", @"interface show interface ""Ethernet""")
             {
                 CreateNoWindow = true,
-//                WindowStyle = ProcessWindowStyle.Hidden,
+                //                WindowStyle = ProcessWindowStyle.Hidden,
                 Verb = "runas",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false
             };
-            Process process = new Process
+            using (Process process = new Process
             {
-                EnableRaisingEvents = true
-            };
-            process.StartInfo = startInfo;
-            process.OutputDataReceived += (object sender, DataReceivedEventArgs e) => {
-                if (e.Data != null && e.Data.Contains("Administrative state: Enabled")) status = 1;
-            };
-            process.ErrorDataReceived += (object sender, DataReceivedEventArgs e) => {
-                if (e.Data != null && e.Data.Contains("Administrative state: Enabled")) status = 1;
-            };
-            process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
-            process.WaitForExit(2000);
+                EnableRaisingEvents = true,
+                StartInfo = startInfo
+            })
+            {
+                process.OutputDataReceived += (object sender, DataReceivedEventArgs e) =>
+                {
+                    if (e.Data != null && e.Data.Contains("Administrative state: Enabled"))
+                    {
+                        status = 1;
+                    }
+                };
+                process.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
+                {
+                    if (e.Data != null && e.Data.Contains("Administrative state: Enabled"))
+                    {
+                        status = 1;
+                    }
+                };
+                process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit(2000);
+            }
             return status;
+        }
+
+        internal static string GetExternalIP()
+        {
+            try
+            {
+                using (HttpClient c = new HttpClient())
+                {
+                    return c.GetStringAsync("http://ipecho.net/plain").Result;
+                }
+            }
+            catch
+            {
+            }
+            return string.Empty;
         }
     }
 }

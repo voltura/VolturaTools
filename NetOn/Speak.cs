@@ -27,7 +27,11 @@ namespace NetOn
 
         internal void Sentence(string sentence)
         {
-            if (Settings.MuteAllSounds) return;
+            if (Settings.MuteAllSounds)
+            {
+                return;
+            }
+
             _voice.Speak(sentence, SpeechVoiceSpeakFlags.SVSFlagsAsync);
         }
 

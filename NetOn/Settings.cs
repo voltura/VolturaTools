@@ -2,7 +2,6 @@
 
 using Microsoft.Win32;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -19,8 +18,8 @@ namespace NetOn
             get => Registry.GetValue("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", Application.ProductName, null) != null;
             set
             {
-                using (var registryKey = Registry.CurrentUser)
-                using (var regRun = registryKey?.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", true))
+                using (RegistryKey registryKey = Registry.CurrentUser)
+                using (RegistryKey regRun = registryKey?.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\", true))
                 {
                     if (value)
                     {
@@ -64,8 +63,8 @@ namespace NetOn
         internal static void UpdateSetting(string setting, string value)
         {
             CreateSettings();
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
+            Configuration configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            KeyValueConfigurationCollection settings = configFile.AppSettings.Settings;
             settings[setting].Value = value;
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
@@ -77,10 +76,10 @@ namespace NetOn
 
         private static void CreateSettings()
         {
-            var settingsFile = Application.ExecutablePath + ".config";
+            string settingsFile = Application.ExecutablePath + ".config";
             if (!File.Exists(settingsFile))
             {
-                var xml = $@"<?xml version=""1.0"" encoding=""utf-8"" ?>
+                string xml = $@"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <configuration>
   <appSettings>
     <add key=""Background"" value=""Black""/>

@@ -117,126 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>NetOn by Voltura AB
-
-https://github.com/voltura/VolturaTools
-
-Free for all.</value>
-    <comment>About box text</comment>
-  </data>
-  <data name="AboutMenu" xml:space="preserve">
-    <value>About NetOn</value>
-  </data>
-  <data name="Background" xml:space="preserve">
-    <value>Background</value>
-  </data>
-  <data name="BackgroundMenu" xml:space="preserve">
-    <value>Background</value>
-  </data>
-  <data name="ClearThroat" xml:space="preserve">
-    <value>   !   </value>
-  </data>
-  <data name="ColorsMenu" xml:space="preserve">
-    <value>Icon colors</value>
-  </data>
-  <data name="CopyExternalIP" xml:space="preserve">
-    <value>Copy external IP</value>
-  </data>
-  <data name="Disabled" xml:space="preserve">
-    <value>disabled</value>
-  </data>
-  <data name="DisabledBackground" xml:space="preserve">
-    <value>DisabledBackground</value>
-  </data>
-  <data name="DisabledForeground" xml:space="preserve">
-    <value>DisabledForeground</value>
-  </data>
-  <data name="Enabled" xml:space="preserve">
-    <value>enabled</value>
-  </data>
-  <data name="ExitMenu" xml:space="preserve">
-    <value>Exit NetOn</value>
-  </data>
-  <data name="FailedToSetIcon" xml:space="preserve">
-    <value>Could not set Icon. 
-
-Please report to feedback@voltura.se!</value>
-  </data>
-  <data name="FailedToUpdateColor" xml:space="preserve">
-    <value>Could not update color.</value>
-  </data>
-  <data name="FailedToUpdateDayOfWeek" xml:space="preserve">
-    <value>Could not update first day of status setting.
-
-Please report to feedback@voltura.se!</value>
-  </data>
-  <data name="FailedToUpdateRegistry" xml:space="preserve">
-    <value>Could not update registry.
-
-Please report to feedback@voltura.se!</value>
-  </data>
-  <data name="ForceRedraw" xml:space="preserve">
-    <value>ForceRedraw</value>
-  </data>
-  <data name="Foreground" xml:space="preserve">
-    <value>Foreground</value>
-  </data>
-  <data name="ForegroundMenu" xml:space="preserve">
-    <value>Foreground</value>
-  </data>
-  <data name="MuteAllSoundsMenu" xml:space="preserve">
-    <value>Mute all sounds</value>
-  </data>
-  <data name="Network" xml:space="preserve">
-    <value>Network </value>
-  </data>
-  <data name="NotImplementedYet" xml:space="preserve">
-    <value>Sorry, this function is not implemented yet.</value>
-  </data>
-  <data name="NotStartWithWindows" xml:space="preserve">
-    <value>NetOn will not start with Windows</value>
-  </data>
-  <data name="Off" xml:space="preserve">
-    <value>OFF</value>
-  </data>
-  <data name="On" xml:space="preserve">
-    <value>ON</value>
-  </data>
-  <data name="ResetColors" xml:space="preserve">
-    <value>Colors reset</value>
-  </data>
-  <data name="ResetColorsMenu" xml:space="preserve">
-    <value>Reset colors</value>
-  </data>
-  <data name="SelectBackgroundColor" xml:space="preserve">
-    <value>Please select background color</value>
-  </data>
-  <data name="SelectForegroundColor" xml:space="preserve">
-    <value>Please select foreground color</value>
-  </data>
-  <data name="SeparatorMenu" xml:space="preserve">
-    <value>-</value>
-    <comment>Do not change</comment>
-  </data>
-  <data name="SettingsMenu" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="StartWithWindows" xml:space="preserve">
-    <value>NetOn set to start with Windows</value>
-  </data>
-  <data name="StartWithWindowsMenu" xml:space="preserve">
-    <value>Start with Windows</value>
-  </data>
-  <data name="UnhandledException" xml:space="preserve">
-    <value>Something went wrong. 
-
-Please report to feedback@voltura.se!</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>version</value>
-  </data>
-  <data name="WednesdayMenu" xml:space="preserve">
-    <value>Wednesday</value>
-  </data>
+  <metadata name="serviceProcessInstaller.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="serviceInstaller.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>328, 17</value>
+  </metadata>
+  <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
 </root>

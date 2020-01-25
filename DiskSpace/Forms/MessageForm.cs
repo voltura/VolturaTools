@@ -1,10 +1,10 @@
 ﻿#region Using statements
 
+using DiskSpace.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using DiskSpace.Properties;
 
 #endregion
 
@@ -21,12 +21,18 @@ namespace DiskSpace.Forms
         ///     Set message to display in form
         /// </summary>
         /// <param name="messageText">Message text</param>
-        public void SetMessage(string messageText) => lblMessage.Text = messageText;
-        
+        public void SetMessage(string messageText)
+        {
+            lblMessage.Text = messageText;
+        }
+
         /// <summary>
         ///     Set link to product URL
         /// </summary>
-        public void SetLink() => Link.Text = Resources.ProductURL;
+        public void SetLink()
+        {
+            Link.Text = Resources.ProductURL;
+        }
 
         #endregion
 
@@ -71,7 +77,7 @@ namespace DiskSpace.Forms
         /// <param name="messageText"></param>
         public static void DisplayMessage(string messageText)
         {
-            using (var message = new MessageForm(messageText))
+            using (MessageForm message = new MessageForm(messageText))
             {
                 message.ShowDialog();
             }
@@ -84,7 +90,7 @@ namespace DiskSpace.Forms
         public static void LogAndDisplayMessage(string messageText)
         {
             Log.Info = messageText;
-            using (var message = new MessageForm(messageText))
+            using (MessageForm message = new MessageForm(messageText))
             {
                 message.ShowDialog();
             }
@@ -97,7 +103,7 @@ namespace DiskSpace.Forms
         public static void LogAndDisplayLinkMessage(string messageText)
         {
             Log.Info = messageText;
-            using (var message = new MessageForm(messageText))
+            using (MessageForm message = new MessageForm(messageText))
             {
                 message.SetLink();
                 message.ShowDialog();
@@ -108,21 +114,45 @@ namespace DiskSpace.Forms
 
         #region Events handling
 
-        private void OK_Click(object sender, EventArgs e) => Close();
+        private void OK_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e) => UpdateOffset(e);
+        private void SettingsTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            UpdateOffset(e);
+        }
 
-        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e) => MoveForm(e);
+        private void SettingsTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            MoveForm(e);
+        }
 
-        private void MinimizePanel_MouseEnter(object sender, EventArgs e) => FocusMinimizeIcon();
+        private void MinimizePanel_MouseEnter(object sender, EventArgs e)
+        {
+            FocusMinimizeIcon();
+        }
 
-        private void MinimizePanel_MouseLeave(object sender, EventArgs e) => UnfocusMinimizeIcon();
+        private void MinimizePanel_MouseLeave(object sender, EventArgs e)
+        {
+            UnfocusMinimizeIcon();
+        }
 
-        private void MinimizePanel_Click(object sender, EventArgs e) => Close();
+        private void MinimizePanel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void MinimizePanelFrame_Click(object sender, EventArgs e) => Close();
+        private void MinimizePanelFrame_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void Link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => OpenUrl();
+        private void Link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            OpenUrl();
+        }
 
         #endregion
 
@@ -135,22 +165,35 @@ namespace DiskSpace.Forms
             Text = Resources.MessageTitle;
         }
 
-        private void FocusMinimizeIcon() => minimizePanel.BackColor = Color.LightGray;
+        private void FocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.LightGray;
+        }
 
         private void MoveForm(MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left) return;
+            if (e.Button != MouseButtons.Left)
+            {
+                return;
+            }
+
             Top = Cursor.Position.Y - Offset.Y;
             Left = Cursor.Position.X - Offset.X;
         }
 
-        private void UpdateOffset(MouseEventArgs e) => Offset = new Point(e.X, e.Y);
+        private void UpdateOffset(MouseEventArgs e)
+        {
+            Offset = new Point(e.X, e.Y);
+        }
 
-        private void UnfocusMinimizeIcon() => minimizePanel.BackColor = Color.White;
+        private void UnfocusMinimizeIcon()
+        {
+            minimizePanel.BackColor = Color.White;
+        }
 
         private void OpenUrl()
         {
-            using (var p = new Process())
+            using (Process p = new Process())
             {
                 p.StartInfo = new ProcessStartInfo
                 {
