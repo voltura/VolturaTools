@@ -59,5 +59,5 @@ Email Settings form features;
   - Activate/Deactivate SSL usage
   
  # DiskSpaceSetup
-   .MSI package for DiskSpace, supports install, uninstall via ControlPanel or though .MSI. Also Repair function.
+   .MSI package for DiskSpace, supports install, uninstall via ControlPanel or through .MSI. Also Repair function.
    When installing options exist to configure DiskSpace (not all settings) and to start it after completed installation.
