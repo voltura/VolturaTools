@@ -1,6 +1,10 @@
 # VolturaTools
 Small tools and utilities for Windows environment
 
+# ScanDevices
+
+Windows Service that automatically performs a Device Manager "Scan for changes" operations every second. Useful for devices that has been removed due to that the external device has been turned off. Use it to get my HDMI sound to work towards my stereo after it has been turned off.
+
 # WeekNumber
 <a href="https://github.com/voltura/VolturaTools/releases/download/v1.5.0.0/WeekNumber_x86_portable.exe">Download executable - version 1.5.0.1</a>
 
