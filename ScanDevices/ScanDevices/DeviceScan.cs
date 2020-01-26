@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 
 namespace ScanDevices
@@ -8,6 +10,7 @@ namespace ScanDevices
         private bool scanning = false;
         private readonly Timer timer;
         private int pdnDevInst = 0;
+        private int numberOfLoggedErrors = 0;
         private bool stop = false;
         public bool Running { get; private set; }
 
@@ -46,13 +49,18 @@ namespace ScanDevices
             {
                 if (NativeMethods.CM_Locate_DevNodeA(ref pdnDevInst, null, NativeMethods.CM_LOCATE_DEVNODE_NORMAL) != NativeMethods.CR_SUCCESS)
                 {
-                }
-                if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
-                {
+                    if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
+                    {
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (numberOfLoggedErrors < 1000)
+                {
+                    numberOfLoggedErrors += 1;
+                    EventLog.WriteEntry(Path.GetFileName(AppDomain.CurrentDomain.ApplicationIdentity.FullName), ex.ToString(), EventLogEntryType.Error);
+                }
             }
             finally
             {
