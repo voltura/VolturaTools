@@ -44,27 +44,34 @@ namespace ScanDevices
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private void ExecuteScan()
         {
-            scanning = true;
             try
             {
+                scanning = true;
                 if (NativeMethods.CM_Locate_DevNodeA(ref pdnDevInst, null, NativeMethods.CM_LOCATE_DEVNODE_NORMAL) != NativeMethods.CR_SUCCESS)
                 {
-                    if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
-                    {
-                    }
+                    LogErrorToEventLog("CM_Locate_DevNodeA failed");
+                }
+                if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
+                {
+                    LogErrorToEventLog("CM_Reenumerate_DevNode failed");
                 }
             }
             catch (Exception ex)
             {
-                if (numberOfLoggedErrors < 1000)
-                {
-                    numberOfLoggedErrors += 1;
-                    EventLog.WriteEntry(Path.GetFileName(AppDomain.CurrentDomain.ApplicationIdentity.FullName), ex.ToString(), EventLogEntryType.Error);
-                }
+                LogErrorToEventLog(ex.ToString());
             }
             finally
             {
                 scanning = false;
+            }
+        }
+
+        private void LogErrorToEventLog(string errorString)
+        {
+            if (numberOfLoggedErrors < 1000)
+            {
+                numberOfLoggedErrors += 1;
+                EventLog.WriteEntry(Path.GetFileName(AppDomain.CurrentDomain.ApplicationIdentity.FullName), errorString, EventLogEntryType.Error);
             }
         }
 
