@@ -12,12 +12,14 @@ namespace ScanDevices
         private int pdnDevInst = 0;
         private int numberOfLoggedErrors = 0;
         private bool stop = false;
+        private readonly object lockObject = new object();
+        private const int TIMER_INTERVAL_MILLISECONDS = 2000;
         public bool Running { get; private set; }
 
         public DeviceScan()
         {
             Running = true;
-            timer = new Timer(TimerEventProcessor, null, 0, 1000);
+            timer = new Timer(TimerEventProcessor, null, 0, TIMER_INTERVAL_MILLISECONDS);
         }
 
         public void Stop()
@@ -44,25 +46,28 @@ namespace ScanDevices
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private void ExecuteScan()
         {
-            try
+            lock (lockObject)
             {
-                scanning = true;
-                if (NativeMethods.CM_Locate_DevNodeA(ref pdnDevInst, null, NativeMethods.CM_LOCATE_DEVNODE_NORMAL) != NativeMethods.CR_SUCCESS)
+                try
                 {
-                    LogErrorToEventLog("CM_Locate_DevNodeA failed");
+                    scanning = true;
+                    if (NativeMethods.CM_Locate_DevNodeA(ref pdnDevInst, null, NativeMethods.CM_LOCATE_DEVNODE_NORMAL) != NativeMethods.CR_SUCCESS)
+                    {
+                        LogErrorToEventLog("CM_Locate_DevNodeA failed");
+                    }
+                    if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
+                    {
+                        LogErrorToEventLog("CM_Reenumerate_DevNode failed");
+                    }
                 }
-                if (NativeMethods.CM_Reenumerate_DevNode(pdnDevInst, NativeMethods.CM_REENUMERATE_NORMAL) != NativeMethods.CR_SUCCESS)
+                catch (Exception ex)
                 {
-                    LogErrorToEventLog("CM_Reenumerate_DevNode failed");
+                    LogErrorToEventLog(ex.ToString());
                 }
-            }
-            catch (Exception ex)
-            {
-                LogErrorToEventLog(ex.ToString());
-            }
-            finally
-            {
-                scanning = false;
+                finally
+                {
+                    scanning = false;
+                }
             }
         }
 

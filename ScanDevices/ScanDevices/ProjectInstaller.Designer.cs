@@ -43,6 +43,7 @@
             this.serviceInstaller.DisplayName = "Voltura AB ScanDevices";
             this.serviceInstaller.ServiceName = "ScanDevicesService";
             this.serviceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
+            this.serviceInstaller.Committed += new System.Configuration.Install.InstallEventHandler(this.ServiceInstaller_Committed);
             // 
             // ProjectInstaller
             // 
