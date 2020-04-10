@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -68,7 +69,7 @@ namespace NetOn
                     }
                 }
 
-                Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
+                Settings.UpdateSetting(Resources.ForceRedraw, true.ToString(CultureInfo.InvariantCulture));
                 EnableMenuItem(mi);
             }
             catch (Exception ex)
@@ -175,19 +176,6 @@ namespace NetOn
             {
                 mi.Enabled = true;
             }
-        }
-
-        private static void CheckMenuItemUncheckSiblings(MenuItem mi)
-        {
-            if (mi is null)
-            {
-                return;
-            }
-            foreach (MenuItem m in mi.Parent?.MenuItems)
-            {
-                m.Checked = false;
-            }
-            mi.Checked = true;
         }
 
         private void SayStartWithWindowsSetting()

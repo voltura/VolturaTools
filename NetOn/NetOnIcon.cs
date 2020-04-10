@@ -11,7 +11,7 @@ namespace NetOn
     {
         #region Icon Size
 
-        private static readonly int _size = 256;
+        private const int _size = 256;
 
         #endregion Icon Size
 

@@ -2,6 +2,7 @@
 
 using Microsoft.Win32;
 using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -40,8 +41,9 @@ namespace NetOn
 
         internal static bool MuteAllSounds
         {
-            get => SettingIsValue(nameof(MuteAllSounds), true.ToString());
-            set => UpdateSetting(nameof(MuteAllSounds), value.ToString());
+
+            get => SettingIsValue(nameof(MuteAllSounds), true.ToString(CultureInfo.InvariantCulture));
+            set => UpdateSetting(nameof(MuteAllSounds), value.ToString(CultureInfo.InvariantCulture));
         }
 
         #endregion Internal static property for MuteAllSounds setting

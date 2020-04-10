@@ -83,7 +83,7 @@ namespace NetOn
             {
                 using (HttpClient c = new HttpClient())
                 {
-                    return c.GetStringAsync("http://ipecho.net/plain").Result;
+                    return c.GetStringAsync(new System.Uri("http://ipecho.net/plain")).Result;
                 }
             }
             catch

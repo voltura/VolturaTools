@@ -17,7 +17,6 @@ namespace NetOn
 
         #region Private variables
 
-        private readonly Status _status;
         private readonly Timer _timer;
 
         #endregion Private variables
@@ -29,7 +28,6 @@ namespace NetOn
             try
             {
                 Application.ApplicationExit += OnApplicationExit;
-                _status = new Status();
                 Gui = new TaskbarGui(Status.Current());
                 _timer = GetTimer;
             }
