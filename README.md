@@ -64,8 +64,10 @@ Email Settings form features;
 
 # ProxyToogle
 <a href="https://github.com/voltura/VolturaTools/releases/tag/v0.0.0.0">Download ProxyToogle portable x64 executable - version 0.0.0.0</a>
-Utility to toogle proxy on|off from a Windows taskbar icon.
+<br>
+A small utility to toogle proxy on|off from a Windows taskbar icon.
+
 - Click taskbar icon to toogle proxy on|off.
-  - Red icon = proxy off
-  - Green icon = proxy on
+  <p>&nbsp;Red icon = proxy off</p>
+  <p>&nbsp;Green icon = proxy on</p>
 - Right-click to show context menu to exit the application.
