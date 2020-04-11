@@ -61,3 +61,9 @@ Email Settings form features;
  # DiskSpaceSetup
    .MSI package for DiskSpace, supports install, uninstall via ControlPanel or through .MSI. Also Repair function.
    When installing options exist to configure DiskSpace (not all settings) and to start it after completed installation.
+
+# ProxyToogle
+Utility to toogle proxy on|off from a Windows taskbar icon.
+Click taskbar icon to toogle proxy on|off.
+Red icon = proxy off, Green icon = proxy on.
+Right-click to show context menu that allows to close application.
