@@ -1,7 +1,5 @@
 ﻿using Microsoft.Win32.TaskScheduler;
 using System;
-using System.Diagnostics;
-using System.Text;
 namespace Runner
 {
     internal class Program
@@ -15,6 +13,7 @@ namespace Runner
 
         private void CreateTask(string[] args)
         {
+            Console.Write(args != null && args.Length >= 1 ? args[0] : "");
             using (TaskService ts = new TaskService())
             {
                 // Create a new task definition and assign properties
@@ -37,6 +36,7 @@ namespace Runner
                 ts.RootFolder.DeleteTask("Test");
             }
         }
+        /*
         private void RunApp(string[] args)
         {
             StringBuilder sb = new StringBuilder();
@@ -56,7 +56,7 @@ namespace Runner
                 UserName = "Administrator"
             };
             System.Security.SecureString password = new System.Security.SecureString();
-            string passwordStr = "m876kh";
+            string passwordStr = "blabla";
 
             foreach (char c in passwordStr)
             {
@@ -69,6 +69,6 @@ namespace Runner
             p.WaitForExit();
             Console.WriteLine("Program ended.");
             Console.ReadKey();
-        }
+        }*/
     }
 }

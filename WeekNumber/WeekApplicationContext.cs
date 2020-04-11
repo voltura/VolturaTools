@@ -17,6 +17,7 @@ namespace WeekNumber
 
         #region Private variables
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "It is used")]
         private readonly Week _week;
         private readonly Timer _timer;
 
