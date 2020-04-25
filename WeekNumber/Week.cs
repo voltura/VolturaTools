@@ -29,18 +29,18 @@ namespace WeekNumber
 
         #region Internal static week strings
 
-        internal static readonly string CalendarWeekRuleString = nameof(CalendarWeekRule);
-        internal static readonly string FirstDay = nameof(CalendarWeekRule.FirstDay);
-        internal static readonly string FirstFourDayWeek = nameof(CalendarWeekRule.FirstFourDayWeek);
-        internal static readonly string FirstFullWeek = nameof(CalendarWeekRule.FirstFullWeek);
-        internal static readonly string DayOfWeekString = nameof(DayOfWeek);
-        internal static readonly string Monday = nameof(DayOfWeek.Monday);
-        internal static readonly string Tuesday = nameof(DayOfWeek.Tuesday);
-        internal static readonly string Wednesday = nameof(DayOfWeek.Wednesday);
-        internal static readonly string Thursday = nameof(DayOfWeek.Thursday);
-        internal static readonly string Friday = nameof(DayOfWeek.Friday);
-        internal static readonly string Saturday = nameof(DayOfWeek.Saturday);
-        internal static readonly string Sunday = nameof(DayOfWeek.Sunday);
+        internal const string CalendarWeekRuleString = nameof(CalendarWeekRule);
+        internal const string FirstDay = nameof(CalendarWeekRule.FirstDay);
+        internal const string FirstFourDayWeek = nameof(CalendarWeekRule.FirstFourDayWeek);
+        internal const string FirstFullWeek = nameof(CalendarWeekRule.FirstFullWeek);
+        internal const string DayOfWeekString = nameof(DayOfWeek);
+        internal const string Monday = nameof(DayOfWeek.Monday);
+        internal const string Tuesday = nameof(DayOfWeek.Tuesday);
+        internal const string Wednesday = nameof(DayOfWeek.Wednesday);
+        internal const string Thursday = nameof(DayOfWeek.Thursday);
+        internal const string Friday = nameof(DayOfWeek.Friday);
+        internal const string Saturday = nameof(DayOfWeek.Saturday);
+        internal const string Sunday = nameof(DayOfWeek.Sunday);
 
         #endregion Internal static week strings
 
@@ -70,9 +70,8 @@ namespace WeekNumber
         /// <returns>Current week as int based on calendar rules in application settings</returns>
         public static int Current()
         {
-            CultureInfo currentCultureInfo = CultureInfo.CurrentCulture;
-            DayOfWeek dayOfWeek = currentCultureInfo.DateTimeFormat.FirstDayOfWeek;
-            CalendarWeekRule calendarWeekRule = currentCultureInfo.DateTimeFormat.CalendarWeekRule;
+            DayOfWeek dayOfWeek;
+            CalendarWeekRule calendarWeekRule;
             dayOfWeek = Enum.TryParse(Settings.GetSetting(DayOfWeekString), true, out dayOfWeek) ?
                 dayOfWeek : DayOfWeek.Monday;
             calendarWeekRule = Enum.TryParse(Settings.GetSetting(CalendarWeekRuleString), true,

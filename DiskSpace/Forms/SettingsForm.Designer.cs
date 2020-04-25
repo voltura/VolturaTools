@@ -21,6 +21,7 @@ namespace DiskSpace.Forms
             {
                 components.Dispose();
             }
+            _emailSettings?.Dispose();
             base.Dispose(disposing);
         }
 

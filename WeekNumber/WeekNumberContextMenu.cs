@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -51,6 +52,7 @@ namespace WeekNumber
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToUpdateDayOfWeek, ex);
+                throw;
             }
         }
 
@@ -82,12 +84,13 @@ namespace WeekNumber
                     }
                 }
 
-                Settings.UpdateSetting(Resources.ForceRedraw, true.ToString());
+                Settings.UpdateSetting(Resources.ForceRedraw, true.ToString(CultureInfo.InvariantCulture));
                 EnableMenuItem(mi);
             }
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToUpdateColor, ex);
+                throw;
             }
         }
 
@@ -105,6 +108,7 @@ namespace WeekNumber
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToUpdateCalendarWeekRule, ex);
+                throw;
             }
         }
 
@@ -113,15 +117,19 @@ namespace WeekNumber
             try
             {
                 MenuItem mi = (MenuItem)o;
-                mi.Enabled = false;
-                mi.Checked = !mi.Checked;
-                Settings.StartWithWindows = mi.Checked;
-                SayStartWithWindowsSetting();
-                EnableMenuItem(mi);
+                if (mi != null)
+                {
+                    mi.Enabled = false;
+                    mi.Checked = !mi.Checked;
+                    Settings.StartWithWindows = mi.Checked;
+                    SayStartWithWindowsSetting();
+                    EnableMenuItem(mi);
+                }
             }
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToUpdateRegistry, ex);
+                throw;
             }
         }
 

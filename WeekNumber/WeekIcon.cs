@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 
 #endregion Using statements
@@ -11,7 +12,7 @@ namespace WeekNumber
     {
         #region Icon Size
 
-        private static readonly int _size = 256;
+        private const int _size = 256;
 
         #endregion Icon Size
 
@@ -61,6 +62,7 @@ namespace WeekNumber
             {
                 Message.Show(Resources.UnhandledException, ex);
                 result = false;
+                throw;
             }
             finally
             {
@@ -104,7 +106,7 @@ namespace WeekNumber
                 GraphicsUnit.Pixel, 0, false))
             using (Brush brush = new SolidBrush(foregroundColor))
             {
-                graphics?.DrawString(weekNumber.ToString().PadLeft(2, '0'), font, brush, insetX, insetY);
+                graphics?.DrawString(weekNumber.ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'), font, brush, insetX, insetY);
             }
         }
 

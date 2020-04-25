@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using ProxyToogle.Properties;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -44,7 +45,7 @@ namespace ProxyToogle
             _notifyIcon = _proxyEnabled ? AppNotifyIcon(ref _onIcon) : AppNotifyIcon(ref _offIcon);
             _notifyIcon.Text = (_proxyEnabled ? "Proxy is ON" : "Proxy is OFF") + $"\r\nProxy: { _proxyServer}";
             _notifyIcon.Click += NotifyIcon_Click;
-            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem("E&xit ProxyToogle", ExitMenuClick) });
+            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem(Resources.ExitProxyToogle, ExitMenuClick) });
             _timer = new Timer
             {
                 Interval = 1000,
@@ -81,7 +82,7 @@ namespace ProxyToogle
             ToogleProxy();
         }
 
-        internal bool ProxyEnabled()
+        internal static bool ProxyEnabled()
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
             return (int)registry.GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1 ? true : false;

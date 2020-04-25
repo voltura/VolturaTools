@@ -41,8 +41,8 @@ namespace WeekNumber
 
         internal static bool MuteAllSounds
         {
-            get => SettingIsValue(nameof(MuteAllSounds), true.ToString());
-            set => UpdateSetting(nameof(MuteAllSounds), value.ToString());
+            get => SettingIsValue(nameof(MuteAllSounds), true.ToString(CultureInfo.InvariantCulture));
+            set => UpdateSetting(nameof(MuteAllSounds), value.ToString(CultureInfo.InvariantCulture));
         }
 
         #endregion Internal static property for MuteAllSounds setting

@@ -460,8 +460,13 @@ namespace DiskSpace.Forms
             }
         }
 
-        private void ShowContextMenuAtTitleIcon()
+        private void ShowContextMenuAtCursor()
         {
+            if (contextMenuStrip == null || contextMenuStrip.Visible)
+            {
+                return;
+            }
+
             contextMenuStrip?.Show(Cursor.Position);
         }
 
@@ -676,7 +681,7 @@ namespace DiskSpace.Forms
 
         private void TitleIcon_Click(object sender, EventArgs e)
         {
-            ShowContextMenuAtTitleIcon();
+            ShowContextMenuAtCursor();
         }
 
         private void MainForm_Load(object sender, EventArgs e)

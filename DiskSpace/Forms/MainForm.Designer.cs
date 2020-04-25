@@ -20,6 +20,7 @@ namespace DiskSpace.Forms
             {
                 components.Dispose();
             }
+            _settingsForm?.Dispose();
             base.Dispose(disposing);
         }
 

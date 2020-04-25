@@ -52,7 +52,10 @@ namespace DiskSpace
             Log.Info = Application.ProductName + " version " + Application.ProductVersion;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            using (MainForm mainForm = new MainForm())
+            {
+                Application.Run(mainForm);
+            }
             Log.Close("=== Application ended ===");
         }
 

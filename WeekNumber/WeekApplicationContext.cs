@@ -39,6 +39,7 @@ namespace WeekNumber
                 _timer?.Stop();
                 Message.Show(Resources.UnhandledException, ex);
                 Application.Exit();
+                throw;
             }
         }
 
@@ -71,23 +72,18 @@ namespace WeekNumber
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            //if ((!_week.WasChanged()) && Settings.GetSetting(Resources.ForceRedraw) == false.ToString())
-            //{
-            //    return;
-            //}
             Timer timer = (Timer)sender;
             timer?.Stop();
             Application.DoEvents();
             try
             {
                 Gui?.UpdateIcon(Week.Current());
-                // Settings.UpdateSetting(Resources.ForceRedraw, false.ToString());
             }
             catch (Exception ex)
             {
                 Message.Show(Resources.FailedToSetIcon, ex);
                 Cleanup();
-                return;
+                throw;
             }
             timer?.Start();
         }

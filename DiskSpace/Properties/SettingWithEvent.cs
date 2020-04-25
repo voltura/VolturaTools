@@ -20,14 +20,14 @@ namespace DiskSpace.Properties
         public string driveLetter
 #pragma warning restore IDE1006 // Naming Styles
         {
-            get => (string)this["driveLetter"];
+            get => (string)this[nameof(driveLetter)];
             set
             {
                 lock (Locker)
                 {
-                    if (this["driveLetter"].ToString() != value)
+                    if (this[nameof(driveLetter)].ToString() != value)
                     {
-                        this["driveLetter"] = value;
+                        this[nameof(driveLetter)] = value;
                         DriveChanged?.Invoke(this, EventArgs.Empty);
                     }
                 }
