@@ -61,3 +61,13 @@ Email Settings form features;
  # DiskSpaceSetup
    .MSI package for DiskSpace, supports install, uninstall via ControlPanel or through .MSI. Also Repair function.
    When installing options exist to configure DiskSpace (not all settings) and to start it after completed installation.
+
+# ProxyToogle
+<a href="https://github.com/voltura/VolturaTools/releases/tag/v0.0.0.0">Download ProxyToogle portable x64 executable - version 0.0.0.0</a>
+<br>
+A small utility to toogle proxy on|off from a Windows taskbar icon.
+
+- Click taskbar icon to toogle proxy on|off.
+  <p>&nbsp;Red icon = proxy off</p>
+  <p>&nbsp;Green icon = proxy on</p>
+- Right-click to show context menu to exit the application.
