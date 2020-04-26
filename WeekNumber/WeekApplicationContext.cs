@@ -1,6 +1,9 @@
 ﻿#region Using statements
 
 using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 #endregion Using statements
@@ -20,6 +23,7 @@ namespace WeekNumber
         [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "It is used")]
         private readonly Week _week;
         private readonly Timer _timer;
+        private Listen _listen;
 
         #endregion Private variables
 
@@ -29,10 +33,17 @@ namespace WeekNumber
         {
             try
             {
+                /* Hack to just register external dll used for speech reqognition */
+              /*  var asmFullPath = Path.Combine(Application.StartupPath, "Microsoft.Speech.dll");
+                Assembly asm = Assembly.LoadFile(asmFullPath);
+                RegistrationServices regAsm = new RegistrationServices();
+                bool bResult = regAsm.RegisterAssembly(asm, AssemblyRegistrationFlags.SetCodeBase);*/
+
                 Application.ApplicationExit += OnApplicationExit;
                 _week = new Week();
                 Gui = new TaskbarGui(Week.Current());
                 _timer = GetTimer;
+                _listen = new Listen();
             }
             catch (Exception ex)
             {
