@@ -20,15 +20,17 @@ namespace WeekNumber
         internal static void Show(string text, Exception ex = null, Speak speak = null)
         {
             speak?.Sentence(Resources.ClearThroat + text);
-            MessageBox.Show(ex is null ? text : $"{text}\r\n{ex}", _caption,
-                MessageBoxButtons.OK, ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+            var message = ex is null ? text : $"{text}\r\n{ex}";
+            MessageBoxIcon icon = ex is null ? MessageBoxIcon.Information : MessageBoxIcon.Error;
+            
+            MessageBox.Show(message, _caption, MessageBoxButtons.OK, icon, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         internal static void Show(string text, Speak speak)
         {
             speak?.Sentence(Resources.ClearThroat + _caption);
             MessageBox.Show(text, _caption,
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         #endregion Show Information or Error dialog methods
