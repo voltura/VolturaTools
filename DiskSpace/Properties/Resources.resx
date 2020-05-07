@@ -145,7 +145,7 @@
     <comment>Settings form</comment>
   </data>
   <data name="Diskcleanup" xml:space="preserve">
-    <value>Disk clean-up</value>
+    <value>Show Disk clean-up</value>
     <comment>Context menu item that launches CleanMgr.exe</comment>
   </data>
   <data name="logIconBlue" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -292,5 +292,9 @@
   </data>
   <data name="Star" xml:space="preserve">
     <value>*</value>
+  </data>
+  <data name="RunDiskcleanup" xml:space="preserve">
+    <value>Run Disk clean-up</value>
+    <comment>Context menu item that runs CleanMgr.exe</comment>
   </data>
 </root>

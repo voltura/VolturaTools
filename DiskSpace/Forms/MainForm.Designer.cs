@@ -46,6 +46,7 @@ namespace DiskSpace.Forms
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.diskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runDiskCleanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diskManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTimer = new System.Windows.Forms.Timer(this.components);
             this.titleIcon = new System.Windows.Forms.PictureBox();
@@ -136,6 +137,7 @@ namespace DiskSpace.Forms
             this.showToolStripMenuItem,
             this.toolStripSeparator1,
             this.diskCleanupToolStripMenuItem,
+            this.runDiskCleanupToolStripMenuItem,
             this.diskManagementToolStripMenuItem});
             this.contextMenuStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
             this.contextMenuStrip.Name = "contextMenuStrip";
@@ -189,6 +191,15 @@ namespace DiskSpace.Forms
             this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(421, 60);
             this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
             this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(MainForm.DiskCleanupToolStripMenuItem_Click);
+            // 
+            // runDiskCleanupToolStripMenuItem
+            // 
+            this.runDiskCleanupToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runDiskCleanupToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.runDiskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
+            this.runDiskCleanupToolStripMenuItem.Size = new System.Drawing.Size(421, 60);
+            this.runDiskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.RunDiskcleanup;
+            this.runDiskCleanupToolStripMenuItem.Click += new System.EventHandler(MainForm.RunDiskCleanupToolStripMenuItem_Click);
             // 
             // diskManagementToolStripMenuItem
             // 
@@ -300,6 +311,7 @@ namespace DiskSpace.Forms
         private Timer checkTimer;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem diskCleanupToolStripMenuItem;
+        private ToolStripMenuItem runDiskCleanupToolStripMenuItem;
         private ToolStripMenuItem diskManagementToolStripMenuItem;
         private PictureBox logFileIcon;
         private ToolStripMenuItem logToolStripMenuItem;

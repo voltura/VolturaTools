@@ -170,8 +170,10 @@ namespace DiskSpace.Forms
             quitToolStripMenuItem.Text = Resources.Quit;
             settingsToolStripMenuItem.Text = Resources.Settings;
             diskCleanupToolStripMenuItem.Text = Resources.Diskcleanup;
-            diskManagementToolStripMenuItem.Text = Resources.DiskManagement;
             diskCleanupToolStripMenuItem.Enabled = File.Exists(CleanMgrFullPath);
+            runDiskCleanupToolStripMenuItem.Text = Resources.RunDiskcleanup;
+            runDiskCleanupToolStripMenuItem.Enabled = File.Exists(CleanMgrFullPath);
+            diskManagementToolStripMenuItem.Text = Resources.DiskManagement;
             showToolStripMenuItem.Text = Resources.ShowHide;
             UpdateTitleText();
         }
@@ -494,7 +496,7 @@ namespace DiskSpace.Forms
             Log.Info = "Now montitoring " + Settings.Default.driveLetter;
         }
 
-        private static void LaunchCleanManager()
+        private static void LaunchCleanManager(bool run = false)
         {
             if (!File.Exists(CleanMgrFullPath))
             {
@@ -508,6 +510,10 @@ namespace DiskSpace.Forms
                     Arguments = Settings.Default.driveLetter,
                     UseShellExecute = false
                 };
+                if (run)
+                {
+                    p.StartInfo.Arguments += " /SAGERUN:11";
+                }
                 p.Start();
                 Log.Info = "Started Disk Clean-up";
             }
@@ -696,7 +702,11 @@ namespace DiskSpace.Forms
 
         private static void DiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LaunchCleanManager();
+            LaunchCleanManager(run: false);
+        }
+        private static void RunDiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LaunchCleanManager(run: true);
         }
 
         private static void LogFileIcon_Click(object sender, EventArgs e)

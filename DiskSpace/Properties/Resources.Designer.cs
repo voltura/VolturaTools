@@ -19,7 +19,7 @@ namespace DiskSpace.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -152,7 +152,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disk clean-up.
+        ///   Looks up a localized string similar to Show Disk clean-up.
         /// </summary>
         internal static string Diskcleanup {
             get {
@@ -369,6 +369,15 @@ namespace DiskSpace.Properties {
         internal static string Quit {
             get {
                 return ResourceManager.GetString("Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run Disk clean-up.
+        /// </summary>
+        internal static string RunDiskcleanup {
+            get {
+                return ResourceManager.GetString("RunDiskcleanup", resourceCulture);
             }
         }
         
