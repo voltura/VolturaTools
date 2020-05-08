@@ -510,10 +510,7 @@ namespace DiskSpace.Forms
                     Arguments = Settings.Default.driveLetter,
                     UseShellExecute = false
                 };
-                if (run)
-                {
-                    p.StartInfo.Arguments += " /SAGERUN:11";
-                }
+                p.StartInfo.Arguments += run ? " /SAGERUN:11" : " /SAGESET:11";
                 p.Start();
                 Log.Info = "Started Disk Clean-up";
             }

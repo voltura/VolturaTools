@@ -152,7 +152,7 @@ namespace DiskSpace.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Disk clean-up.
+        ///   Looks up a localized string similar to Configure Disk clean-up.
         /// </summary>
         internal static string Diskcleanup {
             get {
