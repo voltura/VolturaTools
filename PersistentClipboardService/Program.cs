@@ -17,9 +17,11 @@ namespace PersistentClipboard
             };
             ServiceBase.Run(ServicesToRun);
 #else
-            PersistentClipboardService service = new PersistentClipboardService();
-            service.GetTextFromClipboardFromSTAAppartmentState();
-            service.SetTextToClipboardFromSTAAppartmentState();
+            using (PersistentClipboardService service = new PersistentClipboardService())
+            {
+                service.GetTextFromClipboardFromSTAAppartmentState();
+                service.SetTextToClipboardFromSTAAppartmentState();
+            }
 #endif
         }
     }
