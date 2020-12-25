@@ -88,13 +88,13 @@ namespace ProxyToogle
             return (int)registry.GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1 ? true : false;
         }
 
-        internal string ProxyServer()
+        internal static string ProxyServer()
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
             return (string)registry.GetValue("ProxyServer", "No proxy server defined", RegistryValueOptions.None);
         }
 
-        internal void ToogleProxy()
+        internal static void ToogleProxy()
         {
             RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
             registry.SetValue("ProxyEnable", ProxyEnabled() ? 0 : 1);
@@ -104,7 +104,7 @@ namespace ProxyToogle
             Console.Write($"Internet Options change = {settingsReturn}, Internet Options refreshed = {refreshReturn}");
         }
 
-        private Icon CreateIcon(Color backColor, Color textColor)
+        private static Icon CreateIcon(Color backColor, Color textColor)
         {
             using (Bitmap bitmap = new Bitmap(256, 256)) using (Graphics graphics = Graphics.FromImage(bitmap))
             {
@@ -121,7 +121,7 @@ namespace ProxyToogle
             }
         }
 
-        private NotifyIcon AppNotifyIcon(ref Icon icon)
+        private static NotifyIcon AppNotifyIcon(ref Icon icon)
         {
             return new NotifyIcon() { Visible = true, Icon = icon };
         }

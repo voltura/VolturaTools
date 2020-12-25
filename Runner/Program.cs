@@ -6,12 +6,10 @@ namespace Runner
     {
         private static void Main(string[] args)
         {
-            Program p = new Program();
-            // p.RunApp(args);
-            p.CreateTask(args);
+            CreateTask(args);
         }
 
-        private void CreateTask(string[] args)
+        private static void CreateTask(string[] args)
         {
             Console.Write(args != null && args.Length >= 1 ? args[0] : "");
             using (TaskService ts = new TaskService())
