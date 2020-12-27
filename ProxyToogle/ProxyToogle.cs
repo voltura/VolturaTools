@@ -11,7 +11,6 @@ namespace ProxyToogle
     {
         private static readonly Mutex Mutex = new Mutex(true, "88F5D3E0-16DC-40BC-AD02-C399DC744E14");
 
-        [STAThread]
         private static void Main()
         {
             if (!Mutex.WaitOne(TimeSpan.Zero, true))
@@ -63,12 +62,12 @@ namespace ProxyToogle
 
         internal static bool ProxyEnabled()
         {
-            return (int)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1;
+            return (int)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyEnable", 0) == 1;
         }
 
         internal static string ProxyServer()
         {
-            return (string)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyServer", "No proxy server defined", RegistryValueOptions.None);
+            return (string)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyServer", "No proxy server defined");
         }
 
         private static Icon CreateIcon(Color backColor, Color textColor)
