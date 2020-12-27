@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using ProxyToogle.Properties;
 using System;
 using System.Drawing;
 using System.Threading;
@@ -49,7 +48,7 @@ namespace ProxyToogle
                     NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
                 }
             };
-            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem(Resources.ExitProxyToogle, (o, e) => Application.Exit() ) });
+            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem(Properties.Resources.ExitProxyToogle, (o, e) => Application.Exit() ) });
             _timer = new Timer { Interval = 1000, Enabled = true };
             _timer.Tick += (s, e) => {
                 _timer?.Stop();
