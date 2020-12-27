@@ -31,6 +31,7 @@ namespace ProxyToogle
         private readonly Icon _onIcon, _offIcon;
         private readonly Timer _timer;
         private bool _proxyEnabled;
+        private bool _newProxyStateEnabled;
         //private string _proxyServer;
         private const string REGKEY = @"Software\Microsoft\Windows\CurrentVersion\Internet Settings";
         //private readonly string PROXY_ON = "Proxy is ON";
@@ -49,6 +50,7 @@ namespace ProxyToogle
             //PROXY_OFF += "\r\nProxy: " + _proxyServer;
 
             Size SIZE = new Size(256, 256);
+            _newProxyStateEnabled = _proxyEnabled;
             Icon iconCopy = new Icon(_proxyEnabled ? _onIcon : _offIcon, SIZE);
             _notifyIcon = new NotifyIcon() { Visible = true, Icon = iconCopy };
             _notifyIcon.Click += (s, e) => { if (((MouseEventArgs)e).Button == MouseButtons.Left) {
@@ -57,6 +59,34 @@ namespace ProxyToogle
                         _proxyEnabled = (int)key.GetValue("ProxyEnable", 0) == 1;
                         key.SetValue("ProxyEnable", _proxyEnabled ? 0 : 1);
                     }
+                    _timer?.Stop();
+                    Application.DoEvents();
+                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(REGKEY, true))
+                    {
+                        _newProxyStateEnabled = (int)key.GetValue("ProxyEnable", 0) == 1;
+                        //        _proxyServer = (string)key.GetValue("ProxyServer", "No proxy server defined");
+                    }
+                    if (_newProxyStateEnabled != _proxyEnabled)
+                    {
+                        _proxyEnabled = _newProxyStateEnabled;
+                        if (_notifyIcon.Icon != null)
+                        {
+                            NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                            if (iconCopy != null)
+                            {
+                                NativeMethods.DestroyIcon(iconCopy.Handle);
+                                iconCopy?.Dispose();
+                            }
+                            _notifyIcon.Icon?.Dispose();
+                            GC.WaitForPendingFinalizers();
+                            GC.Collect();
+                        }
+                        iconCopy = new Icon(_proxyEnabled ? _onIcon : _offIcon, SIZE);
+                        _notifyIcon.Icon = iconCopy;
+                        // MEMORY LEAK ON ROW BELOW! How to handle?
+                        //_notifyIcon.Text = _proxyEnabled ? PROXY_ON : PROXY_OFF;
+                    }
+                    _timer?.Start();
                     NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
                     NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
                 }
@@ -83,25 +113,29 @@ namespace ProxyToogle
                 Application.DoEvents();
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(REGKEY, true))
                 {
-                    _proxyEnabled = (int)key.GetValue("ProxyEnable", 0) == 1;
+                    _newProxyStateEnabled = (int)key.GetValue("ProxyEnable", 0) == 1;
             //        _proxyServer = (string)key.GetValue("ProxyServer", "No proxy server defined");
                 }
-                if (_notifyIcon.Icon != null)
+                if (_newProxyStateEnabled != _proxyEnabled)
                 {
-                    NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
-                    if (iconCopy != null)
+                    _proxyEnabled = _newProxyStateEnabled;
+                    if (_notifyIcon.Icon != null)
                     {
-                        NativeMethods.DestroyIcon(iconCopy.Handle);
-                        iconCopy?.Dispose();
+                        NativeMethods.DestroyIcon(_notifyIcon.Icon.Handle);
+                        if (iconCopy != null)
+                        {
+                            NativeMethods.DestroyIcon(iconCopy.Handle);
+                            iconCopy?.Dispose();
+                        }
+                        _notifyIcon.Icon?.Dispose();
+                        GC.WaitForPendingFinalizers();
+                        GC.Collect();
                     }
-                    _notifyIcon.Icon?.Dispose();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
+                    iconCopy = new Icon(_proxyEnabled ? _onIcon : _offIcon, SIZE);
+                    _notifyIcon.Icon = iconCopy;
+                    // MEMORY LEAK ON ROW BELOW! How to handle?
+                    //_notifyIcon.Text = _proxyEnabled ? PROXY_ON : PROXY_OFF;
                 }
-                iconCopy = new Icon(_proxyEnabled ? _onIcon : _offIcon, SIZE);
-                _notifyIcon.Icon = iconCopy;
-                // MEMORY LEAK ON ROW BELOW! How to handle?
-                //_notifyIcon.Text = _proxyEnabled ? PROXY_ON : PROXY_OFF;
                 _timer?.Start();
             };
         }
