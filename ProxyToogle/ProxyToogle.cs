@@ -67,12 +67,12 @@ namespace ProxyToogle
             return (int)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1;
         }
 
-        internal string ProxyServer()
+        internal static string ProxyServer()
         {
             return (string)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyServer", "No proxy server defined", RegistryValueOptions.None);
         }
 
-        private Icon CreateIcon(Color backColor, Color textColor)
+        private static Icon CreateIcon(Color backColor, Color textColor)
         {
             using (Bitmap bitmap = new Bitmap(256, 256)) using (Graphics graphics = Graphics.FromImage(bitmap))
             {

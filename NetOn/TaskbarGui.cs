@@ -86,7 +86,7 @@ namespace NetOn
             }
         }
 
-        private void ChangeStatus()
+        private static void ChangeStatus()
         {
             if (Status.Current() == 1)
             {
