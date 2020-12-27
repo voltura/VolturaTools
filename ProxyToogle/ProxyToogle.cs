@@ -30,11 +30,11 @@ namespace ProxyToogle
     internal class AppContext : ApplicationContext
     {
         private readonly NotifyIcon _notifyIcon;
-        private readonly Icon _onIcon;
-        private readonly Icon _offIcon;
+        private readonly Icon _onIcon, _offIcon;
         private readonly Timer _timer;
         private bool _proxyEnabled;
         private string _proxyServer;
+        private const string REGKEY = @"Software\Microsoft\Windows\CurrentVersion\Internet Settings";
 
         internal AppContext()
         {
@@ -42,66 +42,34 @@ namespace ProxyToogle
             _offIcon = CreateIcon(Color.Crimson, Color.White);
             _proxyEnabled = ProxyEnabled();
             _proxyServer = ProxyServer();
-            _notifyIcon = _proxyEnabled ? AppNotifyIcon(ref _onIcon) : AppNotifyIcon(ref _offIcon);
-            _notifyIcon.Text = (_proxyEnabled ? "Proxy is ON" : "Proxy is OFF") + $"\r\nProxy: { _proxyServer}";
-            _notifyIcon.Click += NotifyIcon_Click;
-            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem(Resources.ExitProxyToogle, ExitMenuClick) });
-            _timer = new Timer
-            {
-                Interval = 1000,
-                Enabled = true
+            _notifyIcon = new NotifyIcon() { Visible = true, Icon = _proxyEnabled ? _onIcon : _offIcon };
+            _notifyIcon.Click += (s, e) => { if (((MouseEventArgs)e).Button == MouseButtons.Left) {
+                    Registry.CurrentUser.OpenSubKey(REGKEY, true).SetValue("ProxyEnable", ProxyEnabled() ? 0 : 1);
+                    NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
+                    NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
+                }
             };
-            _timer.Tick += OnTimerTick;
-
-        }
-
-        private static void ExitMenuClick(object o, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-            Timer timer = (Timer)sender;
-            timer?.Stop();
-            Application.DoEvents();
-            _proxyEnabled = ProxyEnabled();
-            _proxyServer = ProxyServer();
-            _notifyIcon.Icon = _proxyEnabled ? _onIcon : _offIcon;
-            _notifyIcon.Text = (_proxyEnabled ? "Proxy is ON" : "Proxy is OFF") + $"\r\nProxy: { _proxyServer}";
-            timer?.Start();
-        }
-
-        private void NotifyIcon_Click(object sender, EventArgs e)
-        {
-            if (((MouseEventArgs)e).Button != MouseButtons.Left)
-            {
-                return;
-            }
-
-            ToogleProxy();
+            _notifyIcon.ContextMenu = new ContextMenu(new MenuItem[1] { new MenuItem(Resources.ExitProxyToogle, (o, e) => Application.Exit() ) });
+            _timer = new Timer { Interval = 1000, Enabled = true };
+            _timer.Tick += (s, e) => {
+                _timer?.Stop();
+                Application.DoEvents();
+                _proxyEnabled = ProxyEnabled();
+                _proxyServer = ProxyServer();
+                _notifyIcon.Icon = _proxyEnabled ? _onIcon : _offIcon;
+                _notifyIcon.Text = $"Proxy is {(_proxyEnabled ? "ON" : "OFF")}\r\nProxy: {_proxyServer}";
+                _timer?.Start();
+            };
         }
 
         internal static bool ProxyEnabled()
         {
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
-            return (int)registry.GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1 ? true : false;
+            return (int)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyEnable", 0, RegistryValueOptions.None) == 1;
         }
 
         internal string ProxyServer()
         {
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
-            return (string)registry.GetValue("ProxyServer", "No proxy server defined", RegistryValueOptions.None);
-        }
-
-        internal void ToogleProxy()
-        {
-            RegistryKey registry = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Internet Settings", true);
-            registry.SetValue("ProxyEnable", ProxyEnabled() ? 0 : 1);
-            bool settingsReturn, refreshReturn;
-            settingsReturn = NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_SETTINGS_CHANGED, IntPtr.Zero, 0);
-            refreshReturn = NativeMethods.InternetSetOption(IntPtr.Zero, NativeMethods.INTERNET_OPTION_REFRESH, IntPtr.Zero, 0);
-            Console.Write($"Internet Options change = {settingsReturn}, Internet Options refreshed = {refreshReturn}");
+            return (string)Registry.CurrentUser.OpenSubKey(REGKEY, true).GetValue("ProxyServer", "No proxy server defined", RegistryValueOptions.None);
         }
 
         private Icon CreateIcon(Color backColor, Color textColor)
@@ -115,15 +83,17 @@ namespace ProxyToogle
                 {
                     graphics?.FillRectangle(backgroundBrush, 0, 0, 256, 256);
                     graphics?.DrawString("Proxy", font, foregroundBrush, insetX, insetY);
-
                 }
                 return Icon.FromHandle(bitmap.GetHicon());
             }
         }
+    }
 
-        private NotifyIcon AppNotifyIcon(ref Icon icon)
-        {
-            return new NotifyIcon() { Visible = true, Icon = icon };
-        }
+    internal static class NativeMethods
+    {
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        public static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);
+        public const int INTERNET_OPTION_SETTINGS_CHANGED = 39;
+        public const int INTERNET_OPTION_REFRESH = 37;
     }
 }
