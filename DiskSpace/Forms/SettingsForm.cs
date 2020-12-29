@@ -180,7 +180,6 @@ namespace DiskSpace.Forms
             {
                 return;
             }
-
             chkNotificationLimit.DataBindings.Add(new Binding("Checked", Settings.Default,
                 "NotificationLimitActive", true, DataSourceUpdateMode.OnPropertyChanged));
         }
@@ -204,7 +203,6 @@ namespace DiskSpace.Forms
             {
                 return;
             }
-
             bool isInt = int.TryParse(txtNotificationLimitGB.Text, out int i);
             if (i < 0)
             {
@@ -231,7 +229,6 @@ namespace DiskSpace.Forms
             {
                 return;
             }
-
             Top = Cursor.Position.Y - Offset.Y;
             Left = Cursor.Position.X - Offset.X;
         }
@@ -372,6 +369,11 @@ uint.TryParse(txtNotificationLimitGB.Text, out uint notificationLimit) ? notific
         private static void NotificationLimitGB_KeyDown(object sender, KeyEventArgs e)
         {
             OnlyAllowNumericInput(e);
+        }
+
+        private void AlwaysOnTop_Click(object sender, EventArgs e)
+        {
+            Owner.TopMost = chkAlwaysOnTop.Checked;
         }
 
         #endregion
