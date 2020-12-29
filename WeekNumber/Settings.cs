@@ -28,7 +28,8 @@ namespace WeekNumber
                     }
                     else
                     {
-                        regRun?.DeleteValue(Application.ProductName);
+                        if (regRun?.GetValue(Application.ProductName) != null)
+                            regRun?.DeleteValue(Application.ProductName);
                     }
                     registryKey?.Flush();
                 }
