@@ -17,6 +17,14 @@ namespace DiskSpace
     /// </summary>
     internal static class Log
     {
+        #region Static variables
+
+        private static readonly string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
+        private static readonly string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static readonly string logFileFullPath = Path.Combine(appDataFolder, logFile);
+
+        #endregion
+
         #region Internal methods
 
         /// <summary>
@@ -29,9 +37,7 @@ namespace DiskSpace
             try
             {
                 Trace.Listeners.Clear();
-                string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                fs = new FileStream(Path.Combine(appDataFolder, logFile), FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
+                fs = new FileStream(logFileFullPath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
                 TextWriterTraceListener traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
@@ -68,16 +74,14 @@ namespace DiskSpace
             Trace.Listeners.Clear();
             try
             {
-                string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-                string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                FileInfo fi = new FileInfo(Path.Combine(appDataFolder, logFile));
+                FileInfo fi = new FileInfo(logFileFullPath);
                 if (fi.Exists)
                 {
                     int trimSize = Settings.Default.logFileSizeMB * 1024 * 1024;
                     if (fi.Length > trimSize)
                     {
                         using (MemoryStream ms = new MemoryStream(trimSize))
-                        using (FileStream s = new FileStream(logFile, FileMode.Open, FileAccess.ReadWrite))
+                        using (FileStream s = new FileStream(logFileFullPath, FileMode.Open, FileAccess.ReadWrite))
                         {
                             s.Seek(-trimSize, SeekOrigin.End);
                             byte[] bytes = new byte[trimSize];
@@ -104,13 +108,9 @@ namespace DiskSpace
             Show();
         }
 
-        [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static void Show()
         {
-            string logFile = Path.GetFileNameWithoutExtension(Application.ExecutablePath) + ".log";
-            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            logFile = Path.Combine(appDataFolder, logFile);
-            FileInfo fi = new FileInfo(logFile);
+            FileInfo fi = new FileInfo(logFileFullPath);
             if (!fi.Exists)
             {
                 return;
@@ -119,12 +119,10 @@ namespace DiskSpace
             Process process = null;
             try
             {
-#pragma warning disable CC0009 // Use object initializer
 #pragma warning disable IDE0017 // Simplify object initialization
                 process = new Process();
 #pragma warning restore IDE0017 // Simplify object initialization
-#pragma warning restore CC0009 // Use object initializer
-                process.StartInfo = new ProcessStartInfo(logFile) { UseShellExecute = true };
+                process.StartInfo = new ProcessStartInfo(logFileFullPath) { UseShellExecute = true };
                 process.Start();
             }
             catch (InvalidOperationException ex)
@@ -145,8 +143,6 @@ namespace DiskSpace
         ///     Log info
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
         internal static string Info
         {
             private get => string.Empty;
@@ -169,7 +165,6 @@ namespace DiskSpace
         ///     Log error
         /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static Exception Error
         {
             // ReSharper disable once UnusedMember.Local
@@ -192,10 +187,8 @@ namespace DiskSpace
         /// <summary>
         ///     Log an error string
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal static string ErrorString
         {
-            // ReSharper disable once UnusedMember.Local
             private get => Resources.DiskSpace;
             set => Trace.TraceError("{0} {1}",
                     DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
