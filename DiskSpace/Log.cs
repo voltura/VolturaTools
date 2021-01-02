@@ -25,6 +25,18 @@ namespace DiskSpace
 
         #endregion
 
+        #region Internal static constructor
+
+        /// <summary>
+        ///     Constructor - Init log
+        /// </summary>
+        static Log()
+        {
+            Init();
+        }
+
+        #endregion
+
         #region Internal methods
 
         /// <summary>
@@ -33,11 +45,10 @@ namespace DiskSpace
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Init()
         {
-            FileStream fs = null;
             try
             {
                 Trace.Listeners.Clear();
-                fs = new FileStream(logFileFullPath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
+                FileStream fs = new FileStream(logFileFullPath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete, 1024, FileOptions.WriteThrough);
                 TextWriterTraceListener traceListener = new TextWriterTraceListener(fs);
                 Trace.Listeners.Add(traceListener);
                 Trace.AutoFlush = true;
@@ -45,7 +56,6 @@ namespace DiskSpace
             }
             catch (Exception ex)
             {
-                fs?.Dispose();
                 Debug.WriteLine(ex);
             }
         }
@@ -69,11 +79,11 @@ namespace DiskSpace
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Truncate()
         {
-            Trace.Flush();
-            Trace.Close();
-            Trace.Listeners.Clear();
             try
             {
+                Trace.Flush();
+                Trace.Close();
+                Trace.Listeners.Clear();
                 FileInfo fi = new FileInfo(logFileFullPath);
                 if (fi.Exists)
                 {
@@ -110,34 +120,35 @@ namespace DiskSpace
 
         internal static void Show()
         {
-            FileInfo fi = new FileInfo(logFileFullPath);
-            if (!fi.Exists)
-            {
-                return;
-            }
-
-            Process process = null;
             try
             {
-#pragma warning disable IDE0017 // Simplify object initialization
-                process = new Process();
-#pragma warning restore IDE0017 // Simplify object initialization
-                process.StartInfo = new ProcessStartInfo(logFileFullPath) { UseShellExecute = true };
-                process.Start();
+                if (File.Exists(logFileFullPath))
+                {
+                    using (Process process = new Process() { StartInfo = new ProcessStartInfo(logFileFullPath) { UseShellExecute = true } })
+                    {
+                        process.Start();
+                    }
+                }
             }
             catch (InvalidOperationException ex)
             {
                 Error = ex;
             }
-            finally
-            {
-                process?.Dispose();
-            }
+        }
+
+        internal static void LogCaller()
+        {
+            StackTrace stackTrace = new StackTrace();
+            string method = stackTrace.GetFrame(1).GetMethod().Name;
+            string callee = stackTrace.GetFrame(2).GetMethod().Name;
+            string infoText = $"{method} called from {callee}";
+            Info = infoText;
+            Debug.WriteLine(infoText);
         }
 
         #endregion
 
-        #region Public static log properties
+        #region Internal static log properties
 
         /// <summary>
         ///     Log info
@@ -150,9 +161,7 @@ namespace DiskSpace
             {
                 try
                 {
-                    Trace.TraceInformation("{0} {1}",
-                        DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
-                        value);
+                    Trace.TraceInformation($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture)} {value}");
                 }
                 catch (Exception ex)
                 {
@@ -167,15 +176,12 @@ namespace DiskSpace
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static Exception Error
         {
-            // ReSharper disable once UnusedMember.Local
-            private get => new ArgumentNullException(Resources.DiskSpace);
+            private get => new ArgumentNullException(logFile);
             set
             {
                 try
                 {
-                    Trace.TraceError("{0} {1}",
-                        DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
-                        value);
+                    Trace.TraceError($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture)} {value}");
                 }
                 catch (Exception ex)
                 {
@@ -189,10 +195,8 @@ namespace DiskSpace
         /// </summary>
         internal static string ErrorString
         {
-            private get => Resources.DiskSpace;
-            set => Trace.TraceError("{0} {1}",
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture),
-                    value);
+            private get => string.Empty;
+            set => Trace.TraceError($"{DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss.fff", CultureInfo.InvariantCulture)} {value}");
         }
 
         #endregion

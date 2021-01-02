@@ -47,7 +47,6 @@ namespace DiskSpace
 
         private static void RunApplication()
         {
-            Log.Init();
             Log.Info = "=== Application started ===";
             Log.Info = Application.ProductName + " version " + Application.ProductVersion;
             Application.EnableVisualStyles();
