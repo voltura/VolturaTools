@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Runtime;
 using System.Windows.Forms;
 
 #endregion
@@ -26,6 +27,7 @@ namespace DiskSpace
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionTrapper;
+            SetGCSettings();
             if (StartedWithCommandLineArguments(args))
             {
                 HandleCommandLineExecution(args);
@@ -37,6 +39,12 @@ namespace DiskSpace
         #endregion
 
         #region Private static methods and functions
+
+        internal static void SetGCSettings()
+        {
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GCSettings.LatencyMode = GCLatencyMode.Batch;
+        }
 
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {

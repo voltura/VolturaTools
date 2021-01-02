@@ -2,7 +2,6 @@
 
 using DiskSpace.Properties;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Net.Mail;
@@ -25,7 +24,6 @@ namespace DiskSpace
         /// <param name="body">Body text</param>
         /// <param name="settings">Settings class</param>
         /// <returns>Success</returns>
-        [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
         internal static bool Send(string subject,
             string body,
             Settings settings)

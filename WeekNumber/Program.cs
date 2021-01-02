@@ -1,6 +1,7 @@
 ﻿#region Using statements
 
 using System;
+using System.Runtime;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -29,6 +30,7 @@ namespace WeekNumber
             WeekApplicationContext context = null;
             try
             {
+                SetGCSettings();
                 Application.EnableVisualStyles();
                 Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 context = new WeekApplicationContext();
@@ -48,5 +50,12 @@ namespace WeekNumber
         }
 
         #endregion Application starting point
+
+        internal static void SetGCSettings()
+        {
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+            GCSettings.LatencyMode = GCLatencyMode.Batch;
+        }
+
     }
 }
