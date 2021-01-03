@@ -427,12 +427,39 @@ namespace DiskSpace.Forms
             {
                 Visible = true;
                 WindowState = FormWindowState.Normal;
+                PlaceFormOnScreen();
             }
             else
             {
                 Settings.Default.Save();
                 Visible = false;
                 WindowState = FormWindowState.Minimized;
+            }
+        }
+
+        private void PlaceFormOnScreen()
+        {
+            Screen screenFormIsOn = Screen.FromControl(this);
+            int screenWidth = screenFormIsOn.WorkingArea.Width;
+            int screenHeight = screenFormIsOn.WorkingArea.Height;
+            if (screenWidth < Left + Width)
+            {
+                Left = screenWidth - (Width + 50);
+            }
+
+            if (screenHeight < Top + Height)
+            {
+                Top = screenHeight - (Height + 50);
+            }
+
+            if (Left < 0)
+            {
+                Left = 50;
+            }
+
+            if (Top < 0)
+            {
+                Top = 50;
             }
         }
 
