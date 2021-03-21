@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Voltura AB")]
 [assembly: AssemblyProduct("DiskSpace")]
-[assembly: AssemblyCopyright("Copyright © Voltura AB 2020")]
+[assembly: AssemblyCopyright("Copyright © Voltura AB 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

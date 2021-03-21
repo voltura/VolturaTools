@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA2119: Seal methods that satisfy private interfaces
+dotnet_diagnostic.CA2119.severity = none
