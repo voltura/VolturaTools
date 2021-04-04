@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 #endregion
@@ -771,6 +772,12 @@ namespace DiskSpace.Forms
         private void TitleIcon_MouseLeave(object sender, EventArgs e)
         {
             UnfocusTitleIcon();
+        }
+
+        private void OptimizeAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var task = Task.Run(async () => await PostScriptLogic.OptimizeAllVolumes());
+            task.ConfigureAwait(false);
         }
 
         #endregion

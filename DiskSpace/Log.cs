@@ -42,7 +42,6 @@ namespace DiskSpace
         /// <summary>
         ///     Init log
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Init()
         {
             try
@@ -76,7 +75,6 @@ namespace DiskSpace
         /// <summary>
         ///     Truncate log
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static void Truncate()
         {
             try
@@ -153,7 +151,6 @@ namespace DiskSpace
         /// <summary>
         ///     Log info
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static string Info
         {
             private get => string.Empty;
@@ -173,7 +170,6 @@ namespace DiskSpace
         /// <summary>
         ///     Log error
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         internal static Exception Error
         {
             private get => new ArgumentNullException(logFile);
