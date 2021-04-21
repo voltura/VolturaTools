@@ -193,6 +193,7 @@ namespace DiskSpace.Forms
             this.diskCleanupToolStripMenuItem.Name = "diskCleanupToolStripMenuItem";
             this.diskCleanupToolStripMenuItem.Size = new System.Drawing.Size(409, 48);
             this.diskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.Diskcleanup;
+            this.diskCleanupToolStripMenuItem.Click += new System.EventHandler(DiskCleanupToolStripMenuItem_Click);
             // 
             // runDiskCleanupToolStripMenuItem
             // 
@@ -201,6 +202,7 @@ namespace DiskSpace.Forms
             this.runDiskCleanupToolStripMenuItem.Name = "runDiskCleanupToolStripMenuItem";
             this.runDiskCleanupToolStripMenuItem.Size = new System.Drawing.Size(409, 48);
             this.runDiskCleanupToolStripMenuItem.Text = global::DiskSpace.Properties.Resources.RunDiskcleanup;
+            this.runDiskCleanupToolStripMenuItem.Click += new System.EventHandler(RunDiskCleanupToolStripMenuItem_Click);
             // 
             // diskManagementToolStripMenuItem
             // 

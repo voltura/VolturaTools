@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,6 +26,7 @@ namespace DiskSpace.Forms
         private DriveInfo _di;
         private SettingsForm _settingsForm;
         private decimal _currentFreeSpace;
+        private bool _asyncJobThatLogsRunning;
 
         #endregion
 
@@ -580,7 +582,8 @@ namespace DiskSpace.Forms
         {
             CurrentFreeSpace = Math.Round((decimal)ActiveDriveInfo.AvailableFreeSpace / 1024 / 1024 / 1024,
                 MidpointRounding.ToEven);
-            Log.Truncate();
+            if (!_asyncJobThatLogsRunning)
+                Log.Truncate();
         }
 
         private void DriveLetterSettingChanged(object sender, EventArgs e)
@@ -729,6 +732,7 @@ namespace DiskSpace.Forms
         {
             LaunchCleanManager(run: false);
         }
+
         private static void RunDiskCleanupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LaunchCleanManager(run: true);
@@ -776,7 +780,11 @@ namespace DiskSpace.Forms
 
         private void OptimizeAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var task = Task.Run(async () => await PostScriptLogic.OptimizeAllVolumes());
+            if (_asyncJobThatLogsRunning) return; // do not do this again while still running
+            _asyncJobThatLogsRunning = true;
+            var task = Task.Run(async () => await PostScriptLogic.OptimizeAllVolumes().ContinueWith(s => {
+                _asyncJobThatLogsRunning = false;
+            }));
             task.ConfigureAwait(false);
         }
 
