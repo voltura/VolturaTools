@@ -25,10 +25,16 @@ namespace WeekNumber
             GrammarBuilder weekServices = new GrammarBuilder("week") { Culture = CultureInfo.CurrentUICulture };
             weekServices.Append(services);
             Grammar servicesGrammar = new Grammar(weekServices);
-            _recognizer.LoadGrammarAsync(servicesGrammar);
-            _recognizer.SpeechRecognized += (s, e) => _speak.Sentence(Convert.ToString(Week.Current(), CultureInfo.InvariantCulture));
-            _recognizer.SetInputToDefaultAudioDevice();
-            _recognizer.RecognizeAsync(RecognizeMode.Multiple);
+            try
+            {
+                _recognizer.LoadGrammarAsync(servicesGrammar);
+                _recognizer.SetInputToDefaultAudioDevice();  // will fail if no mic
+                _recognizer.SpeechRecognized += (s, e) => _speak.Sentence(Convert.ToString(Week.Current(), CultureInfo.InvariantCulture));
+                _recognizer.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void Dispose()
