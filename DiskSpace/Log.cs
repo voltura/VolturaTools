@@ -138,10 +138,11 @@ namespace DiskSpace
         {
             StackTrace stackTrace = new StackTrace();
             string method = stackTrace.GetFrame(1).GetMethod().Name;
-            string callee = stackTrace.GetFrame(2).GetMethod().Name;
-            string infoText = $"{method} called from {callee}";
+            string methodClass = stackTrace.GetFrame(1).GetMethod().DeclaringType.FullName;
+            string calleeMethod = stackTrace.GetFrame(2).GetMethod().Name;
+            string calleeClass = stackTrace.GetFrame(2).GetMethod().DeclaringType.FullName;
+            string infoText = $"{methodClass}::{(method == ".ctor" ? "constructor" : method)} called from {calleeClass}::{(calleeMethod == ".ctor" ? "constructor" : calleeMethod)}";
             Info = infoText;
-            Debug.WriteLine(infoText);
         }
 
         #endregion
