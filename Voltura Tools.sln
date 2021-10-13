@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1082
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiskSpace", "DiskSpace\DiskSpace.csproj", "{7192A019-B0AC-4307-96B6-F2FA0C4CF77C}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyToogle", "ProxyToogle\ProxyToogle.csproj", "{8948ED83-5F55-4D26-A121-67CCEFE49F6F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistentClipboardService", "PersistentClipboardService\PersistentClipboardService.csproj", "{C3F13D0A-551E-45CB-BFBF-9196C90C3DB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HardTop", "HardTop\HardTop.csproj", "{332653A6-01E3-49CB-B473-0B8B0DB5EB37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +108,16 @@ Global
 		{C3F13D0A-551E-45CB-BFBF-9196C90C3DB0}.Release|x64.Build.0 = Release|Any CPU
 		{C3F13D0A-551E-45CB-BFBF-9196C90C3DB0}.Release|x86.ActiveCfg = Release|Any CPU
 		{C3F13D0A-551E-45CB-BFBF-9196C90C3DB0}.Release|x86.Build.0 = Release|Any CPU
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Debug|x64.ActiveCfg = Debug|x64
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Debug|x64.Build.0 = Debug|x64
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Debug|x86.ActiveCfg = Debug|x86
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Debug|x86.Build.0 = Debug|x86
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Release|Any CPU.ActiveCfg = Release|x86
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Release|x64.ActiveCfg = Release|x64
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Release|x64.Build.0 = Release|x64
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Release|x86.ActiveCfg = Release|x86
+		{332653A6-01E3-49CB-B473-0B8B0DB5EB37}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

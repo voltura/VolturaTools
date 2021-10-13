@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{61E1F1A0-3608-4C97-B90C-2DAF12BD0D5B}</ProjectGuid>
+    <ProjectGuid>{332653A6-01E3-49CB-B473-0B8B0DB5EB37}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>HardTop</RootNamespace>
     <AssemblyName>HardTop</AssemblyName>
