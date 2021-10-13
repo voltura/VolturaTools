@@ -44,7 +44,7 @@ namespace HardTop
             MenuItem mi = (MenuItem)o;
             mi.Enabled = false;
             mi.Checked = !mi.Checked;
-            MessageBox.Show(mi.Name + ((mi.Checked) ? " topmost" : " not topmost"));
+            MessageBox.Show(mi.Name + (mi.Checked ? "" : " not") + " topmost");
             mi.Enabled = true;
         }
 
