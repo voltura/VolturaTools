@@ -33,11 +33,21 @@ namespace HardTop
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
             MouseEventArgs eobj = e as MouseEventArgs;
-            if (eobj.Button == MouseButtons.Left)
+            if (eobj != null && eobj.Button == MouseButtons.Left)
             {
                 ShowWindows();
             }
         }
+
+        private void WindowItem_Click(object o, EventArgs e)
+        {
+            MenuItem mi = (MenuItem)o;
+            mi.Enabled = false;
+            mi.Checked = !mi.Checked;
+            MessageBox.Show(mi.Name + ((mi.Checked) ? " topmost" : " not topmost"));
+            mi.Enabled = true;
+        }
+
 
         #endregion Events
 
@@ -45,7 +55,7 @@ namespace HardTop
 
         private void ShowWindows()
         {
-
+            _contextMenu.ContextMenu.MenuItems.Add(new MenuItem("Test window", WindowItem_Click){Name="Test window"});
         }
 
         #endregion Private methods
