@@ -1,8 +1,11 @@
 ﻿#region Using statements
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 #endregion Using statements
 
@@ -24,6 +27,7 @@ namespace HardTop
             _contextMenu = new HardTopContextMenu();
             _notifyIcon = GetNotifyIcon(_contextMenu.ContextMenu);
             _notifyIcon.Click += NotifyIcon_Click;
+            AddWindowsToContextMenu();
         }
 
         #endregion Constructor
@@ -32,16 +36,12 @@ namespace HardTop
 
         private void NotifyIcon_Click(object sender, EventArgs e)
         {
-            MouseEventArgs eobj = e as MouseEventArgs;
-            if (eobj != null && eobj.Button == MouseButtons.Left)
-            {
-                ShowWindows();
-            }
+            AddWindowsToContextMenu();
         }
 
         private void WindowItem_Click(object o, EventArgs e)
         {
-            MenuItem mi = (MenuItem)o;
+            var mi = (MenuItem)o;
             mi.Enabled = false;
             mi.Checked = !mi.Checked;
             MessageBox.Show(mi.Name + (mi.Checked ? "" : " not") + " topmost");
@@ -53,9 +53,14 @@ namespace HardTop
 
         #region Private methods
 
-        private void ShowWindows()
+        private void AddWindowsToContextMenu()
         {
-            _contextMenu.ContextMenu.MenuItems.Add(new MenuItem("Test window", WindowItem_Click){Name="Test window"});
+            NativeMethods.GetDesktopWindowHandlesAndTitles(out List<IntPtr> handles, out List<string> titles);
+            for (int i = 0; i < titles.Count; i++)
+            {
+                _contextMenu.ContextMenu.MenuItems.RemoveByKey(titles[i]);
+                _contextMenu.ContextMenu.MenuItems.Add(new MenuItem(titles[i], WindowItem_Click) { Name = titles[i], Tag = handles?[i] });
+            }
         }
 
         #endregion Private methods

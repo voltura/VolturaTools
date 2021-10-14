@@ -43,7 +43,6 @@ namespace ScanDevices
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private void ExecuteScan()
         {
             lock (lockObject)

@@ -20,7 +20,7 @@ namespace WeekNumber
         [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "It is used")]
         private readonly Week _week;
         private readonly Timer _timer;
-        private readonly Listen _listen = new Listen();
+        private readonly Listen _listen;
 
         #endregion Private variables
 
