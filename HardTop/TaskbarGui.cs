@@ -1,11 +1,8 @@
 ﻿#region Using statements
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 #endregion Using statements
 
@@ -26,50 +23,15 @@ namespace HardTop
         {
             _contextMenu = new HardTopContextMenu();
             _notifyIcon = GetNotifyIcon(_contextMenu.ContextMenu);
-            _notifyIcon.Click += NotifyIcon_Click;
-            AddWindowsToContextMenu();
         }
 
         #endregion Constructor
-
-        #region Events
-
-        private void NotifyIcon_Click(object sender, EventArgs e)
-        {
-            AddWindowsToContextMenu();
-        }
-
-        private void WindowItem_Click(object o, EventArgs e)
-        {
-            var mi = (MenuItem)o;
-            mi.Enabled = false;
-            mi.Checked = !mi.Checked;
-            MessageBox.Show(mi.Name + (mi.Checked ? "" : " not") + " topmost");
-            mi.Enabled = true;
-        }
-
-
-        #endregion Events
-
-        #region Private methods
-
-        private void AddWindowsToContextMenu()
-        {
-            NativeMethods.GetDesktopWindowHandlesAndTitles(out List<IntPtr> handles, out List<string> titles);
-            for (int i = 0; i < titles.Count; i++)
-            {
-                _contextMenu.ContextMenu.MenuItems.RemoveByKey(titles[i]);
-                _contextMenu.ContextMenu.MenuItems.Add(new MenuItem(titles[i], WindowItem_Click) { Name = titles[i], Tag = handles?[i] });
-            }
-        }
-
-        #endregion Private methods
 
         #region Private helper property to create NotifyIcon
 
         private static NotifyIcon GetNotifyIcon(ContextMenu contextMenu)
         {
-            return new NotifyIcon { Visible = true, ContextMenu = contextMenu, Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath) };
+            return new NotifyIcon { Visible = true, ContextMenu = contextMenu, Text = "HardTop", Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath) };
         }
 
         #endregion Private helper property to create NotifyIcon
